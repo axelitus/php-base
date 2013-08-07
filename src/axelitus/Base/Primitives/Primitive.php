@@ -42,7 +42,7 @@ abstract class Primitive
     }
 
     /**
-     * Validates the given primitive value.This function is automatically called from the constructor.
+     * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
      * @return bool Returns true if the value is valid for the primitive, false otherwise.
@@ -91,7 +91,7 @@ abstract class Primitive
      */
     final public function value()
     {
-        return $this->value();
+        return $this->value;
     }
 
     /**
