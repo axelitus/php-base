@@ -45,7 +45,7 @@ abstract class Primitive
      * Validates the given primitive value.This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
-     * @return bool TReturns true if the value is valid for the primitive, false otherwise.
+     * @return bool Returns true if the value is valid for the primitive, false otherwise.
      */
     abstract protected function validateValue($value);
 
