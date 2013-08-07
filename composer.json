@@ -1,0 +1,40 @@
+{
+    "name": "axelitus/base",
+    "description": "PHP framework agnostic package to handle/extend PHP primitive types",
+    "type": "library",
+    "keywords": ["basic", "primitive", "string", "number", "array", "collection"],
+    "homepage": "http://axelitus.mx/projects/axelitus/base",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Axel Pardemann",
+            "email": "axelitusdev@gmail.com",
+            "homepage": "http://axelitus.mx",
+            "role": "Lead Developer"
+        }
+    ],
+    "support": {
+        "email": "axelitusdv@gmail.com",
+        "source": "https://github.com/axelitusv/php-axelitus-base",
+        "issues": "https://github.com/axelitus/php-axelitus-base/issues",
+        "wiki": "https://github.com/axelitus/php-axelitus-base/wiki"
+    },
+    "require": {
+        "php": ">=5.4.9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.8.*",
+        "squizlabs/php_codesniffer": "1.4.*",
+        "phpmd/phpmd" : "1.5.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "axelitus\\Base": "src/",
+            "axelitus\\Base\\Tests": "res/tests/"
+        }
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "minimum-stability": "dev"
+}
