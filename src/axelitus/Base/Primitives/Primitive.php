@@ -59,7 +59,7 @@ abstract class Primitive
      */
     public static function is($var)
     {
-        throw new NotImplementedException("This method is not yet implemented");
+        throw new NotImplementedException("This method is not yet implemented.");
     }
 
     /**
