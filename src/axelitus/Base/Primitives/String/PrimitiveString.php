@@ -28,7 +28,7 @@ abstract class PrimitiveString extends Primitive
     const DEFAULT_ENCODING = 'UTF-8';
 
     /**
-     * Validates the given primitive value.This function is automatically called from the constructor.
+     * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
      * @return bool Returns true if the value is valid for the primitive, false otherwise.
@@ -43,10 +43,9 @@ abstract class PrimitiveString extends Primitive
      *
      * @param mixed $var The value to be tested.
      * @return bool Returns true if $var is of the type string, false otherwise.
-     * @throws \axelitus\Base\Exceptions\NotImplementedException
      */
     public static function is($var)
     {
-        return is_string($var);
+        return is_string($var) or is_a($var, __NAMESPACE__.'\PrimitiveString');
     }
 }
