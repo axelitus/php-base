@@ -38,8 +38,8 @@ class Numeric extends PrimitiveNumeric
             throw new \InvalidArgumentException("Both parameters \$a and \$b must be numeric.");
         }
 
-        $val_a = (static::isSimple($a)) ? $a : $a->value();
-        $val_b = (static::isSimple($b)) ? $b : $b->value();
+        $val_a = (is_object($a)) ? $a->value() : $a;
+        $val_b = (is_object($b)) ? $b->value() : $b;
 
         return $val_a == $val_b;
     }
