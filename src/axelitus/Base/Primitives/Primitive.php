@@ -113,4 +113,19 @@ abstract class Primitive
     {
         return gettype($this->value);
     }
+
+    /**
+     * Determines if both given values are equal.
+     *
+     * For this implementation, in this case equal is the same as identical.
+     *
+     * @param int|float|PrimitiveNumeric $a The first of the values to compare.
+     * @param int|float|PrimitiveNumeric $b The second of the values to compare.
+     * @return bool Returns true if both values are numeric and are equal, false otherwise.
+     * @throws \axelitus\Base\Exceptions\NotImplementedException
+     */
+    public static function isEqual($a, $b)
+    {
+        throw new NotImplementedException("This method is not yet implemented.");
+    }
 }
