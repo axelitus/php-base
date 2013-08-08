@@ -50,13 +50,20 @@ class String extends PrimitiveString
      * Uses the multibyte function if available with the given encoding $encoding.
      *
      * @author  FuelPHP (http://fuelphp.com)
-     * @param $input The input string.
-     * @param $encoding The encoding of the input string for multibyte functions.
+     * @param string|PrimitiveString $input The input string.
+     * @param \axelitus\Base\Primitives\String\PrimitiveString|string $encoding The encoding of the input string for multibyte functions.
+     * @throws \InvalidArgumentException
      * @return int Returns the length of the string.
      */
     public static function length($input, $encoding = self::DEFAULT_ENCODING)
     {
-        return function_exists('mb_strlen') ? mb_strlen($input, $encoding) : strlen($input);
+        if (!static::is($input)) {
+            throw new \InvalidArgumentException("The \$input parameter must be string.");
+        }
+
+        $val_input = (is_object($input)) ? $input->value() : $input;
+
+        return function_exists('mb_strlen') ? mb_strlen($val_input, $encoding) : strlen($val_input);
     }
 
     /**
@@ -65,25 +72,33 @@ class String extends PrimitiveString
      * USes the multibyte function if available with the given encoding $encoding and falls back to substr.
      *
      * @author  FuelPHP (http://fuelphp.com)
-     * @param $input The input string.
-     * @param $start The start index from where to begin extracting.
+     * @param string|PrimitiveString $input The input string.
+     * @param string|PrimitiveString $start The start index from where to begin extracting.
      * @param int $length The length of the extracted substring.
-     * @param $encoding The encoding of the $input string for multibyte functions.
+     * @param string $encoding The encoding of the $input string for multibyte functions.
+     * @throws \InvalidArgumentException
      * @return string Returns the extracted substring or false on failure.
      */
     public static function sub($input, $start, $length = null, $encoding = self::DEFAULT_ENCODING)
     {
+        if (!static::is($input)) {
+            throw new \InvalidArgumentException("The \$input parameter must be string.");
+        }
+
+        $val_input = (is_object($input)) ? $input->value() : $input;
+
         // sub input functions don't parse null correctly
-        $length = is_null($length) ? (function_exists('mb_substr') ? mb_strlen($input, $encoding) : strlen(
-                $input
+        $length = is_null($length) ? (function_exists('mb_substr') ? mb_strlen($val_input, $encoding) : strlen(
+                $val_input
             )) - $start : $length;
 
-        return function_exists('mb_substr') ? mb_substr($input, $start, $length, $encoding) : substr(
-            $input,
+        return function_exists('mb_substr') ? mb_substr($val_input, $start, $length, $encoding) : substr(
+            $val_input,
             $start,
             $length
         );
     }
+
 
     /**
      * Verifies if a string begins with a substring.
@@ -103,9 +118,12 @@ class String extends PrimitiveString
             throw new \InvalidArgumentException("Both parameters \$input and \$search must be strings.");
         }
 
-        $substr = static::sub($input, 0, static::length($search), $encoding);
+        $val_input = (is_object($input)) ? $input->value() : $input;
+        $val_search = (is_object($search)) ? $search->value() : $search;
 
-        return !(($case_sensitive) ? strcmp($substr, $search) : strcasecmp($substr, $search));
+        $substr = static::sub($val_input, 0, static::length($val_search), $encoding);
+
+        return !(($case_sensitive) ? strcmp($substr, $val_search) : strcasecmp($substr, $val_search));
     }
 
     /**
@@ -126,12 +144,15 @@ class String extends PrimitiveString
             throw new \InvalidArgumentException("Both parameters \$input and \$search must be strings.");
         }
 
-        if (($length = static::length($search, $encoding)) == 0) {
+        $val_input = (is_object($input)) ? $input->value() : $input;
+        $val_search = (is_object($search)) ? $search->value() : $search;
+
+        if (($length = static::length($val_search, $encoding)) == 0) {
             return true;
         }
 
-        $substr = static::sub($input, -$length, $length, $encoding);
+        $substr = static::sub($val_input, -$length, $length, $encoding);
 
-        return !(($case_sensitive) ? strcmp($substr, $search) : strcasecmp($substr, $search));
+        return !(($case_sensitive) ? strcmp($substr, $val_search) : strcasecmp($substr, $val_search));
     }
 }
