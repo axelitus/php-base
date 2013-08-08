@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" stopOnFailure="false" bootstrap="phpunit_bootstrap.php">
+    <php>
+        <server name="tests">res/tests</server>
+    </php>
+    <testsuites>
+        <testsuite name="axelitus/base">
+            <directory suffix=".php">axelitus/Base</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
