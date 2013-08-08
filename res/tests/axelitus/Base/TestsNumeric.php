@@ -14,6 +14,9 @@ namespace axelitus\Base;
 
 class TestsNumeric extends TestCase
 {
+    /**
+     * Tests the Numeric::is() function.
+     */
     public function test_is_numeric()
     {
         $this->assertFalse(Numeric::is(null), "The value null is incorrectly recognized as numeric.");
@@ -30,6 +33,10 @@ class TestsNumeric extends TestCase
         $this->assertFalse(Numeric::is([]), "The value [] is incorrectly recognized as numeric.");
     }
 
+    /**
+     * Tests the Numeric::isEqual() function.
+     * @depends test_is_numeric
+     */
     public function test_is_equal()
     {
         $this->assertTrue(Numeric::isEqual(0, 0), "The values 0 and 0 are not evaluated as equal.");
