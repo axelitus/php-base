@@ -22,6 +22,29 @@ use axelitus\Base\Primitives\String\PrimitiveString;
 class String extends PrimitiveString
 {
     /**
+     * Determines if two given values are equal.
+     *
+     * The given values $a and $b must be of type string. For the sake of this implementation
+     * there is no distinction between the == equal operator and the identical === operator.
+     *
+     * @param int|float|PrimitiveString $a The first of the values to compare.
+     * @param int|float|PrimitiveString $b The second of the values to compare.
+     * @return bool Returns true if both values are numeric and are equal, false otherwise.
+     * @throws \InvalidArgumentException
+     */
+    final static function isEqual($a, $b)
+    {
+        if (!static::is($a) or !static::is($b)) {
+            throw new \InvalidArgumentException("Both parameters \$a and \$b must be strings.");
+        }
+
+        $val_a = (is_object($a)) ? $a->value() : $a;
+        $val_b = (is_object($b)) ? $b->value() : $b;
+
+        return (strcmp($val_a, $val_b) === 0);
+    }
+
+    /**
      * Gets the length of the given string.
      *
      * Uses the multibyte function if available with the given encoding $encoding.
