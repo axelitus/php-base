@@ -2,7 +2,7 @@
 
 <phpunit colors="true" stopOnFailure="false" bootstrap="phpunit_bootstrap.php">
     <php>
-        <server name="tests">res/tests</server>
+        <server name="tests_path">res/tests</server>
     </php>
     <testsuites>
         <testsuite name="axelitus/base">
