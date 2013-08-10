@@ -1,6 +1,6 @@
 # Package axelitus/base
 
-This is a PHP framework agnostic package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.
+A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.
 
 ## Package Information
 
@@ -57,7 +57,7 @@ All classes are referenced from the package namespace if not otherwise stated.
 
 To install this package and use it in your app just follow these instructions (if you haven't read the documentation from [Composer](http://getcomposer.org) please do so before you continue):
 
-1. Download composer if you haven't already done so (use your preferred method). Exmaple:
+1. Download composer if you haven't already done so (use your preferred method). Example:
 ```
 $ curl -s https://getcomposer.org/installer | php
 ```

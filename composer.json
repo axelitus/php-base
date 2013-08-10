@@ -1,6 +1,6 @@
 {
     "name": "axelitus/base",
-    "description": "PHP framework agnostic package to handle/extend PHP primitive types.",
+    "description": "A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.",
     "type": "library",
     "keywords": ["basic", "primitive", "string", "number", "array", "collection"],
     "homepage": "http://axelitus.mx/projects/axelitus/base",
