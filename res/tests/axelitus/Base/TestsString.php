@@ -12,6 +12,11 @@
 
 namespace axelitus\Base;
 
+/**
+ * Class TestsString
+ * 
+ * @package axelitus\Base
+ */
 class TestsString extends TestCase
 {
     /**
@@ -28,17 +33,17 @@ class TestsString extends TestCase
     }
 
     /**
-     * Tests the String::isEqual() function.
+     * Tests the String::areEqual() function.
      * @depends test_is_string
      */
     public function test_is_equal()
     {
-        $this->assertTrue(String::isEqual("", ""), "The string \"\" is evaluated as not equal to the string \"\".");
-        $this->assertTrue(String::isEqual("axelitus", "axelitus"), "The string \"axelitus\" is evaluated as not equal to the string \"axelitus\".");
-        $this->assertTrue(String::isEqual("Winter is coming...", new String("Winter is coming...")), "The string \"Winter is coming...\" is evaluated as not equal to the string [String: { \$value: \"Winter is coming...\" }]].");
-        $this->assertTrue(String::isEqual(new String("Objects"), new String("Objects")), "The string [String: { \$value: \"Objects\" }]] is evaluated as not equal to the string [String: { \$value: \"Objects\" }]].");
-        $this->assertFalse(String::isEqual("This is", "not equal"), "The string \"This is\" is evaluated as equal to the string \"not equal\".");
-        $this->assertFalse(String::isEqual("This is", new String("not equal")), "The string \"This is\" is evaluated as equal to the string [String: { \$value: \"not equal\" }]].");
+        $this->assertTrue(String::areEqual("", ""), "The string \"\" is evaluated as not equal to the string \"\".");
+        $this->assertTrue(String::areEqual("axelitus", "axelitus"), "The string \"axelitus\" is evaluated as not equal to the string \"axelitus\".");
+        $this->assertTrue(String::areEqual("Winter is coming...", new String("Winter is coming...")), "The string \"Winter is coming...\" is evaluated as not equal to the string [String: { \$value: \"Winter is coming...\" }]].");
+        $this->assertTrue(String::areEqual(new String("Objects"), new String("Objects")), "The string [String: { \$value: \"Objects\" }]] is evaluated as not equal to the string [String: { \$value: \"Objects\" }]].");
+        $this->assertFalse(String::areEqual("This is", "not equal"), "The string \"This is\" is evaluated as equal to the string \"not equal\".");
+        $this->assertFalse(String::areEqual("This is", new String("not equal")), "The string \"This is\" is evaluated as equal to the string [String: { \$value: \"not equal\" }]].");
     }
 
     /**

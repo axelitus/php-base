@@ -12,6 +12,11 @@
 
 namespace axelitus\Base;
 
+/**
+ * Class TestCase
+ *
+ * @package axelitus\Base
+ */
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
 }

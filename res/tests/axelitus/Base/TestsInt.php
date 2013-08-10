@@ -12,8 +12,16 @@
 
 namespace axelitus\Base;
 
+/**
+ * Class TestsInt
+ *
+ * @package axelitus\Base
+ */
 class TestsInt extends TestCase
 {
+    /**
+     * Tests Int::is()
+     */
     public function test_is_int()
     {
         $this->assertTrue(Int::is(0), "The value 0 is not recognized as an int.");

@@ -12,8 +12,16 @@
 
 namespace axelitus\Base;
 
+/**
+ * Class TestsFloat
+ *
+ * @package axelitus\Base
+ */
 class TestsFloat extends TestCase
 {
+    /**
+     * Tests Float::is()
+     */
     public function test_is_float()
     {
         $this->assertTrue(Float::is(0), "The value 0 is not recognized as a float.");
