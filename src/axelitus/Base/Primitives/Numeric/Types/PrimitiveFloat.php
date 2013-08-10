@@ -14,6 +14,11 @@ namespace axelitus\Base\Primitives\Numeric\Types;
 
 use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 
+/**
+ * Class PrimitiveFloat
+ *
+ * @package axelitus\Base\Primitives\Numeric\Types
+ */
 abstract class PrimitiveFloat extends PrimitiveNumeric
 {
     protected function validateValue($value)
@@ -21,7 +26,7 @@ abstract class PrimitiveFloat extends PrimitiveNumeric
         return parent::validateValue($value) and $this->is($value);
     }
 
-    public static function is($var, $strict = false)
+    public static function is($var)
     {
         return static::isSimple($var) and (is_float($var) or (strval(floatval($var)) === strval($var)));
     }

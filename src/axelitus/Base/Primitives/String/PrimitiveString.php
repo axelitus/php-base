@@ -31,6 +31,7 @@ abstract class PrimitiveString extends Primitive
      * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
+     *
      * @return bool Returns true if the value is valid for the primitive, false otherwise.
      */
     protected function validateValue($value)
@@ -42,10 +43,11 @@ abstract class PrimitiveString extends Primitive
      * Determines if $var is of the primitive type string.
      *
      * @param mixed $var The value to be tested.
+     *
      * @return bool Returns true if $var is of the type string, false otherwise.
      */
     public static function is($var)
     {
-        return is_string($var) or is_a($var, __NAMESPACE__.'\PrimitiveString');
+        return is_string($var) or is_a($var, __NAMESPACE__ . '\PrimitiveString');
     }
 }

@@ -29,6 +29,7 @@ class String extends PrimitiveString
      *
      * @param int|float|PrimitiveString $a The first of the values to compare.
      * @param int|float|PrimitiveString $b The second of the values to compare.
+     *
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      * @throws \InvalidArgumentException
      */
@@ -50,8 +51,10 @@ class String extends PrimitiveString
      * Uses the multibyte function if available with the given encoding $encoding.
      *
      * @author  FuelPHP (http://fuelphp.com)
-     * @param string|PrimitiveString $input The input string.
+     *
+     * @param string|PrimitiveString                                  $input    The input string.
      * @param \axelitus\Base\Primitives\String\PrimitiveString|string $encoding The encoding of the input string for multibyte functions.
+     *
      * @throws \InvalidArgumentException
      * @return int Returns the length of the string.
      */
@@ -72,10 +75,12 @@ class String extends PrimitiveString
      * USes the multibyte function if available with the given encoding $encoding and falls back to substr.
      *
      * @author  FuelPHP (http://fuelphp.com)
-     * @param string|PrimitiveString $input The input string.
-     * @param string|PrimitiveString $start The start index from where to begin extracting.
-     * @param int $length The length of the extracted substring.
-     * @param string $encoding The encoding of the $input string for multibyte functions.
+     *
+     * @param string|PrimitiveString $input    The input string.
+     * @param string|PrimitiveString $start    The start index from where to begin extracting.
+     * @param int                    $length   The length of the extracted substring.
+     * @param string                 $encoding The encoding of the $input string for multibyte functions.
+     *
      * @throws \InvalidArgumentException
      * @return string Returns the extracted substring or false on failure.
      */
@@ -105,10 +110,11 @@ class String extends PrimitiveString
      *
      * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
      *
-     * @param string $input The input string to compare to.
-     * @param string $search The substring to compare the beginning to.
-     * @param bool $case_sensitive Whether the comparison is case-sensitive.
-     * @param string $encoding The encoding of the input string.
+     * @param string $input          The input string to compare to.
+     * @param string $search         The substring to compare the beginning to.
+     * @param bool   $case_sensitive Whether the comparison is case-sensitive.
+     * @param string $encoding       The encoding of the input string.
+     *
      * @return bool Returns true if the $input string begins with the given $search string.
      * @throws \InvalidArgumentException
      */
@@ -131,10 +137,11 @@ class String extends PrimitiveString
      *
      * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
      *
-     * @param string $input The input string to compare to.
-     * @param string $search The substring to compare the ending to.
-     * @param bool $case_sensitive Whether the comparison is case-sensitive.
-     * @param string $encoding The encoding of the input string.
+     * @param string $input          The input string to compare to.
+     * @param string $search         The substring to compare the ending to.
+     * @param bool   $case_sensitive Whether the comparison is case-sensitive.
+     * @param string $encoding       The encoding of the input string.
+     *
      * @return bool Returns true if the $input string ends with the given $search string.
      * @throws \InvalidArgumentException
      */

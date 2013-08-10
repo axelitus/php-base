@@ -29,6 +29,7 @@ class Numeric extends PrimitiveNumeric
      *
      * @param int|float|PrimitiveNumeric $a The first of the values to compare.
      * @param int|float|PrimitiveNumeric $b The second of the values to compare.
+     *
      * @throws \InvalidArgumentException
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      */

@@ -14,6 +14,11 @@ namespace axelitus\Base;
 
 use axelitus\Base\Primitives\Numeric\Types\PrimitiveInt;
 
+/**
+ * Class Int
+ *
+ * @package axelitus\Base
+ */
 class Int extends PrimitiveInt
 {
 }

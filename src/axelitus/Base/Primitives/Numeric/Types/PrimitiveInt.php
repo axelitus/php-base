@@ -13,8 +13,12 @@
 namespace axelitus\Base\Primitives\Numeric\Types;
 
 use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
-use axelitus\Base\String;
 
+/**
+ * Class PrimitiveInt
+ *
+ * @package axelitus\Base\Primitives\Numeric\Types
+ */
 abstract class PrimitiveInt extends PrimitiveNumeric
 {
     protected function validateValue($value)

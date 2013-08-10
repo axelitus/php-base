@@ -30,6 +30,7 @@ abstract class Primitive
      * Constructor
      *
      * @param mixed $value The value of the primitive.
+     *
      * @throws \InvalidArgumentException
      */
     final public function __construct($value)
@@ -45,6 +46,7 @@ abstract class Primitive
      * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
+     *
      * @return bool Returns true if the value is valid for the primitive, false otherwise.
      */
     abstract protected function validateValue($value);
@@ -54,6 +56,7 @@ abstract class Primitive
      * classes to implement their own algorithm to determine the result of this function.
      *
      * @param mixed $var The value to be tested.
+     *
      * @return bool Returns true if $var is of the type that the called class represents, false otherwise.
      * @throws \axelitus\Base\Exceptions\NotImplementedException
      */
@@ -66,6 +69,7 @@ abstract class Primitive
      * Determines if $var is of a simple type (numeric, string, boolean).
      *
      * @param mixed $var The value to be tested.
+     *
      * @return bool Returns true if $var is a simple primitive type, false otherwise.
      */
     final public static function isSimple($var)
@@ -77,6 +81,7 @@ abstract class Primitive
      * Determines if $var is of a complex type (array, object, resource).
      *
      * @param mixed $var The value to be tested.
+     *
      * @return bool Returns true if $var is a complex primitive type, false otherwise.
      */
     final public static function isComplex($var)
@@ -119,12 +124,13 @@ abstract class Primitive
      *
      * For this implementation, in this case equal is the same as identical.
      *
-     * @param int|float|PrimitiveNumeric $a The first of the values to compare.
-     * @param int|float|PrimitiveNumeric $b The second of the values to compare.
+     * @param int|float|Numeric\PrimitiveNumeric $a The first of the values to compare.
+     * @param int|float|Numeric\PrimitiveNumeric $b The second of the values to compare.
+     *
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      * @throws \axelitus\Base\Exceptions\NotImplementedException
      */
-    public static function isEqual($a, $b)
+    public static function areEqual($a, $b)
     {
         throw new NotImplementedException("This method is not yet implemented.");
     }

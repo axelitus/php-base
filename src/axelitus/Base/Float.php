@@ -14,6 +14,11 @@ namespace axelitus\Base;
 
 use axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat;
 
+/**
+ * Class Float
+ *
+ * @package axelitus\Base
+ */
 class Float extends PrimitiveFloat
 {
 }

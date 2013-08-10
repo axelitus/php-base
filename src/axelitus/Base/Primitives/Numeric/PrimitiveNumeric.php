@@ -12,7 +12,6 @@
 
 namespace axelitus\Base\Primitives\Numeric;
 
-use axelitus\Base\Exceptions\NotImplementedException;
 use axelitus\Base\Primitives\Primitive;
 
 /**
@@ -26,6 +25,7 @@ abstract class PrimitiveNumeric extends Primitive
      * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
+     *
      * @return bool Returns true if the value is valid for the primitive, false otherwise.
      */
     protected function validateValue($value)
@@ -37,6 +37,7 @@ abstract class PrimitiveNumeric extends Primitive
      * Determines if $var is of the primitive type numeric (int or float).
      *
      * @param mixed $var The value to be tested.
+     *
      * @return bool Returns true if $var is of the type numeric, false otherwise.
      */
     public static function is($var)
