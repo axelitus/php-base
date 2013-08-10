@@ -22,7 +22,9 @@ use axelitus\Base\Primitives\Primitive;
 abstract class PrimitiveNumeric extends Primitive
 {
     /**
-     * Validates the given primitive value. This function is automatically called from the constructor.
+     * Validates the given primitive value.
+     *
+     * This function is automatically called from the parent class automatically.
      *
      * @param mixed $value The value of the primitive.
      *
