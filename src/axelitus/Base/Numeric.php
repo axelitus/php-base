@@ -32,7 +32,7 @@ class Numeric extends PrimitiveNumeric
      * @throws \InvalidArgumentException
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      */
-    final static function isEqual($a, $b)
+    final static function areEqual($a, $b)
     {
         if (!static::is($a) or !static::is($b)) {
             throw new \InvalidArgumentException("Both parameters \$a and \$b must be numeric.");

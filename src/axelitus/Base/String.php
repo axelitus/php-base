@@ -32,7 +32,7 @@ class String extends PrimitiveString
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      * @throws \InvalidArgumentException
      */
-    final static function isEqual($a, $b)
+    final static function areEqual($a, $b)
     {
         if (!static::is($a) or !static::is($b)) {
             throw new \InvalidArgumentException("Both parameters \$a and \$b must be strings.");
