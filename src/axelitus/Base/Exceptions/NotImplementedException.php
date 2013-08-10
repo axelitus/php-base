@@ -15,6 +15,8 @@ namespace axelitus\Base\Exceptions;
 /**
  * Class NotImplementedException
  *
+ * The exception to throw when a method is not implemented.
+ *
  * @package axelitus\Base\Exceptions
  */
 class NotImplementedException extends \Exception

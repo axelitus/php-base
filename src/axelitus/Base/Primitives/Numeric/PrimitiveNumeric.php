@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\Primitive;
 /**
  * Class PrimitiveNumeric
  *
+ * Defines the numeric primitives.
+ *
  * @package axelitus\Base\Primitives\Numeric
  */
 abstract class PrimitiveNumeric extends Primitive

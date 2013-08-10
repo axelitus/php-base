@@ -17,6 +17,8 @@ use axelitus\Base\Exceptions\NotImplementedException;
 /**
  * Class Primitive
  *
+ * Defines the primitives.
+ *
  * @package axelitus\Base\Primitives
  */
 abstract class Primitive

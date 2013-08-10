@@ -15,6 +15,8 @@ namespace axelitus\Base;
 /**
  * Class Arr
  *
+ * Defines a dot-notated Arr(ay).
+ *
  * @package axelitus\Base
  */
 class Arr implements \ArrayAccess, \Countable, \Iterator

@@ -18,6 +18,8 @@ use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 /**
  * Class PrimitiveBoolean
  *
+ * Defines the boolean primitives.
+ *
  * @package axelitus\Base\Primitives\Boolean
  */
 abstract class PrimitiveBoolean extends Primitive

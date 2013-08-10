@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\Numeric\Types\PrimitiveInt;
 /**
  * Class Int
  *
+ * Defines an Int.
+ *
  * @package axelitus\Base
  */
 class Int extends PrimitiveInt

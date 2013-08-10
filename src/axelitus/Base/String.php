@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\String\PrimitiveString;
 /**
  * Class String
  *
+ * Defines a String.
+ *
  * @package axelitus\Base
  */
 class String extends PrimitiveString

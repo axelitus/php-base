@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\Boolean\PrimitiveBoolean;
 /**
  * Class Boolean
  *
+ * Defines a Boolean.
+ *
  * @package axelitus\Base
  */
 class Boolean extends PrimitiveBoolean

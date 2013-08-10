@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat;
 /**
  * Class Float
  *
+ * Defines a float.
+ *
  * @package axelitus\Base
  */
 class Float extends PrimitiveFloat

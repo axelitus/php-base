@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 /**
  * Class PrimitiveInt
  *
+ * Defines the int primitives.
+ *
  * @package axelitus\Base\Primitives\Numeric\Types
  */
 abstract class PrimitiveInt extends PrimitiveNumeric
