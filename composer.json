@@ -1,6 +1,6 @@
 {
     "name": "axelitus/base",
-    "description": "PHP framework agnostic package to handle/extend PHP primitive types",
+    "description": "PHP framework agnostic package to handle/extend PHP primitive types.",
     "type": "library",
     "keywords": ["basic", "primitive", "string", "number", "array", "collection"],
     "homepage": "http://axelitus.mx/projects/axelitus/base",
@@ -14,10 +14,10 @@
         }
     ],
     "support": {
-        "email": "axelitusdv@gmail.com",
-        "source": "https://github.com/axelitus/php-axelitus-base",
-        "issues": "https://github.com/axelitus/php-axelitus-base/issues",
-        "wiki": "https://github.com/axelitus/php-axelitus-base/wiki"
+        "email": "axelitusdev@gmail.com",
+        "source": "https://github.com/axelitus/php-base",
+        "issues": "https://github.com/axelitus/php-base/issues",
+        "wiki": "https://github.com/axelitus/php-base/wiki"
     },
     "require": {
         "php": ">=5.4.9"
