@@ -22,9 +22,9 @@ use axelitus\Base\Exceptions\NotImplementedException;
 abstract class Primitive
 {
     /**
-     * @type int $value The value of the primitive.
+     * @type mixed $value The value of the primitive.
      */
-    protected $value = 0;
+    protected $value = null;
 
     /**
      * Constructor
