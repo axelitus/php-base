@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.1
+ * @version     0.2
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -12,6 +12,11 @@
 
 namespace axelitus\Base;
 
+/**
+ * Class TestsNumeric
+ *
+ * @package axelitus\Base
+ */
 class TestsNumeric extends TestCase
 {
     /**
@@ -34,19 +39,19 @@ class TestsNumeric extends TestCase
     }
 
     /**
-     * Tests the Numeric::isEqual() function.
+     * Tests the Numeric::areEqual() function.
      * @depends test_is_numeric
      */
     public function test_is_equal()
     {
-        $this->assertTrue(Numeric::isEqual(0, 0), "The values 0 and 0 are not evaluated as equal.");
-        $this->assertTrue(Numeric::isEqual(-4, -4), "The values -4 and -4 are not evaluated as equal.");
-        $this->assertTrue(Numeric::isEqual(23, new Numeric(23)), "The values 23 and [Numeric: { \$value: int(23) }] are not evaluated as equal.");
-        $this->assertTrue(Numeric::isEqual(new Numeric(5), 5), "The values [Numeric: { \$value: int(5) }] and 5 are not evaluated as equal.");
-        $this->assertTrue(Numeric::isEqual(new Numeric(9), new Numeric(9)), "The values [Numeric: { \$value: int(9) }] and [Numeric: { \$value: int(9) }] are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(0, 0), "The values 0 and 0 are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(-4, -4), "The values -4 and -4 are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(23, new Numeric(23)), "The values 23 and [Numeric: { \$value: int(23) }] are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(new Numeric(5), 5), "The values [Numeric: { \$value: int(5) }] and 5 are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(new Numeric(9), new Numeric(9)), "The values [Numeric: { \$value: int(9) }] and [Numeric: { \$value: int(9) }] are not evaluated as equal.");
 
         // evaluate special cases for numeric with derived classes of PrimitiveNumeric like Int and Float.
-        $this->assertTrue(Numeric::isEqual(5, new Int(5)), "The values 5 and [Int: { \$value: int(5) }] are not evaluated as equal.");
-        $this->assertTrue(Numeric::isEqual(5.8, new Float(5.8)), "The values 5.8 and [Float: { \$value: float(5.8) }] are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(5, new Int(5)), "The values 5 and [Int: { \$value: int(5) }] are not evaluated as equal.");
+        $this->assertTrue(Numeric::areEqual(5.8, new Float(5.8)), "The values 5.8 and [Float: { \$value: float(5.8) }] are not evaluated as equal.");
     }
 }

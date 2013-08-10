@@ -10,23 +10,22 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base\Primitives\Numeric;
+namespace axelitus\Base\Primitives\Boolean;
 
 use axelitus\Base\Primitives\Primitive;
+use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 
 /**
- * Class PrimitiveNumeric
+ * Class PrimitiveBoolean
  *
- * Defines the numeric primitives.
+ * Defines the boolean primitives.
  *
- * @package axelitus\Base\Primitives\Numeric
+ * @package axelitus\Base\Primitives\Boolean
  */
-abstract class PrimitiveNumeric extends Primitive
+abstract class PrimitiveBoolean extends Primitive
 {
     /**
-     * Validates the given primitive value.
-     *
-     * This function is automatically called from the parent class automatically.
+     * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
      *
@@ -46,6 +45,9 @@ abstract class PrimitiveNumeric extends Primitive
      */
     public static function is($var)
     {
-        return is_numeric($var) or is_a($var, __NAMESPACE__ . '\PrimitiveNumeric');
+        return (static::isSimple($var) and (is_bool($var) or $var === 0 or $var === 1)) or is_a(
+            $var,
+            __NAMESPACE__ . '\PrimitiveBoolean'
+        );
     }
 }

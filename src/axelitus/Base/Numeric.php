@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.1
+ * @version     0.2
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -17,6 +17,8 @@ use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 /**
  * Class Numeric
  *
+ * Defines a Numeric.
+ *
  * @package axelitus\Base
  */
 class Numeric extends PrimitiveNumeric
@@ -29,10 +31,11 @@ class Numeric extends PrimitiveNumeric
      *
      * @param int|float|PrimitiveNumeric $a The first of the values to compare.
      * @param int|float|PrimitiveNumeric $b The second of the values to compare.
+     *
      * @throws \InvalidArgumentException
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      */
-    final static function isEqual($a, $b)
+    final static function areEqual($a, $b)
     {
         if (!static::is($a) or !static::is($b)) {
             throw new \InvalidArgumentException("Both parameters \$a and \$b must be numeric.");

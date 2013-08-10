@@ -6,9 +6,9 @@ This is a PHP framework agnostic package that contains _extensions_ and helpers 
 
 * **Package:** axelitus/base
 * **Root Namespace:** axelitus\Base
-* **Version:** 0.1
+* **Version:** 0.2
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
-* **Roadmap:** [axelitus/base at Interstate]()
+* **Roadmap:** [axelitus/base at Interstate](http://roadma.ps/2Ts "axelitus/base at Interstate")
 * **Repository**: [axelitus/base at GitHub](https://github.com/axelitus/php-axelitus-base "axelitus/base at GitHub")
 * **Build Status (master):** [![Build Status](https://secure.travis-ci.org/axelitus/php-axelitus-base.png?branch=master)](http://travis-ci.org/axelitus/php-axelitus-base)
 * **Build Status (develop):** [![Build Status](https://secure.travis-ci.org/axelitus/php-axelitus-base.png?branch=develop)](http://travis-ci.org/axelitus/php-axelitus-base)
@@ -33,18 +33,25 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 
 ## Contents
 
-All classes are referenced from the root namespace (shown as ... in this list) if not otherwise stated.
+All classes are referenced from the package namespace if not otherwise stated.
 
- - **...\Primitives\Primitive** - Abstract class that defines the primitives.
- - **...\Primitives\Numeric\PrimitiveNumeric** - Abstract class that defines the numeric primitive.
- - **...\Primitives\Numeric\Types\PrimitiveInt** - Abstract class that defines the int primitive.
- - **...\Primitives\Numeric\Types\PrimitiveFloat** - Abstract class that defines the float primitive.
- - **...\Primitives\String\PrimitiveString** - Abstract class that defines the string primitive.
- - **...\Primitives\Exceptions\NotImplementedException** - Exception that is thrown when a method/function is not yet implemented.
- - **...\Numeric** - Concrete class that defines a Numeric primitive to be used.
- - **...\Int** - Concrete class that defines an Int primitive to be used.
- - **...\Float** - Concrete class that defines a Float primitive to be used.
- - **...\String** - Concrete class that defines a String primitive to be used.
+ - **Arr** - Defines a dot-notated Arr(ay).
+ - **Boolean** - Defines a Boolean.
+ - **Float** - Defines a Float.
+ - **Int** - Defines an Int.
+ - **Numeric** - Defines a Numeric.
+ - **String** - Defines a String.
+ 
+ - **Exceptions\ClassNotFoundException** - The exception to throw when a class is not found (could not be loaded).
+ - **Exceptions\MethodNotAllowedException** - The exception to throw when a method is not allowed.
+ - **Exceptions\NotImplementedException** - The exception to throw when a method is not implemented.
+
+ - **Primitives\Primitive** - Defines the primitives.
+ - **Primitives\Boolean\PrimitiveBoolean** - Defines the boolean primitives.
+ - **Primitives\Numeric\PrimitiveNumeric** - Defines the numeric primitives.
+ - **Primitives\Numeric\Types\PrimitiveInt** - Defines the int primitives.
+ - **Primitives\Numeric\Types\PrimitiveFloat** - Defines the float primitives.
+ - **Primitives\String\PrimitiveString** - Defines the string primitives.
 
 ## How to install
 
@@ -74,5 +81,5 @@ require 'vendor/autoload.php';
 
 5. Finally just use the package classes as needed:
 ```
-axelitus\Base\[<namespace>\...]<class>::<function>(<params>);
+axelitus\Base\[<sub-namespace>\...]<class>::<function>(<params>);
 ```

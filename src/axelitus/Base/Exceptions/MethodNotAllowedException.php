@@ -10,17 +10,15 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
-
-use axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat;
+namespace axelitus\Base\Exceptions;
 
 /**
- * Class Float
+ * Class MethodNotAllowedException
  *
- * Defines a float.
+ * The exception to throw when a method is not allowed.
  *
- * @package axelitus\Base
+ * @package axelitus\Base\Exceptions
  */
-class Float extends PrimitiveFloat
+class MethodNotAllowedException extends \RuntimeException
 {
 }

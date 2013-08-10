@@ -12,15 +12,15 @@
 
 namespace axelitus\Base;
 
-use axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat;
+use axelitus\Base\Primitives\Boolean\PrimitiveBoolean;
 
 /**
- * Class Float
+ * Class Boolean
  *
- * Defines a float.
+ * Defines a Boolean.
  *
  * @package axelitus\Base
  */
-class Float extends PrimitiveFloat
+class Boolean extends PrimitiveBoolean
 {
 }
