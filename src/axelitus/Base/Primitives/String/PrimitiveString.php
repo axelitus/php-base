@@ -28,6 +28,38 @@ abstract class PrimitiveString extends Primitive
     const DEFAULT_ENCODING = 'UTF-8';
 
     /**
+     * @type string  A string containing all alpha characters
+     */
+    const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+    /**
+     * @type string  A string containing all numbers
+     */
+    const NUM = '0123456789';
+
+    /**
+     * @type string  A string containing all alphanumeric characters
+     */
+    const ALNUM = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+    /**
+     * @type string  A string containing all hexadecimal characters
+     */
+    const HEXDEC = '0123456789abcdef';
+
+    /**
+     * @type string  A string containing distinct characters
+     */
+    const DISTINCT = '2345679ACDEFHJKLMNPRSTUVWXYZ';
+
+    /**
+     * @type string  A string containing ascii printable characters according to Wikipedia:
+     * http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
+     * Be careful, the ' char is escaped so it looks like \ is twice, but it is not.
+     */
+    const ASCII_PRINTABLE = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+
+    /**
      * Validates the given primitive value. This function is automatically called from the constructor.
      *
      * @param mixed $value The value of the primitive.
