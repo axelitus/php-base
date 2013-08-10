@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.1
+ * @version     0.2
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -16,6 +16,8 @@ use axelitus\Base\Primitives\Primitive;
 
 /**
  * Class PrimitiveString
+ *
+ * Defines the string primitives.
  *
  * @package axelitus\Base\Primitives\String
  */
