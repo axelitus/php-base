@@ -6,7 +6,7 @@ This is a PHP framework agnostic package that contains _extensions_ and helpers 
 
 * **Package:** axelitus/base
 * **Root Namespace:** axelitus\Base
-* **Version:** 0.1
+* **Version:** 0.2
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
 * **Roadmap:** [axelitus/base at Interstate]()
 * **Repository**: [axelitus/base at GitHub](https://github.com/axelitus/php-axelitus-base "axelitus/base at GitHub")
