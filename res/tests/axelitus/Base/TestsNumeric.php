@@ -22,7 +22,7 @@ class TestsNumeric extends TestCase
     /**
      * Tests the Numeric::is() function.
      */
-    public function test_is_numeric()
+    public function test_isNumeric()
     {
         $this->assertFalse(Numeric::is(null), "The value null is incorrectly recognized as numeric.");
         $this->assertTrue(Numeric::is(0), "The value 0 is not recognized as numeric.");
@@ -40,9 +40,9 @@ class TestsNumeric extends TestCase
 
     /**
      * Tests the Numeric::areEqual() function.
-     * @depends test_is_numeric
+     * @depends test_isNumeric
      */
-    public function test_is_equal()
+    public function test_areEqual()
     {
         $this->assertTrue(Numeric::areEqual(0, 0), "The values 0 and 0 are not evaluated as equal.");
         $this->assertTrue(Numeric::areEqual(-4, -4), "The values -4 and -4 are not evaluated as equal.");
@@ -53,5 +53,8 @@ class TestsNumeric extends TestCase
         // evaluate special cases for numeric with derived classes of PrimitiveNumeric like Int and Float.
         $this->assertTrue(Numeric::areEqual(5, new Int(5)), "The values 5 and [Int: { \$value: int(5) }] are not evaluated as equal.");
         $this->assertTrue(Numeric::areEqual(5.8, new Float(5.8)), "The values 5.8 and [Float: { \$value: float(5.8) }] are not evaluated as equal.");
+
+        $this->setExpectedException('\InvalidArgumentException');
+        Numeric::areEqual(0, 'string');
     }
 }

@@ -22,7 +22,7 @@ class TestsFloat extends TestCase
     /**
      * Tests Float::is()
      */
-    public function test_is_float()
+    public function test_isFloat()
     {
         $this->assertTrue(Float::is(0), "The value 0 is not recognized as a float.");
         $this->assertTrue(Float::is(5), "The value 5 is not recognized as a float.");

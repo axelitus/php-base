@@ -22,7 +22,7 @@ class TestsString extends TestCase
     /**
      * Tests the String::is() function.
      */
-    public function test_is_string()
+    public function test_isString()
     {
         $this->assertFalse(String::is(null), "The value null is incorrectly recognized as a string.");
         $this->assertTrue(String::is(""), "The value \"\" is not recognized as a string.");
@@ -34,9 +34,9 @@ class TestsString extends TestCase
 
     /**
      * Tests the String::areEqual() function.
-     * @depends test_is_string
+     * @depends test_isString
      */
-    public function test_is_equal()
+    public function test_areEqual()
     {
         $this->assertTrue(String::areEqual("", ""), "The string \"\" is evaluated as not equal to the string \"\".");
         $this->assertTrue(String::areEqual("axelitus", "axelitus"), "The string \"axelitus\" is evaluated as not equal to the string \"axelitus\".");
@@ -44,22 +44,28 @@ class TestsString extends TestCase
         $this->assertTrue(String::areEqual(new String("Objects"), new String("Objects")), "The string [String: { \$value: \"Objects\" }]] is evaluated as not equal to the string [String: { \$value: \"Objects\" }]].");
         $this->assertFalse(String::areEqual("This is", "not equal"), "The string \"This is\" is evaluated as equal to the string \"not equal\".");
         $this->assertFalse(String::areEqual("This is", new String("not equal")), "The string \"This is\" is evaluated as equal to the string [String: { \$value: \"not equal\" }]].");
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::areEqual('string', 0);
     }
 
     /**
      * Tests the String::length() function.
-     * @depends test_is_string
+     * @depends test_isString
      */
     public function test_length()
     {
         $this->assertEquals(0, String::length(""));
         $this->assertEquals(33, String::length("This is a 33 chars length string."), "The length is not correctly calculated.");
         $this->assertEquals(83, String::length("This string, however, is a little bit longer, having in total a length of 83 chars."), "The length is not correctly calculated.");
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::length(false);
     }
 
     /**
      * Tests the String::sub() function.
-     * @depends test_is_string
+     * @depends test_isString
      */
     public function test_sub()
     {
@@ -68,22 +74,31 @@ class TestsString extends TestCase
         $this->assertEquals("coming", String::sub("Winter is coming...", 10, 6), "The resulting substring is not equal to the expected string \"is coming...\".");
         $this->assertEquals("Winter", String::sub("Winter is coming...", 0, 6), "The resulting substring is not equal to the expected string \"is coming...\".");
         $this->assertEquals("...", String::sub("Winter is coming...", -3), "The resulting substring is not equal to the expected string \"is coming...\".");
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::sub(false, 0);
     }
 
     /**
      * Tests the String::beginsWith() function.
-     * @depends test_is_string
+     * @depends test_isString
      */
     public function test_begins_with()
     {
         $this->assertTrue(String::beginsWith("Winter is coming...", "Winter"), "The string \"Winter is coming...\" does not begin with the string \"Winter\".");
         $this->assertTrue(String::beginsWith("Winter is coming...", "winter", false), "The string \"Winter is coming...\" does not begin with the string \"winter\" [case insensitive].");
         $this->assertFalse(String::beginsWith("Winter is coming...", "winter", true), "The string \"Winter is coming...\" does not begin with the string \"winter\" [case sensitive].");
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::beginsWith(false, 'string');
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::beginsWith('string', false);
     }
 
     /**
      * Tests the String::endsWith() function.
-     * @depends test_is_string
+     * @depends test_isString
      */
     public function test_ends_with()
     {
@@ -91,5 +106,11 @@ class TestsString extends TestCase
         $this->assertTrue(String::endsWith("It is known, Khaleesi.", "khaleesi.", false), "The string \"It is known, Khaleesi.\" does not end with the string \"khaleesi.\" [case insensitive].");
         $this->assertFalse(String::endsWith("It is known, Khaleesi.", "khaleesi.", true), "The string \"It is known, Khaleesi.\" does not end with the string \"khaleesi.\" [case sensitive].");
         $this->assertFalse(String::endsWith("It is known, Khaleesi.", "Khaleesi"), "The string \"It is known, Khaleesi.\" does not end with the string \"Khaleesi\"..");
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::endsWith(false, 'string');
+
+        $this->setExpectedException('\InvalidArgumentException');
+        String::endsWith('string', false);
     }
 }

@@ -22,7 +22,7 @@ class TestsInt extends TestCase
     /**
      * Tests Int::is()
      */
-    public function test_is_int()
+    public function test_isInt()
     {
         $this->assertTrue(Int::is(0), "The value 0 is not recognized as an int.");
         $this->assertTrue(Int::is(5), "The value 5 is not recognized as an int.");

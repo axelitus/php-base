@@ -22,7 +22,7 @@ class TestsBoolean extends TestCase
     /**
      * Tests Boolean::is()
      */
-    public function test_is_bool()
+    public function test_isBool()
     {
         $this->assertTrue(Boolean::is(true), "The value true is not recognized as a boolean.");
         $this->assertTrue(Boolean::is(false), "The value false is not recognized as a boolean.");
