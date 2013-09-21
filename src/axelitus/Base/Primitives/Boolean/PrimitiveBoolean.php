@@ -13,7 +13,6 @@
 namespace axelitus\Base\Primitives\Boolean;
 
 use axelitus\Base\Primitives\Primitive;
-use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 
 /**
  * Class PrimitiveBoolean
