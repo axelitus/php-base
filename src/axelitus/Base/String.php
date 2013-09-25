@@ -107,18 +107,19 @@ class String extends PrimitiveString
     }
 
     /**
-     * Verifies if a string contains a substring. The $encoding parameter is used to determine the
-     * encoding and thus the proper method.
+     * Finds the position of the first occurrence of a substring in a string.
+     * The $encoding parameter is used to determine the encoding and thus the
+     * proper method to be used.
      *
      * @param string $input             The input string to compare to
      * @param string $search            The substring to compare the ending to
      * @param bool   $case_sensitive    Whether the comparison is case-sensitive
      * @param string $encoding          The encoding of the input string
      *
-     * @return bool     Whether the input string contains the substring
+     * @return int|bool     Returns the numeric position of the first occurrence of the searched string in the input string. If it is not found, it returns false.
      * @throws \InvalidArgumentException
      */
-    public static function contains($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
+    public static function pos($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
         if (!is_string($input) or !is_string($search)) {
             throw new \InvalidArgumentException("Both parameters \$input and \$search must be strings.");
@@ -133,6 +134,22 @@ class String extends PrimitiveString
                 ? mb_stripos($input, $search, 0, $encoding)
                 : (stripos($input, $search) !== false ? true : false);
         }
+    }
+
+    /**
+     * Verifies if a string contains a substring. The $encoding parameter is used to determine the
+     * encoding and thus the proper method.
+     *
+     * @param string $input             The input string to compare to
+     * @param string $search            The substring to compare the ending to
+     * @param bool   $case_sensitive    Whether the comparison is case-sensitive
+     * @param string $encoding          The encoding of the input string
+     *
+     * @return bool     Whether the input string contains the substring
+     */
+    public static function contains($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
+    {
+        return (bool) static::pos($input, $search, $case_sensitive, $encoding);
     }
 
     /**
