@@ -577,14 +577,14 @@ class String extends PrimitiveString
      * @return  string  The char(s)-separated string
      * @throws  \InvalidArgumentException
      */
-    public static function separated($input, $transform = null, $separator = '_', $encoding = self::DEFAULT_ENCODING)
+    public static function separated($input, $separator = '_', $transform = null, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!is_string($input) and !is_string($separator)) {
+        if (!is_string($input) or !is_string($separator)) {
             throw new \InvalidArgumentException("The \$input and \$separator parameters must be both strings.");
         }
 
         if ($separator == '') {
-            throw new \InvalidArgumentException("The \$separator parameters must have at least one character.");
+            throw new \InvalidArgumentException("The \$separator parameter must have at least one character.");
         }
 
         $separated = preg_replace_callback(
@@ -610,7 +610,7 @@ class String extends PrimitiveString
             $input
         );
 
-        // Do lcfirst and ucfirst transformations
+        // Do lcfirst, ucfirst and ucwords transformations
         if (static::isOneOf($transform, array('lcfirst', 'ucfirst', 'ucwords'))) {
             $words = explode(' ', $separated);
             foreach ($words as &$word) {
@@ -733,8 +733,8 @@ class String extends PrimitiveString
             }
 
             array_push($args, $pool[$var_key]);
-            $format = substr_replace($format, $index = count($args), $var_pos, static::length($var_key));
-            $pos = $var_pos + static::length($index); // skip to end of replacement for next iteration
+            $format = substr_replace($format, $index = count($args), $var_pos, $word_length = static::length($var_key));
+            $pos = $var_pos + $word_length; // skip to end of replacement for next iteration
         }
 
         // Final check to see that everything is ok
@@ -765,12 +765,12 @@ class String extends PrimitiveString
      */
     public static function random($length = 1, $chars = self::ALNUM, $shuffle = false)
     {
-        if (!is_string($chars) or $chars == '') {
-            throw new \InvalidArgumentException("The \$chars parameter must be a non-empty string containing a set of characters to pick a random value from.");
-        }
-
         if (!is_numeric($length) or $length < 0) {
             throw new \InvalidArgumentException("The \$length parameter must be a positive integer or zero.");
+        }
+
+        if (!is_string($chars) or $chars == '') {
+            throw new \InvalidArgumentException("The \$chars parameter must be a non-empty string containing a set of characters to pick a random value from.");
         }
 
         $chars = ($shuffle) ? str_shuffle($chars) : $chars;
