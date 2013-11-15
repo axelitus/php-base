@@ -38,4 +38,46 @@ class TestsFloat extends TestCase
         $this->assertFalse(Float::is("string 4"), "The value \"string 4\" is incorrectly recognized as a float.");
         $this->assertFalse(Float::is([]), "The value [] is incorrectly recognized as an int.");
     }
+
+    /**
+     * Tests Float::random()
+     */
+    public function test_random()
+    {
+        $rand = Float::random();
+        $output = ($rand >= 0 and $rand < 1);
+        $this->assertTrue(is_float($rand) and $output);
+
+        $rand = Float::random(5.23, 10.59);
+        $output = ($rand >= 5.23 and $rand < 10.59);
+        $this->assertTrue(is_float($rand) and $output);
+
+        $rand = Float::random(-20.43, 0.5);
+        $output = ($rand >= -20.43 and $rand < 0.5);
+        $this->assertTrue(is_float($rand) and $output);
+
+        $rand = Float::random(150.82, 250.21, null, 10);
+        $output = ($rand >= 150.82 and $rand < 250.21);
+        $this->assertTrue(is_float($rand) and $output);
+        $this->assertEquals(174.07007607784, $rand);
+
+        $rand = Float::random(150.82, 250.21, 2, 10);
+        $output = ($rand >= 150.82 and $rand < 250.21);
+        $this->assertTrue(is_float($rand) and $output);
+        $this->assertEquals(174.07, $rand);    // Because it's seeded it should give us the same result (it's rounded)
+
+        $rand = Float::random(150.82, 250.21, 5, 10);
+        $output = ($rand >= 150.82 and $rand < 250.21);
+        $this->assertTrue(is_float($rand) and $output);
+        $this->assertEquals(174.07008, $rand);    // Because it's seeded it should give us the same result (it's rounded)
+
+        $this->setExpectedException('\InvalidArgumentException');
+        Float::random(false);
+
+        $this->setExpectedException('\InvalidArgumentException');
+        Float::random(6, false);
+
+        $this->setExpectedException('\InvalidArgumentException');
+        Float::random(6, 3);
+    }
 }

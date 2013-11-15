@@ -39,4 +39,33 @@ class TestsInt extends TestCase
         $this->assertFalse(Int::is("string 4"), "The value \"string 4\" is incorrectly recognized as an int.");
         $this->assertFalse(Int::is([]), "The value [] is incorrectly recognized as an int.");
     }
+
+    /**
+     * Tests Int::random()
+     */
+    public function test_random()
+    {
+        $rand = Int::random();
+        $output = ($rand >= 0 and $rand <= 1);
+        $this->assertTrue(is_int($rand) and $output);
+
+        $rand = Int::random(5, 10);
+        $output = ($rand >= 5 and $rand <= 10);
+        $this->assertTrue(is_int($rand) and $output);
+
+        $rand = Int::random(-20, 0);
+        $output = ($rand >= -20 and $rand <= 0);
+        $this->assertTrue(is_int($rand) and $output);
+
+        $rand = Int::random(150, 250, 10);
+        $output = ($rand >= 150 and $rand <= 250);
+        $this->assertTrue(is_int($rand) and $output);
+        $this->assertEquals(173, $rand);    // Because it's seeded it should give us the same result
+
+        $this->setExpectedException('\InvalidArgumentException');
+        Int::random(false);
+
+        $this->setExpectedException('\InvalidArgumentException');
+        Int::random(6, false);
+    }
 }
