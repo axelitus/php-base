@@ -12,6 +12,8 @@
 
 namespace axelitus\Base;
 
+use SebastianBergmann\Exporter\Exception;
+
 /**
  * Class TestsFloat
  *
@@ -71,13 +73,18 @@ class TestsFloat extends TestCase
         $this->assertTrue(is_float($rand) and $output);
         $this->assertEquals(174.07008, $rand);    // Because it's seeded it should give us the same result (it's rounded)
 
+        $this->assertFalse(@Float::random(6, 3));
+    }
+
+    public function test_randomException01()
+    {
         $this->setExpectedException('\InvalidArgumentException');
         Float::random(false);
+    }
 
+    public function test_randomException02()
+    {
         $this->setExpectedException('\InvalidArgumentException');
         Float::random(6, false);
-
-        $this->setExpectedException('\InvalidArgumentException');
-        Float::random(6, 3);
     }
 }
