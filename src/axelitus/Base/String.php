@@ -514,9 +514,11 @@ class String extends PrimitiveString
 
                 $pattern .= '|' . preg_quote($separator);
             }
-            $pattern = '/(^' . $pattern . ')(.)/e';
+            $pattern = '/(^' . $pattern . ')(.)/';
 
-            $studly = preg_replace($pattern, "strtoupper('\\2')", strval($input));
+            $studly = preg_replace_callback($pattern, function($matches) {
+                    return strtoupper($matches[2]);
+                }, strval($input));
             $words = explode(' ', $studly);
             foreach ($words as &$word) {
                 $word = static::ucfirst($word, $encoding);
