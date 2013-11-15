@@ -779,7 +779,7 @@ class String extends PrimitiveString
 
         $string = '';
         for ($i = 0; $i < $length; $i++) {
-            $string .= $chars[mt_rand(0, static::length($chars) - 1)];
+            $string .= $chars[Int::random(0, static::length($chars) - 1)];
         }
 
         return $string;
@@ -802,14 +802,11 @@ class String extends PrimitiveString
     public static function trandom($type = 'alnum', $length = 16, $shuffle = false)
     {
         switch ($type) {
-            case 'basic':
-                return mt_rand();
-                break;
             case 'unique':
-                return md5(uniqid(mt_rand()));
+                return md5(uniqid(Int::random()));
                 break;
             case 'sha1':
-                return sha1(uniqid(mt_rand(), true));
+                return sha1(uniqid(Int::random(), true));
                 break;
             case 'alpha':
                 $pool = self::ALPHA;
