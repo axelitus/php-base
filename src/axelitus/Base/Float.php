@@ -42,7 +42,7 @@ class Float extends PrimitiveFloat
         }
 
         if ($min >= $max) {
-            trigger_error("The \$min value cannot be greater or equal than the \$max value.");
+            trigger_error("The \$min value cannot be greater or equal than the \$max value.", E_WARNING);
             return false;
         }
 
