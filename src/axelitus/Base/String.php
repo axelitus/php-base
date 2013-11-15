@@ -99,11 +99,7 @@ class String extends PrimitiveString
                 $val_input
             )) - $start : $length;
 
-        return function_exists('mb_substr') ? mb_substr($val_input, $start, $length, $encoding) : substr(
-            $val_input,
-            $start,
-            $length
-        );
+        return function_exists('mb_substr') ? mb_substr($val_input, $start, $length, $encoding) : substr($val_input, $start, $length);
     }
 
     /**
