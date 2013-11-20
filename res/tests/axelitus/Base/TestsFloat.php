@@ -88,4 +88,108 @@ class TestsFloat extends TestCase
         $this->setExpectedException('\InvalidArgumentException');
         Float::random(6, false);
     }
+
+    /**
+     * Tests Float::inRange()
+     */
+    public function test_inRange()
+    {
+        $value = 3.25;
+        $rangeA = [0.25, 5.25];
+        $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1]));
+        $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1], true));
+        $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1], false, true));
+        $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1], true, true));
+
+        $rangeB = [3.25, 9.25];
+        $this->assertTrue(Float::inRange($value, $rangeB[0], $rangeB[1]));
+        $this->assertFalse(Float::inRange($value, $rangeB[0], $rangeB[1], true));
+        $this->assertTrue(Float::inRange($value, $rangeB[0], $rangeB[1], false, true));
+        $this->assertFalse(Float::inRange($value, $rangeB[0], $rangeB[1], true, true));
+
+        $rangeC = [0.25, 3.25];
+        $this->assertTrue(Float::inRange($value, $rangeC[0], $rangeC[1]));
+        $this->assertTrue(Float::inRange($value, $rangeC[0], $rangeC[1], true));
+        $this->assertFalse(Float::inRange($value, $rangeC[0], $rangeC[1], false, true));
+        $this->assertFalse(Float::inRange($value, $rangeC[0], $rangeC[1], true, true));
+
+        $rangeD = [5.25, 9.25];
+        $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1]));
+        $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1], true));
+        $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1], false, true));
+        $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1], true, true));
+    }
+
+    /**
+     * Tests Float::inside()
+     * @depends test_inRange
+     */
+    public function test_inside()
+    {
+        $value = 3.25;
+        $rangeA = [0.25, 5.25];
+        $this->assertTrue(Float::inside($value, $rangeA[0], $rangeA[1]));
+
+        $rangeB = [3.25, 9.25];
+        $this->assertTrue(Float::inside($value, $rangeB[0], $rangeB[1]));
+
+        $rangeC = [0.25, 3.25];
+        $this->assertTrue(Float::inside($value, $rangeC[0], $rangeC[1]));
+
+        $rangeD = [5.25, 9.25];
+        $this->assertFalse(Float::inside($value, $rangeD[0], $rangeD[1]));
+    }
+
+    /**
+     * Tests Float::between()
+     * @depends test_inRange
+     */
+    public function test_between()
+    {
+        $value = 3.25;
+        $rangeA = [0.25, 5.25];
+        $this->assertTrue(Float::between($value, $rangeA[0], $rangeA[1]));
+
+        $rangeB = [3.25, 9.25];
+        $this->assertFalse(Float::between($value, $rangeB[0], $rangeB[1]));
+
+        $rangeC = [0.25, 3.25];
+        $this->assertFalse(Float::between($value, $rangeC[0], $rangeC[1]));
+
+        $rangeD = [5.25, 9.25];
+        $this->assertFalse(Float::between($value, $rangeD[0], $rangeD[1]));
+    }
+
+    /**
+     * Tests Float::inRange()
+     */
+    public function test_inRangeException01()
+    {
+        $value = 'string';
+        $range = [0.25, 1.25];
+        $this->setExpectedException('\InvalidArgumentException');
+        Float::inRange($value, $range[0], $range[1]);
+    }
+
+    /**
+     * Tests Float::inRange()
+     */
+    public function test_inRangeException02()
+    {
+        $value = 1.25;
+        $range = ['string', 1.25];
+        $this->setExpectedException('\InvalidArgumentException');
+        Float::inRange($value, $range[0], $range[1]);
+    }
+
+    /**
+     * Tests Float::inRange()
+     */
+    public function test_inRangeException03()
+    {
+        $value = 1.25;
+        $range = [0.25, 'string'];
+        $this->setExpectedException('\InvalidArgumentException');
+        Float::inRange($value, $range[0], $range[1]);
+    }
 }
