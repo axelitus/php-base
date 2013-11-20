@@ -54,8 +54,8 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param string|PrimitiveString                                  $input                                                                      The input string.
-     * @param \axelitus\Base\Primitives\String\PrimitiveString|string $encoding                                                                   The encoding of the input string for multibyte functions.
+     * @param string|PrimitiveString                                  $input    The input string.
+     * @param \axelitus\Base\Primitives\String\PrimitiveString|string $encoding The encoding of the input string for multibyte functions.
      *
      * @throws \InvalidArgumentException
      * @return int Returns the length of the string.
@@ -99,7 +99,11 @@ class String extends PrimitiveString
                 $val_input
             )) - $start : $length;
 
-        return function_exists('mb_substr') ? mb_substr($val_input, $start, $length, $encoding) : substr($val_input, $start, $length);
+        return function_exists('mb_substr') ? mb_substr($val_input, $start, $length, $encoding) : substr(
+            $val_input,
+            $start,
+            $length
+        );
     }
 
     /**
@@ -107,10 +111,10 @@ class String extends PrimitiveString
      * The $encoding parameter is used to determine the encoding and thus the
      * proper method to be used.
      *
-     * @param string $input             The input string to compare to
-     * @param string $search            The substring to compare the ending to
-     * @param bool   $case_sensitive    Whether the comparison is case-sensitive
-     * @param string $encoding          The encoding of the input string
+     * @param string $input          The input string to compare to
+     * @param string $search         The substring to compare the ending to
+     * @param bool   $case_sensitive Whether the comparison is case-sensitive
+     * @param string $encoding       The encoding of the input string
      *
      * @return int|bool     Returns the numeric position of the first occurrence of the searched string in the input string. If it is not found, it returns false.
      * @throws \InvalidArgumentException
@@ -136,16 +140,16 @@ class String extends PrimitiveString
      * Verifies if a string contains a substring. The $encoding parameter is used to determine the
      * encoding and thus the proper method.
      *
-     * @param string $input             The input string to compare to
-     * @param string $search            The substring to compare the ending to
-     * @param bool   $case_sensitive    Whether the comparison is case-sensitive
-     * @param string $encoding          The encoding of the input string
+     * @param string $input          The input string to compare to
+     * @param string $search         The substring to compare the ending to
+     * @param bool   $case_sensitive Whether the comparison is case-sensitive
+     * @param string $encoding       The encoding of the input string
      *
      * @return bool     Whether the input string contains the substring
      */
     public static function contains($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
-        return (bool) static::pos($input, $search, $case_sensitive, $encoding);
+        return (bool)static::pos($input, $search, $case_sensitive, $encoding);
     }
 
     /**
@@ -209,11 +213,11 @@ class String extends PrimitiveString
     /**
      * Replaces a substring inside a string.
      *
-     * @param string $input             The input string
-     * @param string $search            The substring to be replaced
-     * @param string $replace           The substring replacement
-     * @param bool   $case_sensitive    Whether the comparison should be case sensitive
-     * @param string $encoding          The encoding of the input string
+     * @param string $input          The input string
+     * @param string $search         The substring to be replaced
+     * @param string $replace        The substring replacement
+     * @param bool   $case_sensitive Whether the comparison should be case sensitive
+     * @param string $encoding       The encoding of the input string
      *
      * @return string   The string with the substring replaced
      */
@@ -337,8 +341,8 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input      The input string
-     * @param   string $encoding   The encoding of the input string
+     * @param   string $input    The input string
+     * @param   string $encoding The encoding of the input string
      *
      * @return  string  The lowercased string
      */
@@ -357,8 +361,8 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input      The input string
-     * @param   string $encoding   The encoding of the input string
+     * @param   string $input    The input string
+     * @param   string $encoding The encoding of the input string
      *
      * @return  string  The uppercased string
      */
@@ -378,8 +382,8 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input      The input string
-     * @param   string $encoding   The encoding of the input string
+     * @param   string $input    The input string
+     * @param   string $encoding The encoding of the input string
      *
      * @return  string  The string with the first char lowercased
      */
@@ -400,8 +404,8 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input      The input string
-     * @param   string $encoding   The encoding of the input string
+     * @param   string $input    The input string
+     * @param   string $encoding The encoding of the input string
      *
      * @return  string  The string with the first char uppercased
      */
@@ -422,8 +426,8 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input      The input string
-     * @param   string $encoding   The encoding of the input string
+     * @param   string $input    The input string
+     * @param   string $encoding The encoding of the input string
      *
      * @return  string  The string with the words capitalized
      */
@@ -442,10 +446,10 @@ class String extends PrimitiveString
      * be returned instead of the default bool value. The comparison can be case sensitive or
      * case insensitive (it is made with strcmp and strcasecmp respectively).
      *
-     * @param   string $input              The input string
-     * @param   array  $values             The strings array to look for the input string
-     * @param   bool   $case_sensitive     Whether the comparison is case-sensitive
-     * @param   bool   $return_index       Whether to return the matched array's item instead
+     * @param   string $input          The input string
+     * @param   array  $values         The strings array to look for the input string
+     * @param   bool   $case_sensitive Whether the comparison is case-sensitive
+     * @param   bool   $return_index   Whether to return the matched array's item instead
      *
      * @return  bool|int    Whether the input string was found in the array or the item's index if found
      * @throws  \InvalidArgumentException
@@ -488,9 +492,9 @@ class String extends PrimitiveString
      * When the space char is not used as a separator, each word is converted to studly caps on its own,
      * otherwise the result will be a single studly-caps-cased string.
      *
-     * @param   string $input          The input string
-     * @param   array  $separators     An array containing separators to split the input string
-     * @param   string $encoding       The encoding of the input string
+     * @param   string $input      The input string
+     * @param   array  $separators An array containing separators to split the input string
+     * @param   string $encoding   The encoding of the input string
      *
      * @return  string  The studly-caps-cased string
      * @throws  \InvalidArgumentException
@@ -512,9 +516,13 @@ class String extends PrimitiveString
             }
             $pattern = '/(^' . $pattern . ')(.)/';
 
-            $studly = preg_replace_callback($pattern, function($matches) {
+            $studly = preg_replace_callback(
+                $pattern,
+                function ($matches) {
                     return strtoupper($matches[2]);
-                }, strval($input));
+                },
+                strval($input)
+            );
             $words = explode(' ', $studly);
             foreach ($words as &$word) {
                 $word = static::ucfirst($word, $encoding);
@@ -536,9 +544,9 @@ class String extends PrimitiveString
      * When the space char is not used as a separator, each word is converted to camel case on its own,
      * otherwise the result will be a single camel-cased string.
      *
-     * @param   string $input          The input string
-     * @param   array  $separators     An array containing separators to split the input string
-     * @param   string $encoding       The encoding of the input string
+     * @param   string $input      The input string
+     * @param   array  $separators An array containing separators to split the input string
+     * @param   string $encoding   The encoding of the input string
      *
      * @return  string  The camel-cased string
      * @throws  \InvalidArgumentException
@@ -567,10 +575,10 @@ class String extends PrimitiveString
      * space): 'lower', 'upper', 'lcfirst', 'ucfirst', 'ucwords' by using the $transform parameter (other values will
      * be ignored and no transformation will be made thus returning the separated words unmodified).
      *
-     * @param   string      $input      The input string
-     * @param   null|string $transform  The transformation to be run for each word
-     * @param   string      $separator  The separator to be used
-     * @param   string      $encoding   The encoding of the input string
+     * @param   string      $input     The input string
+     * @param   null|string $transform The transformation to be run for each word
+     * @param   string      $separator The separator to be used
+     * @param   string      $encoding  The encoding of the input string
      *
      * @return  string  The char(s)-separated string
      * @throws  \InvalidArgumentException
@@ -639,10 +647,10 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $string        The string to truncate
-     * @param   int    $limit         The number of characters to truncate too
-     * @param   string $continuation  The string to use to denote it was truncated
-     * @param   bool   $is_html       Whether the string has HTML
+     * @param   string $string       The string to truncate
+     * @param   int    $limit        The number of characters to truncate too
+     * @param   string $continuation The string to use to denote it was truncated
+     * @param   bool   $is_html      Whether the string has HTML
      *
      * @return  string  The truncated string
      */
@@ -697,8 +705,8 @@ class String extends PrimitiveString
      *
      * This method is based on the work of Nate Bessette (www.twitter.com/frickenate)
      *
-     * @param string $format    The format to replace the named variables into
-     * @param array  $args      The args to be replaced (var => replacement).
+     * @param string $format The format to replace the named variables into
+     * @param array  $args   The args to be replaced (var => replacement).
      *
      * @return string|bool  The string with args replaced or false on error
      * @throws \InvalidArgumentException
@@ -723,7 +731,8 @@ class String extends PrimitiveString
 
         // Build args array and substitute variables with numbers
         $args = array();
-        for ($pos = 0; preg_match($pattern, $format, $match, PREG_OFFSET_CAPTURE, $pos);) {
+        //for ($pos = 0; preg_match($pattern, $format, $match, PREG_OFFSET_CAPTURE, $pos);) {
+        for ($pos = 0; static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos);) {
             list($var_key, $var_pos) = $match[0];
 
             if (!array_key_exists($var_key, $pool)) {
@@ -755,9 +764,10 @@ class String extends PrimitiveString
      * The length of the returned string can be controlled with the $length parameter, but every characters is
      * randomized independently with each loop.
      *
-     * @param   int     $length     The length of the output string
-     * @param   string  $chars      The pool of characters to randomize from
-     * @param   bool    $shuffle    Whether to shuffle the character string to increase randomness (entropy)
+     * @param   int    $length  The length of the output string
+     * @param   string $chars   The pool of characters to randomize from
+     * @param   bool   $shuffle Whether to shuffle the character string to increase randomness (entropy)
+     *
      * @return  string  The random string containing random characters from the $chars string
      * @throws  \InvalidArgumentException
      */
@@ -790,9 +800,10 @@ class String extends PrimitiveString
      *
      * This function is based on FuelPHP's \Fuel\Core\Str random function.
      *
-     * @param   string  $type       The type of random string to get
-     * @param   int     $length     The length of the output string
-     * @param   bool    $shuffle    Whether to shuffle the character pool to increase randomness (entropy)
+     * @param   string $type    The type of random string to get
+     * @param   int    $length  The length of the output string
+     * @param   bool   $shuffle Whether to shuffle the character pool to increase randomness (entropy)
+     *
      * @return  string  The type-random string containing random characters from the proper type pool
      */
     public static function trandom($type = 'alnum', $length = 16, $shuffle = false)
@@ -828,5 +839,24 @@ class String extends PrimitiveString
         }
 
         return static::random($length, $pool, $shuffle);
+    }
+
+    /**
+     * Searches the input string for a match to the regular expression given in pattern.
+     *
+     * @param string $input   The input string.
+     * @param string $pattern The pattern to search for, as a string.
+     * @param array  $matches If matches is provided, then it is filled with the results of search.
+     *                        $matches[0] will contain the text that matched the full pattern, $matches[1]
+     *                        will have the text that matched the first captured parenthesized subpattern, and so on.
+     * @param int    $flags   The flag modifiers.
+     * @param int    $offset  The offset from which to start the search (in bytes).
+     *
+     * @return int
+     * @see http://php.net/manual/en/function.preg-match.php
+     */
+    public static function match($input, $pattern, array &$matches = null, $flags = 0, $offset = 0)
+    {
+        return preg_match($pattern, $input, $matches, $flags, $offset);
     }
 }
