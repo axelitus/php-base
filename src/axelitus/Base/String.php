@@ -79,7 +79,7 @@ class String extends PrimitiveString
      * @author  FuelPHP (http://fuelphp.com)
      *
      * @param string|PrimitiveString $input    The input string.
-     * @param string|PrimitiveString $start    The start index from where to begin extracting.
+     * @param int                    $start    The start index from where to begin extracting.
      * @param int                    $length   The length of the extracted substring.
      * @param string                 $encoding The encoding of the $input string for multibyte functions.
      *
@@ -116,7 +116,8 @@ class String extends PrimitiveString
      * @param bool   $case_sensitive Whether the comparison is case-sensitive
      * @param string $encoding       The encoding of the input string
      *
-     * @return int|bool     Returns the numeric position of the first occurrence of the searched string in the input string. If it is not found, it returns false.
+     * @return int|bool Returns the numeric position of the first occurrence of the searched string in the input string.
+     *                  If it is not found, it returns false.
      * @throws \InvalidArgumentException
      */
     public static function pos($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
