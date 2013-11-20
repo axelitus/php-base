@@ -53,7 +53,7 @@ class Int extends PrimitiveInt
     }
 
     /**
-     * Tests if a value is in a range.
+     * Tests if an integer is in a range.
      *
      * Tests if a value is in a range. The function will correct the limits if inverted. The tested range
      * can be set to have its lower and upper limits inclusive (bounds closed) or exclusive (bounds opened) using
@@ -89,7 +89,7 @@ class Int extends PrimitiveInt
     }
 
     /**
-     * Tests if a value is inside a range.
+     * Tests if an integer is inside a range.
      *
      * It's an alias for Int::inRange($value, $lower, $upper, false, false)
      *
@@ -106,7 +106,7 @@ class Int extends PrimitiveInt
     }
 
     /**
-     * Tests if a value is between a range.
+     * Tests if an integer is between a range.
      *
      * It's an alias for Int::inRange($value, $lower, $upper, true, true)
      *
