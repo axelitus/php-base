@@ -31,7 +31,7 @@ class Float extends PrimitiveFloat
      * @param int       $round Decimal places to round the number to (or null for no rounding)
      * @param null|int  $seed  Random generator seed
      *
-     * @return float A random float value between min (or 0) and max (or 1, exclusive), or FALSE if max
+     * @return float|false A random float value between min (or 0) and max (or 1, exclusive), or FALSE if max
      *               is less than min.
      * @throws \InvalidArgumentException
      */

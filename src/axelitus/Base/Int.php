@@ -26,11 +26,11 @@ class Int extends PrimitiveInt
     /**
      * Generates a random integer number between min and max.
      *
-     * @param int      $min     Lower bound (inclusive)
-     * @param int      $max     Upper bound(inclusive)
-     * @param null|int $seed    Random generator seed
+     * @param int      $min  Lower bound (inclusive)
+     * @param int      $max  Upper bound(inclusive)
+     * @param null|int $seed Random generator seed
      *
-     * @return int A random integer value between min (or 0) and max (or 1, inclusive), or FALSE if max
+     * @return int|false A random integer value between min (or 0) and max (or 1, inclusive), or FALSE if max
      *             is less than min.
      * @throws \InvalidArgumentException
      */
