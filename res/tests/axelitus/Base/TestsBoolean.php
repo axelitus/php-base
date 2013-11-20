@@ -10,7 +10,9 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
+
+use axelitus\Base\Boolean;
 
 /**
  * Class TestsBoolean

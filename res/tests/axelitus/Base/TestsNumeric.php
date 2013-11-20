@@ -10,7 +10,11 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
+
+use axelitus\Base\Numeric;
+use axelitus\Base\Int;
+use axelitus\Base\Float;
 
 /**
  * Class TestsNumeric

@@ -10,7 +10,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
 
 /**
  * Class TestsPrimitiveString
@@ -37,7 +37,8 @@ class TestsPrimitiveString extends TestCase
     {
         $this->setExpectedException('\InvalidArgumentException');
         $args = array(58);
-        $this->stub = $this->getMockForAbstractClass('axelitus\Base\Primitives\String\PrimitiveString', $args);
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $primitive = $this->getMockForAbstractClass('axelitus\Base\Primitives\String\PrimitiveString', $args);
     }
 
     /**

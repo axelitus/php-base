@@ -10,7 +10,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
 
 /**
  * Class TestsPrimitiveFloat
@@ -37,7 +37,8 @@ class TestsPrimitiveFloat extends TestCase
     {
         $this->setExpectedException('\InvalidArgumentException');
         $args = array('string');
-        $this->stub = $this->getMockForAbstractClass('axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat', $args);
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $primitive = $this->getMockForAbstractClass('axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat', $args);
     }
 
     /**

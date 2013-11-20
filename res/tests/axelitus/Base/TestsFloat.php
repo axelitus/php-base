@@ -10,9 +10,9 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
 
-use SebastianBergmann\Exporter\Exception;
+use axelitus\Base\Float;
 
 /**
  * Class TestsFloat
@@ -73,6 +73,7 @@ class TestsFloat extends TestCase
         $this->assertTrue(is_float($rand) and $output);
         $this->assertEquals(174.07008, $rand);    // Because it's seeded it should give us the same result (it's rounded)
 
+        /** @noinspection PhpUsageOfSilenceOperatorInspection */
         $this->assertFalse(@Float::random(6, 3));
     }
 

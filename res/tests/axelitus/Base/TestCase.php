@@ -10,7 +10,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
 
 /**
  * Class TestCase
