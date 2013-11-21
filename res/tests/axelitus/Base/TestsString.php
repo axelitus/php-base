@@ -474,4 +474,16 @@ class TestsString extends TestCase
         $output = strlen(String::trandom());
         $this->assertEquals($expected, $output);
     }
+
+    public function test_concat()
+    {
+        $expected = 'Winter is coming!';
+        $output = String::concat('Winter ', 'is ', 'coming', '!');
+        $this->assertEquals($expected, $output);
+
+        $expected = 'Some Winterfell characters from Game of Thrones are: Jon Snow, Ned Stark, Arya Stark, Robb Stark.';
+        $output = String::concat('Some Winterfell characters ', 'from Game of Thrones are: ', [
+            'Jon Snow, ', 'Ned Stark, ', 'Arya Stark, ', 'Robb Stark.']);
+        $this->assertEquals($expected, $output);
+    }
 }
