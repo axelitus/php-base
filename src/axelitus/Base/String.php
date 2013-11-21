@@ -1047,6 +1047,15 @@ class String extends PrimitiveString
         return $concat;
     }
 
+    /**
+     * Prepends a(multiple) string(s) to the input string(s).
+     *
+     * @param string|PrimitiveString|array $input   The input string or array of strings.
+     * @param string|PrimitiveString|array $prepend The prepend string or array of strings.
+     *
+     * @return array|string The resulting string or array of strings.
+     * @throws \InvalidArgumentException
+     */
     public static function prepend($input, $prepend)
     {
         $ret = [];
@@ -1098,6 +1107,15 @@ class String extends PrimitiveString
         return $ret;
     }
 
+    /**
+     * Appends a(multiple) string(s) to the input string(s).
+     *
+     * @param string|PrimitiveString|array $input  The input string or array of strings.
+     * @param string|PrimitiveString|array $append The append string or array of strings.
+     *
+     * @return array|string The resulting string or array of strings.
+     * @throws \InvalidArgumentException
+     */
     public static function append($input, $append)
     {
 
