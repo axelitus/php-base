@@ -70,7 +70,7 @@ abstract class PrimitiveString extends Primitive
      */
     protected function validateValue($value)
     {
-        return $this->is($value);
+        return $this->is($value) and !is_a($value, __NAMESPACE__ . '\PrimitiveString');
     }
 
     /**

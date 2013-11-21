@@ -34,7 +34,7 @@ abstract class PrimitiveFloat extends PrimitiveNumeric
      */
     protected function validateValue($value)
     {
-        return parent::validateValue($value) and $this->is($value);
+        return parent::validateValue($value) and $this->is($value) and !is_a($value, __NAMESPACE__ . '\PrimitiveFloat');
     }
 
     /**
