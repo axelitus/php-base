@@ -1026,11 +1026,11 @@ class String extends PrimitiveString
         foreach ($args as $arg) {
             if (is_array($arg)) {
                 $value = '';
-                foreach($arg as $value) {
+                foreach($arg as $v) {
                     try {
-                        $value .= static::str($arg);
+                        $value .= static::str($v);
                     } catch (\InvalidArgumentException $ex) {
-                        throw new \InvalidArgumentException("The array values must be be strings or instances derived from PrimitiveString.");
+                        throw new \InvalidArgumentException("The array values must be strings or instances derived from PrimitiveString.");
                     }
                 }
             } else {
