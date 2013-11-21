@@ -199,11 +199,11 @@ class TestsString extends TestCase
     {
         $expected = "Summer is coming...";
         $output = String::replace("Winter is coming...", "Winter", "Summer");
-        $this->assertEquals($expected,$output);
+        $this->assertEquals($expected, $output);
 
         $expected = "Winter is coming...";
         $output = String::replace("Winter is coming...", "Autumn", "Summer");
-        $this->assertEquals($expected,$output);
+        $this->assertEquals($expected, $output);
     }
 
     /**
@@ -419,7 +419,7 @@ class TestsString extends TestCase
         $this->assertEquals($expected, $output);
 
         $expected = "<span>Winter is ...</span>";
-        $output = String::truncate("<span>Winter is coming!</span>",10, '...', true);
+        $output = String::truncate("<span>Winter is coming!</span>", 10, '...', true);
         $this->assertEquals($expected, $output);
     }
 
@@ -484,6 +484,44 @@ class TestsString extends TestCase
         $expected = 'Some Winterfell characters from Game of Thrones are: Jon Snow, Ned Stark, Arya Stark, Robb Stark.';
         $output = String::concat('Some Winterfell characters ', 'from Game of Thrones are: ', [
             'Jon Snow, ', 'Ned Stark, ', 'Arya Stark, ', 'Robb Stark.']);
+        $this->assertEquals($expected, $output);
+    }
+
+    public function test_prepend()
+    {
+        $expected = 'Winter is coming!';
+        $output = String::prepend('is coming!', 'Winter ');
+        $this->assertEquals($expected, $output);
+
+        $expected = ['Jon Snow is son of Ned Stark', 'Robb Stark is son of Ned Stark', 'Brandon Stark is son of Ned Stark'];
+        $output = String::prepend(' is son of Ned Stark', ['Jon Snow', 'Robb Stark', 'Brandon Stark']);
+        $this->assertEquals($expected, $output);
+
+        $expected = ['Winter is coming!', 'Winter is upon us!', 'Winter is already here!'];
+        $output = String::prepend([' is coming!', ' is upon us!', ' is already here!'], 'Winter');
+        $this->assertEquals($expected, $output);
+
+        $expected = ['1. Jon Snow', '2. Ned Stark', '3. Arya Stark', '4. Robb Stark'];
+        $output = String::prepend(['Jon Snow', 'Ned Stark', 'Arya Stark', 'Robb Stark'], ['1. ', '2. ', '3. ', '4. ']);
+        $this->assertEquals($expected, $output);
+    }
+
+    public function test_append()
+    {
+        $expected = 'Winter is coming!';
+        $output = String::append('Winter ', 'is coming!');
+        $this->assertEquals($expected, $output);
+
+        $expected = ['Winter is coming!', 'Winter is upon us!', 'Winter is already here!'];
+        $output = String::append('Winter', [' is coming!', ' is upon us!', ' is already here!']);
+        $this->assertEquals($expected, $output);
+
+        $expected = ['Jon Snow is son of Ned Stark', 'Robb Stark is son of Ned Stark', 'Brandon Stark is son of Ned Stark'];
+        $output = String::append(['Jon Snow', 'Robb Stark', 'Brandon Stark'], ' is son of Ned Stark');
+        $this->assertEquals($expected, $output);
+
+        $expected = ['1. Jon Snow', '2. Ned Stark', '3. Arya Stark', '4. Robb Stark'];
+        $output = String::append(['1. ', '2. ', '3. ', '4. '], ['Jon Snow', 'Ned Stark', 'Arya Stark', 'Robb Stark']);
         $this->assertEquals($expected, $output);
     }
 }

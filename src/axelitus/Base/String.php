@@ -568,7 +568,7 @@ class String extends PrimitiveString
      */
     public static function isOneOf($input, array $values, $case_sensitive = true, $return_index = false)
     {
-        if(is_null($input)) {
+        if (is_null($input)) {
             return false;
         }
 
@@ -1026,7 +1026,7 @@ class String extends PrimitiveString
         foreach ($args as $arg) {
             if (is_array($arg)) {
                 $value = '';
-                foreach($arg as $v) {
+                foreach ($arg as $v) {
                     try {
                         $value .= static::str($v);
                     } catch (\InvalidArgumentException $ex) {
@@ -1045,5 +1045,108 @@ class String extends PrimitiveString
         }
 
         return $concat;
+    }
+
+    public static function prepend($input, $prepend)
+    {
+        $ret = [];
+        $source = $bind = [];
+        try {
+            $source = static::str($input);
+        } catch (\InvalidArgumentException $ex) {
+            if (!is_array($input)) {
+                throw new \InvalidArgumentException("The \$input parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
+            }
+
+            $source = $input;
+        }
+
+        try {
+            $bind = static::str($prepend);
+        } catch (\InvalidArgumentException $ex) {
+            if (!is_array($prepend)) {
+                throw new \InvalidArgumentException("The \$prefix parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
+            }
+
+            $bind = $prepend;
+        }
+
+        if (is_array($source)) {
+            if (is_array($bind)) {
+                if (($count = count($source)) !== count($bind)) {
+                    throw new \InvalidArgumentException("The \$input and \$prefix arrays must have the same amount of elements.");
+                }
+
+                for ($i = 0; $i < $count; $i++) {
+                    $ret[] = static::concat($bind[$i], $source[$i]);
+                }
+            } else {
+                foreach ($source as $s) {
+                    $ret[] = static::concat($bind, $s);
+                }
+            }
+        } else {
+            if (is_array($bind)) {
+                foreach ($bind as $b) {
+                    $ret[] = static::concat($b, $source);
+                }
+            } else {
+                $ret = static::concat($bind, $source);
+            }
+        }
+
+        return $ret;
+    }
+
+    public static function append($input, $append)
+    {
+
+        $ret = [];
+        $source = $bind = [];
+        try {
+            $source = static::str($input);
+        } catch (\InvalidArgumentException $ex) {
+            if (!is_array($input)) {
+                throw new \InvalidArgumentException("The \$input parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
+            }
+
+            $source = $input;
+        }
+
+        try {
+            $bind = static::str($append);
+        } catch (\InvalidArgumentException $ex) {
+            if (!is_array($append)) {
+                throw new \InvalidArgumentException("The \$append parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
+            }
+
+            $bind = $append;
+        }
+
+        if (is_array($source)) {
+            if (is_array($bind)) {
+                if (($count = count($source)) !== count($bind)) {
+                    throw new \InvalidArgumentException("The \$input and \$prefix arrays must have the same amount of elements.");
+                }
+
+                for ($i = 0; $i < $count; $i++) {
+                    $ret[] = static::concat($source[$i], $bind[$i]);
+                }
+            } else {
+                foreach ($source as $s) {
+                    $ret[] = static::concat($s, $bind);
+                }
+            }
+        } else {
+            if (is_array($bind)) {
+                foreach ($bind as $b) {
+                    $ret[] = static::concat($source, $b);
+                }
+            } else {
+                $ret = static::concat($source, $bind);
+            }
+        }
+
+        return $ret;
     }
 }
