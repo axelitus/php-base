@@ -25,25 +25,6 @@ use axelitus\Base\Int;
 class String extends PrimitiveString
 {
     /**
-     * Gets the native string of a given value. If the given value is of type PrimitiveString,
-     * the object's value is returned, if it's a string, the string is returned unaltered.
-     * If it's something else, an exception is thrown.
-     *
-     * @param string|PrimitiveString $value The value to get the native string value from.
-     *
-     * @throws \InvalidArgumentException
-     * @return string The native string value.
-     */
-    public static function native($value)
-    {
-        if (!static::is($value)) {
-            throw new \InvalidArgumentException("The \$value must be a string or instance derived from PrimitiveString.");
-        }
-
-        return (is_object($value) and ($value instanceof PrimitiveString)) ? $value->value() : $value;
-    }
-
-    /**
      * Determines if two given values are equal.
      *
      * The given values $a and $b must be of type string. For the sake of this implementation
