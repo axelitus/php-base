@@ -33,7 +33,7 @@ class Boolean extends PrimitiveBoolean
      * @throws \InvalidArgumentException
      * @return bool The native boolean value.
      */
-    public function native($value) {
+    public static function native($value) {
         if (!static::is($value)) {
             throw new \InvalidArgumentException("The \$value must be a boolean or instance derived from PrimitiveBoolean.");
         }

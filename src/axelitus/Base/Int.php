@@ -33,7 +33,7 @@ class Int extends PrimitiveInt
      * @throws \InvalidArgumentException
      * @return int The native integer value.
      */
-    public function native($value) {
+    public static function native($value) {
         if (!static::is($value)) {
             throw new \InvalidArgumentException("The \$value must be an integer or instance derived from PrimitiveInt.");
         }

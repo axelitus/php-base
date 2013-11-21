@@ -33,7 +33,7 @@ class Float extends PrimitiveFloat
      * @throws \InvalidArgumentException
      * @return float The native float value.
      */
-    public function native($value) {
+    public static function native($value) {
         if (!static::is($value)) {
             throw new \InvalidArgumentException("The \$value must be a float or instance derived from PrimitiveFloat.");
         }

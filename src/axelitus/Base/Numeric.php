@@ -33,7 +33,7 @@ class Numeric extends PrimitiveNumeric
      * @throws \InvalidArgumentException
      * @return int|float The native numeric value.
      */
-    public function native($value) {
+    public static function native($value) {
         if (!static::is($value)) {
             throw new \InvalidArgumentException("The \$value must be a numeric or instance derived from PrimitiveNumeric.");
         }
