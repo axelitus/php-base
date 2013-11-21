@@ -13,6 +13,7 @@
 namespace axelitus\Base;
 
 use axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat;
+use axelitus\Base\Primitives\Numeric\Types\PrimitiveInt;
 
 /**
  * Class Float
@@ -26,19 +27,29 @@ class Float extends PrimitiveFloat
     /**
      * Generates a random float number between min and max.
      *
-     * @param float|int $min   Lower bound (inclusive)
-     * @param float|int $max   Upper bound (non-inclusive)
-     * @param int       $round Decimal places to round the number to (or null for no rounding)
-     * @param null|int  $seed  Random generator seed
+     * @param float|PrimitiveFloat  $min   Lower bound (inclusive)
+     * @param float|PrimitiveFloat  $max   Upper bound (non-inclusive)
+     * @param null|int|PrimitiveInt $round Decimal places to round the number to (or null for no rounding)
+     * @param null|int|PrimitiveInt $seed  Random generator seed
      *
      * @return float|false A random float value between min (or 0) and max (or 1, exclusive), or FALSE if max
      *               is less than min.
      * @throws \InvalidArgumentException
      */
-    public static function random($min = 0, $max = 1, $round = null, $seed = null)
+    public static function random($min = 0.0, $max = 1.0, $round = null, $seed = null)
     {
-        if (!Float::is($min) or !Float::is($max)) {
-            throw new \InvalidArgumentException("The \$min and \$max values must be of type float.");
+        try {
+            $min = static::native($min);
+            $max = static::native($max);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$min and \$max parameters must be float or instances derived from PrimitiveFloat.");
+        }
+
+        try {
+            $round = (is_null($round)) ? $round : PrimitiveInt::native($round);
+            $seed = (is_null($seed)) ? $seed : PrimitiveInt::native($seed);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$round and \$seed parameters must be integers or instances derived from PrimitiveInt.");
         }
 
         if ($min >= $max) {
@@ -53,7 +64,7 @@ class Float extends PrimitiveFloat
         // Ensure the max is not inclusive
         $rand = $min + (((mt_rand() - 1) / mt_getrandmax()) * abs($max - $min));
 
-        if (Int::is($round) and $round > 0) {
+        if ($round > 0) {
             $rand = round($rand, $round);
         }
 
@@ -71,19 +82,23 @@ class Float extends PrimitiveFloat
      * the $lowerExclusive and $upperExclusive parameters (all possible variations: ]a,b[ -or- ]a,b] -or- [a,b[
      * -or- [a,b]).
      *
-     * @param int  $value          The value to test in range.
-     * @param int  $lower          The range's lower limit.
-     * @param int  $upper          The range's upper limit.
-     * @param bool $lowerExclusive Whether the lower bound is exclusive.
-     * @param bool $upperExclusive Whether the upper bound is exclusive.
+     * @param float|PrimitiveFloat $value          The value to test in range.
+     * @param float|PrimitiveFloat $lower          The range's lower limit.
+     * @param float|PrimitiveFloat $upper          The range's upper limit.
+     * @param bool                 $lowerExclusive Whether the lower bound is exclusive.
+     * @param bool                 $upperExclusive Whether the upper bound is exclusive.
      *
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @throws \InvalidArgumentException
      */
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
-        if (!static::is($value) or !static::is($lower) or !static::is($upper)) {
-            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be floats.");
+        try {
+            $value = static::native($value);
+            $lower = static::native($lower);
+            $upper = static::native($upper);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be float or instances derived from PrimitiveFloat.");
         }
 
         $lowerLimit = min($lower, $upper);
@@ -104,15 +119,24 @@ class Float extends PrimitiveFloat
      *
      * It's an alias for Float::inRange($value, $lower, $upper, false, false)
      *
-     * @param int $value The value to test in range.
-     * @param int $lower The range's lower limit.
-     * @param int $upper The range's upper limit.
+     * @param float|PrimitiveFloat $value The value to test in range.
+     * @param float|PrimitiveFloat $lower The range's lower limit.
+     * @param float|PrimitiveFloat $upper The range's upper limit.
      *
+     * @throws \InvalidArgumentException
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @see Float::inRange
      */
     public static function inside($value, $lower, $upper)
     {
+        try {
+            $value = static::native($value);
+            $lower = static::native($lower);
+            $upper = static::native($upper);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be float or instances derived from PrimitiveFloat.");
+        }
+
         return static::inRange($value, $lower, $upper, false, false);
     }
 
@@ -121,15 +145,24 @@ class Float extends PrimitiveFloat
      *
      * It's an alias for Float::inRange($value, $lower, $upper, true, true)
      *
-     * @param int $value The value to test in range.
-     * @param int $lower The range's lower limit.
-     * @param int $upper The range's upper limit.
+     * @param float|PrimitiveFloat $value The value to test in range.
+     * @param float|PrimitiveFloat $lower The range's lower limit.
+     * @param float|PrimitiveFloat $upper The range's upper limit.
      *
+     * @throws \InvalidArgumentException
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @see Float::inRange
      */
     public static function between($value, $lower, $upper)
     {
+        try {
+            $value = static::native($value);
+            $lower = static::native($lower);
+            $upper = static::native($upper);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be float or instances derived from PrimitiveFloat.");
+        }
+
         return static::inRange($value, $lower, $upper, true, true);
     }
 }

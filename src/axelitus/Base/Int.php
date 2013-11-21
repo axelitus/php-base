@@ -26,9 +26,9 @@ class Int extends PrimitiveInt
     /**
      * Generates a random integer number between min and max.
      *
-     * @param int      $min  Lower bound (inclusive)
-     * @param int      $max  Upper bound(inclusive)
-     * @param null|int $seed Random generator seed
+     * @param int|PrimitiveInt      $min  Lower bound (inclusive)
+     * @param int|PrimitiveInt      $max  Upper bound(inclusive)
+     * @param null|int|PrimitiveInt $seed Random generator seed
      *
      * @return int|false A random integer value between min (or 0) and max (or 1, inclusive), or FALSE if max
      *             is less than min.
@@ -36,8 +36,12 @@ class Int extends PrimitiveInt
      */
     public static function random($min = 0, $max = 1, $seed = null)
     {
-        if (!Int::is($min) or !Int::is($max)) {
-            throw new \InvalidArgumentException("The \$min and \$max values must be of type integers.");
+        try {
+            $min = static::native($min);
+            $max = static::native($max);
+            $seed = (is_null($seed))? $seed : static::native($seed);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$min, \$max and \$seed parameters must be integers or instances derived from PrimitiveInteger.");
         }
 
         if (!is_null($seed) and Int::is($seed)) {
@@ -60,19 +64,23 @@ class Int extends PrimitiveInt
      * the $lowerExclusive and $upperExclusive parameters (all possible variations: ]a,b[ -or- ]a,b] -or- [a,b[
      * -or- [a,b]).
      *
-     * @param int  $value          The value to test in range.
-     * @param int  $lower          The range's lower limit.
-     * @param int  $upper          The range's upper limit.
-     * @param bool $lowerExclusive Whether the lower bound is exclusive.
-     * @param bool $upperExclusive Whether the upper bound is exclusive.
+     * @param int|PrimitiveInt $value          The value to test in range.
+     * @param int|PrimitiveInt $lower          The range's lower limit.
+     * @param int|PrimitiveInt $upper          The range's upper limit.
+     * @param bool             $lowerExclusive Whether the lower bound is exclusive.
+     * @param bool             $upperExclusive Whether the upper bound is exclusive.
      *
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @throws \InvalidArgumentException
      */
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
-        if (!static::is($value) or !static::is($lower) or !static::is($upper)) {
-            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be integers.");
+        try {
+            $value = static::native($value);
+            $lower = static::native($lower);
+            $upper = static::native($upper);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be integers or instances derived from PrimitiveInt.");
         }
 
         $lowerLimit = min($lower, $upper);
@@ -93,15 +101,24 @@ class Int extends PrimitiveInt
      *
      * It's an alias for Int::inRange($value, $lower, $upper, false, false)
      *
-     * @param int $value The value to test in range.
-     * @param int $lower The range's lower limit.
-     * @param int $upper The range's upper limit.
+     * @param int|PrimitiveInt $value The value to test in range.
+     * @param int|PrimitiveInt $lower The range's lower limit.
+     * @param int|PrimitiveInt $upper The range's upper limit.
      *
+     * @throws \InvalidArgumentException
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @see Int::inRange
      */
     public static function inside($value, $lower, $upper)
     {
+        try {
+            $value = static::native($value);
+            $lower = static::native($lower);
+            $upper = static::native($upper);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be integers or instances derived from PrimitiveInt.");
+        }
+
         return static::inRange($value, $lower, $upper, false, false);
     }
 
@@ -110,15 +127,24 @@ class Int extends PrimitiveInt
      *
      * It's an alias for Int::inRange($value, $lower, $upper, true, true)
      *
-     * @param int $value The value to test in range.
-     * @param int $lower The range's lower limit.
-     * @param int $upper The range's upper limit.
+     * @param int|PrimitiveInt $value The value to test in range.
+     * @param int|PrimitiveInt $lower The range's lower limit.
+     * @param int|PrimitiveInt $upper The range's upper limit.
      *
+     * @throws \InvalidArgumentException
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @see Int::inRange
      */
     public static function between($value, $lower, $upper)
     {
+        try {
+            $value = static::native($value);
+            $lower = static::native($lower);
+            $upper = static::native($upper);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be integers or instances derived from PrimitiveInt.");
+        }
+
         return static::inRange($value, $lower, $upper, true, true);
     }
 }
