@@ -24,6 +24,24 @@ use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 class Numeric extends PrimitiveNumeric
 {
     /**
+     * Gets the native numeric of a given value. If the given value is of type PrimitiveNumeric,
+     * the object's value is returned, if it's a numeric, the numeric is returned unaltered.
+     * If it's something else, an exception is thrown.
+     *
+     * @param string|PrimitiveNumeric $value The value to get the native numeric value from.
+     *
+     * @throws \InvalidArgumentException
+     * @return int|float The native numeric value.
+     */
+    public function native($value) {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value must be a numeric or instance derived from PrimitiveNumeric.");
+        }
+
+        return (is_object($value) and ($value instanceof PrimitiveNumeric)) ? $value->value() : $value;
+    }
+
+    /**
      * Determines if two given values are equal.
      *
      * The given values $a and $b must be of type numeric. For the sake of this implementation

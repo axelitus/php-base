@@ -24,6 +24,24 @@ use axelitus\Base\Primitives\Numeric\Types\PrimitiveFloat;
 class Float extends PrimitiveFloat
 {
     /**
+     * Gets the native float of a given value. If the given value is of type PrimitiveFloat,
+     * the object's value is returned, if it's a float, the float is returned unaltered.
+     * If it's something else, an exception is thrown.
+     *
+     * @param string|PrimitiveFloat $value The value to get the native float value from.
+     *
+     * @throws \InvalidArgumentException
+     * @return float The native float value.
+     */
+    public function native($value) {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value must be a float or instance derived from PrimitiveFloat.");
+        }
+
+        return (is_object($value) and ($value instanceof PrimitiveFloat)) ? $value->value() : $value;
+    }
+
+    /**
      * Generates a random float number between min and max.
      *
      * @param float|int $min   Lower bound (inclusive)
