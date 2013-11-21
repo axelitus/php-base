@@ -173,6 +173,28 @@ class String extends PrimitiveString
     }
 
     /**
+     * Compares two given strings.
+     *
+     * @param string|PrimitiveString $a              The first string to compare.
+     * @param string|PrimitiveString $b              The second string to compare.
+     * @param bool                   $case_sensitive Whether the comparison should be case sensitive or not.
+     *
+     * @return int Returns < 0 if $a is less than $b; > 0 if $a is greater than $b, and 0 if they are equal.
+     * @throws \InvalidArgumentException
+     */
+    public static function compare($a, $b, $case_sensitive = true)
+    {
+        try {
+            $a = static::str($a);
+            $b = static::str($b);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$a and \$b parameters must be strings or instances derived from PrimitiveString.");
+        }
+
+        return ($case_sensitive) ? strcmp($a, $b) : strcasecmp($a, $b);
+    }
+
+    /**
      * Verifies if a string begins with a substring.
      *
      * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
