@@ -13,6 +13,7 @@
 namespace axelitus\Base;
 
 use axelitus\Base\Primitives\String\PrimitiveString;
+use axelitus\Base\Int;
 
 /**
  * Class String
@@ -74,21 +75,22 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param string|PrimitiveString                                  $input    The input string.
-     * @param \axelitus\Base\Primitives\String\PrimitiveString|string $encoding The encoding of the input string for multibyte functions.
+     * @param string|PrimitiveString $input    The input string.
+     * @param string|PrimitiveString $encoding The encoding of the input string for multibyte functions.
      *
      * @throws \InvalidArgumentException
      * @return int Returns the length of the string.
      */
     public static function length($input, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!static::is($input)) {
-            throw new \InvalidArgumentException("The \$input parameter must be string.");
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
-        $val_input = (is_object($input)) ? $input->value() : $input;
-
-        return function_exists('mb_strlen') ? mb_strlen($val_input, $encoding) : strlen($val_input);
+        return function_exists('mb_strlen') ? mb_strlen($input, $encoding) : strlen($input);
     }
 
     /**
@@ -101,26 +103,27 @@ class String extends PrimitiveString
      * @param string|PrimitiveString $input    The input string.
      * @param int                    $start    The start index from where to begin extracting.
      * @param int                    $length   The length of the extracted substring.
-     * @param string                 $encoding The encoding of the $input string for multibyte functions.
+     * @param string|PrimitiveString $encoding The encoding of the $input string for multibyte functions.
      *
      * @throws \InvalidArgumentException
      * @return string Returns the extracted substring or false on failure.
      */
     public static function sub($input, $start, $length = null, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!static::is($input)) {
-            throw new \InvalidArgumentException("The \$input parameter must be string.");
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instance derived from PrimitiveString.");
         }
 
-        $val_input = (is_object($input)) ? $input->value() : $input;
-
         // sub input functions don't parse null correctly
-        $length = is_null($length) ? (function_exists('mb_substr') ? mb_strlen($val_input, $encoding) : strlen(
-                $val_input
+        $length = is_null($length) ? (function_exists('mb_substr') ? mb_strlen($input, $encoding) : strlen(
+                $input
             )) - $start : $length;
 
-        return function_exists('mb_substr') ? mb_substr($val_input, $start, $length, $encoding) : substr(
-            $val_input,
+        return function_exists('mb_substr') ? mb_substr($input, $start, $length, $encoding) : substr(
+            $input,
             $start,
             $length
         );
@@ -131,10 +134,10 @@ class String extends PrimitiveString
      * The $encoding parameter is used to determine the encoding and thus the
      * proper method to be used.
      *
-     * @param string $input          The input string to compare to
-     * @param string $search         The substring to compare the ending to
-     * @param bool   $case_sensitive Whether the comparison is case-sensitive
-     * @param string $encoding       The encoding of the input string
+     * @param string|PrimitiveString $input          The input string to compare to
+     * @param string|PrimitiveString $search         The substring to compare the ending to
+     * @param bool                   $case_sensitive Whether the comparison is case-sensitive
+     * @param string|PrimitiveString $encoding       The encoding of the input string
      *
      * @return int|bool Returns the numeric position of the first occurrence of the searched string in the input string.
      *                  If it is not found, it returns false.
@@ -142,8 +145,12 @@ class String extends PrimitiveString
      */
     public static function pos($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!is_string($input) or !is_string($search)) {
-            throw new \InvalidArgumentException("Both parameters \$input and \$search must be strings.");
+        try {
+            $input = static::str($input);
+            $search = static::str($search);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
         if ($case_sensitive) {
@@ -161,15 +168,24 @@ class String extends PrimitiveString
      * Verifies if a string contains a substring. The $encoding parameter is used to determine the
      * encoding and thus the proper method.
      *
-     * @param string $input          The input string to compare to
-     * @param string $search         The substring to compare the ending to
-     * @param bool   $case_sensitive Whether the comparison is case-sensitive
-     * @param string $encoding       The encoding of the input string
+     * @param string|PrimitiveString $input          The input string to compare to
+     * @param string|PrimitiveString $search         The substring to compare the ending to
+     * @param bool                   $case_sensitive Whether the comparison is case-sensitive
+     * @param string|PrimitiveString $encoding       The encoding of the input string
      *
+     * @throws \InvalidArgumentException
      * @return bool     Whether the input string contains the substring
      */
     public static function contains($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
+        try {
+            $input = static::str($input);
+            $search = static::str($search);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return (bool)static::pos($input, $search, $case_sensitive, $encoding);
     }
 
@@ -200,26 +216,27 @@ class String extends PrimitiveString
      *
      * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
      *
-     * @param string $input          The input string to compare to.
-     * @param string $search         The substring to compare the beginning to.
-     * @param bool   $case_sensitive Whether the comparison is case-sensitive.
-     * @param string $encoding       The encoding of the input string.
+     * @param string|PrimitiveString $input          The input string to compare to.
+     * @param string|PrimitiveString $search         The substring to compare the beginning to.
+     * @param bool                   $case_sensitive Whether the comparison is case-sensitive.
+     * @param string|PrimitiveString $encoding       The encoding of the input string.
      *
      * @return bool Returns true if the $input string begins with the given $search string.
      * @throws \InvalidArgumentException
      */
     public static function beginsWith($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!static::is($input) or !static::is($search)) {
-            throw new \InvalidArgumentException("Both parameters \$input and \$search must be strings.");
+        try {
+            $input = static::str($input);
+            $search = static::str($search);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
-        $val_input = (is_object($input)) ? $input->value() : $input;
-        $val_search = (is_object($search)) ? $search->value() : $search;
+        $substr = static::sub($input, 0, static::length($search), $encoding);
 
-        $substr = static::sub($val_input, 0, static::length($val_search), $encoding);
-
-        return !(($case_sensitive) ? strcmp($substr, $val_search) : strcasecmp($substr, $val_search));
+        return !static::compare($substr, $search, $case_sensitive);
     }
 
     /**
@@ -227,41 +244,44 @@ class String extends PrimitiveString
      *
      * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
      *
-     * @param string $input          The input string to compare to.
-     * @param string $search         The substring to compare the ending to.
-     * @param bool   $case_sensitive Whether the comparison is case-sensitive.
-     * @param string $encoding       The encoding of the input string.
+     * @param string|PrimitiveString $input          The input string to compare to.
+     * @param string|PrimitiveString $search         The substring to compare the ending to.
+     * @param bool                   $case_sensitive Whether the comparison is case-sensitive.
+     * @param string|PrimitiveString $encoding       The encoding of the input string.
      *
      * @return bool Returns true if the $input string ends with the given $search string.
      * @throws \InvalidArgumentException
      */
     public static function endsWith($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!static::is($input) or !static::is($search)) {
-            throw new \InvalidArgumentException("Both parameters \$input and \$search must be strings.");
+        try {
+            $input = static::str($input);
+            $search = static::str($search);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
-        $val_input = (is_object($input)) ? $input->value() : $input;
-        $val_search = (is_object($search)) ? $search->value() : $search;
-
-        if (($length = static::length($val_search, $encoding)) == 0) {
+        if (($length = static::length($search, $encoding)) == 0) {
             return true;
         }
 
-        $substr = static::sub($val_input, -$length, $length, $encoding);
+        $substr = static::sub($input, -$length, $length, $encoding);
 
-        return !(($case_sensitive) ? strcmp($substr, $val_search) : strcasecmp($substr, $val_search));
+        return !static::compare($substr, $search, $case_sensitive);
     }
 
     /**
      * Replaces a substring inside a string.
      *
-     * @param string $input          The input string
-     * @param string $search         The substring to be replaced
-     * @param string $replace        The substring replacement
-     * @param bool   $case_sensitive Whether the comparison should be case sensitive
-     * @param string $encoding       The encoding of the input string
+     * @param string|PrimitiveString $input          The input string
+     * @param string|PrimitiveString $search         The substring to be replaced
+     * @param string|PrimitiveString $replace        The substring replacement
+     * @param bool                   $case_sensitive Whether the comparison should be case sensitive
+     * @param string|PrimitiveString $encoding       The encoding of the input string
+     * @param int                    $count          If passed, this will be set to the number of replacements performed.
      *
+     * @throws \InvalidArgumentException
      * @return string   The string with the substring replaced
      */
     public static function replace(
@@ -272,6 +292,15 @@ class String extends PrimitiveString
         $encoding = self::DEFAULT_ENCODING,
         &$count = null
     ) {
+        try {
+            $input = static::str($input);
+            $search = static::str($search);
+            $replace = static::str($replace);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input, \$search, \$replace and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return function_exists('mb_strlen')
             ? static::_mb_str_replace($search, $replace, $input, $case_sensitive, $encoding, $count)
             : (($case_sensitive) ? (str_replace($search, $replace, $input, $count))
@@ -382,15 +411,23 @@ class String extends PrimitiveString
      * Returns a lowercased string. The $encoding parameter is used to determine the input string encoding
      * and thus use the proper method. The functions uses mb_strtolower if present and falls back to strtolower.
      *
-     * @author  FuelPHP (http://fuelphp.com)
+     * @author FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input    The input string
-     * @param   string $encoding The encoding of the input string
+     * @param string|PrimitiveString $input    The input string
+     * @param string|PrimitiveString $encoding The encoding of the input string
      *
-     * @return  string  The lowercased string
+     * @throws \InvalidArgumentException
+     * @return string The lowercased string
      */
     public static function lower($input, $encoding = self::DEFAULT_ENCODING)
     {
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return function_exists('mb_strtolower')
             ? mb_strtolower($input, $encoding)
             : strtolower($input);
@@ -402,15 +439,23 @@ class String extends PrimitiveString
      * Returns an uppercased string. The $encoding parameter is used to determine the input string encoding
      * and thus use the proper method. The functions uses mb_strtoupper if present and falls back to strtoupper.
      *
-     * @author  FuelPHP (http://fuelphp.com)
+     * @author FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input    The input string
-     * @param   string $encoding The encoding of the input string
+     * @param string|PrimitiveString $input    The input string
+     * @param string|PrimitiveString $encoding The encoding of the input string
      *
-     * @return  string  The uppercased string
+     * @throws \InvalidArgumentException
+     * @return string The uppercased string
      */
     public static function upper($input, $encoding = self::DEFAULT_ENCODING)
     {
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return function_exists('mb_strtoupper')
             ? mb_strtoupper($input, $encoding)
             : strtoupper($input);
@@ -423,15 +468,23 @@ class String extends PrimitiveString
      * The $encoding parameter is used to determine the input string encoding and thus use the proper method.
      * The function uses mb_strtolower, mb_mb_substr and mb_strlen if present and falls back to lcfirst.
      *
-     * @author  FuelPHP (http://fuelphp.com)
+     * @author FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input    The input string
-     * @param   string $encoding The encoding of the input string
+     * @param string|PrimitiveString $input    The input string
+     * @param string|PrimitiveString $encoding The encoding of the input string
      *
-     * @return  string  The string with the first char lowercased
+     * @throws \InvalidArgumentException
+     * @return string The string with the first char lowercased
      */
     public static function lcfirst($input, $encoding = self::DEFAULT_ENCODING)
     {
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return function_exists('mb_strtolower')
             ? mb_strtolower(mb_substr($input, 0, 1, $encoding), $encoding) .
             mb_substr($input, 1, mb_strlen($input, $encoding), $encoding)
@@ -445,15 +498,23 @@ class String extends PrimitiveString
      * The $encoding parameter is used to determine the input string encoding and thus use the proper method.
      * The function uses mb_strtoupper, mb_mb_substr and mb_strlen if present and falls back to ucfirst.
      *
-     * @author  FuelPHP (http://fuelphp.com)
+     * @author FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input    The input string
-     * @param   string $encoding The encoding of the input string
+     * @param string|PrimitiveString $input    The input string
+     * @param string|PrimitiveString $encoding The encoding of the input string
      *
-     * @return  string  The string with the first char uppercased
+     * @throws \InvalidArgumentException
+     * @return string The string with the first char uppercased
      */
     public static function ucfirst($input, $encoding = self::DEFAULT_ENCODING)
     {
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return function_exists('mb_strtoupper')
             ? mb_strtoupper(mb_substr($input, 0, 1, $encoding), $encoding) .
             mb_substr($input, 1, mb_strlen($input, $encoding), $encoding)
@@ -467,15 +528,23 @@ class String extends PrimitiveString
      * encoding and thus use the proper method. The function uses mb_convert_case if present and falls back to ucwords.     *
      * The ucwords function normally does not lowercase the input string first, this function does.
      *
-     * @author  FuelPHP (http://fuelphp.com)
+     * @author FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input    The input string
-     * @param   string $encoding The encoding of the input string
+     * @param string|PrimitiveString $input    The input string
+     * @param string|PrimitiveString $encoding The encoding of the input string
      *
-     * @return  string  The string with the words capitalized
+     * @throws \InvalidArgumentException
+     * @return string The string with the words capitalized
      */
     public static function ucwords($input, $encoding = self::DEFAULT_ENCODING)
     {
+        try {
+            $input = static::str($input);
+            $encoding = static::str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         return function_exists('mb_convert_case')
             ? mb_convert_case($input, MB_CASE_TITLE, $encoding)
             : ucwords(strtolower($input));
@@ -487,39 +556,37 @@ class String extends PrimitiveString
      * Verifies if the input string is one of the values of the given array. Each of the values
      * of the array is matched against the input string. The index of the value that matched can
      * be returned instead of the default bool value. The comparison can be case sensitive or
-     * case insensitive (it is made with strcmp and strcasecmp respectively).
+     * case insensitive.
      *
-     * @param   string $input          The input string
-     * @param   array  $values         The strings array to look for the input string
-     * @param   bool   $case_sensitive Whether the comparison is case-sensitive
-     * @param   bool   $return_index   Whether to return the matched array's item instead
+     * @param  string|PrimitiveString $input          The input string
+     * @param  array                  $values         The string|PrimitiveString array to look for the input string
+     * @param  bool                   $case_sensitive Whether the comparison is case-sensitive
+     * @param  bool                   $return_index   Whether to return the matched array's item instead
      *
-     * @return  bool|int    Whether the input string was found in the array or the item's index if found
-     * @throws  \InvalidArgumentException
+     * @return bool|int    Whether the input string was found in the array or the item's index if found
+     * @throws \InvalidArgumentException
      */
     public static function isOneOf($input, array $values, $case_sensitive = true, $return_index = false)
     {
-        if ($input === null) {
+        if(is_null($input)) {
             return false;
         }
 
-        if (!is_string($input)) {
-            throw new \InvalidArgumentException("The \$input parameter must be a string.");
+        try {
+            $input = static::str($input);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input parameter must be a string or instance derived from PrimitiveString.");
         }
 
         foreach ($values as $index => $str) {
-            if (!is_string($str)) {
-                throw new \InvalidArgumentException("The \$values array must contain only string values.");
+            try {
+                $str = static::str($str);
+            } catch (\InvalidArgumentException $ex) {
+                throw new \InvalidArgumentException("The \$values array must contain only strings or instances derived from PrimitiveString.");
             }
 
-            if ($case_sensitive) {
-                if (strcmp($input, $str) == 0) {
-                    return ($return_index) ? $index : true;
-                }
-            } else {
-                if (strcasecmp($input, $str) == 0) {
-                    return ($return_index) ? $index : true;
-                }
+            if (static::areEqual($input, $str, $case_sensitive)) {
+                return ($return_index) ? $index : true;
             }
         }
 
@@ -535,26 +602,30 @@ class String extends PrimitiveString
      * When the space char is not used as a separator, each word is converted to studly caps on its own,
      * otherwise the result will be a single studly-caps-cased string.
      *
-     * @param   string $input      The input string
-     * @param   array  $separators An array containing separators to split the input string
-     * @param   string $encoding   The encoding of the input string
+     * @param string|PrimitiveString $input      The input string
+     * @param array                  $separators An array containing separators to split the input string
+     * @param string|PrimitiveString $encoding   The encoding of the input string
      *
-     * @return  string  The studly-caps-cased string
-     * @throws  \InvalidArgumentException
+     * @return string The studly-caps-cased string
+     * @throws \InvalidArgumentException
      */
     public static function studly($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
     {
-        if (!is_string($input)) {
-            throw new \InvalidArgumentException("The \$input parameter must be a string.");
+        try {
+            $input = static::str($input);
+            $encoding = static::Str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
         if (!empty($separators)) {
             $pattern = '';
             foreach ($separators as $separator) {
-                if (!is_string($separator)) {
-                    throw new \InvalidArgumentException("The \$separators array must contain only strings.");
+                try {
+                    $separator = static::str($separator);
+                } catch (\InvalidArgumentException $ex) {
+                    throw new \InvalidArgumentException("The \$separators array must contain only strings or instances derived from PrimitiveString.");
                 }
-
                 $pattern .= '|' . preg_quote($separator);
             }
             $pattern = '/(^' . $pattern . ')(.)/';
@@ -587,17 +658,20 @@ class String extends PrimitiveString
      * When the space char is not used as a separator, each word is converted to camel case on its own,
      * otherwise the result will be a single camel-cased string.
      *
-     * @param   string $input      The input string
-     * @param   array  $separators An array containing separators to split the input string
-     * @param   string $encoding   The encoding of the input string
+     * @param string|PrimitiveString $input      The input string
+     * @param array                  $separators An array containing separators to split the input string
+     * @param string|PrimitiveString $encoding   The encoding of the input string
      *
-     * @return  string  The camel-cased string
-     * @throws  \InvalidArgumentException
+     * @return string  The camel-cased string
+     * @throws \InvalidArgumentException
      */
     public static function camel($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
     {
-        if (!is_string($input)) {
-            throw new \InvalidArgumentException("The \$input parameter must be a string.");
+        try {
+            $input = static::str($input);
+            $encoding = static::Str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
         $camel = static::studly($input, $separators, $encoding);
@@ -618,21 +692,25 @@ class String extends PrimitiveString
      * space): 'lower', 'upper', 'lcfirst', 'ucfirst', 'ucwords' by using the $transform parameter (other values will
      * be ignored and no transformation will be made thus returning the separated words unmodified).
      *
-     * @param   string      $input     The input string
-     * @param   null|string $transform The transformation to be run for each word
-     * @param   string      $separator The separator to be used
-     * @param   string      $encoding  The encoding of the input string
+     * @param   string|PrimitiveString $input     The input string
+     * @param   string|PrimitiveString $separator The separator to be used
+     * @param   null|string            $transform The transformation to be run for each word
+     * @param   string|PrimitiveString $encoding  The encoding of the input string
      *
      * @return  string  The char(s)-separated string
      * @throws  \InvalidArgumentException
      */
     public static function separated($input, $separator = '_', $transform = null, $encoding = self::DEFAULT_ENCODING)
     {
-        if (!is_string($input) or !is_string($separator)) {
-            throw new \InvalidArgumentException("The \$input and \$separator parameters must be both strings.");
+        try {
+            $input = static::str($input);
+            $separator = static::str($separator);
+            $encoding = static::Str($encoding);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input, \$separator and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
 
-        if ($separator == '') {
+        if (empty($separator)) {
             throw new \InvalidArgumentException("The \$separator parameter must have at least one character.");
         }
 
@@ -690,20 +768,28 @@ class String extends PrimitiveString
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $string       The string to truncate
-     * @param   int    $limit        The number of characters to truncate too
-     * @param   string $continuation The string to use to denote it was truncated
-     * @param   bool   $is_html      Whether the string has HTML
+     * @param   string|PrimitiveString $input        The string to truncate
+     * @param   int                    $limit        The number of characters to truncate too
+     * @param   string|PrimitiveString $continuation The string to use to denote it was truncated
+     * @param   bool                   $is_html      Whether the string has HTML
      *
+     * @throws \InvalidArgumentException
      * @return  string  The truncated string
      */
-    public static function truncate($string, $limit, $continuation = '...', $is_html = false)
+    public static function truncate($input, $limit, $continuation = '...', $is_html = false)
     {
+        try {
+            $input = static::str($input);
+            $continuation = static::Str($continuation);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$continuation parameters must be strings or instances derived from PrimitiveString.");
+        }
+
         $offset = 0;
         $tags = array();
         if ($is_html) {
             // Handle special characters.
-            preg_match_all('/&[a-z]+;/i', strip_tags($string), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+            preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
             foreach ($matches as $match) {
                 if ($match[0][1] >= $limit) {
                     break;
@@ -712,7 +798,7 @@ class String extends PrimitiveString
             }
 
             // Handle all the html tags.
-            preg_match_all('/<[^>]+>([^<]*)/', $string, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+            preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
             foreach ($matches as $match) {
                 if ($match[0][1] - $offset >= $limit) {
                     break;
@@ -729,8 +815,8 @@ class String extends PrimitiveString
             }
         }
 
-        $new_string = static::sub($string, 0, $limit = min(static::length($string), $limit + $offset));
-        $new_string .= (static::length($string) > $limit ? $continuation : '');
+        $new_string = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
+        $new_string .= (static::length($input) > $limit ? $continuation : '');
         $new_string .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
 
         return $new_string;
@@ -748,8 +834,8 @@ class String extends PrimitiveString
      *
      * This method is based on the work of Nate Bessette (www.twitter.com/frickenate)
      *
-     * @param string $format The format to replace the named variables into
-     * @param array  $args   The args to be replaced (var => replacement).
+     * @param string|PrimitiveString $format The format to replace the named variables into
+     * @param array                  $args   The args to be replaced (var => replacement).
      *
      * @return string|bool  The string with args replaced or false on error
      * @throws \InvalidArgumentException
@@ -758,8 +844,10 @@ class String extends PrimitiveString
      */
     public static function nsprintf($format, array $args = array())
     {
-        if (!is_string($format)) {
-            throw new \InvalidArgumentException("The format must be a string.");
+        try {
+            $format = static::str($format);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$format parameter must be a string or instance derived from PrimitiveString.");
         }
 
         // Filter unnamed %s strings that should not be processed
@@ -807,26 +895,30 @@ class String extends PrimitiveString
      * The length of the returned string can be controlled with the $length parameter, but every characters is
      * randomized independently with each loop.
      *
-     * @param   int    $length  The length of the output string
-     * @param   string $chars   The pool of characters to randomize from
-     * @param   bool   $shuffle Whether to shuffle the character string to increase randomness (entropy)
+     * @param   int                    $length  The length of the output string
+     * @param   string|PrimitiveString $chars   The pool of characters to randomize from
+     * @param   bool                   $shuffle Whether to shuffle the character string to increase randomness (entropy)
      *
      * @return  string  The random string containing random characters from the $chars string
      * @throws  \InvalidArgumentException
      */
     public static function random($length = 1, $chars = self::ALNUM, $shuffle = false)
     {
-        if (!is_numeric($length) or $length < 0) {
+        if (!Int::is($length) or $length < 0) {
             throw new \InvalidArgumentException("The \$length parameter must be a positive integer or zero.");
         }
 
-        if (!is_string($chars) or $chars == '') {
-            throw new \InvalidArgumentException("The \$chars parameter must be a non-empty string containing a set of characters to pick a random value from.");
+        try {
+            $chars = static::str($chars);
+            if (empty($chars)) {
+                throw new \InvalidArgumentException("The \$chars parameter must be a non-empty string containing a set of characters to pick a random value from.");
+            }
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$chars parameter must be a string or instance derived from PrimitiveString.");
         }
 
-        $chars = ($shuffle) ? str_shuffle($chars) : $chars;
-
         $string = '';
+        $chars = ($shuffle) ? str_shuffle($chars) : $chars;
         for ($i = 0; $i < $length; $i++) {
             $string .= $chars[Int::random(0, static::length($chars) - 1)];
         }
@@ -843,14 +935,21 @@ class String extends PrimitiveString
      *
      * This function is based on FuelPHP's \Fuel\Core\Str random function.
      *
-     * @param   string $type    The type of random string to get
-     * @param   int    $length  The length of the output string
-     * @param   bool   $shuffle Whether to shuffle the character pool to increase randomness (entropy)
+     * @param   string|PrimitiveString $type    The type of random string to get
+     * @param   int                    $length  The length of the output string
+     * @param   bool                   $shuffle Whether to shuffle the character pool to increase randomness (entropy)
      *
+     * @throws \InvalidArgumentException
      * @return  string  The type-random string containing random characters from the proper type pool
      */
     public static function trandom($type = 'alnum', $length = 16, $shuffle = false)
     {
+        try {
+            $type = static::str($type);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$type parameter must be a string or instance derived from PrimitiveString.");
+        }
+
         switch ($type) {
             case 'unique':
                 return md5(uniqid(Int::random()));
@@ -887,19 +986,27 @@ class String extends PrimitiveString
     /**
      * Searches the input string for a match to the regular expression given in pattern.
      *
-     * @param string $input   The input string.
-     * @param string $pattern The pattern to search for, as a string.
-     * @param array  $matches If matches is provided, then it is filled with the results of search.
-     *                        $matches[0] will contain the text that matched the full pattern, $matches[1]
-     *                        will have the text that matched the first captured parenthesized subpattern, and so on.
-     * @param int    $flags   The flag modifiers.
-     * @param int    $offset  The offset from which to start the search (in bytes).
+     * @param string|PrimitiveString $input   The input string.
+     * @param string|PrimitiveString $pattern The pattern to search for, as a string.
+     * @param array                  $matches If matches is provided, then it is filled with the results of search.
+     *                                        $matches[0] will contain the text that matched the full pattern, $matches[1]
+     *                                        will have the text that matched the first captured parenthesized subpattern, and so on.
+     * @param int                    $flags   The flag modifiers.
+     * @param int                    $offset  The offset from which to start the search (in bytes).
      *
+     * @throws \InvalidArgumentException
      * @return int
      * @see http://php.net/manual/en/function.preg-match.php
      */
     public static function match($input, $pattern, array &$matches = null, $flags = 0, $offset = 0)
     {
+        try {
+            $input = static::str($input);
+            $pattern = static::str($pattern);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$input and \$pattern parameter must be strings or instances derived from PrimitiveString.");
+        }
+
         return preg_match($pattern, $input, $matches, $flags, $offset);
     }
 }
