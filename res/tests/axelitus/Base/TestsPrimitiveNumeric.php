@@ -12,6 +12,8 @@
 
 namespace axelitus\Base\Tests;
 
+use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
+
 /**
  * Class TestsPrimitiveNumeric
  *
@@ -19,7 +21,10 @@ namespace axelitus\Base\Tests;
  */
 class TestsPrimitiveNumeric extends TestCase
 {
+    /** @var PrimitiveNumeric $stubInt */
     protected $stubInt;
+
+    /** @var PrimitiveNumeric $stubFloat */
     protected $stubFloat;
 
     /**
@@ -71,5 +76,14 @@ class TestsPrimitiveNumeric extends TestCase
         $expected = 'double';
         $output = $this->stubFloat->getValueType();
         $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * Tests PrimitiveNumeric::native()
+     */
+    public function test_native()
+    {
+        $this->assertTrue(is_numeric(PrimitiveNumeric::native($this->stubInt)));
+        $this->assertTrue(is_numeric(PrimitiveNumeric::native($this->stubFloat)));
     }
 }

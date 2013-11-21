@@ -12,7 +12,7 @@
 
 namespace axelitus\Base\Tests;
 
-
+use axelitus\Base\Primitives\Boolean\PrimitiveBoolean;
 
 /**
  * Class TestsPrimitiveBoolean
@@ -21,6 +21,7 @@ namespace axelitus\Base\Tests;
  */
 class TestsPrimitiveBoolean extends TestCase
 {
+    /** @var PrimitiveBoolean $stub */
     protected $stub;
 
     /**
@@ -61,5 +62,13 @@ class TestsPrimitiveBoolean extends TestCase
         $expected = 'boolean';
         $output = $this->stub->getValueType();
         $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * Tests PrimitiveBoolean::native()
+     */
+    public function test_native()
+    {
+        $this->assertTrue(is_bool(PrimitiveBoolean::native($this->stub)));
     }
 }

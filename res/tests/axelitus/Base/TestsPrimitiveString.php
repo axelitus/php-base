@@ -12,6 +12,8 @@
 
 namespace axelitus\Base\Tests;
 
+use axelitus\Base\Primitives\String\PrimitiveString;
+
 /**
  * Class TestsPrimitiveString
  *
@@ -19,6 +21,7 @@ namespace axelitus\Base\Tests;
  */
 class TestsPrimitiveString extends TestCase
 {
+    /** @var PrimitiveString $stub */
     protected $stub;
 
     /**
@@ -59,5 +62,13 @@ class TestsPrimitiveString extends TestCase
         $expected = 'string';
         $output = $this->stub->getValueType();
         $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * Tests PrimitiveString::native()
+     */
+    public function test_native()
+    {
+        $this->assertTrue(is_string(PrimitiveString::native($this->stub)));
     }
 }

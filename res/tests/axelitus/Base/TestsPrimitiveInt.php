@@ -12,6 +12,8 @@
 
 namespace axelitus\Base\Tests;
 
+use axelitus\Base\Primitives\Numeric\Types\PrimitiveInt;
+
 /**
  * Class TestsPrimitiveInt
  *
@@ -19,6 +21,7 @@ namespace axelitus\Base\Tests;
  */
 class TestsPrimitiveInt extends TestCase
 {
+    /** @var PrimitiveInt $stub */
     protected $stub;
 
     /**
@@ -59,5 +62,13 @@ class TestsPrimitiveInt extends TestCase
         $expected = 'integer';
         $output = $this->stub->getValueType();
         $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * Tests PrimitiveInt::native()
+     */
+    public function test_native()
+    {
+        $this->assertTrue(is_int(PrimitiveInt::native($this->stub)));
     }
 }
