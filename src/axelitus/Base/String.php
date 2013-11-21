@@ -1009,4 +1009,41 @@ class String extends PrimitiveString
 
         return preg_match($pattern, $input, $matches, $flags, $offset);
     }
+
+    /**
+     * Concatenates the given strings or array of strings.
+     *
+     * @param string|array $input ... The input strings or arrays containing strings to concatenate.
+     *
+     * @throws \InvalidArgumentException
+     * @return string The concatenated string
+     */
+    public static function concat($input)
+    {
+        $concat = '';
+        $args = func_get_args();
+
+        foreach ($args as $arg) {
+            if (is_array($arg)) {
+                $value = '';
+                foreach($arg as $value) {
+                    try {
+                        $value .= static::str($arg);
+                    } catch (\InvalidArgumentException $ex) {
+                        throw new \InvalidArgumentException("The array values must be be strings or instances derived from PrimitiveString.");
+                    }
+                }
+            } else {
+                try {
+                    $value = static::str($arg);
+                } catch (\InvalidArgumentException $ex) {
+                    throw new \InvalidArgumentException("The parameters must be strings or instances derived from PrimitiveString.");
+                }
+            }
+
+            $concat .= $value;
+        }
+
+        return $concat;
+    }
 }
