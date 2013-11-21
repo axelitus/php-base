@@ -34,7 +34,7 @@ class String extends PrimitiveString
      * @throws \InvalidArgumentException
      * @return string The native string value.
      */
-    public static function str($value)
+    public static function native($value)
     {
         if (!static::is($value)) {
             throw new \InvalidArgumentException("The \$value must be a string or instances derived from PrimitiveString.");
@@ -59,8 +59,8 @@ class String extends PrimitiveString
     final static function areEqual($a, $b, $case_sensitive = true)
     {
         try {
-            $a = static::str($a);
-            $b = static::str($b);
+            $a = static::native($a);
+            $b = static::native($b);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("Both parameters \$a and \$b must be strings or instances derived from PrimitiveString.");
         }
@@ -84,8 +84,8 @@ class String extends PrimitiveString
     public static function length($input, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -111,8 +111,8 @@ class String extends PrimitiveString
     public static function sub($input, $start, $length = null, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instance derived from PrimitiveString.");
         }
@@ -146,9 +146,9 @@ class String extends PrimitiveString
     public static function pos($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $search = static::str($search);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $search = static::native($search);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -179,9 +179,9 @@ class String extends PrimitiveString
     public static function contains($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $search = static::str($search);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $search = static::native($search);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -202,8 +202,8 @@ class String extends PrimitiveString
     public static function compare($a, $b, $case_sensitive = true)
     {
         try {
-            $a = static::str($a);
-            $b = static::str($b);
+            $a = static::native($a);
+            $b = static::native($b);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$a and \$b parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -227,9 +227,9 @@ class String extends PrimitiveString
     public static function beginsWith($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $search = static::str($search);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $search = static::native($search);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -255,9 +255,9 @@ class String extends PrimitiveString
     public static function endsWith($input, $search, $case_sensitive = true, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $search = static::str($search);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $search = static::native($search);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input, \$search and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -293,10 +293,10 @@ class String extends PrimitiveString
         &$count = null
     ) {
         try {
-            $input = static::str($input);
-            $search = static::str($search);
-            $replace = static::str($replace);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $search = static::native($search);
+            $replace = static::native($replace);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input, \$search, \$replace and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -422,8 +422,8 @@ class String extends PrimitiveString
     public static function lower($input, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -450,8 +450,8 @@ class String extends PrimitiveString
     public static function upper($input, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -479,8 +479,8 @@ class String extends PrimitiveString
     public static function lcfirst($input, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -509,8 +509,8 @@ class String extends PrimitiveString
     public static function ucfirst($input, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -539,8 +539,8 @@ class String extends PrimitiveString
     public static function ucwords($input, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -573,14 +573,14 @@ class String extends PrimitiveString
         }
 
         try {
-            $input = static::str($input);
+            $input = static::native($input);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input parameter must be a string or instance derived from PrimitiveString.");
         }
 
         foreach ($values as $index => $str) {
             try {
-                $str = static::str($str);
+                $str = static::native($str);
             } catch (\InvalidArgumentException $ex) {
                 throw new \InvalidArgumentException("The \$values array must contain only strings or instances derived from PrimitiveString.");
             }
@@ -612,8 +612,8 @@ class String extends PrimitiveString
     public static function studly($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::Str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -622,7 +622,7 @@ class String extends PrimitiveString
             $pattern = '';
             foreach ($separators as $separator) {
                 try {
-                    $separator = static::str($separator);
+                    $separator = static::native($separator);
                 } catch (\InvalidArgumentException $ex) {
                     throw new \InvalidArgumentException("The \$separators array must contain only strings or instances derived from PrimitiveString.");
                 }
@@ -668,8 +668,8 @@ class String extends PrimitiveString
     public static function camel($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $encoding = static::Str($encoding);
+            $input = static::native($input);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -703,9 +703,9 @@ class String extends PrimitiveString
     public static function separated($input, $separator = '_', $transform = null, $encoding = self::DEFAULT_ENCODING)
     {
         try {
-            $input = static::str($input);
-            $separator = static::str($separator);
-            $encoding = static::Str($encoding);
+            $input = static::native($input);
+            $separator = static::native($separator);
+            $encoding = static::native($encoding);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input, \$separator and \$encoding parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -779,8 +779,8 @@ class String extends PrimitiveString
     public static function truncate($input, $limit, $continuation = '...', $is_html = false)
     {
         try {
-            $input = static::str($input);
-            $continuation = static::Str($continuation);
+            $input = static::native($input);
+            $continuation = static::native($continuation);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$continuation parameters must be strings or instances derived from PrimitiveString.");
         }
@@ -845,7 +845,7 @@ class String extends PrimitiveString
     public static function nsprintf($format, array $args = array())
     {
         try {
-            $format = static::str($format);
+            $format = static::native($format);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$format parameter must be a string or instance derived from PrimitiveString.");
         }
@@ -909,7 +909,7 @@ class String extends PrimitiveString
         }
 
         try {
-            $chars = static::str($chars);
+            $chars = static::native($chars);
             if (empty($chars)) {
                 throw new \InvalidArgumentException("The \$chars parameter must be a non-empty string containing a set of characters to pick a random value from.");
             }
@@ -945,7 +945,7 @@ class String extends PrimitiveString
     public static function trandom($type = 'alnum', $length = 16, $shuffle = false)
     {
         try {
-            $type = static::str($type);
+            $type = static::native($type);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$type parameter must be a string or instance derived from PrimitiveString.");
         }
@@ -1001,8 +1001,8 @@ class String extends PrimitiveString
     public static function match($input, $pattern, array &$matches = null, $flags = 0, $offset = 0)
     {
         try {
-            $input = static::str($input);
-            $pattern = static::str($pattern);
+            $input = static::native($input);
+            $pattern = static::native($pattern);
         } catch (\InvalidArgumentException $ex) {
             throw new \InvalidArgumentException("The \$input and \$pattern parameter must be strings or instances derived from PrimitiveString.");
         }
@@ -1028,14 +1028,14 @@ class String extends PrimitiveString
                 $value = '';
                 foreach ($arg as $v) {
                     try {
-                        $value .= static::str($v);
+                        $value .= static::native($v);
                     } catch (\InvalidArgumentException $ex) {
                         throw new \InvalidArgumentException("The array values must be strings or instances derived from PrimitiveString.");
                     }
                 }
             } else {
                 try {
-                    $value = static::str($arg);
+                    $value = static::native($arg);
                 } catch (\InvalidArgumentException $ex) {
                     throw new \InvalidArgumentException("The parameters must be strings or instances derived from PrimitiveString.");
                 }
@@ -1061,7 +1061,7 @@ class String extends PrimitiveString
         $ret = [];
         $source = $bind = [];
         try {
-            $source = static::str($input);
+            $source = static::native($input);
         } catch (\InvalidArgumentException $ex) {
             if (!is_array($input)) {
                 throw new \InvalidArgumentException("The \$input parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
@@ -1071,7 +1071,7 @@ class String extends PrimitiveString
         }
 
         try {
-            $bind = static::str($prepend);
+            $bind = static::native($prepend);
         } catch (\InvalidArgumentException $ex) {
             if (!is_array($prepend)) {
                 throw new \InvalidArgumentException("The \$prefix parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
@@ -1122,7 +1122,7 @@ class String extends PrimitiveString
         $ret = [];
         $source = $bind = [];
         try {
-            $source = static::str($input);
+            $source = static::native($input);
         } catch (\InvalidArgumentException $ex) {
             if (!is_array($input)) {
                 throw new \InvalidArgumentException("The \$input parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
@@ -1132,7 +1132,7 @@ class String extends PrimitiveString
         }
 
         try {
-            $bind = static::str($append);
+            $bind = static::native($append);
         } catch (\InvalidArgumentException $ex) {
             if (!is_array($append)) {
                 throw new \InvalidArgumentException("The \$append parameter must be a string or an instances derived from PrimitiveString or an array of strings or instances derived from PrimitiveString.");
