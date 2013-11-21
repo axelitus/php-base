@@ -48,22 +48,23 @@ class String extends PrimitiveString
      * The given values $a and $b must be of type string. For the sake of this implementation
      * there is no distinction between the == equal operator and the identical === operator.
      *
-     * @param int|float|PrimitiveString $a The first of the values to compare.
-     * @param int|float|PrimitiveString $b The second of the values to compare.
+     * @param string|PrimitiveString $a              The first of the values to compare.
+     * @param string|PrimitiveString $b              The second of the values to compare.
+     * @param bool                   $case_sensitive Whether the comparison should be case sensitive or not.
      *
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      * @throws \InvalidArgumentException
      */
-    final static function areEqual($a, $b)
+    final static function areEqual($a, $b, $case_sensitive = true)
     {
-        if (!static::is($a) or !static::is($b)) {
-            throw new \InvalidArgumentException("Both parameters \$a and \$b must be strings.");
+        try {
+            $a = static::str($a);
+            $b = static::str($b);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("Both parameters \$a and \$b must be strings or instances derived from PrimitiveString.");
         }
 
-        $val_a = (is_object($a)) ? $a->value() : $a;
-        $val_b = (is_object($b)) ? $b->value() : $b;
-
-        return (strcmp($val_a, $val_b) === 0);
+        return (static::compare($a, $b, $case_sensitive) === 0);
     }
 
     /**
