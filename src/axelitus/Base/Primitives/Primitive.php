@@ -43,9 +43,11 @@ abstract class Primitive
      */
     final public function __construct($value)
     {
-        if (!$this->validateValue($value)) {
-            $value = (is_null($value)? "null" : ((is_string($value))? "'{$value}'" : "{$value}"));
-            throw new \InvalidArgumentException("The \$value {$value} is not a valid value for this Primitive.");
+        if(!is_null($value)) {
+            if (!$this->validateValue($value)) {
+                $value = ((is_string($value))? "'{$value}'" : "{$value}");
+                throw new \InvalidArgumentException("The \$value {$value} is not a valid value for this Primitive.");
+            }
         }
 
         $this->value = $value;
