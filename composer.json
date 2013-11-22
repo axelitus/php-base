@@ -39,5 +39,11 @@
     "config": {
         "vendor-dir": "vendor"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev-develop"
+        }
+    }
 }
