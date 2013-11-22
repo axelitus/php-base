@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.2
+ * @version     0.3
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -13,7 +13,6 @@
 namespace axelitus\Base\Primitives\Boolean;
 
 use axelitus\Base\Primitives\Primitive;
-use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 
 /**
  * Class PrimitiveBoolean
@@ -33,7 +32,7 @@ abstract class PrimitiveBoolean extends Primitive
      */
     protected function validateValue($value)
     {
-        return $this->is($value);
+        return $this->is($value) and !is_a($value, __NAMESPACE__ . '\PrimitiveBoolean');
     }
 
     /**
@@ -49,5 +48,23 @@ abstract class PrimitiveBoolean extends Primitive
             $var,
             __NAMESPACE__ . '\PrimitiveBoolean'
         );
+    }
+
+    /**
+     * Gets the native boolean of a given value. If the given value is of type PrimitiveBoolean,
+     * the object's value is returned, if it's a boolean, the boolean is returned unaltered.
+     * If it's something else, an exception is thrown.
+     *
+     * @param string|PrimitiveBoolean $value The value to get the native boolean value from.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool The native boolean value.
+     */
+    public static function native($value) {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value must be a boolean or instance derived from PrimitiveBoolean.");
+        }
+
+        return (is_object($value) and ($value instanceof PrimitiveBoolean)) ? $value->value() : $value;
     }
 }

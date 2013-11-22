@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.2
+ * @version     0.3
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -29,21 +29,21 @@ class Numeric extends PrimitiveNumeric
      * The given values $a and $b must be of type numeric. For the sake of this implementation
      * there is no distinction between the == equal operator and the identical === operator.
      *
-     * @param int|float|PrimitiveNumeric $a The first of the values to compare.
-     * @param int|float|PrimitiveNumeric $b The second of the values to compare.
+     * @param numeric|PrimitiveNumeric $a The first of the values to compare.
+     * @param numeric|PrimitiveNumeric $b The second of the values to compare.
      *
      * @throws \InvalidArgumentException
      * @return bool Returns true if both values are numeric and are equal, false otherwise.
      */
     final static function areEqual($a, $b)
     {
-        if (!static::is($a) or !static::is($b)) {
-            throw new \InvalidArgumentException("Both parameters \$a and \$b must be numeric.");
+        try {
+            $a = static::native($a);
+            $b = static::native($b);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$a and \$b parameters must be numeric or instances derived from PrimitiveNumeric.");
         }
 
-        $val_a = (is_object($a)) ? $a->value() : $a;
-        $val_b = (is_object($b)) ? $b->value() : $b;
-
-        return $val_a == $val_b;
+        return $a == $b;
     }
 }

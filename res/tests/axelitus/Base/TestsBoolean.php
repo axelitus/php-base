@@ -3,14 +3,16 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.2
+ * @version     0.3
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  */
 
-namespace axelitus\Base;
+namespace axelitus\Base\Tests;
+
+use axelitus\Base\Boolean;
 
 /**
  * Class TestsBoolean
@@ -22,7 +24,7 @@ class TestsBoolean extends TestCase
     /**
      * Tests Boolean::is()
      */
-    public function test_is_bool()
+    public function test_isBool()
     {
         $this->assertTrue(Boolean::is(true), "The value true is not recognized as a boolean.");
         $this->assertTrue(Boolean::is(false), "The value false is not recognized as a boolean.");

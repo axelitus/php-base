@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.2
+ * @version     0.3
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -70,7 +70,7 @@ abstract class PrimitiveString extends Primitive
      */
     protected function validateValue($value)
     {
-        return $this->is($value);
+        return $this->is($value) and !is_a($value, __NAMESPACE__ . '\PrimitiveString');
     }
 
     /**
@@ -83,5 +83,24 @@ abstract class PrimitiveString extends Primitive
     public static function is($var)
     {
         return is_string($var) or is_a($var, __NAMESPACE__ . '\PrimitiveString');
+    }
+
+    /**
+     * Gets the native string of a given value. If the given value is of type PrimitiveString,
+     * the object's value is returned, if it's a string, the string is returned unaltered.
+     * If it's something else, an exception is thrown.
+     *
+     * @param string|PrimitiveString $value The value to get the native string value from.
+     *
+     * @throws \InvalidArgumentException
+     * @return string The native string value.
+     */
+    public static function native($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value must be a string or instance derived from PrimitiveString.");
+        }
+
+        return (is_object($value) and ($value instanceof PrimitiveString)) ? $value->value() : $value;
     }
 }

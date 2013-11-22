@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.2
+ * @version     0.3
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -34,7 +34,7 @@ abstract class PrimitiveInt extends PrimitiveNumeric
      */
     protected function validateValue($value)
     {
-        return parent::validateValue($value) and $this->is($value);
+        return parent::validateValue($value) and $this->is($value) and !is_a($value, __NAMESPACE__ . '\PrimitiveInt');
     }
 
     /**
@@ -50,5 +50,23 @@ abstract class PrimitiveInt extends PrimitiveNumeric
             $var,
             __NAMESPACE__ . '\PrimitiveInt'
         );
+    }
+
+    /**
+     * Gets the native integer of a given value. If the given value is of type PrimitiveInt,
+     * the object's value is returned, if it's an integer, the integer is returned unaltered.
+     * If it's something else, an exception is thrown.
+     *
+     * @param string|PrimitiveInt $value The value to get the native integer value from.
+     *
+     * @throws \InvalidArgumentException
+     * @return int The native integer value.
+     */
+    public static function native($value) {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value must be an integer or instance derived from PrimitiveInt.");
+        }
+
+        return (is_object($value) and ($value instanceof PrimitiveInt)) ? $value->value() : $value;
     }
 }
