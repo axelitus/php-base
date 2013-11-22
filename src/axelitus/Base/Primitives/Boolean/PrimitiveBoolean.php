@@ -137,7 +137,7 @@ abstract class PrimitiveBoolean extends Primitive
                         $chain &= static::native($b);
                     }
                 } else {
-                    $chain &= $arg;
+                    $chain &= static::native($arg);
                 }
 
                 if (!$chain) {
