@@ -70,4 +70,22 @@ class TestsPrimitive extends TestCase
         $output = $this->stub->getValueType();
         $this->assertEquals($expected, $output);
     }
+
+    /**
+     * Tests Primitive::getValue()
+     */
+    public function test_getValue()
+    {
+        $expected = null;
+        $output = $this->stub->getValue();
+        $this->assertEquals($expected, $output);
+
+        $expected = 'Value is null, so return this string';
+        $output = $this->stub->getValue($expected);
+        $this->assertEquals($expected, $output);
+
+        $expected = 9;
+        $output = $this->stub->getValue($expected);
+        $this->assertEquals($expected, $output);
+    }
 }

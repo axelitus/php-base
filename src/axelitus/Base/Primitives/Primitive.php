@@ -43,9 +43,9 @@ abstract class Primitive
      */
     final public function __construct($value)
     {
-        if(!is_null($value)) {
+        if (!is_null($value)) {
             if (!$this->validateValue($value)) {
-                $value = ((is_string($value))? "'{$value}'" : "{$value}");
+                $value = ((is_string($value)) ? "'{$value}'" : "{$value}");
                 throw new \InvalidArgumentException("The \$value {$value} is not a valid value for this Primitive.");
             }
         }
@@ -69,22 +69,26 @@ abstract class Primitive
     /**
      * Gets the primitive's value.
      *
+     * @param mixed $defaultIfNull The default value to return if the primitive's value is null.
+     *
      * @return mixed The primitive's value.
      */
-    final public function getValue()
+    final public function getValue($defaultIfNull = null)
     {
-        return $this->value;
+        return is_null($this->value) ? $defaultIfNull : $this->value;
     }
 
     /**
      * Alias to Primitive->getValue()
      *
+     * @param null $defaultIfNull The default value to return if the primitive's value is null.
+     *
      * @return mixed The primitive's value.
      * @see getValue
      */
-    final public function value()
+    final public function value($defaultIfNull = null)
     {
-        return $this->getValue();
+        return $this->getValue($defaultIfNull);
     }
 
     /**
