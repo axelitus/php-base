@@ -113,7 +113,7 @@ abstract class PrimitiveString extends Primitive
             throw new \InvalidArgumentException("The \$value must be a string or instance derived from PrimitiveString.");
         }
 
-        return (is_object($value) and ($value instanceof PrimitiveString)) ? $value->value() : $value;
+        return (is_object($value) and ($value instanceof PrimitiveString)) ? $value->getValue() : $value;
     }
 
     /**

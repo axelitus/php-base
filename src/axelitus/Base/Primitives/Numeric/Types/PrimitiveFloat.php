@@ -74,7 +74,7 @@ abstract class PrimitiveFloat extends PrimitiveNumeric
             throw new \InvalidArgumentException("The \$value must be a float or instance derived from PrimitiveFloat.");
         }
 
-        return (is_object($value) and ($value instanceof PrimitiveFloat)) ? $value->value() : $value;
+        return (is_object($value) and ($value instanceof PrimitiveFloat)) ? $value->getValue() : $value;
     }
 
     /**

@@ -71,7 +71,7 @@ abstract class Primitive
      *
      * @return mixed The primitive's value.
      */
-    final public function value()
+    final public function getValue()
     {
         return $this->value;
     }

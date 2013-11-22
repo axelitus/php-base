@@ -70,7 +70,7 @@ abstract class PrimitiveNumeric extends Primitive
             throw new \InvalidArgumentException("The \$value must be a numeric or instance derived from PrimitiveNumeric.");
         }
 
-        return (is_object($value) and ($value instanceof PrimitiveNumeric)) ? $value->value() : $value;
+        return (is_object($value) and ($value instanceof PrimitiveNumeric)) ? $value->getValue() : $value;
     }
 
     /**

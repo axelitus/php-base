@@ -71,7 +71,7 @@ abstract class PrimitiveBoolean extends Primitive
             throw new \InvalidArgumentException("The \$value must be a boolean or instance derived from PrimitiveBoolean.");
         }
 
-        return (is_object($value) and ($value instanceof PrimitiveBoolean)) ? $value->value() : $value;
+        return (is_object($value) and ($value instanceof PrimitiveBoolean)) ? $value->getValue() : $value;
     }
 
     /**
