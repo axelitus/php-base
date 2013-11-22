@@ -993,7 +993,7 @@ class String extends PrimitiveString
     /**
      * Concatenates the given strings or array of strings.
      *
-     * @param string|array $input ... The input strings or arrays containing strings to concatenate.
+     * @param string|array $input,... The input strings or arrays containing strings to concatenate.
      *
      * @throws \InvalidArgumentException
      * @return string The concatenated string
@@ -1039,7 +1039,7 @@ class String extends PrimitiveString
     public static function prepend($input, $prepend)
     {
         $ret = [];
-        $source = $bind = [];
+
         try {
             $source = static::native($input);
         } catch (\InvalidArgumentException $ex) {
