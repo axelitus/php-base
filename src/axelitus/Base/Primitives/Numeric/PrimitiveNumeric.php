@@ -23,6 +23,8 @@ use axelitus\Base\Primitives\Primitive;
  */
 abstract class PrimitiveNumeric extends Primitive
 {
+    //region Instance Methods/Functions
+
     /**
      * Validates the given primitive value.
      *
@@ -36,6 +38,10 @@ abstract class PrimitiveNumeric extends Primitive
     {
         return $this->is($value) and !is_a($value, __NAMESPACE__ . '\PrimitiveNumeric');
     }
+
+    //endregion
+
+    //region Static Methods/Functions
 
     /**
      * Determines if $var is of the primitive type numeric (int or float).
@@ -66,4 +72,30 @@ abstract class PrimitiveNumeric extends Primitive
 
         return (is_object($value) and ($value instanceof PrimitiveNumeric)) ? $value->value() : $value;
     }
+
+    /**
+     * Determines if two given values are equal.
+     *
+     * For the sake of this implementation there is no distinction between the == (equal) operator
+     * and the === (identical) operator.
+     *
+     * @param int|float|PrimitiveNumeric $a The first of the values to compare.
+     * @param int|float|PrimitiveNumeric $b The second of the values to compare.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if both values are numeric and are equal, false otherwise.
+     */
+    public static function areEqual($a, $b)
+    {
+        try {
+            $a = static::native($a);
+            $b = static::native($b);
+        } catch (\InvalidArgumentException $ex) {
+            throw new \InvalidArgumentException("The \$a and \$b parameters must be numeric or instances derived from PrimitiveNumeric.");
+        }
+
+        return $a == $b;
+    }
+
+    //endregion
 }

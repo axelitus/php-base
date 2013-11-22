@@ -23,10 +23,16 @@ use axelitus\Base\Exceptions\NotImplementedException;
  */
 abstract class Primitive
 {
+    //region Attributes
+
     /**
      * @type mixed $value The value of the primitive.
      */
     protected $value = null;
+
+    //endregion
+
+    //region Constructors
 
     /**
      * Constructor
@@ -45,6 +51,10 @@ abstract class Primitive
         $this->value = $value;
     }
 
+    //endregion
+
+    //region Instance Methods/Functions
+
     /**
      * Validates the given primitive value. This function is automatically called from the constructor.
      *
@@ -53,44 +63,6 @@ abstract class Primitive
      * @return bool Returns true if the value is valid for the primitive, false otherwise.
      */
     abstract protected function validateValue($value);
-
-    /**
-     * Determines if $var is of the primitive type. This function must be overridden by all derivable
-     * classes to implement their own algorithm to determine the result of this function.
-     *
-     * @param mixed $var The value to be tested.
-     *
-     * @return bool Returns true if $var is of the type that the called class represents, false otherwise.
-     * @throws \axelitus\Base\Exceptions\NotImplementedException
-     */
-    public static function is($var)
-    {
-        throw new NotImplementedException("This method is not yet implemented.");
-    }
-
-    /**
-     * Determines if $var is of a simple type (numeric, string, boolean).
-     *
-     * @param mixed $var The value to be tested.
-     *
-     * @return bool Returns true if $var is a simple primitive type, false otherwise.
-     */
-    final public static function isSimple($var)
-    {
-        return !self::isComplex($var);
-    }
-
-    /**
-     * Determines if $var is of a complex type (array, object, resource).
-     *
-     * @param mixed $var The value to be tested.
-     *
-     * @return bool Returns true if $var is a complex primitive type, false otherwise.
-     */
-    final public static function isComplex($var)
-    {
-        return is_array($var) or is_object($var) or is_resource($var);
-    }
 
     /**
      * Gets the primitive's value.
@@ -123,18 +95,74 @@ abstract class Primitive
     }
 
     /**
+     * Allows to compare this object to a given value.
+     *
+     * @param $compare
+     *
+     * @return bool Returns true if both values are equal, false otherwise.
+     */
+    public function equals($compare)
+    {
+        return static::areEqual($this, $compare);
+    }
+
+    //endregion
+
+    //region Static Methods/Functions
+
+    /**
+     * Determines if $var is of the primitive type. This function must be overridden by all derivable
+     * classes to implement their own algorithm to determine the result of this function.
+     *
+     * @param mixed $var The value to be tested.
+     *
+     * @return bool Returns true if $var is of the type that the called class represents, false otherwise.
+     * @throws NotImplementedException
+     */
+    public static function is($var)
+    {
+        throw new NotImplementedException("This method is not yet implemented.");
+    }
+
+    /**
+     * Determines if $var is of a simple type (numeric, string, boolean).
+     *
+     * @param mixed $var The value to be tested.
+     *
+     * @return bool Returns true if $var is a simple primitive type, false otherwise.
+     */
+    final public static function isSimple($var)
+    {
+        return !self::isComplex($var);
+    }
+
+    /**
+     * Determines if $var is of a complex type (array, object, resource).
+     *
+     * @param mixed $var The value to be tested.
+     *
+     * @return bool Returns true if $var is a complex primitive type, false otherwise.
+     */
+    final public static function isComplex($var)
+    {
+        return is_array($var) or is_object($var) or is_resource($var);
+    }
+
+    /**
      * Determines if both given values are equal.
      *
      * For this implementation, in this case equal is the same as identical.
      *
-     * @param int|float|Numeric\PrimitiveNumeric $a The first of the values to compare.
-     * @param int|float|Numeric\PrimitiveNumeric $b The second of the values to compare.
+     * @param primitive|Primitive $a The first of the values to compare.
+     * @param primitive|Primitive $b The second of the values to compare.
      *
-     * @return bool Returns true if both values are numeric and are equal, false otherwise.
-     * @throws \axelitus\Base\Exceptions\NotImplementedException
+     * @return bool Returns true if both values are equal, false otherwise.
+     * @throws NotImplementedException
      */
     public static function areEqual($a, $b)
     {
         throw new NotImplementedException("This method is not yet implemented.");
     }
+
+    //endregion
 }
