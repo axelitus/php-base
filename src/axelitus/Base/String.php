@@ -13,7 +13,6 @@
 namespace axelitus\Base;
 
 use axelitus\Base\Primitives\String\PrimitiveString;
-use axelitus\Base\Int;
 
 /**
  * Class String
