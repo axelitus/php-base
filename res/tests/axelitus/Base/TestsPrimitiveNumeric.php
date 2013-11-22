@@ -51,20 +51,6 @@ class TestsPrimitiveNumeric extends TestCase
     }
 
     /**
-     * Tests Primitive::getType()
-     */
-    public function test_getType()
-    {
-        $expected = 'object';
-        $output = $this->stubInt->getType();
-        $this->assertEquals($expected, $output);
-
-        $expected = 'object';
-        $output = $this->stubFloat->getType();
-        $this->assertEquals($expected, $output);
-    }
-
-    /**
      * Tests Primitive::getValueType()
      */
     public function test_getValueType()

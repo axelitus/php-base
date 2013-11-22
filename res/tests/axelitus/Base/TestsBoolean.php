@@ -22,7 +22,7 @@ use axelitus\Base\Boolean;
 class TestsBoolean extends TestCase
 {
     /**
-     * Tests Boolean::is()
+     * Tests PrimitiveBoolean::is()
      */
     public function test_isBool()
     {
@@ -37,7 +37,7 @@ class TestsBoolean extends TestCase
     }
 
     /**
-     * Tests Boolean::doNot()
+     * Tests PrimitiveBoolean::doNot()
      */
     public function test_doNot()
     {
@@ -46,7 +46,7 @@ class TestsBoolean extends TestCase
     }
 
     /**
-     * Tests Boolean::doAnd()
+     * Tests PrimitiveBoolean::doAnd()
      */
     public function test_doAnd()
     {
@@ -58,7 +58,17 @@ class TestsBoolean extends TestCase
     }
 
     /**
-     * Tests Boolean::doOr()
+     * Tests Boolean->andWith()
+     *
+     * @depends test_doAnd
+     */
+    public function test_andWith()
+    {
+
+    }
+
+    /**
+     * Tests PrimitiveBoolean::doOr()
      */
     public function test_doOr()
     {
@@ -71,7 +81,7 @@ class TestsBoolean extends TestCase
     }
 
     /**
-     * Tests Boolean::doEq()
+     * Tests PrimitiveBoolean::doEq()
      */
     public function test_doEq()
     {
@@ -84,7 +94,7 @@ class TestsBoolean extends TestCase
     }
 
     /**
-     * Tests Boolean::doXor()
+     * Tests PrimitiveBoolean::doXor()
      *
      * @depends test_doEq
      */

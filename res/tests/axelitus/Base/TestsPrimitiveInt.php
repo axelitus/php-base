@@ -45,16 +45,6 @@ class TestsPrimitiveInt extends TestCase
     }
 
     /**
-     * Tests Primitive::getType()
-     */
-    public function test_getType()
-    {
-        $expected = 'object';
-        $output = $this->stub->getType();
-        $this->assertEquals($expected, $output);
-    }
-
-    /**
      * Tests Primitive::getValueType()
      */
     public function test_getValueType()

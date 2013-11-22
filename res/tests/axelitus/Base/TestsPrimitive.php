@@ -21,13 +21,16 @@ use axelitus\Base\Primitives\Primitive;
  */
 class TestsPrimitive extends TestCase
 {
+    /** @var Primitive $stub */
     protected $stub;
 
+    /**
+     * Setup function
+     */
     public function setUp()
-    {/*
+    {
         $args = array(null);
         $this->stub = $this->getMockForAbstractClass('axelitus\Base\Primitives\Primitive', $args);
-*/
     }
 
     /**
@@ -46,5 +49,25 @@ class TestsPrimitive extends TestCase
     {
         $this->setExpectedException('axelitus\Base\Exceptions\NotImplementedException');
         Primitive::areEqual('a', 'b');
+    }
+
+    /**
+     * Tests Primitive::getType()
+     */
+    public function test_getType()
+    {
+        $expected = 'object';
+        $output = $this->stub->getType();
+        $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * Tests Primitive::getValueType()
+     */
+    public function test_getValueType()
+    {
+        $expected = 'NULL';
+        $output = $this->stub->getValueType();
+        $this->assertEquals($expected, $output);
     }
 }
