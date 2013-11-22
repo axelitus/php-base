@@ -9,7 +9,7 @@ A framework agnostic PHP package that contains _extensions_ and helpers for the 
 * **Root Namespace:** axelitus\Base
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
 * **Repository**: [axelitus/php-base](https://github.com/axelitus/php-base "axelitus/php-base at GitHub") at GitHub
-* **Build Status (master):** [![Build Status](https://secure.travis-ci.org/axelitus/php-base.png?branch=master)](http://travis-ci.org/axelitus/php-base) [![Latest Stable Version](https://poser.pugx.org/axelitus/base/v/stable.png)](https://packagist.org/packages/axelitus/base)
+* **Build Status (master):** [![Build Status](https://secure.travis-ci.org/axelitus/php-base.png?branch=master)](http://travis-ci.org/axelitus/php-base) [![Latest Stable Version](https://poser.pugx.org/axelitus/base/v/stable.png)](https://packagist.org/packages/axelitus/base)[![Coverage Status](https://coveralls.io/repos/axelitus/php-base/badge.png)](https://coveralls.io/r/axelitus/php-base)
 * **Build Status (develop):** [![Build Status](https://secure.travis-ci.org/axelitus/php-base.png?branch=develop)](http://travis-ci.org/axelitus/php-base) [![Latest Unstable Version](https://poser.pugx.org/axelitus/base/v/unstable.png)](https://packagist.org/packages/axelitus/base)
 * **Composer Package:** [axelitus/base](http://packagist.org/packages/axelitus/base "axelitus/base at Packagist") at Packagist
 * **Issue Tracker:** [axelitus/php-base](https://github.com/axelitus/php-base/issues "axelitus/php-base Issue Tracker at GitHub") Issue Tracker at GitHub
