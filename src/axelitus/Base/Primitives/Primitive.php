@@ -77,6 +77,17 @@ abstract class Primitive
     }
 
     /**
+     * Alias to Primitive->getValue()
+     *
+     * @return mixed The primitive's value.
+     * @see getValue
+     */
+    final public function value()
+    {
+        return $this->getValue();
+    }
+
+    /**
      * Gets the type of the primitive object.
      *
      * @return string The type of the primitive object.
