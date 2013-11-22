@@ -23,4 +23,13 @@ use axelitus\Base\Primitives\Boolean\PrimitiveBoolean;
  */
 class Boolean extends PrimitiveBoolean
 {
+    /**
+     * @param $operand
+     *
+     * @return mixed
+     */
+    public function andWith($operand)
+    {
+        return call_user_func_array(['axelitus\Base\Primitives\Boolean\PrimitiveBoolean', 'doAnd'], array_merge([$this], func_get_args()));
+    }
 }

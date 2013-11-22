@@ -21,6 +21,17 @@ use axelitus\Base\Boolean;
  */
 class TestsBoolean extends TestCase
 {
+    /** @var axelitus\Base\Boolean $booleanTrue */
+    protected $booleanTrue;
+
+    /** @var axelitus\Base\Boolean $booleanFalse */
+    protected $booleanFalse;
+
+    public function setUp() {
+        $this->booleanTrue = new Boolean(true);
+        $this->booleanFalse = new Boolean(false);
+    }
+
     /**
      * Tests PrimitiveBoolean::is()
      */
@@ -58,13 +69,17 @@ class TestsBoolean extends TestCase
     }
 
     /**
-     * Tests Boolean->andWith()
+     * Tests Boolean::andWith()
      *
      * @depends test_doAnd
      */
     public function test_andWith()
     {
-
+        $this->assertFalse($this->booleanTrue->andWith($this->booleanFalse));
+        $this->assertFalse($this->booleanFalse->andWith($this->booleanTrue));
+        $this->assertTrue($this->booleanTrue->andWith(true));
+        $this->assertTrue($this->booleanTrue->andWith([true, true, true]));
+        $this->assertFalse($this->booleanTrue->andWith([true, true, false]));
     }
 
     /**
