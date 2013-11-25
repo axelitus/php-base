@@ -40,10 +40,6 @@
         "vendor-dir": "vendor"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "branch-alias": {
-            "dev-master": "dev-develop"
-        }
+    "prefer-stable": true
     }
 }
