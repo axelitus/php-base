@@ -65,7 +65,8 @@ abstract class PrimitiveNumeric extends Primitive
      * @throws \InvalidArgumentException
      * @return int|float The native numeric value.
      */
-    public static function native($value) {
+    public static function native($value)
+    {
         if (!static::is($value)) {
             throw new \InvalidArgumentException("The \$value must be a numeric or instance derived from PrimitiveNumeric.");
         }
@@ -95,6 +96,180 @@ abstract class PrimitiveNumeric extends Primitive
         }
 
         return $a == $b;
+    }
+
+    /**
+     * Does a numeric sum operation to the given operand(s).
+     *
+     * @param int|float|PrimitiveNumeric $operand,... The operand(s) to operate with
+     *
+     * @return float|int The resulting sum
+     * @throws \InvalidArgumentException
+     */
+    public static function doSum($operand)
+    {
+        $chain = 0;
+        $args = func_get_args();
+
+        foreach ($args as $arg) {
+            try {
+                if (is_array($arg)) {
+                    foreach ($arg as $a) {
+                        $chain += static::native($a);
+                    }
+                } else {
+                    $chain += static::native($arg);
+                }
+            } catch (\InvalidArgumentException $ex) {
+                throw new \InvalidArgumentException("The parameters must be numeric or instances derived from PrimitiveNumeric.");
+            }
+        }
+
+        return $chain;
+    }
+
+    /**
+     * Does a numeric rest operation to the given operand(s). The first operand will be taken as base.
+     *
+     * @param int|float|PrimitiveNumeric $operand,... The operand(s) to operate with
+     *
+     * @return float|int The resulting sum
+     * @throws \InvalidArgumentException
+     */
+    public static function doRest($operand)
+    {
+        $args = func_get_args();
+        if (count($args) < 1) {
+            return 0;
+        }
+
+        try {
+            $chain = array_shift($args);
+            $chain = static::native($chain);
+        } catch (\InvalidArgumentException $ex) {
+            if(is_array($chain) and count($chain) > 0) {
+                try {
+                    $tmp = static::native(array_shift($chain));
+                    array_unshift($args, $chain);
+                    $chain = $tmp;
+                } catch(\InvalidArgumentException $ex) {
+                    throw new \InvalidArgumentException("The parameters must be numeric or instances derived from PrimitiveNumeric.");
+                }
+            }
+        }
+
+        foreach ($args as $arg) {
+            try {
+                if (is_array($arg)) {
+                    foreach ($arg as $a) {
+                        $chain -= static::native($a);
+                    }
+                } else {
+                    $chain -= static::native($arg);
+                }
+            } catch (\InvalidArgumentException $ex) {
+                throw new \InvalidArgumentException("The parameters must be numeric or instances derived from PrimitiveNumeric.");
+            }
+        }
+
+        return $chain;
+    }
+
+    /**
+     * Does a numeric multiplication operation to the given operand(s).
+     *
+     * @param int|float|PrimitiveNumeric $operand,... The operand(s) to operate with
+     *
+     * @return float|int The resulting sum
+     * @throws \InvalidArgumentException
+     */
+    public static function doMult($operand)
+    {
+        $chain = 1;
+        $args = func_get_args();
+
+        foreach ($args as $arg) {
+            if ($chain == 0) {
+                return 0;
+            }
+
+            try {
+                if (is_array($arg)) {
+                    foreach ($arg as $a) {
+                        $chain *= static::native($a);
+                    }
+                } else {
+                    $chain *= static::native($arg);
+                }
+            } catch (\InvalidArgumentException $ex) {
+                throw new \InvalidArgumentException("The parameters must be numeric or instances derived from PrimitiveNumeric.");
+            }
+        }
+
+        return $chain;
+    }
+
+    /**
+     * Does a numeric division operation to the given operand(s). The first operand will be taken as base.
+     *
+     * @param int|float|PrimitiveNumeric $operand,... The operand(s) to operate with
+     *
+     * @return float|int The resulting sum
+     * @throws \InvalidArgumentException
+     */
+    public static function doDiv($operand)
+    {
+        $args = func_get_args();
+        if (count($args) < 1) {
+            return 0;
+        }
+
+        try {
+            $chain = array_shift($args);
+            $chain = static::native($chain);
+        } catch (\InvalidArgumentException $ex) {
+            if(is_array($chain) and count($chain)) {
+                try {
+                    $tmp = static::native(array_shift($chain));
+                    array_unshift($args, $chain);
+                    $chain = $tmp;
+                } catch(\InvalidArgumentException $ex) {
+                    throw new \InvalidArgumentException("The parameters must be numeric or instances derived from PrimitiveNumeric.");
+                }
+            }
+        }
+
+        foreach ($args as $arg) {
+            try {
+                if (is_array($arg)) {
+                    foreach ($arg as $a) {
+                        if(($a = static::native($a)) == 0) {
+                            throw new \InvalidArgumentException("Division by zero found. The divide parameters cannot be zero.");
+                        }
+                        $chain /= $a;
+                    }
+                } else {
+                    if(($arg = static::native($arg)) == 0) {
+                        throw new \InvalidArgumentException("Division by zero found. The divide parameters cannot be zero.");
+                    }
+                    $chain /= $arg;
+                }
+            } catch (\InvalidArgumentException $ex) {
+                throw new \InvalidArgumentException("The parameters must be numeric or instances derived from PrimitiveNumeric.");
+            }
+        }
+
+        return $chain;
+    }
+
+    public static function doMod($operand, $mod)
+    {
+
+    }
+
+    public static function doPow($operand)
+    {
+
     }
 
     //endregion

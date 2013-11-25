@@ -61,4 +61,46 @@ class TestsNumeric extends TestCase
         $this->setExpectedException('\InvalidArgumentException');
         Numeric::areEqual(0, 'string');
     }
+
+    public function test_doSum()
+    {
+        $this->assertEquals(9, Numeric::doSum(1, 2, 2, 4));
+        $this->assertEquals(9, Numeric::doSum([1, 2, 2, 4]));
+        $this->assertEquals(9, Numeric::doSum(1, [2, 2, 4]));
+        $this->assertEquals(9, Numeric::doSum(1, [2, 2], 4));
+    }
+
+    public function test_doRest()
+    {
+        $this->assertEquals(4, Numeric::doRest(10, 2, 3, 1));
+        $this->assertEquals(4, Numeric::doRest([10, 2, 3, 1]));
+        $this->assertEquals(4, Numeric::doRest(10, [2, 3, 1]));
+        $this->assertEquals(4, Numeric::doRest(10, [2, 3], 1));
+    }
+
+    public function test_doMult()
+    {
+        $this->assertEquals(4, Numeric::doRest(10, 2, 3, 1));
+        $this->assertEquals(4, Numeric::doRest([10, 2, 3, 1]));
+        $this->assertEquals(4, Numeric::doRest(10, [2, 3, 1]));
+        $this->assertEquals(4, Numeric::doRest(10, [2, 3], 1));
+    }
+
+    public function test_doDiv()
+    {
+        $this->assertEquals(13.351578947368, Numeric::doDiv(6342, 19, 1, 25));
+        $this->assertEquals(13.351578947368, Numeric::doDiv([6342, 19, 1, 25]));
+        $this->assertEquals(13.351578947368, Numeric::doDiv(6342, [19, 1, 25]));
+        $this->assertEquals(13.351578947368, Numeric::doDiv(6342, [19, 1], 25));
+    }
+
+    public function test_doMod()
+    {
+
+    }
+
+    public function test_doPow()
+    {
+
+    }
 }
