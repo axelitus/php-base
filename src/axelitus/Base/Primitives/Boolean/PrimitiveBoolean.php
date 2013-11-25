@@ -133,8 +133,8 @@ abstract class PrimitiveBoolean extends Primitive
         foreach ($args as $arg) {
             try {
                 if (is_array($arg)) {
-                    foreach ($arg as $b) {
-                        $chain &= static::native($b);
+                    foreach ($arg as $a) {
+                        $chain &= static::native($a);
                     }
                 } else {
                     $chain &= static::native($arg);
@@ -167,8 +167,8 @@ abstract class PrimitiveBoolean extends Primitive
         foreach ($args as $arg) {
             try {
                 if (is_array($arg)) {
-                    foreach ($arg as $b) {
-                        $chain |= static::native($b);
+                    foreach ($arg as $a) {
+                        $chain |= static::native($a);
                     }
                 } else {
                     $chain |= static::native($arg);
