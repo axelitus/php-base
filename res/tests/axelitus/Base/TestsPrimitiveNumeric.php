@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.3
+ * @version     0.4
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -48,20 +48,6 @@ class TestsPrimitiveNumeric extends TestCase
         $args = array('string');
         /** @noinspection PhpUnusedLocalVariableInspection */
         $primitive = $this->getMockForAbstractClass('axelitus\Base\Primitives\Numeric\PrimitiveNumeric', $args);
-    }
-
-    /**
-     * Tests Primitive::getType()
-     */
-    public function test_getType()
-    {
-        $expected = 'object';
-        $output = $this->stubInt->getType();
-        $this->assertEquals($expected, $output);
-
-        $expected = 'object';
-        $output = $this->stubFloat->getType();
-        $this->assertEquals($expected, $output);
     }
 
     /**

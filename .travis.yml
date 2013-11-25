@@ -6,4 +6,4 @@ php:
 before_script:
   - composer install --dev
 
-script: phpunit --configuration res/tests/phpunit.xml --bootstrap res/tests/phpunit_bootstrap.php
+script: phpunit --configuration phpunit.travis.xml --bootstrap phpunit.bootstrap.php

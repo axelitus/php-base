@@ -3,7 +3,7 @@
  * Part of composer package: axelitus/base
  *
  * @package     axelitus\Base
- * @version     0.3
+ * @version     0.4
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @license     MIT License
  * @copyright   2013 - Axel Pardemann
@@ -42,16 +42,6 @@ class TestsPrimitiveBoolean extends TestCase
         $args = array('string');
         /** @noinspection PhpUnusedLocalVariableInspection */
         $primitive = $this->getMockForAbstractClass('axelitus\Base\Primitives\Boolean\PrimitiveBoolean', $args);
-    }
-
-    /**
-     * Tests Primitive::getType()
-     */
-    public function test_getType()
-    {
-        $expected = 'object';
-        $output = $this->stub->getType();
-        $this->assertEquals($expected, $output);
     }
 
     /**
