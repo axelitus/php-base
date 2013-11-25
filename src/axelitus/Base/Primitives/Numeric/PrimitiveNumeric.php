@@ -12,6 +12,7 @@
 
 namespace axelitus\Base\Primitives\Numeric;
 
+use axelitus\Base\Exceptions\NotImplementedException;
 use axelitus\Base\Primitives\Primitive;
 
 /**
@@ -264,12 +265,12 @@ abstract class PrimitiveNumeric extends Primitive
 
     public static function doMod($operand, $mod)
     {
-
+        throw new NotImplementedException("This operation has not yet been implemented.");
     }
 
     public static function doPow($operand)
     {
-
+        throw new NotImplementedException("This operation has not yet been implemented.");
     }
 
     //endregion
