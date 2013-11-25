@@ -96,6 +96,21 @@ class TestsBoolean extends TestCase
     }
 
     /**
+     * Tests Boolean::orWith()
+     *
+     * @depends test_doOr
+     */
+    public function test_orWith()
+    {
+        $this->assertTrue($this->booleanTrue->orWith(true, true, true));
+        $this->assertTrue($this->booleanFalse->orWith(false, true, false));
+        $this->assertFalse($this->booleanFalse->orWith(false, false, false));
+        $this->assertTrue($this->booleanFalse->orWith([false, false, false, false], true));
+        $this->assertFalse($this->booleanFalse->orWith([false, false, false, false], false));
+        $this->assertTrue($this->booleanFalse->orWith([false, false, true, false], false));
+    }
+
+    /**
      * Tests PrimitiveBoolean::doEq()
      */
     public function test_doEq()
@@ -106,6 +121,22 @@ class TestsBoolean extends TestCase
         $this->assertTrue(Boolean::doEq(false, false));
 
         $this->assertEquals([true, false, true], Boolean::doEq([true, true, false], [true, false, false]));
+    }
+
+    /**
+     * Tests Boolean::eqWith()
+     *
+     * @depends test_doEq
+     */
+    public function test_eqWith()
+    {
+        $this->assertFalse($this->booleanTrue->eqWith(false));
+        $this->assertFalse($this->booleanFalse->eqWith(true));
+        $this->assertTrue($this->booleanTrue->eqWith(true));
+        $this->assertTrue($this->booleanFalse->eqWith(false));
+
+        $this->assertEquals([true, false, false], $this->booleanTrue->eqWith([true, false, false]));
+        $this->assertEquals([false, true, true], $this->booleanFalse->eqWith([true, false, false]));
     }
 
     /**
@@ -121,5 +152,21 @@ class TestsBoolean extends TestCase
         $this->assertFalse(Boolean::doXor(false, false));
 
         $this->assertEquals([false, true, false], Boolean::doXor([true, true, false], [true, false, false]));
+    }
+
+    /**
+     * Tests Boolean::xorWith()
+     *
+     * @depends test_doXor
+     */
+    public function test_xorWith()
+    {
+        $this->assertTrue($this->booleanTrue->xorWith(false));
+        $this->assertTrue($this->booleanFalse->xorWith(true));
+        $this->assertFalse($this->booleanTrue->xorWith(true));
+        $this->assertFalse($this->booleanFalse->xorWith(false));
+
+        $this->assertEquals([false, true, true], $this->booleanTrue->xorWith([true, false, false]));
+        $this->assertEquals([true, false, false], $this->booleanFalse->xorWith([true, false, false]));
     }
 }
