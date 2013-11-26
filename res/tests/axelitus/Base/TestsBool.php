@@ -24,7 +24,7 @@ class TestsBool extends TestCase
 
     public function test()
     {
-        
+
     }
 //    /** @var axelitus\Base\Boolean $booleanTrue */
 //    protected $booleanTrue;

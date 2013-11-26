@@ -25,7 +25,8 @@ class Bool
 {
     public static function is($value)
     {
-        return is_bool($value) || $value === 0 || $value === 1;
+        // TODO: define if we will allow known config string values as bool like 'yes', 'on' or even 'true' or leave it for other another function to determine this (extIs maybe).
+        return $value === true || $value === false || $value === 0 || $value === 1;
     }
 
     public static function parse($input)
