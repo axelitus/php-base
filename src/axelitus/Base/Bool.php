@@ -23,16 +23,32 @@ use axelitus\Base\Exceptions\NotImplementedException;
  */
 class Bool
 {
+    //region Value testing
+
     public static function is($value)
     {
         // TODO: define if we will allow known config string values as bool like 'yes', 'on' or even 'true' or leave it for other another function to determine this (extIs maybe).
         return $value === true || $value === false || $value === 0 || $value === 1;
     }
 
+    //endregion
+
+    //region Parsing
+
     public static function parse($input)
     {
-        throw new NotImplementedException("This method is not yet implemented");
+        if (!is_string($input) || empty($input)) {
+            throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
+        }
+
+        if (($input = strtolower($input)) != 'true' && $input != 'false') {
+            throw new \RuntimeException("The \$input string cannot be parsed because it does not match 'true' or 'false'.");
+        }
+
+        return $input == 'true';
     }
+
+    //endregion
 
     //region NOT operation
 
