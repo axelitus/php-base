@@ -48,6 +48,35 @@ class Bool
         return $input == 'true';
     }
 
+    public static function extParse($input)
+    {
+        if (!is_string($input) || empty($input)) {
+            throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
+        }
+
+        switch ($input = strtolower($input)) {
+            case $input == 'true':
+            case $input == 'on':
+            case $input =='yes':
+            case $input == 'y':
+            case $input == '1':
+                $ret = true;
+                break;
+            case $input == 'false':
+            case $input == 'off':
+            case $input =='no':
+            case $input == 'n':
+            case $input == '0':
+                $ret = false;
+                break;
+            default:
+                throw new \RuntimeException("The \$input parameter did not match any of the valid strings that can be parsed.");
+                break;
+        }
+
+        return $ret;
+    }
+
     //endregion
 
     //region NOT operation
