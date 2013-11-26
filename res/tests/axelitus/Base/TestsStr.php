@@ -12,7 +12,7 @@
 
 namespace axelitus\Base\Tests;
 
-use axelitus\Base\String;
+use axelitus\Base\Str;
 
 /**
  * Class TestsString
@@ -26,12 +26,12 @@ class TestsString extends TestCase
      */
     public function test_isString()
     {
-        $this->assertFalse(String::is(null), "The value null is incorrectly recognized as a string.");
-        $this->assertTrue(String::is(""), "The value \"\" is not recognized as a string.");
-        $this->assertTrue(String::is("Winter is coming!"), "The value \"Winter is coming!\" is not recognized as a string.");
-        $this->assertTrue(String::is(new String("It is known.")), "The value [String:{ \$value: string(\"It is known.\") }] is not recognized as a string.");
-        $this->assertFalse(String::is(56), "The value 56 is incorrectly recognized as a string.");
-        $this->assertFalse(String::is(10.3), "The value 10.3 is incorrectly recognized as a string.");
+        $this->assertFalse(Str::is(null), "The value null is incorrectly recognized as a string.");
+        $this->assertTrue(Str::is(""), "The value \"\" is not recognized as a string.");
+        $this->assertTrue(Str::is("Winter is coming!"), "The value \"Winter is coming!\" is not recognized as a string.");
+        $this->assertTrue(Str::is(new Str("It is known.")), "The value [String:{ \$value: string(\"It is known.\") }] is not recognized as a string.");
+        $this->assertFalse(Str::is(56), "The value 56 is incorrectly recognized as a string.");
+        $this->assertFalse(Str::is(10.3), "The value 10.3 is incorrectly recognized as a string.");
     }
 
     /**
@@ -40,18 +40,18 @@ class TestsString extends TestCase
      */
     public function test_areEqual()
     {
-        $this->assertTrue(String::areEqual("", ""), "The string \"\" is evaluated as not equal to the string \"\".");
-        $this->assertTrue(String::areEqual("axelitus", "axelitus"), "The string \"axelitus\" is evaluated as not equal to the string \"axelitus\".");
-        $this->assertTrue(String::areEqual("Winter is coming...", new String("Winter is coming...")), "The string \"Winter is coming...\" is evaluated as not equal to the string [String: { \$value: \"Winter is coming...\" }]].");
-        $this->assertTrue(String::areEqual(new String("Objects"), new String("Objects")), "The string [String: { \$value: \"Objects\" }]] is evaluated as not equal to the string [String: { \$value: \"Objects\" }]].");
-        $this->assertFalse(String::areEqual("This is", "not equal"), "The string \"This is\" is evaluated as equal to the string \"not equal\".");
-        $this->assertFalse(String::areEqual("This is", new String("not equal")), "The string \"This is\" is evaluated as equal to the string [String: { \$value: \"not equal\" }]].");
+        $this->assertTrue(Str::areEqual("", ""), "The string \"\" is evaluated as not equal to the string \"\".");
+        $this->assertTrue(Str::areEqual("axelitus", "axelitus"), "The string \"axelitus\" is evaluated as not equal to the string \"axelitus\".");
+        $this->assertTrue(Str::areEqual("Winter is coming...", new Str("Winter is coming...")), "The string \"Winter is coming...\" is evaluated as not equal to the string [String: { \$value: \"Winter is coming...\" }]].");
+        $this->assertTrue(Str::areEqual(new Str("Objects"), new Str("Objects")), "The string [String: { \$value: \"Objects\" }]] is evaluated as not equal to the string [String: { \$value: \"Objects\" }]].");
+        $this->assertFalse(Str::areEqual("This is", "not equal"), "The string \"This is\" is evaluated as equal to the string \"not equal\".");
+        $this->assertFalse(Str::areEqual("This is", new Str("not equal")), "The string \"This is\" is evaluated as equal to the string [String: { \$value: \"not equal\" }]].");
     }
 
     public function test_areEqualException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::areEqual('string', 0);
+        Str::areEqual('string', 0);
     }
 
     /**
@@ -60,15 +60,15 @@ class TestsString extends TestCase
      */
     public function test_length()
     {
-        $this->assertEquals(0, String::length(""));
-        $this->assertEquals(33, String::length("This is a 33 chars length string."), "The length is not correctly calculated.");
-        $this->assertEquals(83, String::length("This string, however, is a little bit longer, having in total a length of 83 chars."), "The length is not correctly calculated.");
+        $this->assertEquals(0, Str::length(""));
+        $this->assertEquals(33, Str::length("This is a 33 chars length string."), "The length is not correctly calculated.");
+        $this->assertEquals(83, Str::length("This string, however, is a little bit longer, having in total a length of 83 chars."), "The length is not correctly calculated.");
     }
 
     public function test_lengthException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::length(false);
+        Str::length(false);
     }
 
     /**
@@ -77,17 +77,17 @@ class TestsString extends TestCase
      */
     public function test_sub()
     {
-        $this->assertEquals("", String::sub("", 0, 2), "The resulting substring is not equal to the expected string \"is coming...\".");
-        $this->assertEquals("is coming...", String::sub("Winter is coming...", 7), "The resulting substring is not equal to the expected string \"is coming...\".");
-        $this->assertEquals("coming", String::sub("Winter is coming...", 10, 6), "The resulting substring is not equal to the expected string \"is coming...\".");
-        $this->assertEquals("Winter", String::sub("Winter is coming...", 0, 6), "The resulting substring is not equal to the expected string \"is coming...\".");
-        $this->assertEquals("...", String::sub("Winter is coming...", -3), "The resulting substring is not equal to the expected string \"is coming...\".");
+        $this->assertEquals("", Str::sub("", 0, 2), "The resulting substring is not equal to the expected string \"is coming...\".");
+        $this->assertEquals("is coming...", Str::sub("Winter is coming...", 7), "The resulting substring is not equal to the expected string \"is coming...\".");
+        $this->assertEquals("coming", Str::sub("Winter is coming...", 10, 6), "The resulting substring is not equal to the expected string \"is coming...\".");
+        $this->assertEquals("Winter", Str::sub("Winter is coming...", 0, 6), "The resulting substring is not equal to the expected string \"is coming...\".");
+        $this->assertEquals("...", Str::sub("Winter is coming...", -3), "The resulting substring is not equal to the expected string \"is coming...\".");
     }
 
     public function test_subException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::sub(false, 0);
+        Str::sub(false, 0);
     }
 
     /**
@@ -97,20 +97,20 @@ class TestsString extends TestCase
     public function test_pos()
     {
         $expected = 13;
-        $output = String::pos("It is known, Khaleesi.", "Khal");
+        $output = Str::pos("It is known, Khaleesi.", "Khal");
         $this->assertEquals($expected, $output, "The string \"Khal\" is not found at position 13 in the string \"It is known, Khaleesi.\".");
     }
 
     public function test_posException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::pos(false, 'string');
+        Str::pos(false, 'string');
     }
 
     public function test_posException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::pos('string', false);
+        Str::pos('string', false);
     }
 
     /**
@@ -120,23 +120,23 @@ class TestsString extends TestCase
      */
     public function test_contains()
     {
-        $this->assertTrue(String::contains("It is known, Khaleesi.", "Khal"), "The string \"It is known, Khaleesi.\" does not contain the string \"Khal\".");
-        $this->assertFalse(String::contains("It is known, Khaleesi.", "khal"), "The string \"It is known, Khaleesi.\" does not contain the string \"khal\".");
-        $this->assertTrue(String::contains("It is known, Khaleesi.", "khal", false), "The string \"It is known, Khaleesi.\" does not contain the string \"khal\" (case-insensitive).");
-        $this->assertFalse(String::contains("It is known, Khaleesi.", "Chal"), "The string \"It is known, Khaleesi.\" does not contain the string \"Chal\".");
-        $this->assertFalse(String::contains("It is known, Khaleesi.", "Chal", false), "The string \"It is known, Khaleesi.\" does not contain the string \"Chal\".");
+        $this->assertTrue(Str::contains("It is known, Khaleesi.", "Khal"), "The string \"It is known, Khaleesi.\" does not contain the string \"Khal\".");
+        $this->assertFalse(Str::contains("It is known, Khaleesi.", "khal"), "The string \"It is known, Khaleesi.\" does not contain the string \"khal\".");
+        $this->assertTrue(Str::contains("It is known, Khaleesi.", "khal", false), "The string \"It is known, Khaleesi.\" does not contain the string \"khal\" (case-insensitive).");
+        $this->assertFalse(Str::contains("It is known, Khaleesi.", "Chal"), "The string \"It is known, Khaleesi.\" does not contain the string \"Chal\".");
+        $this->assertFalse(Str::contains("It is known, Khaleesi.", "Chal", false), "The string \"It is known, Khaleesi.\" does not contain the string \"Chal\".");
     }
 
     public function test_containsException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::contains(false, 'string');
+        Str::contains(false, 'string');
     }
 
     public function test_containsException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::contains('string', false);
+        Str::contains('string', false);
     }
 
     /**
@@ -147,21 +147,21 @@ class TestsString extends TestCase
      */
     public function test_beginsWith()
     {
-        $this->assertTrue(String::beginsWith("Winter is coming...", "Winter"), "The string \"Winter is coming...\" does not begin with the string \"Winter\".");
-        $this->assertTrue(String::beginsWith("Winter is coming...", "winter", false), "The string \"Winter is coming...\" does not begin with the string \"winter\" [case insensitive].");
-        $this->assertFalse(String::beginsWith("Winter is coming...", "winter", true), "The string \"Winter is coming...\" does not begin with the string \"winter\" [case sensitive].");
+        $this->assertTrue(Str::beginsWith("Winter is coming...", "Winter"), "The string \"Winter is coming...\" does not begin with the string \"Winter\".");
+        $this->assertTrue(Str::beginsWith("Winter is coming...", "winter", false), "The string \"Winter is coming...\" does not begin with the string \"winter\" [case insensitive].");
+        $this->assertFalse(Str::beginsWith("Winter is coming...", "winter", true), "The string \"Winter is coming...\" does not begin with the string \"winter\" [case sensitive].");
     }
 
     public function test_beginsWithException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::beginsWith(false, 'string');
+        Str::beginsWith(false, 'string');
     }
 
     public function test_beginsWithException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::beginsWith('string', false);
+        Str::beginsWith('string', false);
     }
 
     /**
@@ -172,23 +172,23 @@ class TestsString extends TestCase
      */
     public function test_endsWith()
     {
-        $this->assertTrue(String::endsWith("It is known, Khaleesi.", "Khaleesi."), "The string \"It is known, Khaleesi.\" does not end with the string \"Khaleesi.\".");
-        $this->assertTrue(String::endsWith("It is known, Khaleesi.", "khaleesi.", false), "The string \"It is known, Khaleesi.\" does not end with the string \"khaleesi.\" [case insensitive].");
-        $this->assertFalse(String::endsWith("It is known, Khaleesi.", "khaleesi.", true), "The string \"It is known, Khaleesi.\" does not end with the string \"khaleesi.\" [case sensitive].");
-        $this->assertFalse(String::endsWith("It is known, Khaleesi.", "Khaleesi"), "The string \"It is known, Khaleesi.\" does not end with the string \"Khaleesi\".");
-        $this->assertTrue(String::endsWith("It is known, Khaleesi.", ""), "The string \"It is known, Khaleesi.\" does not end with the string \"\".");
+        $this->assertTrue(Str::endsWith("It is known, Khaleesi.", "Khaleesi."), "The string \"It is known, Khaleesi.\" does not end with the string \"Khaleesi.\".");
+        $this->assertTrue(Str::endsWith("It is known, Khaleesi.", "khaleesi.", false), "The string \"It is known, Khaleesi.\" does not end with the string \"khaleesi.\" [case insensitive].");
+        $this->assertFalse(Str::endsWith("It is known, Khaleesi.", "khaleesi.", true), "The string \"It is known, Khaleesi.\" does not end with the string \"khaleesi.\" [case sensitive].");
+        $this->assertFalse(Str::endsWith("It is known, Khaleesi.", "Khaleesi"), "The string \"It is known, Khaleesi.\" does not end with the string \"Khaleesi\".");
+        $this->assertTrue(Str::endsWith("It is known, Khaleesi.", ""), "The string \"It is known, Khaleesi.\" does not end with the string \"\".");
     }
 
     public function test_endsWithException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::endsWith(false, 'string');
+        Str::endsWith(false, 'string');
     }
 
     public function test_endsWithException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::endsWith('string', false);
+        Str::endsWith('string', false);
     }
 
     /**
@@ -198,11 +198,11 @@ class TestsString extends TestCase
     public function test_replace()
     {
         $expected = "Summer is coming...";
-        $output = String::replace("Winter is coming...", "Winter", "Summer");
+        $output = Str::replace("Winter is coming...", "Winter", "Summer");
         $this->assertEquals($expected, $output);
 
         $expected = "Winter is coming...";
-        $output = String::replace("Winter is coming...", "Autumn", "Summer");
+        $output = Str::replace("Winter is coming...", "Autumn", "Summer");
         $this->assertEquals($expected, $output);
     }
 
@@ -213,7 +213,7 @@ class TestsString extends TestCase
     public function test_lower()
     {
         $expected = "winter is coming...";
-        $output = String::lower("Winter Is COMING...");
+        $output = Str::lower("Winter Is COMING...");
         $this->assertEquals($expected, $output);
     }
 
@@ -224,7 +224,7 @@ class TestsString extends TestCase
     public function test_upper()
     {
         $expected = "WINTER IS COMING...";
-        $output = String::upper("Winter Is COMING...");
+        $output = Str::upper("Winter Is COMING...");
         $this->assertEquals($expected, $output);
     }
 
@@ -235,11 +235,11 @@ class TestsString extends TestCase
     public function test_lcfirst()
     {
         $expected = "winter Is COMING...";
-        $output = String::lcfirst("Winter Is COMING...");
+        $output = Str::lcfirst("Winter Is COMING...");
         $this->assertEquals($expected, $output);
 
         $expected = "wINTER IS COMING...";
-        $output = String::lcfirst("WINTER IS COMING...");
+        $output = Str::lcfirst("WINTER IS COMING...");
         $this->assertEquals($expected, $output);
     }
 
@@ -250,11 +250,11 @@ class TestsString extends TestCase
     public function test_ucfirst()
     {
         $expected = "Winter Is COMING...";
-        $output = String::ucfirst("winter Is COMING...");
+        $output = Str::ucfirst("winter Is COMING...");
         $this->assertEquals($expected, $output);
 
         $expected = "Winter is coming...";
-        $output = String::ucfirst("winter is coming...");
+        $output = Str::ucfirst("winter is coming...");
         $this->assertEquals($expected, $output);
     }
 
@@ -265,11 +265,11 @@ class TestsString extends TestCase
     public function test_ucwords()
     {
         $expected = "Winter Is Coming...";
-        $output = String::ucwords("winter is coming...");
+        $output = Str::ucwords("winter is coming...");
         $this->assertEquals($expected, $output);
 
         $expected = "Winter Is Coming...";
-        $output = String::ucwords("WINTER IS COMING...");
+        $output = Str::ucwords("WINTER IS COMING...");
         $this->assertEquals($expected, $output);
     }
 
@@ -280,22 +280,22 @@ class TestsString extends TestCase
     public function test_isOneOf()
     {
         $values = array('apple', 'banana', 'grapes', 'oranges');
-        $this->assertTrue(String::isOneOf('apple', $values));
-        $this->assertFalse(String::isOneOf('Apple', $values));
-        $this->assertTrue(String::isOneOf('Apple', $values, false));
+        $this->assertTrue(Str::isOneOf('apple', $values));
+        $this->assertFalse(Str::isOneOf('Apple', $values));
+        $this->assertTrue(Str::isOneOf('Apple', $values, false));
     }
 
     public function test_isOneOfException01()
     {
         $values = array('apple', 'banana', 'grapes', 'oranges');
         $this->setExpectedException('\InvalidArgumentException');
-        String::isOneOf(false, $values);
+        Str::isOneOf(false, $values);
     }
 
     public function test_isOneOfException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::isOneOf('string', array('value', false));
+        Str::isOneOf('string', array('value', false));
     }
 
     /**
@@ -305,24 +305,24 @@ class TestsString extends TestCase
     public function test_studly()
     {
         $expected = "winter_is_coming";
-        $output = String::studly("winter_is_coming", array());
+        $output = Str::studly("winter_is_coming", array());
         $this->assertEquals($expected, $output);
 
         $expected = "WinterIsComing";
-        $output = String::studly("winter_is_coming");
+        $output = Str::studly("winter_is_coming");
         $this->assertEquals($expected, $output);
     }
 
     public function test_studlyException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::studly(false);
+        Str::studly(false);
     }
 
     public function test_studlyException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::studly('separated_string', array(false));
+        Str::studly('separated_string', array(false));
     }
 
     /**
@@ -333,24 +333,24 @@ class TestsString extends TestCase
     public function test_camel()
     {
         $expected = "winter_is_coming";
-        $output = String::camel("winter_is_coming", array());
+        $output = Str::camel("winter_is_coming", array());
         $this->assertEquals($expected, $output);
 
         $expected = "winterIsComing";
-        $output = String::camel("winter_is_coming");
+        $output = Str::camel("winter_is_coming");
         $this->assertEquals($expected, $output);
     }
 
     public function test_camelException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::camel(false);
+        Str::camel(false);
     }
 
     public function test_camelException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::camel('separated_string', array(false));
+        Str::camel('separated_string', array(false));
     }
 
     /**
@@ -364,44 +364,44 @@ class TestsString extends TestCase
     public function test_separated()
     {
         $expected = "winter_Is_Coming";
-        $output = String::separated("winterIsComing");
+        $output = Str::separated("winterIsComing");
         $this->assertEquals($expected, $output);
 
         $expected = "Winter-Is-Coming";
-        $output = String::separated("WinterIsComing", '-');
+        $output = Str::separated("WinterIsComing", '-');
         $this->assertEquals($expected, $output);
 
         $expected = "winter-is-coming";
-        $output = String::separated("WinterIsComing", '-', 'lower');
+        $output = Str::separated("WinterIsComing", '-', 'lower');
         $this->assertEquals($expected, $output);
 
         $expected = "WINTER-IS-COMING";
-        $output = String::separated("WinterIsComing", '-', 'upper');
+        $output = Str::separated("WinterIsComing", '-', 'upper');
         $this->assertEquals($expected, $output);
 
         $expected = "winter-Is-Coming";
-        $output = String::separated("WinterIsComing", '-', 'lcfirst');
+        $output = Str::separated("WinterIsComing", '-', 'lcfirst');
         $this->assertEquals($expected, $output);
 
         $expected = "Winter-Is-Coming";
-        $output = String::separated("winterIsComing", '-', 'ucfirst');
+        $output = Str::separated("winterIsComing", '-', 'ucfirst');
         $this->assertEquals($expected, $output);
 
         $expected = "Winter-is-coming";
-        $output = String::separated("winterIsComing", '-', 'ucwords');
+        $output = Str::separated("winterIsComing", '-', 'ucwords');
         $this->assertEquals($expected, $output);
     }
 
     public function test_separatedException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::separated(false);
+        Str::separated(false);
     }
 
     public function test_separatedException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::separated('camelString', false);
+        Str::separated('camelString', false);
     }
 
     /**
@@ -411,15 +411,15 @@ class TestsString extends TestCase
     public function test_truncate()
     {
         $expected = "Winter is ...";
-        $output = String::truncate("Winter is coming!", 10);
+        $output = Str::truncate("Winter is coming!", 10);
         $this->assertEquals($expected, $output);
 
         $expected = "Winter is ";
-        $output = String::truncate("Winter is coming!", 10, '');
+        $output = Str::truncate("Winter is coming!", 10, '');
         $this->assertEquals($expected, $output);
 
         $expected = "<span>Winter is ...</span>";
-        $output = String::truncate("<span>Winter is coming!</span>", 10, '...', true);
+        $output = Str::truncate("<span>Winter is coming!</span>", 10, '...', true);
         $this->assertEquals($expected, $output);
     }
 
@@ -430,14 +430,14 @@ class TestsString extends TestCase
     public function test_nsprintf()
     {
         $expected = "This is the name that was replaced: Jon Snow.";
-        $output = String::nsprintf('This is the name that was replaced: %name$s.', array('name' => 'Jon Snow'));
+        $output = Str::nsprintf('This is the name that was replaced: %name$s.', array('name' => 'Jon Snow'));
         $this->assertEquals($expected, $output);
     }
 
     public function test_nsprintfException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::nsprintf(false);
+        Str::nsprintf(false);
     }
 
     /**
@@ -447,20 +447,20 @@ class TestsString extends TestCase
     public function test_random()
     {
         $expected = 10;
-        $output = strlen(String::random($expected));
+        $output = strlen(Str::random($expected));
         $this->assertEquals($expected, $output);
     }
 
     public function test_randomException01()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::random(false);
+        Str::random(false);
     }
 
     public function test_randomException02()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        String::random(10, false);
+        Str::random(10, false);
     }
 
     /**
@@ -471,18 +471,18 @@ class TestsString extends TestCase
     public function test_trandom()
     {
         $expected = 16;
-        $output = strlen(String::trandom());
+        $output = strlen(Str::trandom());
         $this->assertEquals($expected, $output);
     }
 
     public function test_concat()
     {
         $expected = 'Winter is coming!';
-        $output = String::concat('Winter ', 'is ', 'coming', '!');
+        $output = Str::concat('Winter ', 'is ', 'coming', '!');
         $this->assertEquals($expected, $output);
 
         $expected = 'Some Winterfell characters from Game of Thrones are: Jon Snow, Ned Stark, Arya Stark, Robb Stark.';
-        $output = String::concat('Some Winterfell characters ', 'from Game of Thrones are: ', [
+        $output = Str::concat('Some Winterfell characters ', 'from Game of Thrones are: ', [
             'Jon Snow, ', 'Ned Stark, ', 'Arya Stark, ', 'Robb Stark.']);
         $this->assertEquals($expected, $output);
     }
@@ -490,38 +490,38 @@ class TestsString extends TestCase
     public function test_prepend()
     {
         $expected = 'Winter is coming!';
-        $output = String::prepend('is coming!', 'Winter ');
+        $output = Str::prepend('is coming!', 'Winter ');
         $this->assertEquals($expected, $output);
 
         $expected = ['Jon Snow is son of Ned Stark', 'Robb Stark is son of Ned Stark', 'Brandon Stark is son of Ned Stark'];
-        $output = String::prepend(' is son of Ned Stark', ['Jon Snow', 'Robb Stark', 'Brandon Stark']);
+        $output = Str::prepend(' is son of Ned Stark', ['Jon Snow', 'Robb Stark', 'Brandon Stark']);
         $this->assertEquals($expected, $output);
 
         $expected = ['Winter is coming!', 'Winter is upon us!', 'Winter is already here!'];
-        $output = String::prepend([' is coming!', ' is upon us!', ' is already here!'], 'Winter');
+        $output = Str::prepend([' is coming!', ' is upon us!', ' is already here!'], 'Winter');
         $this->assertEquals($expected, $output);
 
         $expected = ['1. Jon Snow', '2. Ned Stark', '3. Arya Stark', '4. Robb Stark'];
-        $output = String::prepend(['Jon Snow', 'Ned Stark', 'Arya Stark', 'Robb Stark'], ['1. ', '2. ', '3. ', '4. ']);
+        $output = Str::prepend(['Jon Snow', 'Ned Stark', 'Arya Stark', 'Robb Stark'], ['1. ', '2. ', '3. ', '4. ']);
         $this->assertEquals($expected, $output);
     }
 
     public function test_append()
     {
         $expected = 'Winter is coming!';
-        $output = String::append('Winter ', 'is coming!');
+        $output = Str::append('Winter ', 'is coming!');
         $this->assertEquals($expected, $output);
 
         $expected = ['Winter is coming!', 'Winter is upon us!', 'Winter is already here!'];
-        $output = String::append('Winter', [' is coming!', ' is upon us!', ' is already here!']);
+        $output = Str::append('Winter', [' is coming!', ' is upon us!', ' is already here!']);
         $this->assertEquals($expected, $output);
 
         $expected = ['Jon Snow is son of Ned Stark', 'Robb Stark is son of Ned Stark', 'Brandon Stark is son of Ned Stark'];
-        $output = String::append(['Jon Snow', 'Robb Stark', 'Brandon Stark'], ' is son of Ned Stark');
+        $output = Str::append(['Jon Snow', 'Robb Stark', 'Brandon Stark'], ' is son of Ned Stark');
         $this->assertEquals($expected, $output);
 
         $expected = ['1. Jon Snow', '2. Ned Stark', '3. Arya Stark', '4. Robb Stark'];
-        $output = String::append(['1. ', '2. ', '3. ', '4. '], ['Jon Snow', 'Ned Stark', 'Arya Stark', 'Robb Stark']);
+        $output = Str::append(['1. ', '2. ', '3. ', '4. '], ['Jon Snow', 'Ned Stark', 'Arya Stark', 'Robb Stark']);
         $this->assertEquals($expected, $output);
     }
 }

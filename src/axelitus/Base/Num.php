@@ -12,15 +12,15 @@
 
 namespace axelitus\Base;
 
-use axelitus\Base\Primitives\String\PrimitiveString;
+use axelitus\Base\Primitives\Numeric\PrimitiveNumeric;
 
 /**
- * Class String
+ * Class Numeric
  *
- * Defines a String.
+ * Defines a Numeric.
  *
  * @package axelitus\Base
  */
-class String extends PrimitiveString
+class Num extends PrimitiveNumeric
 {
 }

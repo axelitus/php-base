@@ -59,7 +59,7 @@ class Arr implements \Countable, \ArrayAccess, \Iterator
      */
     public static function dhas($input, $key)
     {
-        if (!Int::is($key) and !String::is($key)) {
+        if (!Int::is($key) and !Str::is($key)) {
             throw new \InvalidArgumentException('The $key parameter must be an integer or a string.');
         }
 
