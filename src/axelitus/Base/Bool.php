@@ -1,0 +1,130 @@
+<?php
+/**
+ * Part of composer package: axelitus/base
+ *
+ * @package     axelitus\Base
+ * @version     0.4
+ * @author      Axel Pardemann (axelitusdev@gmail.com)
+ * @license     MIT License
+ * @copyright   2013 - Axel Pardemann
+ * @link        http://axelitus.mx/projects/axelitus/base
+ */
+
+namespace axelitus\Base;
+
+use axelitus\Base\Exceptions\NotImplementedException;
+
+/**
+ * Class Bool
+ *
+ * Boolean operations.
+ *
+ * @package axelitus\Base
+ */
+class Bool
+{
+    public static function is($value)
+    {
+        return is_bool($value) || $value === 0 || $value === 1;
+    }
+
+    public static function parse($input)
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    //region NOT operation
+
+    public static function valNot()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function arrNot()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function mixNot()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    //endregion
+
+    //region AND operation
+
+    public static function valAnd()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function arrAnd()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function mixAnd()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    //endregion
+
+    //region OR operation
+
+    public static function valOr()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function arrOr()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function mixOr()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    //endregion
+
+    //region EQ operation
+
+    public static function valEq()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function arrEq()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function mixEq()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    //endregion
+
+    //region XOR operation
+
+    public static function valXor()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function arrXor()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    public static function mixXor()
+    {
+        throw new NotImplementedException("This method is not yet implemented");
+    }
+
+    //endregion
+}
