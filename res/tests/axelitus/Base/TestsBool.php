@@ -30,23 +30,39 @@ class TestsBool extends TestCase
         $this->assertTrue(Bool::is(1));
         $this->assertTrue(Bool::is(0));
         $this->assertFalse(Bool::is('true'));
+        $this->assertFalse(Bool::is('false'));
+        $this->assertFalse(Bool::is('on'));
+        $this->assertFalse(Bool::is('off'));
+        $this->assertFalse(Bool::is('yes'));
+        $this->assertFalse(Bool::is('no'));
+        $this->assertFalse(Bool::is('y'));
+        $this->assertFalse(Bool::is('n'));
+        $this->assertFalse(Bool::is('1'));
+        $this->assertFalse(Bool::is('0'));
+        $this->assertFalse(Bool::is('string'));
         $this->assertFalse(Bool::is(10));
         $this->assertFalse(Bool::is(-10));
     }
 
-    public function testOpNot()
+    public function testExtIs()
     {
-        $this->assertTrue(Bool::opNot(false));
-        $this->assertFalse(Bool::opNot(true));
-        $this->assertEquals([true, false], Bool::opNot(false, true));
-        $this->assertEquals([false, true, true], Bool::opNot(true, false, false));
-        $this->assertEquals([true, false, false, true, false], Bool::opNot(false, true, true, false, true));
-        $this->assertEquals([true], Bool::opNot([false]));
-        $this->assertEquals([false], Bool::opNot([true]));
-        $this->assertEquals([true, false], Bool::opNot([false, true]));
-        $this->assertEquals([false, true, true], Bool::opNot([true, false, false]));
-        $this->assertEquals([true, false, false, true, false], Bool::opNot([false, true, true, false, true]));
-        $this->assertEquals([true, [false, false, true], false], Bool::opNot(false, [true, true, false], true));
+        $this->assertTrue(Bool::extIs(true));
+        $this->assertTrue(Bool::extIs(false));
+        $this->assertTrue(Bool::extIs(1));
+        $this->assertTrue(Bool::extIs(0));
+        $this->assertTrue(Bool::extIs('true'));
+        $this->assertTrue(Bool::extIs('false'));
+        $this->assertTrue(Bool::extIs('on'));
+        $this->assertTrue(Bool::extIs('off'));
+        $this->assertTrue(Bool::extIs('yes'));
+        $this->assertTrue(Bool::extIs('no'));
+        $this->assertTrue(Bool::extIs('y'));
+        $this->assertTrue(Bool::extIs('n'));
+        $this->assertTrue(Bool::extIs('1'));
+        $this->assertTrue(Bool::extIs('0'));
+        $this->assertFalse(Bool::extIs('string'));
+        $this->assertFalse(Bool::extIs(10));
+        $this->assertFalse(Bool::extIs(-10));
     }
 
     //endregion
@@ -69,7 +85,10 @@ class TestsBool extends TestCase
 
     public function testParseEx02()
     {
-        $this->setExpectedException('\RuntimeException', "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'.");
+        $this->setExpectedException(
+            '\RuntimeException',
+            "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'."
+        );
         $val = Bool::parse('yes');
     }
 
@@ -103,7 +122,10 @@ class TestsBool extends TestCase
 
     public function testExtParseEx02()
     {
-        $this->setExpectedException('\RuntimeException', "The \$input parameter did not match any of the valid strings that can be parsed.");
+        $this->setExpectedException(
+            '\RuntimeException',
+            "The \$input parameter did not match any of the valid strings that can be parsed."
+        );
         $val = Bool::extParse('valid');
     }
 
