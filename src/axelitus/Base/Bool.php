@@ -40,17 +40,38 @@ class Bool
 
     //region Parsing
 
+    /**
+     * Parses the input string into a bool.
+     *
+     * The only strings that this function parses to boolean are 'true', 'false', '1' and '0'.
+     * This function is NOT case sensitive.
+     *
+     * @param $input
+     *
+     * @return bool
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
     public static function parse($input)
     {
-        if (!is_string($input) || ($input != '0' && empty($input))) {
+        if (!is_string($input) || $input == '') {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
-        if (($input = strtolower($input)) != 'true' && $input != 'false') {
-            throw new \RuntimeException("The \$input string cannot be parsed because it does not match 'true' or 'false'.");
+        $input = strtolower($input);
+        switch (true) {
+            case ($input == 'true' || $input == '1'):
+                $ret = true;
+                break;
+            case ($input == 'false' || $input == '0'):
+                $ret = false;
+                break;
+            default:
+                throw new \RuntimeException("The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'.");
+                break;
         }
 
-        return $input == 'true';
+        return $ret;
     }
 
     public static function extParse($input)
