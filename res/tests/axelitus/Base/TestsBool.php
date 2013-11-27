@@ -21,7 +21,6 @@ use axelitus\Base\Bool;
  */
 class TestsBool extends TestCase
 {
-
     //region Value Testing
 
     public function testIs()
@@ -48,20 +47,20 @@ class TestsBool extends TestCase
 
     public function testValNot()
     {
-        $this->assertTrue(Bool::valNot(false));
-        $this->assertFalse(Bool::valNot(true));
-        $this->assertEquals([true, false], Bool::valNot(false, true));
-        $this->assertEquals([false, true, true], Bool::valNot(true, false, false));
-        $this->assertEquals([true, false, false, true, false], Bool::valNot(false, true, true, false, true));
+        $this->assertTrue(static::execNonPublicMethod($this->class, 'valNot', [false]));
+        $this->assertFalse(static::execNonPublicMethod($this->class, 'valNot', [true]));
+        $this->assertEquals([true, false], static::execNonPublicMethod($this->class, 'valNot', [false, true]));
+        $this->assertEquals([false, true, true], static::execNonPublicMethod($this->class, 'valNot', [true, false, false]));
+        $this->assertEquals([true, false, false, true, false], static::execNonPublicMethod($this->class, 'valNot', [false, true, true, false, true]));
     }
 
     public function testArrNot()
     {
-        $this->assertEquals([true], Bool::arrNot([false]));
-        $this->assertEquals([false], Bool::arrNot([true]));
-        $this->assertEquals([true, false], Bool::arrNot([false, true]));
-        $this->assertEquals([false, true, true], Bool::arrNot([true, false, false]));
-        $this->assertEquals([true, false, false, true, false], Bool::arrNot([false, true, true, false, true]));
+        $this->assertEquals([true], static::execNonPublicMethod($this->class, 'arrNot', [[false]]));
+        $this->assertEquals([false], static::execNonPublicMethod($this->class, 'arrNot', [[true]]));
+        $this->assertEquals([true, false], static::execNonPublicMethod($this->class, 'arrNot', [[false, true]]));
+        $this->assertEquals([false, true, true], static::execNonPublicMethod($this->class, 'arrNot', [[true, false, false]]));
+        $this->assertEquals([true, false, false, true, false], static::execNonPublicMethod($this->class, 'arrNot', [[false, true, true, false, true]]));
     }
 
     //endregion

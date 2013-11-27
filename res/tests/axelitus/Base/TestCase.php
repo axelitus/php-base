@@ -19,4 +19,24 @@ namespace axelitus\Base\Tests;
  */
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
+    protected $class;
+
+    public function setUp()
+    {
+        $this->class = str_replace('Tests\Tests', '', get_called_class());
+    }
+
+    protected static function getNonPublicMethod($class, $methodName)
+    {
+        $ref = new \ReflectionClass($class);
+        $method = $ref->getMethod($methodName);
+        $method->setAccessible(true);
+        return $method;
+    }
+
+    protected static function execNonPublicMethod($class, $methodName, array $args = [])
+    {
+        $method = static::getNonPublicMethod($class, $methodName);
+        return $method->invokeArgs(null, $args);
+    }
 }

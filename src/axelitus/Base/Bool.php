@@ -162,7 +162,7 @@ class Bool
 
     //region NOT operation
 
-    public static function valNot($value1, $value2 = null, $_ = null)
+    protected static function valNot($value1, $value2 = null, $_ = null)
     {
         if (static::isNot($value1)) {
             throw new \InvalidArgumentException("All arguments must be of type bool.");
@@ -195,7 +195,7 @@ class Bool
         return $ret;
     }
 
-    public static function arrNot($value1, $value2 = null, $_ = null)
+    protected static function arrNot($value1, $value2 = null, $_ = null)
     {
         if (!is_array($value1)) {
             throw new \InvalidArgumentException("All arguments must be of type array.");
