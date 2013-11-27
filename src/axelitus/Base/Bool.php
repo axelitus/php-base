@@ -101,25 +101,36 @@ class Bool
         return $ret;
     }
 
+    /**
+     * Parses the input string into a bool.
+     *
+     * This function allows for an extended set of strings that are parsed as booleans:
+     * 'true', '1', 'on', 'yes', 'y', 'false', '0', 'off', 'no', 'n'.
+     * This function is NOT case sensitive.
+     *
+     * @param string $input The string to be parsed.
+     *
+     * @return bool The parsed bool.
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
     public static function extParse($input)
     {
-        if (!is_string($input) || ($input != '0' && empty($input))) {
+        if (!is_string($input) || $input == '') {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
-        switch ($input = strtolower($input)) {
-            case 'true':
-            case 'on':
-            case 'yes':
-            case 'y':
-            case '1':
+        // This function is case insensitive so let's compare to the lower-cased input string.
+        $input = strtolower($input);
+
+        // Use true so that the expressions of the switch will evaluate to
+        // (true && (result of expression)) effectively entering the first
+        // case in which the expression evaluates to true.
+        switch (true) {
+            case ($input == 'true' || $input == '1' || $input == 'on' || $input == 'yes' || $input == 'y'):
                 $ret = true;
                 break;
-            case 'false':
-            case 'off':
-            case 'no':
-            case 'n':
-            case '0':
+            case ($input == 'false' || $input == '0' || $input == 'off' || $input == 'no' || $input == 'n'):
                 $ret = false;
                 break;
             default:
