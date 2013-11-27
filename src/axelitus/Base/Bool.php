@@ -68,9 +68,9 @@ class Bool
      * The only strings that this function parses to boolean are 'true', 'false', '1' and '0'.
      * This function is NOT case sensitive.
      *
-     * @param $input
+     * @param string $input The string to be parsed.
      *
-     * @return bool
+     * @return bool The parsed bool.
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
