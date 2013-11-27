@@ -34,17 +34,6 @@ class TestsBool extends TestCase
         $this->assertFalse(Bool::is(-10));
     }
 
-    public function testIsNot()
-    {
-        $this->assertFalse(Bool::isNot(true));
-        $this->assertFalse(Bool::isNot(false));
-        $this->assertFalse(Bool::isNot(1));
-        $this->assertFalse(Bool::isNot(0));
-        $this->assertTrue(Bool::isNot('true'));
-        $this->assertTrue(Bool::isNot(10));
-        $this->assertTrue(Bool::isNot(-10));
-    }
-
     public function testValNot()
     {
         $this->assertTrue(static::execNonPublicMethod($this->class, 'valNot', [false]));
@@ -71,6 +60,8 @@ class TestsBool extends TestCase
     {
         $this->assertTrue(Bool::parse('true'));
         $this->assertFalse(Bool::parse('false'));
+        $this->assertTrue(Bool::parse('1'));
+        $this->assertFalse(Bool::parse('0'));
     }
 
     public function testParseEx01()
@@ -81,21 +72,29 @@ class TestsBool extends TestCase
 
     public function testParseEx02()
     {
-        $this->setExpectedException('\RuntimeException', "The \$input string cannot be parsed because it does not match 'true' or 'false'.");
+        $this->setExpectedException('\RuntimeException', "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'.");
         $val = Bool::parse('yes');
     }
 
     public function testExtParse()
     {
         $this->assertTrue(Bool::extParse('true'));
+        $this->assertTrue(Bool::extParse('TRUE'));
         $this->assertTrue(Bool::extParse('on'));
+        $this->assertTrue(Bool::extParse('ON'));
         $this->assertTrue(Bool::extParse('yes'));
+        $this->assertTrue(Bool::extParse('Yes'));
         $this->assertTrue(Bool::extParse('y'));
+        $this->assertTrue(Bool::extParse('Y'));
         $this->assertTrue(Bool::extParse('1'));
         $this->assertFalse(Bool::extParse('false'));
+        $this->assertFalse(Bool::extParse('FALSE'));
         $this->assertFalse(Bool::extParse('off'));
+        $this->assertFalse(Bool::extParse('OFF'));
         $this->assertFalse(Bool::extParse('no'));
+        $this->assertFalse(Bool::extParse('No'));
         $this->assertFalse(Bool::extParse('n'));
+        $this->assertFalse(Bool::extParse('N'));
         $this->assertFalse(Bool::extParse('0'));
     }
 
