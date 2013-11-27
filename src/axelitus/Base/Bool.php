@@ -25,15 +25,37 @@ class Bool
 {
     //region Value Testing
 
+    /**
+     * Tests if the given value is a bool or not.
+     *
+     * This function considers 0 and 1 as "true" booleans.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is a bool or 0 or 1, false otherwise.
+     */
     public static function is($value)
     {
-        // TODO: define if we will allow known config string values as bool like 'yes', 'on' or even 'true' or leave it for other another function to determine this (extIs maybe).
-        return $value === true || $value === false || $value === 0 || $value === 1;
+        return ($value === true || $value === false || $value === 0 || $value === 1);
     }
 
-    public static function isNot($value)
+    /**
+     * Tests if the given value is a bool or not.
+     *
+     * This function considers also the strings 'true', 'false', 'on', 'off', 'yes', 'no', 'y', 'n', '1', '0'
+     * to be booleans. The function is NOT case sensitive.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is a bool or 0 or 1, false otherwise.
+     */
+    public static function extIs($value)
     {
-        return !static::is($value);
+        return (static::is($value) || (is_string($value) && Str::isOneOf(
+                $value,
+                ['true', 'false', 'on', 'off', 'yes', 'no', 'y', 'n', '1', '0'],
+                false
+            )));
     }
 
     //endregion
