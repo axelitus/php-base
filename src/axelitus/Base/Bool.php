@@ -163,16 +163,16 @@ class Bool
     /**
      * Applies the NOT operation to the given value(s).
      *
+     * If only a boolean is given, the result will be a boolean. If multiple booleans are given, the result
+     * will be an array of booleans. If only one array of booleans is given, the result will be an array of
+     * booleans. If multiple arrays are given, the result will be an array of arrays of booleans. Any
+     * combination of booleans and array of booleans will return an array containing a combination of booleans
+     * and array of booleans in the order in which they were given.
+     *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ ... More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
-     *                    If only a boolean is given, the result will be a boolean. If multiple booleans are
-     *                    given, the result will be an array of booleans. If only one array of booleans is
-     *                    given, the result will be an array of booleans. If multiple arrays are given, the
-     *                    result will be an array of arrays of booleans. Any combination of booleans and array
-     *                    of booleans will return an array containing a combination of booleans and array of
-     *                    booleans in the order in which they were given.
      * @throws \InvalidArgumentException
      */
     public static function opNot($value1, $_ = null)
@@ -192,7 +192,7 @@ class Bool
             } elseif (static::is($arg)) {
                 $ret[] = !$arg;
             } else {
-                throw new \InvalidArgumentException("All parameters must be of type bool.");
+                throw new \InvalidArgumentException("All values must be of type bool.");
             }
         }
 
