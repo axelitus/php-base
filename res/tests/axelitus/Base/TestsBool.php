@@ -22,10 +22,98 @@ use axelitus\Base\Bool;
 class TestsBool extends TestCase
 {
 
-    public function test()
-    {
+    //region Value Testing
 
+    public function testIs()
+    {
+        $this->assertTrue(Bool::is(true));
+        $this->assertTrue(Bool::is(false));
+        $this->assertTrue(Bool::is(1));
+        $this->assertTrue(Bool::is(0));
+        $this->assertFalse(Bool::is('true'));
+        $this->assertFalse(Bool::is(10));
+        $this->assertFalse(Bool::is(-10));
     }
+
+    public function testIsNot()
+    {
+        $this->assertFalse(Bool::isNot(true));
+        $this->assertFalse(Bool::isNot(false));
+        $this->assertFalse(Bool::isNot(1));
+        $this->assertFalse(Bool::isNot(0));
+        $this->assertTrue(Bool::isNot('true'));
+        $this->assertTrue(Bool::isNot(10));
+        $this->assertTrue(Bool::isNot(-10));
+    }
+
+    public function testValNot()
+    {
+        $this->assertTrue(Bool::valNot(false));
+        $this->assertFalse(Bool::valNot(true));
+        $this->assertEquals([true, false], Bool::valNot(false, true));
+        $this->assertEquals([false, true, true], Bool::valNot(true, false, false));
+        $this->assertEquals([true, false, false, true, false], Bool::valNot(false, true, true, false, true));
+    }
+
+    public function testArrNot()
+    {
+        $this->assertEquals([true], Bool::arrNot([false]));
+        $this->assertEquals([false], Bool::arrNot([true]));
+        $this->assertEquals([true, false], Bool::arrNot([false, true]));
+        $this->assertEquals([false, true, true], Bool::arrNot([true, false, false]));
+        $this->assertEquals([true, false, false, true, false], Bool::arrNot([false, true, true, false, true]));
+    }
+
+    //endregion
+
+    //region Parsing
+
+    public function testParse()
+    {
+        $this->assertTrue(Bool::parse('true'));
+        $this->assertFalse(Bool::parse('false'));
+    }
+
+    public function testParseEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$input parameter must be a non-empty string.");
+        $val = Bool::parse(9);
+    }
+
+    public function testParseEx02()
+    {
+        $this->setExpectedException('\RuntimeException', "The \$input string cannot be parsed because it does not match 'true' or 'false'.");
+        $val = Bool::parse('yes');
+    }
+
+    public function testExtParse()
+    {
+        $this->assertTrue(Bool::extParse('true'));
+        $this->assertTrue(Bool::extParse('on'));
+        $this->assertTrue(Bool::extParse('yes'));
+        $this->assertTrue(Bool::extParse('y'));
+        $this->assertTrue(Bool::extParse('1'));
+        $this->assertFalse(Bool::extParse('false'));
+        $this->assertFalse(Bool::extParse('off'));
+        $this->assertFalse(Bool::extParse('no'));
+        $this->assertFalse(Bool::extParse('n'));
+        $this->assertFalse(Bool::extParse('0'));
+    }
+
+    public function testExtParseEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$input parameter must be a non-empty string.");
+        $val = Bool::extParse(9);
+    }
+
+    public function testExtParseEx02()
+    {
+        $this->setExpectedException('\RuntimeException', "The \$input parameter did not match any of the valid strings that can be parsed.");
+        $val = Bool::extParse('valid');
+    }
+
+    //endregion
+
 //    /** @var axelitus\Base\Boolean $booleanTrue */
 //    protected $booleanTrue;
 //

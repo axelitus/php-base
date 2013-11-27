@@ -23,12 +23,17 @@ use axelitus\Base\Exceptions\NotImplementedException;
  */
 class Bool
 {
-    //region Value testing
+    //region Value Testing
 
     public static function is($value)
     {
         // TODO: define if we will allow known config string values as bool like 'yes', 'on' or even 'true' or leave it for other another function to determine this (extIs maybe).
         return $value === true || $value === false || $value === 0 || $value === 1;
+    }
+
+    public static function isNot($value)
+    {
+        return !static::is($value);
     }
 
     //endregion
@@ -37,7 +42,7 @@ class Bool
 
     public static function parse($input)
     {
-        if (!is_string($input) || empty($input)) {
+        if (!is_string($input) || ($input != '0' && empty($input))) {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
@@ -50,23 +55,23 @@ class Bool
 
     public static function extParse($input)
     {
-        if (!is_string($input) || empty($input)) {
+        if (!is_string($input) || ($input != '0' && empty($input))) {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
         switch ($input = strtolower($input)) {
-            case $input == 'true':
-            case $input == 'on':
-            case $input =='yes':
-            case $input == 'y':
-            case $input == '1':
+            case 'true':
+            case 'on':
+            case 'yes':
+            case 'y':
+            case '1':
                 $ret = true;
                 break;
-            case $input == 'false':
-            case $input == 'off':
-            case $input =='no':
-            case $input == 'n':
-            case $input == '0':
+            case 'false':
+            case 'off':
+            case 'no':
+            case 'n':
+            case '0':
                 $ret = false;
                 break;
             default:
@@ -81,14 +86,113 @@ class Bool
 
     //region NOT operation
 
-    public static function valNot()
+    public static function valNot($value1, $value2 = null, $_ = null)
     {
-        throw new NotImplementedException("This method is not yet implemented");
+        if (static::isNot($value1)) {
+            throw new \InvalidArgumentException("All arguments must be of type bool.");
+        }
+
+        $args = array_slice(func_get_args(), 3);
+        if ($value2 !== null) {
+            if (static::isNot($value2)) {
+                throw new \InvalidArgumentException("All arguments must be of type bool.");
+            }
+            $ret = [!$value1, !$value2];
+
+            if ($_ !== null) {
+                if (static::isNot($_)) {
+                    throw new \InvalidArgumentException("All arguments must be of type bool.");
+                }
+                $ret[] = !$_;
+
+                foreach ($args as $val) {
+                    if (static::isNot($val)) {
+                        throw new \InvalidArgumentException("All arguments must be of type bool.");
+                    }
+                    $ret[] = !$val;
+                }
+            }
+        } else {
+            $ret = !$value1;
+        }
+
+        return $ret;
     }
 
-    public static function arrNot()
+    public static function arrNot($value1, $value2 = null, $_ = null)
     {
-        throw new NotImplementedException("This method is not yet implemented");
+        if (!is_array($value1)) {
+            throw new \InvalidArgumentException("All arguments must be of type array.");
+        }
+
+        $ret = [];
+        $args = array_slice(func_get_args(), 3);
+        if ($value2 !== null) {
+            if (!is_array($value2)) {
+                throw new \InvalidArgumentException("All arguments must be of type array.");
+            }
+
+            // process value1 array
+            // TODO: array_walk|array_map with anonymous function to validate?
+            $tmp = [];
+            foreach($value1 as $val){
+                if(static::isNot($val)){
+                    throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
+                }
+                $tmp[] = !$val;
+            }
+            $ret[] = $tmp;
+
+            // process value2 array
+            // TODO: array_walk|array_map with anonymous function to validate?
+            $tmp = [];
+            foreach($value2 as $val){
+                if(static::isNot($val)){
+                    throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
+                }
+                $tmp[] = !$val;
+            }
+            $ret[] = $tmp;
+
+            if ($_ !== null) {
+                if (!is_array($_)) {
+                    throw new \InvalidArgumentException("All arguments must be of type array.");
+                }
+                // TODO: array_walk|array_map with anonymous function to validate?
+                $tmp = [];
+                foreach($_ as $val){
+                    if(static::isNot($val)){
+                        throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
+                    }
+                    $tmp[] = !$val;
+                }
+                $ret[] = $tmp;
+
+                foreach ($args as $arg) {
+                    if (!is_array($arg)) {
+                        throw new \InvalidArgumentException("All arguments must be of type array.");
+                    }
+                    // TODO: array_walk|array_map with anonymous function to validate?
+                    $tmp = [];
+                    foreach($arg as $val){
+                        if(static::isNot($val)){
+                            throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
+                        }
+                        $tmp[] = !$val;
+                    }
+                    $ret[] = $tmp;
+                }
+            }
+        } else {
+            foreach($value1 as $val){
+                if(static::isNot($val)){
+                    throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
+                }
+                $ret[] = !$val;
+            }
+        }
+
+        return $ret;
     }
 
     public static function mixNot()
