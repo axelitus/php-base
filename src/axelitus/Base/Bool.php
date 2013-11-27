@@ -80,7 +80,12 @@ class Bool
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
+        // This function is case insensitive so let's compare to the lower-cased input string.
         $input = strtolower($input);
+
+        // Use true so that the expressions of the switch will evaluate to
+        // (true && (result of expression)) effectively entering the first
+        // case in which the expression evaluates to true.
         switch (true) {
             case ($input == 'true' || $input == '1'):
                 $ret = true;
