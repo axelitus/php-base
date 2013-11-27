@@ -12,8 +12,6 @@
 
 namespace axelitus\Base;
 
-use axelitus\Base\Exceptions\NotImplementedException;
-
 /**
  * Class Bool
  *
@@ -205,45 +203,129 @@ class Bool
 
     //region AND operation
 
-    public static function valAnd()
+    /**
+     * Applies the AND operation to the given value(s).
+     *
+     * Consistent input values must be given, if the first value is bool, then all other values must be bool.
+     * The AND operation is applied in chain for all values, one after another in the order they were given.
+     * If the first value is array, then all other values must be array. If only one array is given, the AND
+     * operation is applied in chain for all items in the given array in the order they are. If multiple arrays
+     * are given, the AND operation is applied individually for each array, returning an array of results, one
+     * item per array (they are not mixed).
+     *
+     * @param bool|array $value1 The value to which the operation should be applied.
+     * @param bool|array $_      More values to apply the operation to.
+     *
+     * @return bool|array The result of applying the operation to the given value(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function opAnd($value1, $_ = null)
     {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
+        $reset = true;
+        $ret = [];
+        $args = func_get_args();
 
-    public static function arrAnd()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
+        if (is_array($value1)) {
+            if (count($args) > 1) {
+                foreach ($args as $arr) {
+                    if (!is_array($arr)) {
+                        throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case array).");
+                    }
 
-    public static function mixAnd()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
+                    $ret[] = static::opAnd($arr);
+                }
+            } else {
+                $tmp = $reset;
+                foreach ($value1 as $arg) {
+                    if (!static::is($arg)) {
+                        throw new \InvalidArgumentException("All array values must be of type bool.");
+                    }
+                    $tmp = ($tmp && $arg);
+                }
+                $ret[] = $tmp;
+            }
+        } elseif (static::is($value1)) {
+            $tmp = $reset;
+            foreach ($args as $arg) {
+                if (!static::is($arg)) {
+                    throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case bool).");
+                }
+                $tmp = ($tmp && $arg);
+            }
+            $ret[] = $tmp;
+        } else {
+            throw new \InvalidArgumentException("All values must be of type bool or array.");
+        }
+
+        return (count($ret) > 1) ? $ret : $ret[0];
     }
 
     //endregion
 
     //region OR operation
 
-    public static function valOr()
+    /**
+     * Applies the OR operation to the given value(s).
+     *
+     * Consistent input values must be given, if the first value is bool, then all other values must be bool.
+     * The OR operation is applied in chain for all values, one after another in the order they were given.
+     * If the first value is array, then all other values must be array. If only one array is given, the OR
+     * operation is applied in chain for all items in the given array in the order they are. If multiple arrays
+     * are given, the OR operation is applied individually for each array, returning an array of results, one
+     * item per array (they are not mixed).
+     *
+     * @param bool|array $value1 The value to which the operation should be applied.
+     * @param bool|array $_      More values to apply the operation to.
+     *
+     * @return bool|array The result of applying the operation to the given value(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function opOr($value1, $_ = null)
     {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
+        $reset = false;
+        $ret = [];
+        $args = func_get_args();
 
-    public static function arrOr()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
+        if (is_array($value1)) {
+            if (count($args) > 1) {
+                foreach ($args as $arr) {
+                    if (!is_array($arr)) {
+                        throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case array).");
+                    }
 
-    public static function mixOr()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
+                    $ret[] = static::opOr($arr);
+                }
+            } else {
+                $tmp = $reset;
+                foreach ($value1 as $arg) {
+                    if (!static::is($arg)) {
+                        throw new \InvalidArgumentException("All array values must be of type bool.");
+                    }
+                    $tmp = ($tmp || $arg);
+                }
+                $ret[] = $tmp;
+            }
+        } elseif (static::is($value1)) {
+            $tmp = $reset;
+            foreach ($args as $arg) {
+                if (!static::is($arg)) {
+                    throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case bool).");
+                }
+                $tmp = ($tmp || $arg);
+            }
+            $ret[] = $tmp;
+        } else {
+            throw new \InvalidArgumentException("All values must be of type bool or array.");
+        }
+
+        return (count($ret) > 1) ? $ret : $ret[0];
     }
 
     //endregion
 
     //region EQ operation
 
-    public static function valEq()
+    public static function opEq()
     {
         throw new NotImplementedException("This method is not yet implemented");
     }

@@ -109,107 +109,143 @@ class TestsBool extends TestCase
 
     //endregion
 
-//    /** @var axelitus\Base\Boolean $booleanTrue */
-//    protected $booleanTrue;
-//
-//    /** @var axelitus\Base\Boolean $booleanFalse */
-//    protected $booleanFalse;
-//
-//    public function setUp() {
-//        $this->booleanTrue = new Bool(true);
-//        $this->booleanFalse = new Bool(false);
-//    }
-//
-//    /**
-//     * Tests PrimitiveBoolean::is()
-//     */
-//    public function test_isBool()
-//    {
-//        $this->assertTrue(Bool::is(true), "The value true is not recognized as a boolean.");
-//        $this->assertTrue(Bool::is(false), "The value false is not recognized as a boolean.");
-//        $this->assertTrue(Bool::is(1), "The value 1 is not recognized as a boolean.");
-//        $this->assertTrue(Bool::is(0), "The value 0 is not recognized as a boolean.");
-//        $this->assertFalse(Bool::is("true"), "The value \"true\" is incorrectly recognized as a boolean.");
-//        $this->assertFalse(Bool::is("false"), "The value \"false\" is incorrectly recognized as a boolean.");
-//        $this->assertFalse(Bool::is("1"), "The value \"1\" is incorrectly recognized as a boolean.");
-//        $this->assertFalse(Bool::is("0"), "The value \"0\" is incorrectly recognized as a boolean.");
-//    }
-//
-//    /**
-//     * Tests PrimitiveBoolean::doNot()
-//     */
-//    public function test_doNot()
-//    {
-//        $this->assertTrue(Bool::doNot(false));
-//        $this->assertFalse(Bool::doNot(true));
-//    }
-//
-//    /**
-//     * Tests PrimitiveBoolean::doAnd()
-//     */
-//    public function test_doAnd()
-//    {
-//        $this->assertTrue(Bool::doAnd(true, true, true, true));
-//        $this->assertFalse(Bool::doAnd(true, false, true, true));
-//        $this->assertTrue(Bool::doAnd([true, true, true, true], true));
-//        $this->assertFalse(Bool::doAnd([true, true, true, true], false));
-//        $this->assertFalse(Bool::doAnd([true, true, false, true], true));
-//    }
-//
-//    /**
-//     * Tests Boolean::andWith()
-//     *
-//     * @depends test_doAnd
-//     */
-//    public function test_andWith()
-//    {
-//        $this->assertFalse($this->booleanTrue->andWith($this->booleanFalse));
-//        $this->assertFalse($this->booleanFalse->andWith($this->booleanTrue));
-//        $this->assertTrue($this->booleanTrue->andWith(true));
-//        $this->assertTrue($this->booleanTrue->andWith([true, true, true]));
-//        $this->assertFalse($this->booleanTrue->andWith([true, true, false]));
-//    }
-//
-//    /**
-//     * Tests PrimitiveBoolean::doOr()
-//     */
-//    public function test_doOr()
-//    {
-//        $this->assertTrue(Bool::doOr(true, true, true, true));
-//        $this->assertTrue(Bool::doOr(false, false, true, false));
-//        $this->assertFalse(Bool::doOr(false, false, false, false));
-//        $this->assertTrue(Bool::doOr([false, false, false, false], true));
-//        $this->assertFalse(Bool::doOr([false, false, false, false], false));
-//        $this->assertTrue(Bool::doOr([false, false, true, false], false));
-//    }
-//
-//    /**
-//     * Tests Boolean::orWith()
-//     *
-//     * @depends test_doOr
-//     */
-//    public function test_orWith()
-//    {
-//        $this->assertTrue($this->booleanTrue->orWith(true, true, true));
-//        $this->assertTrue($this->booleanFalse->orWith(false, true, false));
-//        $this->assertFalse($this->booleanFalse->orWith(false, false, false));
-//        $this->assertTrue($this->booleanFalse->orWith([false, false, false, false], true));
-//        $this->assertFalse($this->booleanFalse->orWith([false, false, false, false], false));
-//        $this->assertTrue($this->booleanFalse->orWith([false, false, true, false], false));
-//    }
-//
-//    /**
-//     * Tests PrimitiveBoolean::doEq()
-//     */
-//    public function test_doEq()
-//    {
-//        $this->assertFalse(Bool::doEq(true, false));
-//        $this->assertFalse(Bool::doEq(false, true));
-//        $this->assertTrue(Bool::doEq(true, true));
-//        $this->assertTrue(Bool::doEq(false, false));
-//
-//        $this->assertEquals([true, false, true], Bool::doEq([true, true, false], [true, false, false]));
-//    }
+    //region NOT operation
+
+    public function testOpNot()
+    {
+        $this->assertTrue(Bool::opNot(false));
+        $this->assertFalse(Bool::opNot(true));
+        $this->assertEquals([true, false], Bool::opNot(false, true));
+        $this->assertEquals([false, true, true], Bool::opNot(true, false, false));
+        $this->assertEquals([true, false, false, true, false], Bool::opNot(false, true, true, false, true));
+        $this->assertEquals([true], Bool::opNot([false]));
+        $this->assertEquals([false], Bool::opNot([true]));
+        $this->assertEquals([true, false], Bool::opNot([false, true]));
+        $this->assertEquals([false, true, true], Bool::opNot([true, false, false]));
+        $this->assertEquals([true, false, false, true, false], Bool::opNot([false, true, true, false, true]));
+        $this->assertEquals([true, [false, false, true], false], Bool::opNot(false, [true, true, false], true));
+    }
+
+    public function testOpNotEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opNot([true, true, 'string']);
+    }
+
+    public function testOpNotEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool.");
+        Bool::opNot(true, true, 'string');
+    }
+
+    //endregion
+
+    //region AND operation
+
+    public function testOpAnd()
+    {
+        $this->assertTrue(Bool::opAnd(true, true));
+        $this->assertFalse(Bool::opAnd(true, false));
+        $this->assertTrue(Bool::opAnd(true, true, true, true, true));
+        $this->assertFalse(Bool::opAnd(true, true, true, false, true));
+
+        $this->assertTrue(Bool::opAnd([true, true]));
+        $this->assertFalse(Bool::opAnd([true, false]));
+        $this->assertTrue(Bool::opAnd([true, true, true, true, true]));
+        $this->assertFalse(Bool::opAnd([true, true, true, false, true]));
+
+        $this->assertEquals(
+            [true, false, false, true],
+            Bool::opAnd([true, true, true], [true, false, true], [false, false, true], [true, true, true])
+        );
+    }
+
+    public function testOpAndEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        Bool::opAnd([true, true], true);
+    }
+
+    public function testOpAndEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opAnd([true, true, true], [true, true, 'string']);
+    }
+
+    public function testOpAndEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opAnd([5, 'string']);
+    }
+
+    public function testOpAndEx04()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        Bool::opAnd(true, [true, true]);
+    }
+
+    public function testOpAndEx05()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
+        $val = Bool::opAnd(5, 'string');
+    }
+
+    //endregion
+
+    //region OR operation
+
+    public function testOpOr()
+    {
+        $this->assertTrue(Bool::opOr(true, true));
+        $this->assertTrue(Bool::opOr(true, false));
+        $this->assertTrue(Bool::opOr(false, false, true, false, false));
+        $this->assertFalse(Bool::opOr(false, false));
+        $this->assertFalse(Bool::opOr(false, false, false, false, false));
+
+        $this->assertTrue(Bool::opOr([true, true]));
+        $this->assertTrue(Bool::opOr([true, false]));
+        $this->assertTrue(Bool::opOr([false, false, true, false, false]));
+        $this->assertFalse(Bool::opOr([false, false]));
+        $this->assertFalse(Bool::opOr([false, false, false, false, false]));
+
+        $this->assertEquals(
+            [true, false, false, true],
+            Bool::opOr([true, false, false], [false, false, false], [false, false, false], [false, true, true])
+        );
+    }
+
+    public function testOpOrEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        Bool::opOr([true, true], true);
+    }
+
+    public function testOpOrEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opOr([true, true, true], [true, true, 'string']);
+    }
+
+    public function testOpOrEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opOr([5, 'string']);
+    }
+
+    public function testOpOrEx04()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        Bool::opOr(true, [true, true]);
+    }
+
+    public function testOpOrEx05()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
+        $val = Bool::opOr(5, 'string');
+    }
+
+    //endregion
+
 //
 //    /**
 //     * Tests Boolean::eqWith()
