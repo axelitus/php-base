@@ -162,118 +162,43 @@ class Bool
 
     //region NOT operation
 
-    protected static function valNot($value1, $value2 = null, $_ = null)
+    /**
+     * Applies the NOT operation to the given value(s).
+     *
+     * @param bool|array $value1 The value to which the operation should be applied.
+     * @param bool|array $_ ... More values to apply the operation to.
+     *
+     * @return bool|array The result of applying the operation to the given value(s).
+     *                    If only a boolean is given, the result will be a boolean. If multiple booleans are
+     *                    given, the result will be an array of booleans. If only one array of booleans is
+     *                    given, the result will be an array of booleans. If multiple arrays are given, the
+     *                    result will be an array of arrays of booleans. Any combination of booleans and array
+     *                    of booleans will return an array containing a combination of booleans and array of
+     *                    booleans in the order in which they were given.
+     * @throws \InvalidArgumentException
+     */
+    public static function opNot($value1, $_ = null)
     {
-        if (static::isNot($value1)) {
-            throw new \InvalidArgumentException("All arguments must be of type bool.");
-        }
-
-        $args = array_slice(func_get_args(), 3);
-        if ($value2 !== null) {
-            if (static::isNot($value2)) {
-                throw new \InvalidArgumentException("All arguments must be of type bool.");
-            }
-            $ret = [!$value1, !$value2];
-
-            if ($_ !== null) {
-                if (static::isNot($_)) {
-                    throw new \InvalidArgumentException("All arguments must be of type bool.");
-                }
-                $ret[] = !$_;
-
-                foreach ($args as $val) {
-                    if (static::isNot($val)) {
-                        throw new \InvalidArgumentException("All arguments must be of type bool.");
-                    }
-                    $ret[] = !$val;
-                }
-            }
-        } else {
-            $ret = !$value1;
-        }
-
-        return $ret;
-    }
-
-    protected static function arrNot($value1, $value2 = null, $_ = null)
-    {
-        if (!is_array($value1)) {
-            throw new \InvalidArgumentException("All arguments must be of type array.");
-        }
-
         $ret = [];
-        $args = array_slice(func_get_args(), 3);
-        if ($value2 !== null) {
-            if (!is_array($value2)) {
-                throw new \InvalidArgumentException("All arguments must be of type array.");
-            }
-
-            // process value1 array
-            // TODO: array_walk|array_map with anonymous function to validate?
-            $tmp = [];
-            foreach($value1 as $val){
-                if(static::isNot($val)){
-                    throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
-                }
-                $tmp[] = !$val;
-            }
-            $ret[] = $tmp;
-
-            // process value2 array
-            // TODO: array_walk|array_map with anonymous function to validate?
-            $tmp = [];
-            foreach($value2 as $val){
-                if(static::isNot($val)){
-                    throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
-                }
-                $tmp[] = !$val;
-            }
-            $ret[] = $tmp;
-
-            if ($_ !== null) {
-                if (!is_array($_)) {
-                    throw new \InvalidArgumentException("All arguments must be of type array.");
-                }
-                // TODO: array_walk|array_map with anonymous function to validate?
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            if (is_array($arg)) {
                 $tmp = [];
-                foreach($_ as $val){
-                    if(static::isNot($val)){
-                        throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
+                foreach ($arg as $item) {
+                    if (!static::is($item)) {
+                        throw new \InvalidArgumentException("All array values must be of type bool.");
                     }
-                    $tmp[] = !$val;
+                    $tmp[] = !$item;
                 }
                 $ret[] = $tmp;
-
-                foreach ($args as $arg) {
-                    if (!is_array($arg)) {
-                        throw new \InvalidArgumentException("All arguments must be of type array.");
-                    }
-                    // TODO: array_walk|array_map with anonymous function to validate?
-                    $tmp = [];
-                    foreach($arg as $val){
-                        if(static::isNot($val)){
-                            throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
-                        }
-                        $tmp[] = !$val;
-                    }
-                    $ret[] = $tmp;
-                }
-            }
-        } else {
-            foreach($value1 as $val){
-                if(static::isNot($val)){
-                    throw new \InvalidArgumentException("All items in the arrays must be of type bool.");
-                }
-                $ret[] = !$val;
+            } elseif (static::is($arg)) {
+                $ret[] = !$arg;
+            } else {
+                throw new \InvalidArgumentException("All parameters must be of type bool.");
             }
         }
 
-        return $ret;
-    }
-
-    public static function mixNot()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
+        return (count($ret) > 1) ? $ret : $ret[0];
     }
 
     //endregion

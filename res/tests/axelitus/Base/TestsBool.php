@@ -34,22 +34,19 @@ class TestsBool extends TestCase
         $this->assertFalse(Bool::is(-10));
     }
 
-    public function testValNot()
+    public function testOpNot()
     {
-        $this->assertTrue(static::execNonPublicMethod($this->class, 'valNot', [false]));
-        $this->assertFalse(static::execNonPublicMethod($this->class, 'valNot', [true]));
-        $this->assertEquals([true, false], static::execNonPublicMethod($this->class, 'valNot', [false, true]));
-        $this->assertEquals([false, true, true], static::execNonPublicMethod($this->class, 'valNot', [true, false, false]));
-        $this->assertEquals([true, false, false, true, false], static::execNonPublicMethod($this->class, 'valNot', [false, true, true, false, true]));
-    }
-
-    public function testArrNot()
-    {
-        $this->assertEquals([true], static::execNonPublicMethod($this->class, 'arrNot', [[false]]));
-        $this->assertEquals([false], static::execNonPublicMethod($this->class, 'arrNot', [[true]]));
-        $this->assertEquals([true, false], static::execNonPublicMethod($this->class, 'arrNot', [[false, true]]));
-        $this->assertEquals([false, true, true], static::execNonPublicMethod($this->class, 'arrNot', [[true, false, false]]));
-        $this->assertEquals([true, false, false, true, false], static::execNonPublicMethod($this->class, 'arrNot', [[false, true, true, false, true]]));
+        $this->assertTrue(Bool::opNot(false));
+        $this->assertFalse(Bool::opNot(true));
+        $this->assertEquals([true, false], Bool::opNot(false, true));
+        $this->assertEquals([false, true, true], Bool::opNot(true, false, false));
+        $this->assertEquals([true, false, false, true, false], Bool::opNot(false, true, true, false, true));
+        $this->assertEquals([true], Bool::opNot([false]));
+        $this->assertEquals([false], Bool::opNot([true]));
+        $this->assertEquals([true, false], Bool::opNot([false, true]));
+        $this->assertEquals([false, true, true], Bool::opNot([true, false, false]));
+        $this->assertEquals([true, false, false, true, false], Bool::opNot([false, true, true, false, true]));
+        $this->assertEquals([true, [false, false, true], false], Bool::opNot(false, [true, true, false], true));
     }
 
     //endregion
