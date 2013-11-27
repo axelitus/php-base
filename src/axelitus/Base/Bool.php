@@ -51,11 +51,28 @@ class Bool
      */
     public static function extIs($value)
     {
-        return (static::is($value) || (is_string($value) && Str::isOneOf(
-                $value,
-                ['true', 'false', 'on', 'off', 'yes', 'no', 'y', 'n', '1', '0'],
-                false
-            )));
+        if (static::is($value)) {
+            return true;
+        }
+
+        if (is_string($value)) {
+            // This function is case insensitive so let's compare to the lower-cased input string.
+            $value = strtolower($value);
+
+            // Use true so that the expressions of the switch will evaluate to
+            // (true && (result of expression)) effectively entering the first
+            // case in which the expression evaluates to true.
+            switch (true) {
+                case ($value == 'true' || $value == '1' || $value == 'on' || $value == 'yes' || $value == 'y'):
+                case ($value == 'false' || $value == '0' || $value == 'off' || $value == 'no' || $value == 'n'):
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        return false;
     }
 
     //endregion
