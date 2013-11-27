@@ -327,36 +327,14 @@ class Bool
 
     public static function opEq()
     {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
-
-    public static function arrEq()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
-
-    public static function mixEq()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
     }
 
     //endregion
 
     //region XOR operation
 
-    public static function valXor()
+    public static function opXor()
     {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
-
-    public static function arrXor()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
-    }
-
-    public static function mixXor()
-    {
-        throw new NotImplementedException("This method is not yet implemented");
     }
 
     //endregion
