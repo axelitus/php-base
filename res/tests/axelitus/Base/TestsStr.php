@@ -62,6 +62,16 @@ class TestsString extends TestCase
 
     //endregion
 
+    //region Length
+
+    public function testLength()
+    {
+        $this->assertEquals(3, Str::length('abc'));
+        $this->assertEquals(5, Str::length('abcde'));
+    }
+
+    //endregion
+
 //    /**
 //     * Tests the String::is() function.
 //     */

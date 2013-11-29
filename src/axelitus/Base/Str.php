@@ -112,4 +112,25 @@ class Str
     }
 
     //endregion
+
+    //region Length
+
+    /**
+     * Gets the length of the given string.
+     *
+     * Uses the multibyte function if available with the given encoding $encoding.
+     *
+     * @author  FuelPHP (http://fuelphp.com)
+     *
+     * @param string $input    The input string.
+     * @param string $encoding The encoding of the input string for multibyte functions.
+     *
+     * @return int Returns the length of the string.
+     */
+    public static function length($input, $encoding = self::DEFAULT_ENCODING)
+    {
+        return function_exists('mb_strlen') ? mb_strlen($input, $encoding) : strlen($input);
+    }
+
+    //endregion
 }
