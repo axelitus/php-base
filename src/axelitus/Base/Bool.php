@@ -170,7 +170,7 @@ class Bool
      * and array of booleans in the order in which they were given.
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_      More values to apply the operation to.
+     * @param bool|array $_ More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -209,12 +209,12 @@ class Bool
      * Consistent input values must be given, if the first value is bool, then all other values must be bool.
      * The AND operation is applied in chain for all values, one after another in the order they were given.
      * If the first value is array, then all other values must be array. If only one array is given, the AND
-     * operation is applied in chain for all items in the given array in the order they are. If multiple arrays
+     * operation is applied in chain for all items in the input array in the order they are. If multiple arrays
      * are given, the AND operation is applied individually for each array, returning an array of results, one
-     * item per array (they are not mixed).
+     * result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_      More values to apply the operation to.
+     * @param bool|array $_ More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -270,12 +270,12 @@ class Bool
      * Consistent input values must be given, if the first value is bool, then all other values must be bool.
      * The OR operation is applied in chain for all values, one after another in the order they were given.
      * If the first value is array, then all other values must be array. If only one array is given, the OR
-     * operation is applied in chain for all items in the given array in the order they are. If multiple arrays
+     * operation is applied in chain for all items in the input array in the order they are. If multiple arrays
      * are given, the OR operation is applied individually for each array, returning an array of results, one
-     * item per array (they are not mixed).
+     * result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_      More values to apply the operation to.
+     * @param bool|array $_ More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -325,16 +325,106 @@ class Bool
 
     //region EQ operation
 
-    public static function opEq()
+    /**
+     * Applies the EQ operation to the given value(s).
+     *
+     * Consistent input values must be given, if the first value is bool, then the second values must be bool.
+     * If bool values are given, only two arguments are allowed. If the first value is array, then all other
+     * values must be array. Each array must contain only two bool values on which the EQ operation will be
+     * applied. If multiple arrays are given, the EQ operation is applied individually for each array, returning
+     * an array of results, one result per input array (the arrays are not mixed).
+     *
+     * @param bool|array $value1 The value to which the operation should be applied.
+     * @param bool|array $_ More values to apply the operation to.
+     *
+     * @return bool|array The result of applying the operation to the given value(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function opEq($value1, $_ = null)
     {
+        $ret = [];
+        $args = func_get_args();
+
+        if (is_array($value1)) {
+            foreach ($args as $arg) {
+                if (!is_array($arg) || count($arg) != 2) {
+                    throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case array).");
+                }
+
+                if (!static::is($arg[0]) || !static::is($arg[1])) {
+                    throw new \InvalidArgumentException("All array values must be of type bool.");
+                }
+
+                $ret[] = ($arg[0] == $arg[1]);
+            }
+        } elseif (static::is($value1)) {
+            if (count($args) != 2) {
+                throw new \InvalidArgumentException("Only two booleans at a time are allowed.");
+            }
+
+            if (!static::is($args[1])) {
+                throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case bool).");
+            }
+
+            $ret[] = ($value1 == $args[1]);
+        } else {
+            throw new \InvalidArgumentException("All values must be of type bool or array.");
+        }
+
+        return (count($ret) > 1) ? $ret : $ret[0];
     }
 
     //endregion
 
     //region XOR operation
 
-    public static function opXor()
+    /**
+     * Applies the XOR operation to the given value(s).
+     *
+     * Consistent input values must be given, if the first value is bool, then the second values must be bool.
+     * If bool values are given, only two arguments are allowed. If the first value is array, then all other
+     * values must be array. Each array must contain only two bool values on which the XOR operation will be
+     * applied. If multiple arrays are given, the XOR operation is applied individually for each array, returning
+     * an array of results, one result per input array (the arrays are not mixed).
+     *
+     * @param bool|array $value1 The value to which the operation should be applied.
+     * @param bool|array $_ More values to apply the operation to.
+     *
+     * @return bool|array The result of applying the operation to the given value(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function opXor($value1, $_ = null)
     {
+        $ret = [];
+        $args = func_get_args();
+
+        if (is_array($value1)) {
+            foreach ($args as $arg) {
+                if (!is_array($arg) || count($arg) != 2) {
+                    throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case array).");
+                }
+
+                if (!static::is($arg[0]) || !static::is($arg[1])) {
+                    throw new \InvalidArgumentException("All array values must be of type bool.");
+                }
+
+                $ret[] = ($arg[0] != $arg[1]);
+            }
+        } elseif (static::is($value1)) {
+            if (count($args) != 2) {
+                throw new \InvalidArgumentException("Only two booleans at a time are allowed.");
+            }
+
+            if (!static::is($args[1])) {
+                throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case bool).");
+            }
+
+            $ret[] = ($value1 != $args[1]);
+        } else {
+            throw new \InvalidArgumentException("All values must be of type bool or array.");
+        }
+
+        return (count($ret) > 1) ? $ret : $ret[0];
     }
 
     //endregion

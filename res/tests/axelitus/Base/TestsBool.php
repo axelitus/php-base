@@ -80,7 +80,7 @@ class TestsBool extends TestCase
     public function testParseEx01()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$input parameter must be a non-empty string.");
-        $val = Bool::parse(9);
+        Bool::parse(9);
     }
 
     public function testParseEx02()
@@ -89,7 +89,7 @@ class TestsBool extends TestCase
             '\RuntimeException',
             "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'."
         );
-        $val = Bool::parse('yes');
+        Bool::parse('yes');
     }
 
     public function testExtParse()
@@ -117,7 +117,7 @@ class TestsBool extends TestCase
     public function testExtParseEx01()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$input parameter must be a non-empty string.");
-        $val = Bool::extParse(9);
+        Bool::extParse(9);
     }
 
     public function testExtParseEx02()
@@ -126,7 +126,7 @@ class TestsBool extends TestCase
             '\RuntimeException',
             "The \$input parameter did not match any of the valid strings that can be parsed."
         );
-        $val = Bool::extParse('valid');
+        Bool::extParse('valid');
     }
 
     //endregion
@@ -209,7 +209,7 @@ class TestsBool extends TestCase
     public function testOpAndEx05()
     {
         $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
-        $val = Bool::opAnd(5, 'string');
+        Bool::opAnd(5, 'string');
     }
 
     //endregion
@@ -263,56 +263,106 @@ class TestsBool extends TestCase
     public function testOpOrEx05()
     {
         $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
-        $val = Bool::opOr(5, 'string');
+        Bool::opOr(5, 'string');
     }
 
     //endregion
 
-//
-//    /**
-//     * Tests Boolean::eqWith()
-//     *
-//     * @depends test_doEq
-//     */
-//    public function test_eqWith()
-//    {
-//        $this->assertFalse($this->booleanTrue->eqWith(false));
-//        $this->assertFalse($this->booleanFalse->eqWith(true));
-//        $this->assertTrue($this->booleanTrue->eqWith(true));
-//        $this->assertTrue($this->booleanFalse->eqWith(false));
-//
-//        $this->assertEquals([true, false, false], $this->booleanTrue->eqWith([true, false, false]));
-//        $this->assertEquals([false, true, true], $this->booleanFalse->eqWith([true, false, false]));
-//    }
-//
-//    /**
-//     * Tests PrimitiveBoolean::doXor()
-//     *
-//     * @depends test_doEq
-//     */
-//    public function test_doXor()
-//    {
-//        $this->assertTrue(Bool::doXor(true, false));
-//        $this->assertTrue(Bool::doXor(false, true));
-//        $this->assertFalse(Bool::doXor(true, true));
-//        $this->assertFalse(Bool::doXor(false, false));
-//
-//        $this->assertEquals([false, true, false], Bool::doXor([true, true, false], [true, false, false]));
-//    }
-//
-//    /**
-//     * Tests Boolean::xorWith()
-//     *
-//     * @depends test_doXor
-//     */
-//    public function test_xorWith()
-//    {
-//        $this->assertTrue($this->booleanTrue->xorWith(false));
-//        $this->assertTrue($this->booleanFalse->xorWith(true));
-//        $this->assertFalse($this->booleanTrue->xorWith(true));
-//        $this->assertFalse($this->booleanFalse->xorWith(false));
-//
-//        $this->assertEquals([false, true, true], $this->booleanTrue->xorWith([true, false, false]));
-//        $this->assertEquals([true, false, false], $this->booleanFalse->xorWith([true, false, false]));
-//    }
+    //region EQ operation
+
+    public function testOpEq()
+    {
+        $this->assertTrue(Bool::opEq(false, false));
+        $this->assertFalse(Bool::opEq(false, true));
+        $this->assertFalse(Bool::opEq(true, false));
+        $this->assertTrue(Bool::opEq(true, true));
+
+        $this->assertTrue(Bool::opEq([false, false]));
+        $this->assertFalse(Bool::opEq([false, true]));
+        $this->assertFalse(Bool::opEq([true, false]));
+        $this->assertTrue(Bool::opEq([true, true]));
+
+        $this->assertEquals([true, false, false, true], Bool::opEq([false, false], [false, true], [true, false], [true, true]));
+    }
+
+    public function testOpEqEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        Bool::opEq([true, true], true);
+    }
+
+    public function testOpEqEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opEq([true, 'string']);
+    }
+
+    public function testOpEqEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Only two booleans at a time are allowed.");
+        Bool::opEq(true, true, true);
+    }
+
+    public function testOpEqEx04()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        Bool::opEq(true, [true, true]);
+    }
+
+    public function testOpEqEx05()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
+        Bool::opEq(5, 'string');
+    }
+
+    //endregion
+
+    //region XOR operation
+
+    public function testOpXor()
+    {
+        $this->assertFalse(Bool::opXor(false, false));
+        $this->assertTrue(Bool::opXor(false, true));
+        $this->assertTrue(Bool::opXor(true, false));
+        $this->assertFalse(Bool::opXor(true, true));
+
+        $this->assertFalse(Bool::opXor([false, false]));
+        $this->assertTrue(Bool::opXor([false, true]));
+        $this->assertTrue(Bool::opXor([true, false]));
+        $this->assertFalse(Bool::opXor([true, true]));
+
+        $this->assertEquals([false, true, true, false], Bool::opXor([false, false], [false, true], [true, false], [true, true]));
+    }
+
+    public function testOpXorEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        Bool::opXor([true, true], true);
+    }
+
+    public function testOpXorEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
+        Bool::opXor([true, 'string']);
+    }
+
+    public function testOpXorEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Only two booleans at a time are allowed.");
+        Bool::opXor(true, true, true);
+    }
+
+    public function testOpXorEx04()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        Bool::opXor(true, [true, true]);
+    }
+
+    public function testOpXorEx05()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
+        Bool::opXor(5, 'string');
+    }
+
+    //endregion
 }
