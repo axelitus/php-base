@@ -65,6 +65,15 @@ class Str
 
     //region Value Testing
 
+    /**
+     * Tests if the given value is a string or not.
+     *
+     * This function is just an alias to the is_string function.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is a string, false otherwise.
+     */
     public static function is($value)
     {
         return is_string($value);
