@@ -15,7 +15,7 @@ namespace axelitus\Base\Tests;
 use axelitus\Base\Bool;
 
 /**
- * Class TestsBoolean
+ * Class TestsBool
  *
  * @package axelitus\Base
  */
