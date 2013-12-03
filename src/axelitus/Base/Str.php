@@ -685,8 +685,8 @@ class Str
      */
     public static function separated($input, $separator = '_', $transform = null, $encoding = self::DEFAULT_ENCODING)
     {
-        if (empty($separator)) {
-            throw new \InvalidArgumentException("The \$separator parameter must have at least one character.");
+        if (!is_string($separator) || $separator == '') {
+            throw new \InvalidArgumentException("The \$separator parameter must be a non-empty string.");
         }
 
         $separated = preg_replace_callback(

@@ -151,6 +151,9 @@ class TestsString extends TestCase
         $this->assertEquals('<span>abc<strong>de...</strong></span>', Str::truncate('<span>abc<strong>defghi</strong>jklmnop</span>', 5, '...', true));
         $this->assertEquals('<span>abc<strong>de...</strong></span>', Str::truncate('<span>abc<strong>de</strong>fghijklmnop</span>', 5, '...', true));
         $this->assertEquals('<span>abc<strong>d</strong>e...</span>', Str::truncate('<span>abc<strong>d</strong>efghijklmnop</span>', 5, '...', true));
+        $this->assertEquals('<span>a&nbsp;bc<strong>d...</strong></span>', Str::truncate('<span>a&nbsp;bc<strong>d</strong>efghijklmnop</span>', 5, '...', true));
+        $this->assertEquals('<span>abc<strong>d...</strong></span>', Str::truncate('<span>abc<strong>d&nbsp;</strong>efghijklmnop</span>', 4, '...', true));
+        $this->assertEquals('<span>a&nbsp;bc<strong>d</strong>ef&nbsp;ghi...</span>', Str::truncate('<span>a&nbsp;bc<strong>d</strong>ef&nbsp;ghijklmnop</span>', 11, '...', true));
     }
 
     //endregion
@@ -225,6 +228,12 @@ class TestsString extends TestCase
         $this->assertEquals('abc-Def-Ghi', Str::separated("AbcDefGhi", '-', 'lcfirst'));
         $this->assertEquals('Abc-Def-Ghi', Str::separated("abcDefGhi", '-', 'ucfirst'));
         $this->assertEquals('Abc-def-ghi', Str::separated("AbcDefGhi", '-', 'ucwords'));
+    }
+
+    public function testSeparatedEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$separator parameter must be a non-empty string.");
+        Str::separated('abcDefGhi', '');
     }
 
     //endregion
