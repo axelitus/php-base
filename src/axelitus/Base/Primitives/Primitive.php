@@ -1,13 +1,13 @@
 <?php
 /**
- * Part of composer package: axelitus/base
+ * axelitus/base - Primitive extensions and helpers.
  *
- * @package     axelitus\Base
- * @version     0.4
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @license     MIT License
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
+ * @license     MIT License (@see LICENSE.md)
+ * @package     axelitus\Base
+ * @version     0.4
  */
 
 namespace axelitus\Base\Primitives;
