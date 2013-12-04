@@ -3,7 +3,7 @@
     "description": "A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.",
     "type": "library",
     "keywords": ["basic", "primitive", "string", "number", "array", "collection"],
-    "homepage": "http://axelitus.mx/projects/axelitus/base",
+    "homepage": "http://axelitus.github.io/php-base",
     "license": "MIT",
     "authors": [
         {
@@ -43,8 +43,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.5-dev",
-            "dev-master": "0.4-dev"
+            "dev-master": "0.6-dev"
         }
     }
 }

@@ -1,7 +1,6 @@
 # Package axelitus/base
 
-A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.
-
+A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like dot-notated arrays, collections, etc.
 
 ## Package Information
 
@@ -26,7 +25,7 @@ This package is intended to follow some standards for easy contributions and usa
 
 There are already some standards marked as accepted (_final_): [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md), [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md).
 
-**This package is intentend to be PSR-2 compliant.**
+**This package is intended to be PSR-2 compliant.**
 
 Being PSR-2 compliant means this package can be easily installed by using [Composer](getcomposer.org) from the [Packagist](http://packagist.org) package archive. Just follow the instructions in section [How to install](#how-to-install). It also means that there's a [guide for coding styles](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and the developers and contributors should enforce this for everyone's benefit.
 
@@ -34,23 +33,11 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 
 All classes are referenced from the package namespace if not otherwise stated.
 
- - **Arr** - Defines a dot-notated Arr(ay).
- - **Boolean** - Defines a Boolean.
- - **Float** - Defines a Float.
- - **Int** - Defines an Int.
- - **Numeric** - Defines a Numeric.
- - **String** - Defines a String.
- 
- - **Exceptions\ClassNotFoundException** - The exception to throw when a class is not found (could not be loaded).
- - **Exceptions\MethodNotAllowedException** - The exception to throw when a method is not allowed.
- - **Exceptions\NotImplementedException** - The exception to throw when a method is not implemented.
-
- - **Primitives\Primitive** - Defines the primitives.
- - **Primitives\Boolean\PrimitiveBoolean** - Defines the boolean primitives.
- - **Primitives\Numeric\PrimitiveNumeric** - Defines the numeric primitives.
- - **Primitives\Numeric\Types\PrimitiveInt** - Defines the int primitives.
- - **Primitives\Numeric\Types\PrimitiveFloat** - Defines the float primitives.
- - **Primitives\String\PrimitiveString** - Defines the string primitives.
+ - **Bool** - Boolean operations.
+ - **Float** - Float operations.
+ - **Int** - Int operations.
+ - **Num** - Numeric operations.
+ - **Str** - String operations.
 
 ## How to install
 
