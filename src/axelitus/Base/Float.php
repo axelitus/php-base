@@ -30,8 +30,7 @@ class Float
 
     public static function extIs($value)
     {
-        // TODO: fix known issue when $value is a float with decimal .0
-        return (static::is($value) || (is_string($value) && (strval(floatval($value)) === strval($value))));
+        return (static::is($value) || (is_numeric($value) && !Int::extIs($value)));
     }
 
     //endregion
