@@ -1,6 +1,6 @@
 <?php
 /**
- * axelitus/base - Primitive extensions and helpers.
+ * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
