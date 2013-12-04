@@ -1,13 +1,13 @@
 <?php
 /**
- * Part of composer package: axelitus/base
+ * axelitus/base - Primitive extensions and helpers.
  *
- * @package     axelitus\Base
- * @version     0.4
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @license     MIT License
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
+ * @license     MIT License (@see LICENSE.md)
+ * @package     axelitus\Base
+ * @version     0.4
  */
 
 namespace axelitus\Base\Tests;
@@ -21,175 +21,205 @@ use axelitus\Base\Float;
  */
 class TestsFloat extends TestCase
 {
-    /**
-     * Tests Float::is()
-     */
-    public function test_isFloat()
+    //region Value Testing
+
+    public function testIs()
     {
-        $this->assertTrue(Float::is(0), "The value 0 is not recognized as a float.");
-        $this->assertTrue(Float::is(5), "The value 5 is not recognized as a float.");
-        $this->assertTrue(Float::is(-23), "The value -23 is not recognized as a float.");
-        $this->assertTrue(Float::is(0.0), "The value 0.0 is not recognized as a float.");
-        $this->assertTrue(Float::is(5.23), "The value 5.23 is not recognized as a float.");
-        $this->assertTrue(Float::is(-4.9), "The value -4.9 is not recognized as a float.");
-        $this->assertTrue(Float::is("7.3"), "The value 7.3 is not recognized as a float.");
-        $this->assertTrue(Float::is("-3.984"), "The value -3.984 is not recognized as a float.");
-        $this->assertFalse(Float::is("string"), "The value \"string\" is incorrectly recognized as a float.");
-        $this->assertFalse(Float::is("2. string"), "The value \"2. string\" is incorrectly recognized as a float.");
-        $this->assertFalse(Float::is("7. string 9"), "The value \"7. string 9\" is incorrectly recognized as a float.");
-        $this->assertFalse(Float::is("string 4"), "The value \"string 4\" is incorrectly recognized as a float.");
-        $this->assertFalse(Float::is([]), "The value [] is incorrectly recognized as an int.");
+        $this->assertTrue(Float::is(-5.5));
+        $this->assertTrue(Float::is(0.5));
+        $this->assertTrue(Float::is(5.5));
+        $this->assertFalse(Float::is(-5));
+        $this->assertFalse(Float::is(0));
+        $this->assertFalse(Float::is(5));
+        $this->assertFalse(Float::is('string'));
+        $this->assertFalse(Float::is(true));
+        $this->assertFalse(Float::is(false));
+        $this->assertFalse(Float::is([]));
     }
 
-    /**
-     * Tests Float::random()
-     */
-    public function test_random()
+    public function testExtIs()
     {
-        $rand = Float::random();
-        $output = ($rand >= 0 and $rand < 1);
-        $this->assertTrue(is_float($rand) and $output);
-
-        $rand = Float::random(5.23, 10.59);
-        $output = ($rand >= 5.23 and $rand < 10.59);
-        $this->assertTrue(is_float($rand) and $output);
-
-        $rand = Float::random(-20.43, 0.5);
-        $output = ($rand >= -20.43 and $rand < 0.5);
-        $this->assertTrue(is_float($rand) and $output);
-
-        $rand = Float::random(150.82, 250.21, null, 10);
-        $output = ($rand >= 150.82 and $rand < 250.21);
-        $this->assertTrue(is_float($rand) and $output);
-        $this->assertEquals(174.07007607784, $rand);
-
-        $rand = Float::random(150.82, 250.21, 2, 10);
-        $output = ($rand >= 150.82 and $rand < 250.21);
-        $this->assertTrue(is_float($rand) and $output);
-        $this->assertEquals(174.07, $rand);    // Because it's seeded it should give us the same result (it's rounded)
-
-        $rand = Float::random(150.82, 250.21, 5, 10);
-        $output = ($rand >= 150.82 and $rand < 250.21);
-        $this->assertTrue(is_float($rand) and $output);
-        $this->assertEquals(174.07008, $rand);    // Because it's seeded it should give us the same result (it's rounded)
-
-        /** @noinspection PhpUsageOfSilenceOperatorInspection */
-        $this->assertFalse(@Float::random(6, 3));
+        $this->assertTrue(Float::extIs(-5.5));
+        $this->assertTrue(Float::extIs(0.5));
+        $this->assertTrue(Float::extIs(5.5));
+        $this->assertFalse(Float::extIs(-5));
+        $this->assertFalse(Float::extIs(0));
+        $this->assertFalse(Float::extIs(5));
+        $this->assertTrue(Float::extIs('-5.5'));
+        $this->assertTrue(Float::extIs('0.5'));
+        $this->assertTrue(Float::extIs('5.5'));
+        $this->assertFalse(Float::extIs('5th Street'));
+        $this->assertFalse(Float::extIs('-5'));
+        $this->assertFalse(Float::extIs('0'));
+        $this->assertFalse(Float::extIs('5'));
+        $this->assertFalse(Float::extIs('string'));
+        $this->assertFalse(Float::extIs(true));
+        $this->assertFalse(Float::extIs(false));
+        $this->assertFalse(Float::extIs([]));
     }
 
-    public function test_randomException01()
+    //endregion
+
+    //region Comparing
+
+    public function testCompare()
     {
-        $this->setExpectedException('\InvalidArgumentException');
-        Float::random(false);
+        $this->assertLessThan(0, Float::compare(10.5, 20.5));
+        $this->assertGreaterThan(0, Float::compare(30.5, 20.5));
+        $this->assertEquals(0, Float::compare(15.5, 15.5));
     }
 
-    public function test_randomException02()
+    public function testCompareEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException');
-        Float::random(6, false);
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        Float::compare(false, 5.5);
     }
 
-    /**
-     * Tests Float::inRange()
-     */
-    public function test_inRange()
+    public function testCompareEx02()
     {
-        $value = 3.25;
-        $rangeA = [0.25, 5.25];
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        Float::compare(-5.5, false);
+    }
+
+    public function testEquals()
+    {
+        $this->assertTrue(Float::equals(10.5, 10.5));
+        $this->assertFalse(Float::equals(-10.5, 10.5));
+        $this->assertFalse(Float::equals(10.5, -10.5));
+    }
+
+    public function testInRange()
+    {
+        $value = 3.5;
+        $rangeA = [0.5, 5.5];
         $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1]));
         $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1], true));
         $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1], false, true));
         $this->assertTrue(Float::inRange($value, $rangeA[0], $rangeA[1], true, true));
 
-        $rangeB = [3.25, 9.25];
+        $rangeB = [3.5, 9.5];
         $this->assertTrue(Float::inRange($value, $rangeB[0], $rangeB[1]));
         $this->assertFalse(Float::inRange($value, $rangeB[0], $rangeB[1], true));
         $this->assertTrue(Float::inRange($value, $rangeB[0], $rangeB[1], false, true));
         $this->assertFalse(Float::inRange($value, $rangeB[0], $rangeB[1], true, true));
 
-        $rangeC = [0.25, 3.25];
+        $rangeC = [0.5, 3.5];
         $this->assertTrue(Float::inRange($value, $rangeC[0], $rangeC[1]));
         $this->assertTrue(Float::inRange($value, $rangeC[0], $rangeC[1], true));
         $this->assertFalse(Float::inRange($value, $rangeC[0], $rangeC[1], false, true));
         $this->assertFalse(Float::inRange($value, $rangeC[0], $rangeC[1], true, true));
 
-        $rangeD = [5.25, 9.25];
+        $rangeD = [5.5, 9.5];
         $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1]));
         $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1], true));
         $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1], false, true));
         $this->assertFalse(Float::inRange($value, $rangeD[0], $rangeD[1], true, true));
     }
 
-    /**
-     * Tests Float::inside()
-     * @depends test_inRange
-     */
-    public function test_inside()
+    public function testInRangeEx01()
     {
-        $value = 3.25;
-        $rangeA = [0.25, 5.25];
+        $value = 1;
+        $range = [0.5, 1.5];
+        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type float.");
+        Float::inRange($value, $range[0], $range[1]);
+    }
+
+    public function testInRangeEx02()
+    {
+        $value = 1.0;
+        $range = [0.5, 1];
+        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type float.");
+        Float::inRange($value, $range[0], $range[1]);
+    }
+
+    public function testInRangeEx03()
+    {
+        $value = 1.0;
+        $range = [0, 1.5];
+        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type float.");
+        Float::inRange($value, $range[0], $range[1]);
+    }
+
+    public function testInside()
+    {
+        $value = 3.5;
+        $rangeA = [0.5, 5.5];
         $this->assertTrue(Float::inside($value, $rangeA[0], $rangeA[1]));
 
-        $rangeB = [3.25, 9.25];
+        $rangeB = [3.5, 9.5];
         $this->assertTrue(Float::inside($value, $rangeB[0], $rangeB[1]));
 
-        $rangeC = [0.25, 3.25];
+        $rangeC = [0.5, 3.5];
         $this->assertTrue(Float::inside($value, $rangeC[0], $rangeC[1]));
 
-        $rangeD = [5.25, 9.25];
+        $rangeD = [5.5, 9.5];
         $this->assertFalse(Float::inside($value, $rangeD[0], $rangeD[1]));
     }
 
-    /**
-     * Tests Float::between()
-     * @depends test_inRange
-     */
-    public function test_between()
+    public function testBetween()
     {
-        $value = 3.25;
-        $rangeA = [0.25, 5.25];
+        $value = 3.5;
+        $rangeA = [0.5, 5.5];
         $this->assertTrue(Float::between($value, $rangeA[0], $rangeA[1]));
 
-        $rangeB = [3.25, 9.25];
+        $rangeB = [3.5, 9.5];
         $this->assertFalse(Float::between($value, $rangeB[0], $rangeB[1]));
 
-        $rangeC = [0.25, 3.25];
+        $rangeC = [0.5, 3.5];
         $this->assertFalse(Float::between($value, $rangeC[0], $rangeC[1]));
 
-        $rangeD = [5.25, 9.25];
+        $rangeD = [5.5, 9.5];
         $this->assertFalse(Float::between($value, $rangeD[0], $rangeD[1]));
     }
 
-    /**
-     * Tests Float::inRange()
-     */
-    public function test_inRangeException01()
+    //endregion
+
+    //region Random
+
+    public function testRandom()
     {
-        $value = 'string';
-        $range = [0.25, 1.25];
-        $this->setExpectedException('\InvalidArgumentException');
-        Float::inRange($value, $range[0], $range[1]);
+        $rand = Float::random();
+        $output = ($rand >= 0.0 && $rand <= 1.0);
+        $this->assertTrue(is_float($rand) && $output);
+
+        $rand = Float::random(5.5, 10.5);
+        $output = ($rand >= 5.5 && $rand <= 10.5);
+        $this->assertTrue(is_float($rand) && $output);
+
+        $rand = Float::random(-20.5, 0.5);
+        $output = ($rand >= -20.5 && $rand <= 0.5);
+        $this->assertTrue(is_float($rand) && $output);
+
+        $rand = Float::random(-20.5, 0.5, 2);
+        $output = ($rand >= -20.5 && $rand <= 0.5);
+        $control = (($rand - ((int) $rand)) <= 0.99);
+        $this->assertTrue(is_float($rand) && $output && $control);
+
+        $rand = Float::random(150.5, 250.5, null, 10);
+        $output = ($rand >= 150.5 && $rand <= 250.5);
+        $this->assertTrue(is_float($rand) && $output);
+        $this->assertEquals($rand, Float::random(150.5, 250.5, null, 10)); // Because it's seeded it should give us the same result
     }
 
-    /**
-     * Tests Float::inRange()
-     */
-    public function test_inRangeException02()
+    public function testRandomEx01()
     {
-        $value = 1.25;
-        $range = ['string', 1.25];
-        $this->setExpectedException('\InvalidArgumentException');
-        Float::inRange($value, $range[0], $range[1]);
+        $this->setExpectedException('\InvalidArgumentException', "The \$min and \$max parameters must be of type float.");
+        Float::random(false);
     }
 
-    /**
-     * Tests Float::inRange()
-     */
-    public function test_inRangeException03()
+    public function testRandomEx02()
     {
-        $value = 1.25;
-        $range = [0.25, 'string'];
-        $this->setExpectedException('\InvalidArgumentException');
-        Float::inRange($value, $range[0], $range[1]);
+        $this->setExpectedException('\InvalidArgumentException', "The \$min and \$max parameters must be of type float.");
+        Float::random(5.5, false);
     }
+
+    public function testRandomErr01()
+    {
+        $this->assertFalse(@Float::random(5.5, -5.5));
+
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning', "The \$min value cannot be greater than the \$max value.");
+        Float::random(5.5, -5.5);
+    }
+
+    //endregion
 }
