@@ -85,6 +85,7 @@ class TestsString extends TestCase
         $this->assertTrue(Str::endsWith('abcdef', 'deF', true));
         $this->assertFalse(Str::endsWith('abcdef', 'cde'));
         $this->assertTrue(Str::endsWith('abcdef', 'abcdef'));
+        $this->assertTrue(Str::endsWith('abcdef', ''));
     }
 
     public function testIsOneOf()
@@ -98,7 +99,8 @@ class TestsString extends TestCase
 
     public function testMatch()
     {
-
+        $this->assertEquals(1, Str::match('abcdefghijklmnop', '/.*/'));
+        $this->assertEquals(0, Str::match('abcdefghijklmnop', '/ponmlkjihgfedcba/'));
     }
 
     //endregion
@@ -140,6 +142,7 @@ class TestsString extends TestCase
         $this->assertEquals('ghidef', Str::replace('abcdef', 'abc', 'ghi'));
         $this->assertEquals('abcghi', Str::replace('abcdef', 'def', 'ghi'));
         $this->assertEquals('ghijkl', Str::replace('abcdef', 'abcdef', 'ghijkl'));
+        $this->assertEquals('ghijkl', Str::replace('aBcDEf', 'abcdef', 'ghijkl', true));
     }
 
     public function testTruncate()
