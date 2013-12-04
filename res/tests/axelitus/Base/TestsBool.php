@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License (@see LICENSE.md)
  * @package     axelitus\Base
- * @version     0.4
+ * @version     0.5
  */
 
 namespace axelitus\Base\Tests;

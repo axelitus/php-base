@@ -34,23 +34,11 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 
 All classes are referenced from the package namespace if not otherwise stated.
 
- - **Arr** - Defines a dot-notated Arr(ay).
- - **Boolean** - Defines a Boolean.
- - **Float** - Defines a Float.
- - **Int** - Defines an Int.
- - **Numeric** - Defines a Numeric.
- - **String** - Defines a String.
- 
- - **Exceptions\ClassNotFoundException** - The exception to throw when a class is not found (could not be loaded).
- - **Exceptions\MethodNotAllowedException** - The exception to throw when a method is not allowed.
- - **Exceptions\NotImplementedException** - The exception to throw when a method is not implemented.
-
- - **Primitives\Primitive** - Defines the primitives.
- - **Primitives\Boolean\PrimitiveBoolean** - Defines the boolean primitives.
- - **Primitives\Numeric\PrimitiveNumeric** - Defines the numeric primitives.
- - **Primitives\Numeric\Types\PrimitiveInt** - Defines the int primitives.
- - **Primitives\Numeric\Types\PrimitiveFloat** - Defines the float primitives.
- - **Primitives\String\PrimitiveString** - Defines the string primitives.
+ - **Bool** - Boolean operations.
+ - **Float** - Float operations.
+ - **Int** - Int operations.
+ - **Num** - Numeric operations.
+ - **Str** - String operations.
 
 ## How to install
 
