@@ -13,8 +13,6 @@
 namespace axelitus\Base\Tests;
 
 use axelitus\Base\Num;
-use axelitus\Base\Int;
-use axelitus\Base\Float;
 
 /**
  * Class TestsNumeric
@@ -23,84 +21,213 @@ use axelitus\Base\Float;
  */
 class TestsNum extends TestCase
 {
-    /**
-     * Tests the Numeric::is() function.
-     */
-    public function test_isNumeric()
+    //region Value Testing
+
+    public function testIs()
     {
-        $this->assertFalse(Num::is(null), "The value null is incorrectly recognized as numeric.");
-        $this->assertTrue(Num::is(0), "The value 0 is not recognized as numeric.");
-        $this->assertTrue(Num::is(4), "The value 4 is not recognized as numeric.");
-        $this->assertTrue(Num::is(-128), "The value -128 is not recognized as numeric.");
-        $this->assertTrue(Num::is(37.84), "The value 37.84 is not recognized as numeric.");
-        $this->assertTrue(Num::is(-14.37), "The value -14.37 is not recognized as numeric.");
-        $this->assertTrue(Num::is("45"), "The value \"45\" is not recognized as numeric.");
-        $this->assertTrue(Num::is("0"), "The value \"0\" is not recognized as numeric.");
-        $this->assertTrue(Num::is(new Num(10)), "The value \"[Numeric: { \$value: int(10) }]\" is not recognized as numeric.");
-        $this->assertFalse(Num::is("34. This is not numeric"), "The value \"34. This is not numeric\" is incorrectly recognized as numeric.");
-        $this->assertFalse(Num::is("This is not numeric 34.56"), "The value \"This is not numeric 34.56\" is incorrectly recognized as numeric.");
-        $this->assertFalse(Num::is([]), "The value [] is incorrectly recognized as numeric.");
+        $this->assertTrue(Num::is(-5));
+        $this->assertTrue(Num::is(0));
+        $this->assertTrue(Num::is(5));
+        $this->assertTrue(Num::is(-5.0));
+        $this->assertTrue(Num::is(0.0));
+        $this->assertTrue(Num::is(5.0));
+        $this->assertFalse(Num::is('string'));
+        $this->assertFalse(Num::is(true));
+        $this->assertFalse(Num::is(false));
+        $this->assertFalse(Num::is([]));
     }
 
-    /**
-     * Tests the Numeric::areEqual() function.
-     * @depends test_isNumeric
-     */
-    public function test_areEqual()
+    public function testExtIs()
     {
-        $this->assertTrue(Num::areEqual(0, 0), "The values 0 and 0 are not evaluated as equal.");
-        $this->assertTrue(Num::areEqual(-4, -4), "The values -4 and -4 are not evaluated as equal.");
-        $this->assertTrue(Num::areEqual(23, new Num(23)), "The values 23 and [Numeric: { \$value: int(23) }] are not evaluated as equal.");
-        $this->assertTrue(Num::areEqual(new Num(5), 5), "The values [Numeric: { \$value: int(5) }] and 5 are not evaluated as equal.");
-        $this->assertTrue(Num::areEqual(new Num(9), new Num(9)), "The values [Numeric: { \$value: int(9) }] and [Numeric: { \$value: int(9) }] are not evaluated as equal.");
-
-        // evaluate special cases for numeric with derived classes of PrimitiveNumeric like Int and Float.
-        $this->assertTrue(Num::areEqual(5, new Int(5)), "The values 5 and [Int: { \$value: int(5) }] are not evaluated as equal.");
-        $this->assertTrue(Num::areEqual(5.8, new Float(5.8)), "The values 5.8 and [Float: { \$value: float(5.8) }] are not evaluated as equal.");
-
-        $this->setExpectedException('\InvalidArgumentException');
-        Num::areEqual(0, 'string');
+        $this->assertTrue(Num::extIs(-5));
+        $this->assertTrue(Num::extIs(0));
+        $this->assertTrue(Num::extIs(5));
+        $this->assertTrue(Num::extIs(-5.0));
+        $this->assertTrue(Num::extIs(0.0));
+        $this->assertTrue(Num::extIs(5.0));
+        $this->assertTrue(Num::extIs('-5'));
+        $this->assertTrue(Num::extIs('0'));
+        $this->assertTrue(Num::extIs('5'));
+        $this->assertFalse(Num::extIs('5th Street'));
+        $this->assertTrue(Num::extIs('-5.0'));
+        $this->assertTrue(Num::extIs('0.0'));
+        $this->assertTrue(Num::extIs('5.0'));
+        $this->assertFalse(Num::extIs('string'));
+        $this->assertFalse(Num::extIs(true));
+        $this->assertFalse(Num::extIs(false));
+        $this->assertFalse(Num::extIs([]));
     }
 
-    public function test_doSum()
+    //endregion
+
+    //region Comparing
+
+    public function testCompare()
     {
-        $this->assertEquals(9, Num::doSum(1, 2, 2, 4));
-        $this->assertEquals(9, Num::doSum([1, 2, 2, 4]));
-        $this->assertEquals(9, Num::doSum(1, [2, 2, 4]));
-        $this->assertEquals(9, Num::doSum(1, [2, 2], 4));
+        $this->assertLessThan(0, Num::compare(10, 20));
+        $this->assertLessThan(0, Num::compare(10, 20.5));
+        $this->assertGreaterThan(0, Num::compare(30, 20));
+        $this->assertGreaterThan(0, Num::compare(30.5, 20));
+        $this->assertEquals(0, Num::compare(15, 15));
+        $this->assertEquals(0, Num::compare(15.5, 15.5));
     }
 
-    public function test_doRest()
+    public function testCompareEx01()
     {
-        $this->assertEquals(4, Num::doRest(10, 2, 3, 1));
-        $this->assertEquals(4, Num::doRest([10, 2, 3, 1]));
-        $this->assertEquals(4, Num::doRest(10, [2, 3, 1]));
-        $this->assertEquals(4, Num::doRest(10, [2, 3], 1));
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
+        Num::compare(false, 5);
     }
 
-    public function test_doMult()
+    public function testCompareEx02()
     {
-        $this->assertEquals(4, Num::doRest(10, 2, 3, 1));
-        $this->assertEquals(4, Num::doRest([10, 2, 3, 1]));
-        $this->assertEquals(4, Num::doRest(10, [2, 3, 1]));
-        $this->assertEquals(4, Num::doRest(10, [2, 3], 1));
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
+        Num::compare(-5, false);
     }
 
-    public function test_doDiv()
+    public function testEquals()
     {
-        $this->assertEquals(13.351578947368, Num::doDiv(6342, 19, 1, 25));
-        $this->assertEquals(13.351578947368, Num::doDiv([6342, 19, 1, 25]));
-        $this->assertEquals(13.351578947368, Num::doDiv(6342, [19, 1, 25]));
-        $this->assertEquals(13.351578947368, Num::doDiv(6342, [19, 1], 25));
+        $this->assertTrue(Num::equals(10, 10));
+        $this->assertTrue(Num::equals(10.5, 10.5));
+        $this->assertFalse(Num::equals(-10, 10));
+        $this->assertFalse(Num::equals(-10.5, 10.5));
+        $this->assertFalse(Num::equals(10, -10));
+        $this->assertFalse(Num::equals(10.5, -10.5));
     }
 
-    public function test_doMod()
+    public function testInRange()
     {
+        $value = 3;
+        $rangeA = [0, 5];
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1]));
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1], true));
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1], false, true));
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1], true, true));
 
+        $rangeB = [3, 9];
+        $this->assertTrue(Num::inRange($value, $rangeB[0], $rangeB[1]));
+        $this->assertFalse(Num::inRange($value, $rangeB[0], $rangeB[1], true));
+        $this->assertTrue(Num::inRange($value, $rangeB[0], $rangeB[1], false, true));
+        $this->assertFalse(Num::inRange($value, $rangeB[0], $rangeB[1], true, true));
+
+        $rangeC = [0, 3];
+        $this->assertTrue(Num::inRange($value, $rangeC[0], $rangeC[1]));
+        $this->assertTrue(Num::inRange($value, $rangeC[0], $rangeC[1], true));
+        $this->assertFalse(Num::inRange($value, $rangeC[0], $rangeC[1], false, true));
+        $this->assertFalse(Num::inRange($value, $rangeC[0], $rangeC[1], true, true));
+
+        $rangeD = [5, 9];
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1]));
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1], true));
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1], false, true));
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1], true, true));
+
+        $value = 3.5;
+        $rangeA = [0.5, 5.5];
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1]));
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1], true));
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1], false, true));
+        $this->assertTrue(Num::inRange($value, $rangeA[0], $rangeA[1], true, true));
+
+        $rangeB = [3.5, 9.5];
+        $this->assertTrue(Num::inRange($value, $rangeB[0], $rangeB[1]));
+        $this->assertFalse(Num::inRange($value, $rangeB[0], $rangeB[1], true));
+        $this->assertTrue(Num::inRange($value, $rangeB[0], $rangeB[1], false, true));
+        $this->assertFalse(Num::inRange($value, $rangeB[0], $rangeB[1], true, true));
+
+        $rangeC = [0.5, 3.5];
+        $this->assertTrue(Num::inRange($value, $rangeC[0], $rangeC[1]));
+        $this->assertTrue(Num::inRange($value, $rangeC[0], $rangeC[1], true));
+        $this->assertFalse(Num::inRange($value, $rangeC[0], $rangeC[1], false, true));
+        $this->assertFalse(Num::inRange($value, $rangeC[0], $rangeC[1], true, true));
+
+        $rangeD = [5.5, 9.5];
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1]));
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1], true));
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1], false, true));
+        $this->assertFalse(Num::inRange($value, $rangeD[0], $rangeD[1], true, true));
     }
 
-    public function test_doPow()
+    public function testInRangeEx01()
     {
-
+        $value = false;
+        $range = [0, 1];
+        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be numeric.");
+        Num::inRange($value, $range[0], $range[1]);
     }
+
+    public function testInRangeEx02()
+    {
+        $value = 1;
+        $range = [false, 1.5];
+        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be numeric.");
+        Num::inRange($value, $range[0], $range[1]);
+    }
+
+    public function testInRangeEx03()
+    {
+        $value = 1;
+        $range = [0, false];
+        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be numeric.");
+        Num::inRange($value, $range[0], $range[1]);
+    }
+
+    public function testInside()
+    {
+        $value = 3;
+        $rangeA = [0, 5];
+        $this->assertTrue(Num::inside($value, $rangeA[0], $rangeA[1]));
+
+        $rangeB = [3, 9];
+        $this->assertTrue(Num::inside($value, $rangeB[0], $rangeB[1]));
+
+        $rangeC = [0, 3];
+        $this->assertTrue(Num::inside($value, $rangeC[0], $rangeC[1]));
+
+        $rangeD = [5, 9];
+        $this->assertFalse(Num::inside($value, $rangeD[0], $rangeD[1]));
+
+        $value = 3.5;
+        $rangeA = [0.5, 5.5];
+        $this->assertTrue(Num::inside($value, $rangeA[0], $rangeA[1]));
+
+        $rangeB = [3.5, 9.5];
+        $this->assertTrue(Num::inside($value, $rangeB[0], $rangeB[1]));
+
+        $rangeC = [0.5, 3.5];
+        $this->assertTrue(Num::inside($value, $rangeC[0], $rangeC[1]));
+
+        $rangeD = [5.5, 9.5];
+        $this->assertFalse(Num::inside($value, $rangeD[0], $rangeD[1]));
+    }
+
+    public function testBetween()
+    {
+        $value = 3;
+        $rangeA = [0, 5];
+        $this->assertTrue(Num::between($value, $rangeA[0], $rangeA[1]));
+
+        $rangeB = [3, 9];
+        $this->assertFalse(Num::between($value, $rangeB[0], $rangeB[1]));
+
+        $rangeC = [0, 3];
+        $this->assertFalse(Num::between($value, $rangeC[0], $rangeC[1]));
+
+        $rangeD = [5, 9];
+        $this->assertFalse(Num::between($value, $rangeD[0], $rangeD[1]));
+
+        $value = 3.5;
+        $rangeA = [0.5, 5.5];
+        $this->assertTrue(Num::between($value, $rangeA[0], $rangeA[1]));
+
+        $rangeB = [3.5, 9.5];
+        $this->assertFalse(Num::between($value, $rangeB[0], $rangeB[1]));
+
+        $rangeC = [0.5, 3.5];
+        $this->assertFalse(Num::between($value, $rangeC[0], $rangeC[1]));
+
+        $rangeD = [5.5, 9.5];
+        $this->assertFalse(Num::between($value, $rangeD[0], $rangeD[1]));
+    }
+
+    //endregion
 }
