@@ -74,13 +74,13 @@ class TestsNum extends TestCase
 
     public function testCompareEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
         Num::compare(false, 5);
     }
 
     public function testCompareEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
         Num::compare(-5, false);
     }
 
