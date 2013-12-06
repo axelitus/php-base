@@ -174,4 +174,20 @@ class TestsDotArr extends TestCase
     }
 
     //endregion
+
+    //region Convert
+
+    public function testConvert()
+    {
+        $this->assertEquals([], DotArr::convert([]));
+        $this->assertEquals(['first'], DotArr::convert(['first']));
+        $this->assertEquals(['first' => ['sub' => 'value'], 'second' => 'value'], DotArr::convert(['first' => ['sub' => 'value'], 'second' => 'value']));
+        $this->assertEquals(['first' => ['sub' => 'value'], 'second' => 'value'], DotArr::convert(['first.sub' => 'value', 'second' => 'value']));
+        $this->assertEquals(['first' => ['second' => ['third' => 'value', 'fourth' => 'value']]], DotArr::convert(['first.second.third' => 'value', 'first.second.fourth' => 'value']));
+        $this->assertEquals(['first' => ['second' => ['third' => 'value']]], DotArr::convert(['first.second' => 'value', 'first.second.third' => 'value']));
+        $this->assertEquals(['first' => ['second' => 'value']], DotArr::convert(['first.second.third' => 'value', 'first.second' => 'value']));
+        $this->assertEquals(['first' => ['second' => ['third' => ['fourth' => 'value']]]], DotArr::convert(['first.second' => ['third.fourth' => 'value']]));
+    }
+
+    //endregion
 }

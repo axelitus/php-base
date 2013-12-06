@@ -124,9 +124,9 @@ class DotArr
 
     public static function delete(array &$arr, $key)
     {
-        if(is_array($key)) {
+        if (is_array($key)) {
             $return = [];
-            foreach($key as $k){
+            foreach ($key as $k) {
                 $return[$k] = static::delete($arr, $k);
             }
             return $return;
@@ -231,6 +231,44 @@ class DotArr
             $arr =& $arr[$k];
         }
         return $return;
+    }
+
+    //endregion
+
+    //region Convert
+
+    /**
+     * Converts an array to a dot-notated array.
+     *
+     * Be aware that some values may be lost in this conversion if a partial key match is found
+     * twice or more. The last found element of a partial key match is the one that takes precedence.
+     *
+     * @param array $arr The array to convert.
+     *
+     * @return array The converted array.
+     */
+    public static function convert(array $arr)
+    {
+        $converted = [];
+        foreach ($arr as $key => $value) {
+            $keys = explode('.', $key);
+            $tmp =& $converted;
+            foreach ($keys as $k) {
+                if (!array_key_exists($k, $tmp) || !is_array($tmp[$k])) {
+                    $tmp[$k] = [];
+                }
+
+                $tmp =& $tmp[$k];
+            }
+
+            if (is_array($value)) {
+                $tmp = static::convert($value);
+            } else {
+                $tmp = $value;
+            }
+        }
+
+        return $converted;
     }
 
     //endregion

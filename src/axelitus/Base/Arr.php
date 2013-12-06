@@ -32,9 +32,17 @@ class Arr implements \ArrayAccess, \Countable
 
     //region Constructors
 
+    /**
+     * Constructor
+     *
+     * The given initial data will be converted using DotArr::convert().
+     * Values may be lost, @see DotArr::convert.
+     *
+     * @param array $data The initial value for the Arr object.
+     */
     public function __construct(array $data = [])
     {
-        $this->data = $data;
+        $this->data = DotArr::convert($data);
     }
 
     //endregion
