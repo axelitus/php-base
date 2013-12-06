@@ -62,6 +62,7 @@ class TestsDotArr extends TestCase
 
         $this->assertEquals(['a.aa' => 'A.AA', 'b' => 'B'], DotArr::get(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], ['a.aa', 'b']));
         $this->assertEquals(['a.aa' => 'A.AA', 'd' => null], DotArr::get(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], ['a.aa', 'd']));
+        $this->assertEquals(['a.aa' => 'A.AA', 'a.aaa' => null], DotArr::get(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], ['a.aa', 'a.aaa']));
     }
 
     public function testGetEx01()
