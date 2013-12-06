@@ -96,6 +96,37 @@ class TestsDotArr extends TestCase
         DotArr::set($array, true);
     }
 
+    public function testDelete()
+    {
+        $array = ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']], 'third' => ['sub' => ['k' => 'v']]];
+
+        $this->assertTrue(DotArr::delete($array, 'first'));
+        $this->assertArrayNotHasKey('first', $array);
+
+        $this->assertTrue(DotArr::delete($array, 'second.lvl.opt'));
+        $this->assertArrayHasKey('second', $array);
+        $this->assertArrayHasKey('lvl', $array['second']);
+        $this->assertInternalType('array', $array['second']['lvl']);
+        $this->assertArrayNotHasKey('opt', $array['second']['lvl']);
+
+        $this->assertFalse(DotArr::delete($array, 'third.sub.k.v'));
+        $this->assertTrue(DotArr::delete($array, 'third.sub'));
+        $this->assertArrayHasKey('third', $array);
+        $this->assertInternalType('array', $array['third']);
+        $this->assertArrayNotHasKey('sub', $array['third']);
+
+        $this->assertFalse(DotArr::delete($array, 'fourth'));
+
+        $this->assertEquals(['second' => true, 'third' => true, 'fifth' => false], DotArr::delete($array, ['second', 'third', 'fifth']));
+    }
+
+    public function testDeleteEx01()
+    {
+        $array = [];
+        $this->setExpectedException('\InvalidArgumentException', "The \$key parameter must be int or string (or an array of them).");
+        DotArr::delete($array, true);
+    }
+
     //endregion
 
     //region Matches

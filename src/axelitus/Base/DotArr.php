@@ -122,6 +122,41 @@ class DotArr
         }
     }
 
+    public static function delete(array &$arr, $key)
+    {
+        if(is_array($key)) {
+            $return = [];
+            foreach($key as $k){
+                $return[$k] = static::delete($arr, $k);
+            }
+            return $return;
+        }
+
+        if (!Int::is($key) && !Str::is($key)) {
+            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+        }
+
+        $tmp =& $arr;
+        $keys = explode('.', $key);
+        while (count($keys) > 1) {
+            $key = array_shift($keys);
+
+            if (!is_array($tmp[$key])) {
+                return false;
+            }
+
+            $tmp =& $tmp[$key];
+        }
+
+        $key = array_shift($keys);
+        if (array_key_exists($key, $tmp)) {
+            unset($tmp[$key]);
+            return true;
+        }
+
+        return false;
+    }
+
     //endregion
 
     //region Matches
