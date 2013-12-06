@@ -132,6 +132,26 @@ class TestsDotArr extends TestCase
 
     //region Matches
 
+    public function testKeyExists()
+    {
+        $this->assertFalse(DotArr::keyExists(['a' => 'A', 'b' => 'B', 'c' => 'C'], 'd'));
+        $this->assertTrue(DotArr::keyExists(['a' => 'A', 'b' => 'B', 'c' => 'C'], 'a'));
+        $this->assertTrue(DotArr::keyExists(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], 'a.aa'));
+        $this->assertTrue(DotArr::keyExists(['a' => ['aa' => ['aaa' => 'A.AA.AAA']], 'b' => 'B', 'c' => 'C'], 'a.aa'));
+        $this->assertTrue(DotArr::keyExists(['a' => ['aa' => ['aaa' => 'A.AA.AAA']], 'b' => 'B', 'c' => 'C'], 'a.aa.aaa'));
+
+        $this->assertEquals(['a.aa' => true, 'b' => true], DotArr::keyExists(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], ['a.aa', 'b']));
+        $this->assertEquals(['a.aa' => true, 'd' => false], DotArr::keyExists(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], ['a.aa', 'd']));
+        $this->assertEquals(['a.aa' => true, 'a.aaa' => false], DotArr::keyExists(['a' => ['aa' => 'A.AA'], 'b' => 'B', 'c' => 'C'], ['a.aa', 'a.aaa']));
+    }
+
+    public function testKEyExistsEx01()
+    {
+        $array = [];
+        $this->setExpectedException('\InvalidArgumentException', "The \$key parameter must be int or string (or an array of them).");
+        DotArr::keyExists($array, true);
+    }
+
     public function testKeyMatches()
     {
         $array = ['first' => ['second' => ['third' => ['fourth' => ['fifth' => 'value']]]]];

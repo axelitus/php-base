@@ -161,6 +161,35 @@ class DotArr
 
     //region Matches
 
+    public static function keyExists(array $arr, $key)
+    {
+        if (is_array($key)) {
+            $return = [];
+            foreach ($key as $k) {
+                $return[$k] = static::keyExists($arr, $k);
+            }
+            return $return;
+        }
+
+        if (!Int::is($key) && !Str::is($key)) {
+            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+        }
+
+        if (array_key_exists($key, $arr)) {
+            return true;
+        }
+
+        foreach (explode('.', $key) as $key_seg) {
+            if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
+                return false;
+            }
+
+            $arr = $arr[$key_seg];
+        }
+
+        return true;
+    }
+
     /**
      * Gets all full and partial matches to the given key.
      *
