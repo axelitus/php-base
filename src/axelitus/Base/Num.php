@@ -159,4 +159,141 @@ class Num
     }
 
     //endregion
+
+    //region Basic numeric operations
+
+    /**
+     * Adds a number to another number.
+     *
+     * @param int|float $num1 The left operand.
+     * @param int|float $num2 The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function add($num1, $num2)
+    {
+        if (!static::is($num1) || !static::is($num2)) {
+            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric.");
+        }
+
+        return ($num1 + $num2);
+    }
+
+    /**
+     * Subtracts a number from another number.
+     *
+     * @param int|float $num1 The left operand.
+     * @param int|float $num2 The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sub($num1, $num2)
+    {
+        if (!static::is($num1) || !static::is($num2)) {
+            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric.");
+        }
+
+        return ($num1 - $num2);
+    }
+
+    /**
+     * Multiplies a number by another number.
+     *
+     * @param int|float $num1 The left operand.
+     * @param int|float $num2 The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mul($num1, $num2)
+    {
+        if (!static::is($num1) || !static::is($num2)) {
+            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric.");
+        }
+
+        return ($num1 * $num2);
+    }
+
+    /**
+     * Divides a number by another number.
+     *
+     * @param int|float $num1 The left operand.
+     * @param int|float $num2 The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function div($num1, $num2)
+    {
+        if (!static::is($num1) || !static::is($num2)) {
+            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric.");
+        }
+
+        if ($num2 == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$num2 parameter cannot be zero.");
+        }
+
+        return ($num1 / $num2);
+    }
+
+    /**
+     * Raises a number to the power of another number.
+     *
+     * @param int|float $base The base number.
+     * @param int|float $exponent The power exponent.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function pow($base, $exponent)
+    {
+        if (!static::is($base) || !static::is($exponent)) {
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be numeric.");
+        }
+
+        return pow($base, $exponent);
+    }
+
+    /**
+     * Gets the remainder of a number divided by another number.
+     *
+     * @param int|float $base The left operand.
+     * @param int|float $modulus The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mod($base, $modulus)
+    {
+        if (!static::is($base) || !static::is($modulus)) {
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be numeric.");
+        }
+
+        if ($modulus == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        }
+
+        return ($base % $modulus);
+    }
+
+    /**
+     * Gets the square root of a number.
+     *
+     * @param int|float $base The base to use.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sqrt($base)
+    {
+        if (!static::is($base)) {
+            throw new \InvalidArgumentException("The \$base parameters must be numeric.");
+        }
+
+        return sqrt($base);
+    }
+
+    //endregion
 }

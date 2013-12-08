@@ -230,4 +230,150 @@ class TestsNum extends TestCase
     }
 
     //endregion
+
+    //region Basic numeric operations
+
+    public function testAdd()
+    {
+        $this->assertEquals(5, Num::add(3, 2));
+        $this->assertEquals(-5, Num::add(-3, -2));
+        $this->assertEquals(-1, Num::add(-3, 2));
+        $this->assertEquals(5.75, Num::add(3.5, 2.25));
+    }
+
+    public function testAddEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::add(5, false);
+    }
+
+    public function testAddEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::add(false, 5);
+    }
+
+    public function testSub()
+    {
+        $this->assertEquals(1, Num::sub(3, 2));
+        $this->assertEquals(-1, Num::sub(-3, -2));
+        $this->assertEquals(-5, Num::sub(-3, 2));
+        $this->assertEquals(1.25, Num::sub(3.5, 2.25));
+    }
+
+    public function tesSubEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::sub(5, false);
+    }
+
+    public function tesSubEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::sub(false, 5);
+    }
+
+    public function testMul()
+    {
+        $this->assertEquals(25, Num::mul(5, 5));
+        $this->assertEquals(27, Num::mul(-9, -3));
+        $this->assertEquals(-42, Num::mul(-7, 6));
+        $this->assertEquals(28.875, Num::mul(5.5, 5.25));
+    }
+
+    public function testMulEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::mul(5, false);
+    }
+
+    public function testMulEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::mul(false, 5);
+    }
+
+    public function testDiv()
+    {
+        $this->assertEquals(3, Num::div(27, 9));
+        $this->assertEquals(6, Num::div(42, 7));
+        $this->assertEquals(2, Num::div(8, 4));
+        $this->assertEquals(5.5, Num::div(23.375, 4.25));
+    }
+
+    public function testDivEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::div(5, false);
+    }
+
+    public function tesDivEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
+        Num::div(false, 5);
+    }
+
+    public function tesDivEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$num2 parameter cannot be zero.");
+        Num::div(5, 0);
+    }
+
+    public function testPow()
+    {
+        $this->assertEquals(125, Num::pow(5, 3));
+        $this->assertEquals(-8, Num::pow(-2, 3));
+        $this->assertEquals(15129, Num::pow(123, 2));
+        $this->assertEquals(97.65625, Num::pow(2.5, 5));
+    }
+
+    public function testPowEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric.");
+        Num::pow(5, false);
+    }
+
+    public function tesPowEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric.");
+        Num::pow(false, 5);
+    }
+
+    public function testMod()
+    {
+        $this->assertEquals(0, Num::mod(25, 5));
+        $this->assertEquals(1, Num::mod(43, 3));
+        $this->assertEquals(6, Num::mod(278, 8));
+    }
+
+    public function testModEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric.");
+        Num::mod(5, false);
+    }
+
+    public function tesModEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric.");
+        Num::mod(false, 5);
+    }
+
+    public function tesModEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        Num::mod(5, 0);
+    }
+
+    public function testSqrt()
+    {
+        $this->assertEquals(3, Num::sqrt(9));
+    }
+
+    public function testSqrtEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be numeric.");
+        Num::sqrt(false);
+    }
+
+    //endregion
 }
