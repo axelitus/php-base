@@ -268,11 +268,9 @@ class Str
             )) - $start : $length;
 
 
-        return function_exists('mb_substr') ? mb_substr($input, $start, $length, $encoding) : substr(
-            $input,
-            $start,
-            $length
-        );
+        return function_exists('mb_substr')
+            ? mb_substr($input, $start, $length, $encoding)
+            : substr($input, $start, $length);
     }
 
     /**
