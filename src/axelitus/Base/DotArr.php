@@ -122,6 +122,15 @@ class DotArr
         }
     }
 
+    /**
+     * Deletes an item from a dot-notated array.
+     *
+     * @param array            $arr The dot-notated array.
+     * @param int|string|array $key The key of the item to delete or array of keys.
+     *
+     * @return bool|array Returns true if the item was found and deleted, false otherwise (or an array of results).
+     * @throws \InvalidArgumentException
+     */
     public static function delete(array &$arr, $key)
     {
         if (is_array($key)) {
@@ -161,6 +170,15 @@ class DotArr
 
     //region Matches
 
+    /**
+     * Verifies if an item with the given key exists in a dot-notated array or not.
+     *
+     * @param array            $arr The dot-notated array.
+     * @param int|string|array $key The key of the item to check for or an array of keys.
+     *
+     * @return bool|array Returns true if the item exists, false otherwise (or an array of results).
+     * @throws \InvalidArgumentException
+     */
     public static function keyExists(array $arr, $key)
     {
         if (is_array($key)) {

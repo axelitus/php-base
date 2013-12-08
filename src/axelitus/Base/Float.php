@@ -23,11 +23,30 @@ class Float
 {
     //region Value Testing
 
+    /**
+     * Tests if the given value is a float (type test).
+     *
+     * This function uses the is_float() function to test.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is a float, false otherwise.
+     */
     public static function is($value)
     {
         return is_float($value);
     }
 
+    /**
+     * Tests if the given value is a float or a string representation of a float.
+     *
+     * This function is strict, so it does not match integers of the form X,
+     * though it matches numbers of the form X.0 use @see Num::is to match either a float or an int.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is a float or a representation of a float, false otherwise.
+     */
     public static function extIs($value)
     {
         return (static::is($value) || (is_numeric($value) && !Int::extIs($value)));
@@ -37,6 +56,17 @@ class Float
 
     //region Comparing
 
+    /**
+     * Compares two float values.
+     *
+     * The returning value contains the actual value difference.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float Returns <0 if $float1<$float2, =0 if $float1 == $float2, >0 if $float1>$float2
+     * @throws \InvalidArgumentException
+     */
     public static function compare($float1, $float2)
     {
         if (!static::is($float1) || !static::is($float2)) {
@@ -46,6 +76,14 @@ class Float
         return ($float1 - $float2);
     }
 
+    /**
+     * Tests if two given float values are equal.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return bool Returns true if $float1 == $float2, false otherwise.
+     */
     public static function equals($float1, $float2)
     {
         return (static::compare($float1, $float2) == 0);

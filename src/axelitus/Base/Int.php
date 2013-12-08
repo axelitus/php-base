@@ -23,11 +23,27 @@ class Int
 {
     //region Value Testing
 
+    /**
+     * Tests if the given value is an int (type test).
+     *
+     * This function uses the is_int() function to test.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is an int, false otherwise.
+     */
     public static function is($value)
     {
         return is_int($value);
     }
 
+    /**
+     * Tests if the given value is an int or a string representation of an int.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is an int or a representation of an int, false otherwise.
+     */
     public static function extIs($value)
     {
         return static::is($value) || (is_string($value) && (strval(intval($value)) === strval($value)));
@@ -37,6 +53,17 @@ class Int
 
     //region Comparing
 
+    /**
+     * Compares two int values.
+     *
+     * The returning value contains the actual value difference.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int Returns <0 if $int1<$int2, =0 if $int1 == $int2, >0 if $int1>$int2
+     * @throws \InvalidArgumentException
+     */
     public static function compare($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
@@ -46,6 +73,14 @@ class Int
         return ($int1 - $int2);
     }
 
+    /**
+     * Tests if two given int values are equal.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return bool Returns true if $int1 == $int2, false otherwise.
+     */
     public static function equals($int1, $int2)
     {
         return (static::compare($int1, $int2) == 0);
