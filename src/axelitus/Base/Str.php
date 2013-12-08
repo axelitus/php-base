@@ -190,7 +190,6 @@ class Str
             return false;
         }
 
-        // TODO: in_array()? or other native function like array_search() perhaps?
         foreach ($values as $index => $str) {
             if (static::equals($input, $str, $caseInsensitive)) {
                 return ($returnIndex) ? $index : true;
