@@ -145,6 +145,27 @@ class TestsString extends TestCase
         $this->assertEquals('ghijkl', Str::replace('aBcDEf', 'abcdef', 'ghijkl', true));
     }
 
+    public function testMbStrReplaceCaller()
+    {
+        $expected = ['String A to replace.', 'String B to replace.'];
+        $actual = $this->execNonPublicMethod('axelitus\Base\Str', 'mbStrReplaceCaller', ['change', 'replace', ['String A to change.', 'String B to change.']]);
+        $this->assertEquals($expected, $actual);
+
+        $expected = 'To replace the string some values will be replaced.';
+        $actual = $this->execNonPublicMethod('axelitus\Base\Str', 'mbStrReplaceCaller', [['change', 'modify'], 'replace', 'To modify the string some values will be changed.']);
+        $this->assertEquals($expected, $actual);
+
+        $expected = 'String not changed.';
+        $actual = $this->execNonPublicMethod('axelitus\Base\Str', 'mbStrReplaceCaller', ['none', 'replace', 'String not changed.']);
+        $this->assertEquals($expected, $actual);
+
+        $count = 0;
+        $expected = 'One replacement. Two replacements. Three replacements.';
+        $actual = $this->execNonPublicMethod('axelitus\Base\Str', 'mbStrReplaceCaller', ['change', 'replacement', 'One change. Two changes. Three changes.', false, Str::DEFAULT_ENCODING, &$count]);
+        $this->assertEquals($expected, $actual);
+        $this->assertEquals(3, $count);
+    }
+
     public function testTruncate()
     {
         $this->assertEquals('abcdefghijklmnop', Str::truncate('abcdefghijklmnop', Str::length('abcdefghijklmnop')));
