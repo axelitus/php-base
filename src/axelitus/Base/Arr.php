@@ -77,9 +77,11 @@ class Arr implements \ArrayAccess, \Countable
     }
 
     /**
-     * @param $key
+     * Deletes an item from the dot-notated internal array.
      *
-     * @return array|bool
+     * @param int|string|array $key The key of the item to delete or an array of keys.
+     *
+     * @return bool|array Returns true if the item was found and deleted, false otherwise (or array of results).
      *
      * @see DotArr::delete
      */
@@ -93,9 +95,11 @@ class Arr implements \ArrayAccess, \Countable
     //region Matches
 
     /**
-     * @param $key
+     * Checks if the dot-notated internal array has the given key.
      *
-     * @return array|bool
+     * @param int|string|array $key The key to check or array of keys.
+     *
+     * @return bool|array Returns true if the array has the key, false otherwise (or an array of results).
      * @see DotArr::keyExists
      */
     public function has($key)
