@@ -17,6 +17,9 @@ namespace axelitus\Base;
  *
  * Int operations.
  *
+ * The function in this class are strict-typed (only accept int values).
+ * If you want to accept both int and float use the {@link Num} class instead.
+ *
  * @package axelitus\Base
  */
 class Int
