@@ -261,13 +261,13 @@ class TestsNum extends TestCase
         $this->assertEquals(1.25, Num::sub(3.5, 2.25));
     }
 
-    public function tesSubEx01()
+    public function testSubEx01()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
         Num::sub(5, false);
     }
 
-    public function tesSubEx02()
+    public function testSubEx02()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
         Num::sub(false, 5);
@@ -307,13 +307,13 @@ class TestsNum extends TestCase
         Num::div(5, false);
     }
 
-    public function tesDivEx02()
+    public function testDivEx02()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric.");
         Num::div(false, 5);
     }
 
-    public function tesDivEx03()
+    public function testDivEx03()
     {
         $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$num2 parameter cannot be zero.");
         Num::div(5, 0);
@@ -333,7 +333,7 @@ class TestsNum extends TestCase
         Num::pow(5, false);
     }
 
-    public function tesPowEx02()
+    public function testPowEx02()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric.");
         Num::pow(false, 5);
@@ -344,6 +344,7 @@ class TestsNum extends TestCase
         $this->assertEquals(0, Num::mod(25, 5));
         $this->assertEquals(1, Num::mod(43, 3));
         $this->assertEquals(6, Num::mod(278, 8));
+        $this->assertEquals(9.35, Num::mod(328.35, 11));
     }
 
     public function testModEx01()
@@ -352,13 +353,13 @@ class TestsNum extends TestCase
         Num::mod(5, false);
     }
 
-    public function tesModEx02()
+    public function testModEx02()
     {
         $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric.");
         Num::mod(false, 5);
     }
 
-    public function tesModEx03()
+    public function testModEx03()
     {
         $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
         Num::mod(5, 0);
