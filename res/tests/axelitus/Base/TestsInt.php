@@ -217,4 +217,145 @@ class TestsInt extends TestCase
     }
 
     //endregion
+
+    //region Basic numeric operations
+
+    public function testAdd()
+    {
+        $this->assertEquals(5, Int::add(3, 2));
+        $this->assertEquals(-5, Int::add(-3, -2));
+        $this->assertEquals(-1, Int::add(-3, 2));
+    }
+
+    public function testAddEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::add(5, 2.3);
+    }
+
+    public function testAddEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::add(3.4, 5);
+    }
+
+    public function testSub()
+    {
+        $this->assertEquals(1, Int::sub(3, 2));
+        $this->assertEquals(-1, Int::sub(-3, -2));
+        $this->assertEquals(-5, Int::sub(-3, 2));
+    }
+
+    public function testSubEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::sub(5, 2.3);
+    }
+
+    public function testSubEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::sub(3.4, 5);
+    }
+
+    public function testMul()
+    {
+        $this->assertEquals(25, Int::mul(5, 5));
+        $this->assertEquals(27, Int::mul(-9, -3));
+        $this->assertEquals(-42, Int::mul(-7, 6));
+    }
+
+    public function testMulEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::mul(5, 2.3);
+    }
+
+    public function testMulEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::mul(3.4, 5);
+    }
+
+    public function testDiv()
+    {
+        $this->assertEquals(3, Int::div(27, 9));
+        $this->assertEquals(6, Int::div(42, 7));
+        $this->assertEquals(2, Int::div(8, 4));
+    }
+
+    public function testDivEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::div(5, 2.3);
+    }
+
+    public function testDivEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        Int::div(3.4, 5);
+    }
+
+    public function testDivEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$int2 parameter cannot be zero.");
+        Int::div(5, 0);
+    }
+
+    public function testPow()
+    {
+        $this->assertEquals(125, Int::pow(5, 3));
+        $this->assertEquals(-8, Int::pow(-2, 3));
+        $this->assertEquals(15129, Int::pow(123, 2));
+    }
+
+    public function testPowEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be int.");
+        Int::pow(5, 2.3);
+    }
+
+    public function testPowEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be int.");
+        Int::pow(3.4, 5);
+    }
+
+    public function testMod()
+    {
+        $this->assertEquals(0, Int::mod(25, 5));
+        $this->assertEquals(1, Int::mod(43, 3));
+        $this->assertEquals(6, Int::mod(278, 8));
+    }
+
+    public function testModEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be int.");
+        Int::mod(5, 2.3);
+    }
+
+    public function testModEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be int.");
+        Int::mod(3.4, 5);
+    }
+
+    public function testModEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        Int::mod(5, 0);
+    }
+
+    public function testSqrt()
+    {
+        $this->assertEquals(3, Int::sqrt(9));
+    }
+
+    public function testSqrtEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be int.");
+        Int::sqrt(2.3);
+    }
+
+    //endregion
 }

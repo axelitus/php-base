@@ -222,4 +222,133 @@ class TestsFloat extends TestCase
     }
 
     //endregion
+
+    //region Basic numeric operations
+
+    public function testAdd()
+    {
+        $this->assertEquals(5.75, Float::add(3.5, 2.25));
+    }
+
+    public function testAddEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::add(5.0, false);
+    }
+
+    public function testAddEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::add(false, 5.0);
+    }
+
+    public function testSub()
+    {
+        $this->assertEquals(1.25, Float::sub(3.5, 2.25));
+    }
+
+    public function testSubEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::sub(5.0, false);
+    }
+
+    public function testSubEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::sub(false, 5.0);
+    }
+
+    public function testMul()
+    {
+        $this->assertEquals(28.875, Float::mul(5.5, 5.25));
+    }
+
+    public function testMulEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::mul(5.0, false);
+    }
+
+    public function testMulEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::mul(false, 5.0);
+    }
+
+    public function testDiv()
+    {
+        $this->assertEquals(5.5, Float::div(23.375, 4.25));
+    }
+
+    public function testDivEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::div(5.0, false);
+    }
+
+    public function testDivEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float.");
+        Float::div(false, 5.0);
+    }
+
+    public function testDivEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$float2 parameter cannot be zero.");
+        Float::div(5.0, 0.0);
+    }
+
+    public function testPow()
+    {
+        $this->assertEquals(97.65625, Float::pow(2.5, 5.0));
+    }
+
+    public function testPowEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be float.");
+        Float::pow(5.0, false);
+    }
+
+    public function testPowEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be float.");
+        Float::pow(false, 5.0);
+    }
+
+    public function testMod()
+    {
+        $this->assertEquals(9.35, Float::mod(328.35, 11.0));
+    }
+
+    public function testModEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be float.");
+        Float::mod(5.0, false);
+    }
+
+    public function testModEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be float.");
+        Float::mod(false, 5.0);
+    }
+
+    public function testModEx03()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        Float::mod(5.0, 0.0);
+    }
+
+    public function testSqrt()
+    {
+        $this->assertEquals(3.0, Float::sqrt(9.0));
+    }
+
+    public function testSqrtEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be float.");
+        Float::sqrt(false);
+    }
+
+    //endregion
 }

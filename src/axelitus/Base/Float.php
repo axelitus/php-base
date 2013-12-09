@@ -206,4 +206,141 @@ class Float
     }
 
     //endregion
+
+    //region Basic numeric operations
+
+    /**
+     * Adds a number to another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function add($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+        }
+
+        return ($float1 + $float2);
+    }
+
+    /**
+     * Subtracts a number from another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sub($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+        }
+
+        return ($float1 - $float2);
+    }
+
+    /**
+     * Multiplies a number by another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mul($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+        }
+
+        return ($float1 * $float2);
+    }
+
+    /**
+     * Divides a number by another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function div($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+        }
+
+        if ($float2 == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$float2 parameter cannot be zero.");
+        }
+
+        return ($float1 / $float2);
+    }
+
+    /**
+     * Raises a number to the power of another number.
+     *
+     * @param float $base The base number.
+     * @param float $exponent The power exponent.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function pow($base, $exponent)
+    {
+        if (!static::is($base) || !static::is($exponent)) {
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be float.");
+        }
+
+        return pow($base, $exponent);
+    }
+
+    /**
+     * Gets the remainder of a number divided by another number.
+     *
+     * @param float $base The left operand.
+     * @param float $modulus The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mod($base, $modulus)
+    {
+        if (!static::is($base) || !static::is($modulus)) {
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be float.");
+        }
+
+        if ($modulus == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        }
+
+        return fmod($base, $modulus);
+    }
+
+    /**
+     * Gets the square root of a number.
+     *
+     * @param float $base The base to use.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sqrt($base)
+    {
+        if (!static::is($base)) {
+            throw new \InvalidArgumentException("The \$base parameters must be float.");
+        }
+
+        return sqrt($base);
+    }
+
+    //endregion
 }

@@ -195,4 +195,141 @@ class Int
     }
 
     //endregion
+
+    //region Basic numeric operations
+
+    /**
+     * Adds a number to another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function add($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+        }
+
+        return ($int1 + $int2);
+    }
+
+    /**
+     * Subtracts a number from another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sub($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+        }
+
+        return ($int1 - $int2);
+    }
+
+    /**
+     * Multiplies a number by another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mul($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+        }
+
+        return ($int1 * $int2);
+    }
+
+    /**
+     * Divides a number by another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function div($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+        }
+
+        if ($int2 == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$int2 parameter cannot be zero.");
+        }
+
+        return ($int1 / $int2);
+    }
+
+    /**
+     * Raises a number to the power of another number.
+     *
+     * @param int $base The base number.
+     * @param int $exponent The power exponent.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function pow($base, $exponent)
+    {
+        if (!static::is($base) || !static::is($exponent)) {
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be int.");
+        }
+
+        return pow($base, $exponent);
+    }
+
+    /**
+     * Gets the remainder of a number divided by another number.
+     *
+     * @param int $base The left operand.
+     * @param int $modulus The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mod($base, $modulus)
+    {
+        if (!static::is($base) || !static::is($modulus)) {
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be int.");
+        }
+
+        if ($modulus == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        }
+
+        return ($base % $modulus);
+    }
+
+    /**
+     * Gets the square root of a number.
+     *
+     * @param int $base The base to use.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sqrt($base)
+    {
+        if (!static::is($base)) {
+            throw new \InvalidArgumentException("The \$base parameters must be int.");
+        }
+
+        return sqrt($base);
+    }
+
+    //endregion
 }
