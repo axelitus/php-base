@@ -151,7 +151,10 @@ class TestsNum extends TestCase
     {
         $value = false;
         $range = [0, 1];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be numeric."
+        );
         Num::inRange($value, $range[0], $range[1]);
     }
 
@@ -159,7 +162,10 @@ class TestsNum extends TestCase
     {
         $value = 1;
         $range = [false, 1.5];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be numeric."
+        );
         Num::inRange($value, $range[0], $range[1]);
     }
 
@@ -167,7 +173,10 @@ class TestsNum extends TestCase
     {
         $value = 1;
         $range = [0, false];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be numeric."
+        );
         Num::inRange($value, $range[0], $range[1]);
     }
 
@@ -315,7 +324,10 @@ class TestsNum extends TestCase
 
     public function testDivEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$num2 parameter cannot be zero.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot divide by zero. The \$num2 parameter cannot be zero."
+        );
         Num::div(5, 0);
     }
 
@@ -329,13 +341,19 @@ class TestsNum extends TestCase
 
     public function testPowEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$exponent parameters must be numeric."
+        );
         Num::pow(5, false);
     }
 
     public function testPowEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$exponent parameters must be numeric."
+        );
         Num::pow(false, 5);
     }
 
@@ -349,19 +367,28 @@ class TestsNum extends TestCase
 
     public function testModEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$modulus parameters must be numeric."
+        );
         Num::mod(5, false);
     }
 
     public function testModEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$modulus parameters must be numeric."
+        );
         Num::mod(false, 5);
     }
 
     public function testModEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot divide by zero. The \$modulus parameter cannot be zero."
+        );
         Num::mod(5, 0);
     }
 

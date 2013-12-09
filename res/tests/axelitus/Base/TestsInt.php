@@ -71,13 +71,19 @@ class TestsInt extends TestCase
 
     public function testCompareEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$int1 and \$int2 parameters must be of type int."
+        );
         Int::compare(false, 5);
     }
 
     public function testCompareEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$int1 and \$int2 parameters must be of type int."
+        );
         Int::compare(-5, false);
     }
 
@@ -120,7 +126,10 @@ class TestsInt extends TestCase
     {
         $value = 0.5;
         $range = [0, 1];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type int.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be of type int."
+        );
         Int::inRange($value, $range[0], $range[1]);
     }
 
@@ -128,7 +137,10 @@ class TestsInt extends TestCase
     {
         $value = 1;
         $range = [0.5, 1];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type int.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be of type int."
+        );
         Int::inRange($value, $range[0], $range[1]);
     }
 
@@ -136,7 +148,10 @@ class TestsInt extends TestCase
     {
         $value = 1;
         $range = [0, 1.5];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type int.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be of type int."
+        );
         Int::inRange($value, $range[0], $range[1]);
     }
 
@@ -212,7 +227,10 @@ class TestsInt extends TestCase
     {
         $this->assertFalse(@Int::random(5, -5));
 
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning', "The \$min value cannot be greater than the \$max value.");
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error_Warning',
+            "The \$min value cannot be greater than the \$max value."
+        );
         Int::random(5, -5);
     }
 
@@ -298,7 +316,10 @@ class TestsInt extends TestCase
 
     public function testDivEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$int2 parameter cannot be zero.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot divide by zero. The \$int2 parameter cannot be zero."
+        );
         Int::div(5, 0);
     }
 
@@ -342,7 +363,10 @@ class TestsInt extends TestCase
 
     public function testModEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot divide by zero. The \$modulus parameter cannot be zero."
+        );
         Int::mod(5, 0);
     }
 

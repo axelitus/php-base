@@ -71,13 +71,19 @@ class TestsFloat extends TestCase
 
     public function testCompareEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::compare(false, 5.5);
     }
 
     public function testCompareEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::compare(-5.5, false);
     }
 
@@ -120,7 +126,10 @@ class TestsFloat extends TestCase
     {
         $value = 1;
         $range = [0.5, 1.5];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be of type float."
+        );
         Float::inRange($value, $range[0], $range[1]);
     }
 
@@ -128,7 +137,10 @@ class TestsFloat extends TestCase
     {
         $value = 1.0;
         $range = [0.5, 1];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be of type float."
+        );
         Float::inRange($value, $range[0], $range[1]);
     }
 
@@ -136,7 +148,10 @@ class TestsFloat extends TestCase
     {
         $value = 1.0;
         $range = [0, 1.5];
-        $this->setExpectedException('\InvalidArgumentException', "The \$value, \$lower and \$upper parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value, \$lower and \$upper parameters must be of type float."
+        );
         Float::inRange($value, $range[0], $range[1]);
     }
 
@@ -192,24 +207,33 @@ class TestsFloat extends TestCase
 
         $rand = Float::random(-20.5, 0.5, 2);
         $output = ($rand >= -20.5 && $rand <= 0.5);
-        $control = (($rand - ((int) $rand)) <= 0.99);
+        $control = (($rand - ((int)$rand)) <= 0.99);
         $this->assertTrue(is_float($rand) && $output && $control);
 
         $rand = Float::random(150.5, 250.5, null, 10);
         $output = ($rand >= 150.5 && $rand <= 250.5);
         $this->assertTrue(is_float($rand) && $output);
-        $this->assertEquals($rand, Float::random(150.5, 250.5, null, 10)); // Because it's seeded it should give us the same result
+        $this->assertEquals(
+            $rand,
+            Float::random(150.5, 250.5, null, 10)
+        ); // Because it's seeded it should give us the same result
     }
 
     public function testRandomEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$min and \$max parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$min and \$max parameters must be of type float."
+        );
         Float::random(false);
     }
 
     public function testRandomEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$min and \$max parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$min and \$max parameters must be of type float."
+        );
         Float::random(5.5, false);
     }
 
@@ -217,7 +241,10 @@ class TestsFloat extends TestCase
     {
         $this->assertFalse(@Float::random(5.5, -5.5));
 
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning', "The \$min value cannot be greater than the \$max value.");
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error_Warning',
+            "The \$min value cannot be greater than the \$max value."
+        );
         Float::random(5.5, -5.5);
     }
 
@@ -295,7 +322,10 @@ class TestsFloat extends TestCase
 
     public function testDivEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$float2 parameter cannot be zero.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot divide by zero. The \$float2 parameter cannot be zero."
+        );
         Float::div(5.0, 0.0);
     }
 
@@ -335,7 +365,10 @@ class TestsFloat extends TestCase
 
     public function testModEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot divide by zero. The \$modulus parameter cannot be zero."
+        );
         Float::mod(5.0, 0.0);
     }
 

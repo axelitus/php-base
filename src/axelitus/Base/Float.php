@@ -288,7 +288,7 @@ class Float
     /**
      * Raises a number to the power of another number.
      *
-     * @param float $base The base number.
+     * @param float $base     The base number.
      * @param float $exponent The power exponent.
      *
      * @return float The result of the operation.
@@ -306,7 +306,7 @@ class Float
     /**
      * Gets the remainder of a number divided by another number.
      *
-     * @param float $base The left operand.
+     * @param float $base    The left operand.
      * @param float $modulus The right operand.
      *
      * @return float The result of the operation.

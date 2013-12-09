@@ -280,7 +280,7 @@ class Int
     /**
      * Raises a number to the power of another number.
      *
-     * @param int $base The base number.
+     * @param int $base     The base number.
      * @param int $exponent The power exponent.
      *
      * @return int The result of the operation.
@@ -298,7 +298,7 @@ class Int
     /**
      * Gets the remainder of a number divided by another number.
      *
-     * @param int $base The left operand.
+     * @param int $base    The left operand.
      * @param int $modulus The right operand.
      *
      * @return int The result of the operation.

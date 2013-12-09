@@ -170,7 +170,7 @@ class Bool
      * and array of booleans in the order in which they were given.
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -214,7 +214,7 @@ class Bool
      * result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -275,7 +275,7 @@ class Bool
      * result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -335,7 +335,7 @@ class Bool
      * an array of results, one result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -388,7 +388,7 @@ class Bool
      * an array of results, one result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException

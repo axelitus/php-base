@@ -58,7 +58,10 @@ class TestsArr extends TestCase
 
     public function testGet()
     {
-        static::getNonPublicProperty($this->arr, 'data')->setValue($this->arr, ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']]]);
+        static::getNonPublicProperty($this->arr, 'data')->setValue(
+            $this->arr,
+            ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']]]
+        );
 
         $this->assertEquals('value', $this->arr->get('first'));
         $this->assertEquals('other value', $this->arr->get('second.lvl.opt'));
@@ -81,7 +84,10 @@ class TestsArr extends TestCase
 
     public function testDelete()
     {
-        static::getNonPublicProperty($this->arr, 'data')->setValue($this->arr, ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']], 'third' => ['sub' => 'sub value']]);
+        static::getNonPublicProperty($this->arr, 'data')->setValue(
+            $this->arr,
+            ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']], 'third' => ['sub' => 'sub value']]
+        );
 
         $this->assertTrue($this->arr->delete('first'));
         $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
@@ -89,7 +95,10 @@ class TestsArr extends TestCase
 
         $this->assertFalse($this->arr->delete('fourth'));
 
-        $this->assertEquals(['second' => true, 'third' => true, 'fifth' => false], $this->arr->delete(['second', 'third', 'fifth']));
+        $this->assertEquals(
+            ['second' => true, 'third' => true, 'fifth' => false],
+            $this->arr->delete(['second', 'third', 'fifth'])
+        );
         $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
         $this->assertArrayNotHasKey('second', $data);
         $this->assertArrayNotHasKey('third', $data);
@@ -102,12 +111,18 @@ class TestsArr extends TestCase
 
     public function testHas()
     {
-        static::getNonPublicProperty($this->arr, 'data')->setValue($this->arr, ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']], 'third' => ['sub' => 'sub value']]);
+        static::getNonPublicProperty($this->arr, 'data')->setValue(
+            $this->arr,
+            ['first' => 'value', 'second' => ['lvl' => ['opt' => 'other value']], 'third' => ['sub' => 'sub value']]
+        );
 
         $this->assertTrue($this->arr->has('first'));
         $this->assertTrue($this->arr->has('second.lvl'));
         $this->assertFalse($this->arr->has('fourth'));
-        $this->assertEquals(['first' => true, 'third.sub' => true, 'fifth' => false], $this->arr->has(['first', 'third.sub', 'fifth']));
+        $this->assertEquals(
+            ['first' => true, 'third.sub' => true, 'fifth' => false],
+            $this->arr->has(['first', 'third.sub', 'fifth'])
+        );
     }
 
     //endregion
@@ -142,17 +157,30 @@ class TestsArr extends TestCase
         $this->assertEquals(0, count($this->arr));
         $this->assertEquals(false, $this->arr->count('first'));
 
-        static::getNonPublicProperty($this->arr, 'data')->setValue($this->arr, ['first' => 'value', 'second' => ['lvl' => ['opt' => ['value 1', 'value 2', 'value 3', 'value 4', 'value 5']]], 'third' => ['sub' => 'sub value']]);
+        static::getNonPublicProperty($this->arr, 'data')->setValue(
+            $this->arr,
+            [
+                'first' => 'value',
+                'second' => ['lvl' => ['opt' => ['value 1', 'value 2', 'value 3', 'value 4', 'value 5']]],
+                'third' => ['sub' => 'sub value']
+            ]
+        );
         $this->assertEquals(1, $this->arr->count('first'));
         $this->assertEquals(1, $this->arr->count('second.lvl'));
         $this->assertEquals(5, $this->arr->count('second.lvl.opt'));
 
-        $this->assertEquals(['first' => 1, 'second.lvl.opt' => 5, 'third' => 1, 'fourth' => false], $this->arr->count(['first', 'second.lvl.opt', 'third', 'fourth']));
+        $this->assertEquals(
+            ['first' => 1, 'second.lvl.opt' => 5, 'third' => 1, 'fourth' => false],
+            $this->arr->count(['first', 'second.lvl.opt', 'third', 'fourth'])
+        );
     }
 
     public function testCountableEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$key parameter must be int or string (or array of them).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$key parameter must be int or string (or array of them)."
+        );
         $this->arr->count(false);
     }
 
