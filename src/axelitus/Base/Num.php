@@ -262,7 +262,7 @@ class Num
      * @param int|float $base The left operand.
      * @param int|float $modulus The right operand.
      *
-     * @return int|float The result of the operation.
+     * @return float The result of the operation.
      * @throws \InvalidArgumentException
      */
     public static function mod($base, $modulus)
@@ -275,7 +275,7 @@ class Num
             throw new \InvalidArgumentException("Cannot divide by zero. The \$modulus parameter cannot be zero.");
         }
 
-        return ($base % $modulus);
+        return fmod($base, $modulus);
     }
 
     /**
