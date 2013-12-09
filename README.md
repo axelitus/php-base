@@ -33,7 +33,9 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 
 All classes are referenced from the package namespace if not otherwise stated.
 
+ - **Arr** - Dot-notated array object.
  - **Bool** - Boolean operations.
+ - **DotArr** - Dot-notated array operations.
  - **Float** - Float operations.
  - **Int** - Int operations.
  - **Num** - Numeric operations.
