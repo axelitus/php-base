@@ -36,7 +36,7 @@ class Arr implements \ArrayAccess, \Countable
      * Constructor
      *
      * The given initial data will be converted using DotArr::convert().
-     * Values may be lost, @see DotArr::convert.
+     * Values may be lost, {@link DotArr::convert}.
      *
      * @param array $data The initial value for the Arr object.
      */
@@ -80,6 +80,8 @@ class Arr implements \ArrayAccess, \Countable
      * @param $key
      *
      * @return array|bool
+     *
+     * @see DotArr::delete
      */
     public function delete($key)
     {
@@ -94,6 +96,7 @@ class Arr implements \ArrayAccess, \Countable
      * @param $key
      *
      * @return array|bool
+     * @see DotArr::keyExists
      */
     public function has($key)
     {

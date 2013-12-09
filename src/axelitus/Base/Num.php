@@ -26,7 +26,7 @@ class Num
     /**
      * Tests if the given value is a number (type test).
      *
-     * This function uses @see Int::is and @see Float::is function to test.
+     * This function uses {@link Int::is} and {@link Float::is} function to test.
      *
      * @param mixed $value The value to test.
      *
@@ -40,7 +40,7 @@ class Num
     /**
      * Tests if the given value is a number or a string representation of a number.
      *
-     * This function uses @see Int::extIs and @see Float::extIs function to test.
+     * This function uses {@link Int::extIs} and {@link Float::extIs} function to test.
      *
      * @param mixed $value The value to test.
      *
@@ -241,7 +241,7 @@ class Num
     /**
      * Raises a number to the power of another number.
      *
-     * @param int|float $base The base number.
+     * @param int|float $base     The base number.
      * @param int|float $exponent The power exponent.
      *
      * @return int|float The result of the operation.
@@ -259,7 +259,7 @@ class Num
     /**
      * Gets the remainder of a number divided by another number.
      *
-     * @param int|float $base The left operand.
+     * @param int|float $base    The left operand.
      * @param int|float $modulus The right operand.
      *
      * @return float The result of the operation.
