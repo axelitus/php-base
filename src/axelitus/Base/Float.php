@@ -43,9 +43,6 @@ class Float
     /**
      * Tests if the given value is a float or a string representation of a float.
      *
-     * This function is strict, so it does not match integers of the form X,
-     * though it matches numbers of the form X.0 use @see Num::is to match either a float or an int.
-     *
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the given value is a float or a representation of a float, false otherwise.
