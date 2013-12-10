@@ -54,6 +54,28 @@ class Float
 
     //endregion
 
+    //region Conversion
+
+    /**
+     * Converts a given value to float.
+     *
+     * If the given value is not identified as float by {@link Float::extIs} the default value is returned.
+     *
+     * @param mixed $value The value to convert from.
+     * @param mixed $default The default value.
+     *
+     * @return mixed Returns the converted float value or the default value.
+     */
+    public static function from($value, $default = null)
+    {
+        if (!static::extIs($value)) {
+            return $default;
+        }
+        return (float)$value;
+    }
+
+    //endregion
+
     //region Comparing
 
     /**

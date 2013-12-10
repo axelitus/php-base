@@ -60,6 +60,21 @@ class TestsFloat extends TestCase
 
     //endregion
 
+    //region Conversion
+
+    public function testFrom()
+    {
+        $this->assertEquals(5.0, Float::From('5.0'));
+        $this->assertEquals(9.23, Float::From('9.23'));
+        $this->assertEquals(null, Float::From('5')); // this is evaluated as integer so the default value is returned
+
+        $this->assertEquals(null, Float::From('string'));
+        $this->assertEquals(5.0, Float::From('string', 5.0));
+        $this->assertEquals(9.23, Float::From('string', 9.23));
+    }
+
+    //endregion
+
     //region Comparing
 
     public function testCompare()

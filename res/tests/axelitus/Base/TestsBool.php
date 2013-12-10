@@ -67,6 +67,29 @@ class TestsBool extends TestCase
 
     //endregion
 
+    //region Conversion
+
+    public function testFrom()
+    {
+        $this->assertTrue(Bool::From('yes'));
+        $this->assertTrue(Bool::From('1'));
+        $this->assertTrue(Bool::From('true'));
+        $this->assertTrue(Bool::From('y'));
+        $this->assertTrue(Bool::From('on'));
+
+        $this->assertFalse(Bool::From('no'));
+        $this->assertFalse(Bool::From('0'));
+        $this->assertFalse(Bool::From('false'));
+        $this->assertFalse(Bool::From('n'));
+        $this->assertFalse(Bool::From('off'));
+
+        $this->assertEquals(null, Bool::From('string'));
+        $this->assertEquals(true, Bool::From('string', true));
+        $this->assertEquals(false, Bool::From('string', false));
+    }
+
+    //endregion
+
     //region Parsing
 
     public function testParse()

@@ -60,6 +60,21 @@ class TestsInt extends TestCase
 
     //endregion
 
+    //region Conversion
+
+    public function testFrom()
+    {
+        $this->assertEquals(5, Int::From('5'));
+        $this->assertEquals(9, Int::From('9'));
+        $this->assertEquals(null, Int::From('5.0'));
+
+        $this->assertEquals(null, Int::From('string'));
+        $this->assertEquals(5, Int::From('string', 5));
+        $this->assertEquals(9, Int::From('string', 9));
+    }
+
+    //endregion
+
     //region Comparing
 
     public function testCompare()
