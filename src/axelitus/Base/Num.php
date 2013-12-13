@@ -13,7 +13,7 @@
 namespace axelitus\Base;
 
 /**
- * Class Numeric
+ * Class Num
  *
  * Numeric operations.
  *
@@ -26,7 +26,7 @@ class Num
     /**
      * Tests if the given value is a number (type test).
      *
-     * This function uses {@link Int::is} and {@link Float::is} function to test.
+     * This function uses {@link Int::is} and {@link Float::is} functions to test.
      *
      * @param mixed $value The value to test.
      *
