@@ -28,6 +28,8 @@ class TestsBigInt extends TestCase
         $this->assertTrue(BigInt::is(-5));
         $this->assertTrue(BigInt::is(0));
         $this->assertTrue(BigInt::is(5));
+        $this->assertTrue(BigInt::is('-5'));
+        $this->assertTrue(BigInt::is('0'));
         $this->assertTrue(BigInt::is('5'));
         $this->assertTrue(BigInt::is('824357247439634062562562966721753589745973549'));
         $this->assertFalse(BigInt::is(-5.0));
