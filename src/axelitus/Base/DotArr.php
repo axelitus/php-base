@@ -62,30 +62,42 @@ class DotArr
     public static function get(array $arr, $key, $default = null)
     {
         if (is_array($key)) {
-            $return = [];
-            foreach ($key as $k) {
-                $return[$k] = static::get($arr, $k, $default);
-            }
-            return $return;
-        }
-
-        if (!Int::is($key) && !Str::is($key)) {
-            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-        }
-
-        if (array_key_exists($key, $arr)) {
-            return $arr[$key];
-        }
-
-        foreach (explode('.', $key) as $key_seg) {
-            if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
-                return $default;
+            return static::getMultiple($arr, $key, $default);
+        } else {
+            if (!Int::is($key) && !Str::is($key)) {
+                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
             }
 
-            $arr = $arr[$key_seg];
-        }
+            foreach (explode('.', $key) as $key_seg) {
+                if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
+                    return $default;
+                }
 
-        return $arr;
+                $arr = $arr[$key_seg];
+            }
+
+            return $arr;
+        }
+    }
+
+    /**
+     * Gets multiple values from a dot-notated array.
+     *
+     * @internal
+     *
+     * @param array $arr     The array to get the values from.
+     * @param array $keys    The keys to the items to get the values from.
+     * @param mixed $default A default value to return if the item is not found.
+     *
+     * @return array The values of the found items or the default values if not found.
+     */
+    private static function getMultiple(array $arr, array $keys, $default = null)
+    {
+        $return = [];
+        foreach ($keys as $key) {
+            $return[$key] = static::get($arr, $key, $default);
+        }
+        return $return;
     }
 
     /**
@@ -100,9 +112,7 @@ class DotArr
     public static function set(array &$arr, $key, $value = null)
     {
         if (is_array($key)) {
-            foreach ($key as $k => $v) {
-                static::set($arr, $k, $v);
-            }
+            static::setMultiple($arr, $key);
         } else {
             if (!Int::is($key) && !Str::is($key)) {
                 throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
@@ -123,6 +133,21 @@ class DotArr
     }
 
     /**
+     * Sets multiple values to a dot-notated array.
+     *
+     * @internal
+     *
+     * @param array $arr     The array to set the values to.
+     * @param array $keyvals The key=>value associative array to set the item values.
+     */
+    private static function setMultiple(array &$arr, array $keyvals)
+    {
+        foreach ($keyvals as $key => $value) {
+            static::set($arr, $key, $value);
+        }
+    }
+
+    /**
      * Deletes an item from a dot-notated array.
      *
      * @param array            $arr The dot-notated array.
@@ -134,36 +159,52 @@ class DotArr
     public static function delete(array &$arr, $key)
     {
         if (is_array($key)) {
-            $return = [];
-            foreach ($key as $k) {
-                $return[$k] = static::delete($arr, $k);
+            return static::deleteMultiple($arr, $key);
+        } else {
+            if (!Int::is($key) && !Str::is($key)) {
+                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
             }
-            return $return;
-        }
 
-        if (!Int::is($key) && !Str::is($key)) {
-            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-        }
+            // TODO: optimize
+            $tmp =& $arr;
+            $keys = explode('.', $key);
+            while (count($keys) > 1) {
+                $key = array_shift($keys);
 
-        $tmp =& $arr;
-        $keys = explode('.', $key);
-        while (count($keys) > 1) {
+                if (!is_array($tmp[$key])) {
+                    return false;
+                }
+
+                $tmp =& $tmp[$key];
+            }
+
             $key = array_shift($keys);
-
-            if (!is_array($tmp[$key])) {
-                return false;
+            if (array_key_exists($key, $tmp)) {
+                unset($tmp[$key]);
+                return true;
             }
 
-            $tmp =& $tmp[$key];
+            return false;
         }
+    }
 
-        $key = array_shift($keys);
-        if (array_key_exists($key, $tmp)) {
-            unset($tmp[$key]);
-            return true;
+    /**
+     * Deletes multiple items from a dot-notated array.
+     *
+     * @internal
+     *
+     * @param array $arr  The array to delete the items from.
+     * @param array $keys The keys of the items to delete.
+     *
+     * @return array Returns an array of results.
+     */
+    private static function deleteMultiple(array &$arr, array $keys)
+    {
+        $return = [];
+        foreach ($keys as $key) {
+            $return[$key] = static::delete($arr, $key);
         }
-
-        return false;
+        return $return;
     }
 
     //endregion
@@ -182,11 +223,7 @@ class DotArr
     public static function keyExists(array $arr, $key)
     {
         if (is_array($key)) {
-            $return = [];
-            foreach ($key as $k) {
-                $return[$k] = static::keyExists($arr, $k);
-            }
-            return $return;
+            return static::keyExistsMultiple($arr, $key);
         }
 
         if (!Int::is($key) && !Str::is($key)) {
@@ -209,44 +246,70 @@ class DotArr
     }
 
     /**
-     * Gets all full and partial matches to the given key.
+     * Verifies if multiple keys exists in a dot-notated array or not.
+     *
+     * @param array $arr  The dot-notated array.
+     * @param array $keys The keys to verify.
+     *
+     * @return array The array of results.
+     */
+    private static function keyExistsMultiple(array $arr, array $keys)
+    {
+        $return = [];
+        foreach ($keys as $key) {
+            $return[$key] = static::keyExists($arr, $key);
+        }
+        return $return;
+    }
+
+    /**
+     * Gets full and partial matches to the given key.
      *
      * The function matches each key sub level to a partial match.
      *
      * @param array            $arr The array to match the key to.
      * @param int|string|array $key The key to be matched or an array of keys.
      *
-     * @return array
+     * @return array The array of full and partial matches.
      * @throws \InvalidArgumentException
      */
     public static function keyMatches(array $arr, $key)
     {
         if (is_array($key)) {
+            return static::keyMatchesMultiple($arr, $key);
+        } else {
+            if (!Int::is($key) && !Str::is($key)) {
+                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+            }
+
+            $match = '';
             $return = [];
-            foreach ($key as $k) {
-                $return[$k] = static::keyMatches($arr, $k);
+            foreach (explode('.', $key) as $k) {
+                if (!is_array($arr) || !array_key_exists($k, $arr)) {
+                    return $return;
+                }
+
+                $match .= (($match != '') ? '.' : '') . $k;
+                $return[] = $match;
+                $arr =& $arr[$k];
             }
             return $return;
         }
+    }
 
-        if (!Int::is($key) && !Str::is($key)) {
-            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-        }
-
-        if (array_key_exists($key, $arr)) {
-            return [$key];
-        }
-
-        $match = '';
+    /**
+     * Gets full and partial matches to multiple keys.
+     *
+     * @param array $arr  The array to match the keys to.
+     * @param array $keys The keys to be matched.
+     *
+     * @return array The array of ful and partial matches of the given keys.
+     */
+    private static function keyMatchesMultiple(array $arr, array $keys)
+    {
         $return = [];
-        foreach (explode('.', $key) as $k) {
-            if (!is_array($arr) || !array_key_exists($k, $arr)) {
-                return $return;
-            }
-
-            $match .= (($match != '') ? '.' : '') . $k;
-            $return[] = $match;
-            $arr =& $arr[$k];
+        foreach ($keys as $key) {
+            $return[$key] = static::keyMatches($arr, $key);
         }
         return $return;
     }
