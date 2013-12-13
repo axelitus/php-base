@@ -35,6 +35,7 @@ class TestsTraversor extends TestCase
             )
         );
 
+        // Test item callback with value and key (by value)
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0, 3, 8, 15],
@@ -46,6 +47,7 @@ class TestsTraversor extends TestCase
             )
         );
 
+        // Test item callback with value and key (by reference)
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [3 => 10, 4 => 15, 5 => 20, 6 => 25],
@@ -58,7 +60,7 @@ class TestsTraversor extends TestCase
             )
         );
 
-        // Test by reference array item callback manipulation
+        // Test item callback with value, key and original array (by reference)
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0 => 'deleted', 1 => 'deleted', 2 => 'deleted', 3 => 'deleted'],
@@ -72,7 +74,27 @@ class TestsTraversor extends TestCase
         );
         $this->assertEquals([], $arr);
 
-        // Test by reference array post item callback manipulation
+        // Test result callback with result array
+        $arr = [2, 3, 4, 5];
+        $this->assertEquals(
+            28,
+            Traversor::run(
+                $arr,
+                function ($value) {
+                    return $value * 2;
+                },
+                function ($result) {
+                    $count = 0;
+                    foreach($result as $value){
+                        $count += $value;
+                    }
+
+                    return $count;
+                }
+            )
+        );
+
+        // Test result callback with result and original array (by reference)
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             $arr,
@@ -81,12 +103,18 @@ class TestsTraversor extends TestCase
                 function ($value) {
                     return $value;
                 },
-                function (&$arr, $result) {
-                    for ($i = 0; $i < count($arr); $i++) {
-                        $arr[$i] = $result;
-                    }
+                function ($result, &$arr) {
+                    // To be sure we need to check if both arrays are equal sized because we "don't know" if the
+                    // original array got modified in the item callback.
+                    if (count($result) === count($arr)) {
+                        for ($i = 0; $i < count($result); $i++) {
+                            $arr[$i] = $result;
+                        }
 
-                    return $result;
+                        return $result;
+                    } else {
+                        return false;
+                    }
                 }
             )
         );

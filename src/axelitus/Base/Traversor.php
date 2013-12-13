@@ -35,7 +35,7 @@ class Traversor
 
         if (!is_null($resultCallback)) {
             // Allow for the original array to be modified with the result array.
-                return $resultCallback($arr, $result);
+            return $resultCallback($result, $arr);
         }
 
         return $result;
