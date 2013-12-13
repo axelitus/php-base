@@ -271,13 +271,13 @@ class TestsInt extends TestCase
 
     public function testAddEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::add(5, 2.3);
     }
 
     public function testAddEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::add(3.4, 5);
     }
 
@@ -290,13 +290,13 @@ class TestsInt extends TestCase
 
     public function testSubEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::sub(5, 2.3);
     }
 
     public function testSubEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::sub(3.4, 5);
     }
 
@@ -309,13 +309,13 @@ class TestsInt extends TestCase
 
     public function testMulEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::mul(5, 2.3);
     }
 
     public function testMulEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::mul(3.4, 5);
     }
 
@@ -328,13 +328,13 @@ class TestsInt extends TestCase
 
     public function testDivEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::div(5, 2.3);
     }
 
     public function testDivEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int.");
         Int::div(3.4, 5);
     }
 
@@ -356,13 +356,13 @@ class TestsInt extends TestCase
 
     public function testPowEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type int.");
         Int::pow(5, 2.3);
     }
 
     public function testPowEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type int.");
         Int::pow(3.4, 5);
     }
 
@@ -375,13 +375,13 @@ class TestsInt extends TestCase
 
     public function testModEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type int.");
         Int::mod(5, 2.3);
     }
 
     public function testModEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type int.");
         Int::mod(3.4, 5);
     }
 
@@ -401,7 +401,7 @@ class TestsInt extends TestCase
 
     public function testSqrtEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be int.");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be of type int.");
         Int::sqrt(2.3);
     }
 

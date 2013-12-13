@@ -243,7 +243,7 @@ class Float
     public static function add($float1, $float2)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
         }
 
         return ($float1 + $float2);
@@ -261,7 +261,7 @@ class Float
     public static function sub($float1, $float2)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
         }
 
         return ($float1 - $float2);
@@ -279,7 +279,7 @@ class Float
     public static function mul($float1, $float2)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
         }
 
         return ($float1 * $float2);
@@ -297,7 +297,7 @@ class Float
     public static function div($float1, $float2)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float.");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
         }
 
         if ($float2 == 0) {
@@ -319,7 +319,7 @@ class Float
     public static function pow($base, $exponent)
     {
         if (!static::is($base) || !static::is($exponent)) {
-            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be float.");
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type float.");
         }
 
         return pow($base, $exponent);
@@ -337,7 +337,7 @@ class Float
     public static function mod($base, $modulus)
     {
         if (!static::is($base) || !static::is($modulus)) {
-            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be float.");
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type float.");
         }
 
         if ($modulus == 0) {
@@ -358,7 +358,7 @@ class Float
     public static function sqrt($base)
     {
         if (!static::is($base)) {
-            throw new \InvalidArgumentException("The \$base parameters must be float.");
+            throw new \InvalidArgumentException("The \$base parameters must be of type float.");
         }
 
         return sqrt($base);

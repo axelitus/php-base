@@ -244,13 +244,13 @@ class TestsBigInt extends TestCase
 
     public function testAddEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::add(5, 2.3);
     }
 
     public function testAddEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::add(3.4, 5);
     }
 
@@ -265,13 +265,13 @@ class TestsBigInt extends TestCase
 
     public function testSubEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::sub(5, 2.3);
     }
 
     public function testSubEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::sub(3.4, 5);
     }
 
@@ -286,13 +286,13 @@ class TestsBigInt extends TestCase
 
     public function testMulEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::mul(5, 2.3);
     }
 
     public function testMulEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::mul(3.4, 5);
     }
 
@@ -307,13 +307,13 @@ class TestsBigInt extends TestCase
 
     public function testDivEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::div(5, 2.3);
     }
 
     public function testDivEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
         BigInt::div(3.4, 5);
     }
 
@@ -337,13 +337,13 @@ class TestsBigInt extends TestCase
 
     public function testPowEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type int (or string representing a big int).");
         BigInt::pow(5, 2.3);
     }
 
     public function testPowEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type int (or string representing a big int).");
         BigInt::pow(3.4, 5);
     }
 
@@ -359,13 +359,13 @@ class TestsBigInt extends TestCase
 
     public function testModEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type int (or string representing a big int).");
         BigInt::mod(5, 2.3);
     }
 
     public function testModEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type int (or string representing a big int).");
         BigInt::mod(3.4, 5);
     }
 
@@ -387,7 +387,7 @@ class TestsBigInt extends TestCase
 
     public function testSqrtEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be int (or string representing a big int).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be of type int (or string representing a big int).");
         BigInt::sqrt(2.3);
     }
 

@@ -201,7 +201,7 @@ class BigFloat
     public static function add($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -227,7 +227,7 @@ class BigFloat
     public static function sub($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -253,7 +253,7 @@ class BigFloat
     public static function mul($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -279,7 +279,7 @@ class BigFloat
     public static function div($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         }
 
         if ($float2 == '0') {
@@ -309,7 +309,7 @@ class BigFloat
     public static function pow($base, $exponent, $scale = null)
     {
         if (!static::is($base) || !static::is($exponent)) {
-            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type float (or string representing a big float).");
         }
 
         if (is_float($base) && is_float($exponent)) {
@@ -335,7 +335,7 @@ class BigFloat
     public static function mod($base, $modulus, $scale = null)
     {
         if (!static::is($base) || !static::is($modulus)) {
-            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type float (or string representing a big float).");
         }
 
         if ($modulus == '0') {
@@ -366,7 +366,7 @@ class BigFloat
     public static function sqrt($base, $scale = null)
     {
         if (!static::is($base)) {
-            throw new \InvalidArgumentException("The \$base parameters must be float (or string representing a big float).");
+            throw new \InvalidArgumentException("The \$base parameters must be of type float (or string representing a big float).");
         }
 
         if (is_float($base)) {

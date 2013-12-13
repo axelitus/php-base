@@ -259,13 +259,13 @@ class TestsBigFloat extends TestCase
 
     public function testAddEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::add(5.0, false);
     }
 
     public function testAddEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::add(false, 5.0);
     }
 
@@ -277,13 +277,13 @@ class TestsBigFloat extends TestCase
 
     public function testSubEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::sub(5.0, false);
     }
 
     public function testSubEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::sub(false, 5.0);
     }
 
@@ -295,13 +295,13 @@ class TestsBigFloat extends TestCase
 
     public function testMulEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::mul(5.0, false);
     }
 
     public function testMulEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::mul(false, 5.0);
     }
 
@@ -313,13 +313,13 @@ class TestsBigFloat extends TestCase
 
     public function testDivEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::div(5.0, false);
     }
 
     public function testDivEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
         BigFloat::div(false, 5.0);
     }
 
@@ -340,13 +340,13 @@ class TestsBigFloat extends TestCase
 
     public function testPowEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type float (or string representing a big float).");
         BigFloat::pow(5.0, false);
     }
 
     public function testPowEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type float (or string representing a big float).");
         BigFloat::pow(false, 5.0);
     }
 
@@ -358,13 +358,13 @@ class TestsBigFloat extends TestCase
 
     public function testModEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type float (or string representing a big float).");
         BigFloat::mod(5.0, false);
     }
 
     public function testModEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type float (or string representing a big float).");
         BigFloat::mod(false, 5.0);
     }
 
@@ -385,7 +385,7 @@ class TestsBigFloat extends TestCase
 
     public function testSqrtEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be float (or string representing a big float).");
+        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be of type float (or string representing a big float).");
         BigFloat::sqrt(false);
     }
 

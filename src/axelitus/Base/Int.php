@@ -242,7 +242,7 @@ class Int
     public static function add($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
         }
 
         return ($int1 + $int2);
@@ -260,7 +260,7 @@ class Int
     public static function sub($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
         }
 
         return ($int1 - $int2);
@@ -278,7 +278,7 @@ class Int
     public static function mul($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
         }
 
         return ($int1 * $int2);
@@ -296,7 +296,7 @@ class Int
     public static function div($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be int.");
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
         }
 
         if ($int2 == 0) {
@@ -318,7 +318,7 @@ class Int
     public static function pow($base, $exponent)
     {
         if (!static::is($base) || !static::is($exponent)) {
-            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be int.");
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type int.");
         }
 
         return pow($base, $exponent);
@@ -336,7 +336,7 @@ class Int
     public static function mod($base, $modulus)
     {
         if (!static::is($base) || !static::is($modulus)) {
-            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be int.");
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type int.");
         }
 
         if ($modulus == 0) {
@@ -357,7 +357,7 @@ class Int
     public static function sqrt($base)
     {
         if (!static::is($base)) {
-            throw new \InvalidArgumentException("The \$base parameters must be int.");
+            throw new \InvalidArgumentException("The \$base parameters must be of type int.");
         }
 
         return sqrt($base);
