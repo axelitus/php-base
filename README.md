@@ -44,6 +44,21 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **Num** - Numeric operations.
  - **Str** - String operations.
 
+ ## Features & Roadmap
+
+ - [TODO] New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating.
+ - [TODO] Try to reduce the complexity rating from the DotArr functions.
+ - [TODO] Add the Initiable interface for classes that can/should be initiated.
+ - [TODO] Define how to iterate through a dot-notated array.
+     - [TODO] Implement the Iterator interface to the Arr class.
+ - [TODO] Add a Flag class to handle numeric/boolena flag operations.
+     - [TODO] set() function.
+     - [TODO] isOn() function.
+     - [TODO] isOff() function.
+     - [TODO] mask() function.
+ - [TODO] Add an abstract 'magic' class that allows for derived class object's to use setters and getters with property syntax through the __set() and __get() magic methods.
+ 
+
 ## How to install
 
 To install this package and use it in your app just follow these instructions (if you haven't read the documentation from [Composer](http://getcomposer.org) please do so before you continue):
