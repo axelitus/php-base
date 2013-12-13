@@ -24,6 +24,13 @@ namespace axelitus\Base;
  */
 class Int
 {
+    //region Constants
+
+    /** @var int Maximum environment integer value, alias to PHP_INT_MAX */
+    const MAX = PHP_INT_MAX;
+
+    //endregion
+
     //region Value Testing
 
     /**

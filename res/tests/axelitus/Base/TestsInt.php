@@ -21,6 +21,15 @@ use axelitus\Base\Int;
  */
 class TestsInt extends TestCase
 {
+    //region Constants
+
+    public function testConstants()
+    {
+        $this->assertEquals(PHP_INT_MAX, Int::MAX);
+    }
+
+    //endregion
+
     //region Value Testing
 
     public function testIs()
