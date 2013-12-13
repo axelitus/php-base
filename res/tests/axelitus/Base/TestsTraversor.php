@@ -23,9 +23,7 @@ class TestsTraversor extends TestCase
 {
     public function testRun()
     {
-        $arr = [2, 3, 4, 5];
-        $this->assertEquals($arr, Traversor::run($arr));
-
+        // Test item callback only with value
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [4, 9, 16, 25],

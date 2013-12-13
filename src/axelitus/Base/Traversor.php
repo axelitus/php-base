@@ -21,27 +21,23 @@ namespace axelitus\Base;
  */
 class Traversor
 {
-    public static function run(array &$arr, callable $itemCallback = null, callable $resultCallback = null)
+    public static function run(array &$arr, callable $itemCallback, callable $resultCallback = null)
     {
-        if (is_null($itemCallback)) {
-            return $arr;
-        } else {
-            $result = [];
-            foreach ($arr as $key => $value) {
-                // Run the callback and store the result in a variable so that we allow the key to be modified by the callback.
-                // also pass the original array if one needs to unset variables from the original array.
-                $r = $itemCallback($value, $key, $arr);
+        $result = [];
+        foreach ($arr as $key => $value) {
+            // Run the callback and store the result in a variable so that we allow the key to be modified by the callback.
+            // also pass the original array if one needs to unset variables from the original array.
+            $r = $itemCallback($value, $key, $arr);
 
-                // Store the item callback's result with the (new) key.
-                $result[$key] = $r;
-            }
-
-            if (!is_null($resultCallback)) {
-                // Allow for the original array to be modified with the result array.
-                return $resultCallback($arr, $result);
-            }
-
-            return $result;
+            // Store the item callback's result with the (new) key.
+            $result[$key] = $r;
         }
+
+        if (!is_null($resultCallback)) {
+            // Allow for the original array to be modified with the result array.
+                return $resultCallback($arr, $result);
+        }
+
+        return $result;
     }
 }
