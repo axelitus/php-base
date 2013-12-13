@@ -5,9 +5,9 @@
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
- * @license     MIT License (@see LICENSE.md)
+ * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.5
+ * @version     0.6.0
  */
 
 namespace axelitus\Base;
@@ -17,17 +17,36 @@ namespace axelitus\Base;
  *
  * Float operations.
  *
+ * The function in this class are strict-typed (only accept float values).
+ * If you want to accept both int and float use the {@link Num} class instead.
+ *
  * @package axelitus\Base
  */
 class Float
 {
     //region Value Testing
 
+    /**
+     * Tests if the given value is a float (type test).
+     *
+     * This function uses the is_float() function to test.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is a float, false otherwise.
+     */
     public static function is($value)
     {
         return is_float($value);
     }
 
+    /**
+     * Tests if the given value is a float or a string representation of a float.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is a float or a representation of a float, false otherwise.
+     */
     public static function extIs($value)
     {
         return (static::is($value) || (is_numeric($value) && !Int::extIs($value)));
@@ -35,8 +54,41 @@ class Float
 
     //endregion
 
+    //region Conversion
+
+    /**
+     * Converts a given value to float.
+     *
+     * If the given value is not identified as float by {@link Float::extIs} the default value is returned.
+     *
+     * @param mixed $value The value to convert from.
+     * @param mixed $default The default value.
+     *
+     * @return mixed Returns the converted float value or the default value.
+     */
+    public static function from($value, $default = null)
+    {
+        if (!static::extIs($value)) {
+            return $default;
+        }
+        return (float)$value;
+    }
+
+    //endregion
+
     //region Comparing
 
+    /**
+     * Compares two float values.
+     *
+     * The returning value contains the actual value difference.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float Returns <0 if $float1<$float2, =0 if $float1 == $float2, >0 if $float1>$float2
+     * @throws \InvalidArgumentException
+     */
     public static function compare($float1, $float2)
     {
         if (!static::is($float1) || !static::is($float2)) {
@@ -46,6 +98,14 @@ class Float
         return ($float1 - $float2);
     }
 
+    /**
+     * Tests if two given float values are equal.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return bool Returns true if $float1 == $float2, false otherwise.
+     */
     public static function equals($float1, $float2)
     {
         return (static::compare($float1, $float2) == 0);
@@ -165,6 +225,143 @@ class Float
         mt_srand();
 
         return $rand;
+    }
+
+    //endregion
+
+    //region Basic numeric operations
+
+    /**
+     * Adds a number to another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function add($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
+        }
+
+        return ($float1 + $float2);
+    }
+
+    /**
+     * Subtracts a number from another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sub($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
+        }
+
+        return ($float1 - $float2);
+    }
+
+    /**
+     * Multiplies a number by another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mul($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
+        }
+
+        return ($float1 * $float2);
+    }
+
+    /**
+     * Divides a number by another number.
+     *
+     * @param float $float1 The left operand.
+     * @param float $float2 The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function div($float1, $float2)
+    {
+        if (!static::is($float1) || !static::is($float2)) {
+            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float.");
+        }
+
+        if ($float2 == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$float2 parameter cannot be zero.");
+        }
+
+        return ($float1 / $float2);
+    }
+
+    /**
+     * Raises a number to the power of another number.
+     *
+     * @param float $base     The base number.
+     * @param float $exponent The power exponent.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function pow($base, $exponent)
+    {
+        if (!static::is($base) || !static::is($exponent)) {
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type float.");
+        }
+
+        return pow($base, $exponent);
+    }
+
+    /**
+     * Gets the remainder of a number divided by another number.
+     *
+     * @param float $base    The left operand.
+     * @param float $modulus The right operand.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mod($base, $modulus)
+    {
+        if (!static::is($base) || !static::is($modulus)) {
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type float.");
+        }
+
+        if ($modulus == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        }
+
+        return fmod($base, $modulus);
+    }
+
+    /**
+     * Gets the square root of a number.
+     *
+     * @param float $base The base to use.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sqrt($base)
+    {
+        if (!static::is($base)) {
+            throw new \InvalidArgumentException("The \$base parameters must be of type float.");
+        }
+
+        return sqrt($base);
     }
 
     //endregion

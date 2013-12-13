@@ -5,9 +5,9 @@
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
- * @license     MIT License (@see LICENSE.md)
+ * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.5
+ * @version     0.6.0
  */
 
 namespace axelitus\Base;
@@ -190,7 +190,6 @@ class Str
             return false;
         }
 
-        // TODO: in_array()? or other native function like array_search() perhaps?
         foreach ($values as $index => $str) {
             if (static::equals($input, $str, $caseInsensitive)) {
                 return ($returnIndex) ? $index : true;
@@ -268,11 +267,9 @@ class Str
             )) - $start : $length;
 
 
-        return function_exists('mb_substr') ? mb_substr($input, $start, $length, $encoding) : substr(
-            $input,
-            $start,
-            $length
-        );
+        return function_exists('mb_substr')
+            ? mb_substr($input, $start, $length, $encoding)
+            : substr($input, $start, $length);
     }
 
     /**
@@ -326,7 +323,7 @@ class Str
         &$count = null
     ) {
         return function_exists('mb_strlen')
-            ? static::_mb_str_replace($search, $replace, $input, $caseInsensitive, $encoding, $count)
+            ? static::mbStrReplaceCaller($search, $replace, $input, $caseInsensitive, $encoding, $count)
             : (($caseInsensitive)
                 ? (str_ireplace($search, $replace, $input, $count))
                 : (str_replace($search, $replace, $input, $count)));
@@ -335,17 +332,17 @@ class Str
     /**
      * Replaces a substring inside a string with multi-byte support
      *
-     * @param string $search
-     * @param string $replace
-     * @param string $subject
-     * @param bool   $caseInsensitive
-     * @param string $encoding
-     * @param int    $count
+     * @param string|array $search
+     * @param string|array $replace
+     * @param string|array $subject
+     * @param bool         $caseInsensitive
+     * @param string       $encoding
+     * @param int          $count
      *
      * @return array|string
      * @see     https://github.com/faceleg/php-mb_str_replace
      */
-    protected static function _mb_str_replace(
+    private static function mbStrReplaceCaller(
         $search,
         $replace,
         $subject,
@@ -356,19 +353,19 @@ class Str
         if (is_array($subject)) {
             $result = array();
             foreach ($subject as $item) {
-                $result[] = static::_mb_str_replace($search, $replace, $item, $caseInsensitive, $encoding, $count);
+                $result[] = static::mbStrReplaceCaller($search, $replace, $item, $caseInsensitive, $encoding, $count);
             }
 
             return $result;
         }
 
         if (!is_array($search)) {
-            return static::_mb_str_replace_i($search, $replace, $subject, $caseInsensitive, $encoding, $count);
+            return static::mbStrReplaceInternal($search, $replace, $subject, $caseInsensitive, $encoding, $count);
         }
 
         $replace_is_array = is_array($replace);
         foreach ($search as $key => $value) {
-            $subject = static::_mb_str_replace_i(
+            $subject = static::mbStrReplaceInternal(
                 $value,
                 ($replace_is_array ? $replace[$key] : $replace),
                 $subject,
@@ -394,7 +391,7 @@ class Str
      * @return string
      * @see      https://github.com/faceleg/php-mb_str_replace
      */
-    protected static function _mb_str_replace_i(
+    private static function mbStrReplaceInternal(
         $search,
         $replace,
         $subject,

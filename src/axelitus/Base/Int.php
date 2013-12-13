@@ -5,9 +5,9 @@
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
- * @license     MIT License (@see LICENSE.md)
+ * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.5
+ * @version     0.6.0
  */
 
 namespace axelitus\Base;
@@ -17,17 +17,43 @@ namespace axelitus\Base;
  *
  * Int operations.
  *
+ * The function in this class are strict-typed (only accept int values).
+ * If you want to accept both int and float use the {@link Num} class instead.
+ *
  * @package axelitus\Base
  */
 class Int
 {
+    //region Constants
+
+    /** @var int Maximum environment integer value, alias to PHP_INT_MAX */
+    const MAX = PHP_INT_MAX;
+
+    //endregion
+
     //region Value Testing
 
+    /**
+     * Tests if the given value is an int (type test).
+     *
+     * This function uses the is_int() function to test.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is an int, false otherwise.
+     */
     public static function is($value)
     {
         return is_int($value);
     }
 
+    /**
+     * Tests if the given value is an int or a string representation of an int.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is an int or a representation of an int, false otherwise.
+     */
     public static function extIs($value)
     {
         return static::is($value) || (is_string($value) && (strval(intval($value)) === strval($value)));
@@ -35,8 +61,41 @@ class Int
 
     //endregion
 
+    //region Conversion
+
+    /**
+     * Converts a given value to int.
+     *
+     * If the given value is not identified as int by {@link Int::extIs} the default value is returned.
+     *
+     * @param mixed $value The value to convert from.
+     * @param mixed $default The default value.
+     *
+     * @return mixed Returns the converted int value or the default value.
+     */
+    public static function from($value, $default = null)
+    {
+        if (!static::extIs($value)) {
+            return $default;
+        }
+        return (int)$value;
+    }
+
+    //endregion
+
     //region Comparing
 
+    /**
+     * Compares two int values.
+     *
+     * The returning value contains the actual value difference.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int Returns <0 if $int1<$int2, =0 if $int1 == $int2, >0 if $int1>$int2
+     * @throws \InvalidArgumentException
+     */
     public static function compare($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
@@ -46,6 +105,14 @@ class Int
         return ($int1 - $int2);
     }
 
+    /**
+     * Tests if two given int values are equal.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return bool Returns true if $int1 == $int2, false otherwise.
+     */
     public static function equals($int1, $int2)
     {
         return (static::compare($int1, $int2) == 0);
@@ -157,6 +224,143 @@ class Int
         mt_srand();
 
         return $rand;
+    }
+
+    //endregion
+
+    //region Basic numeric operations
+
+    /**
+     * Adds a number to another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function add($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
+        }
+
+        return ($int1 + $int2);
+    }
+
+    /**
+     * Subtracts a number from another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sub($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
+        }
+
+        return ($int1 - $int2);
+    }
+
+    /**
+     * Multiplies a number by another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mul($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
+        }
+
+        return ($int1 * $int2);
+    }
+
+    /**
+     * Divides a number by another number.
+     *
+     * @param int $int1 The left operand.
+     * @param int $int2 The right operand.
+     *
+     * @return int|float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function div($int1, $int2)
+    {
+        if (!static::is($int1) || !static::is($int2)) {
+            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int.");
+        }
+
+        if ($int2 == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$int2 parameter cannot be zero.");
+        }
+
+        return ($int1 / $int2);
+    }
+
+    /**
+     * Raises a number to the power of another number.
+     *
+     * @param int $base     The base number.
+     * @param int $exponent The power exponent.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function pow($base, $exponent)
+    {
+        if (!static::is($base) || !static::is($exponent)) {
+            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type int.");
+        }
+
+        return pow($base, $exponent);
+    }
+
+    /**
+     * Gets the remainder of a number divided by another number.
+     *
+     * @param int $base    The left operand.
+     * @param int $modulus The right operand.
+     *
+     * @return int The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function mod($base, $modulus)
+    {
+        if (!static::is($base) || !static::is($modulus)) {
+            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type int.");
+        }
+
+        if ($modulus == 0) {
+            throw new \InvalidArgumentException("Cannot divide by zero. The \$modulus parameter cannot be zero.");
+        }
+
+        return ($base % $modulus);
+    }
+
+    /**
+     * Gets the square root of a number.
+     *
+     * @param int $base The base to use.
+     *
+     * @return float The result of the operation.
+     * @throws \InvalidArgumentException
+     */
+    public static function sqrt($base)
+    {
+        if (!static::is($base)) {
+            throw new \InvalidArgumentException("The \$base parameters must be of type int.");
+        }
+
+        return sqrt($base);
     }
 
     //endregion

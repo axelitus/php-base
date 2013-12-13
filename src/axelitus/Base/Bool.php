@@ -5,9 +5,9 @@
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
- * @license     MIT License (@see LICENSE.md)
+ * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.5
+ * @version     0.6.0
  */
 
 namespace axelitus\Base;
@@ -71,6 +71,28 @@ class Bool
         }
 
         return false;
+    }
+
+    //endregion
+
+    //region Conversion
+
+    /**
+     * Converts a given value to bool.
+     *
+     * If the given value is not identified as bool by {@link Bool::extIs} the default value is returned.
+     *
+     * @param mixed $value The value to convert from.
+     * @param mixed $default The default value.
+     *
+     * @return mixed Returns the converted bool value or the default value.
+     */
+    public static function from($value, $default = null)
+    {
+        if (!static::extIs($value)) {
+            return $default;
+        }
+        return static::extParse($value);
     }
 
     //endregion
@@ -170,7 +192,7 @@ class Bool
      * and array of booleans in the order in which they were given.
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -214,7 +236,7 @@ class Bool
      * result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -275,7 +297,7 @@ class Bool
      * result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -335,7 +357,7 @@ class Bool
      * an array of results, one result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException
@@ -388,7 +410,7 @@ class Bool
      * an array of results, one result per input array (the arrays are not mixed).
      *
      * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_ More values to apply the operation to.
+     * @param bool|array $_      More values to apply the operation to.
      *
      * @return bool|array The result of applying the operation to the given value(s).
      * @throws \InvalidArgumentException

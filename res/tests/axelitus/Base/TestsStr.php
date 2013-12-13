@@ -5,9 +5,9 @@
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
- * @license     MIT License (@see LICENSE.md)
+ * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.5
+ * @version     0.6.0
  */
 
 namespace axelitus\Base\Tests;
@@ -145,18 +145,73 @@ class TestsString extends TestCase
         $this->assertEquals('ghijkl', Str::replace('aBcDEf', 'abcdef', 'ghijkl', true));
     }
 
+    public function testMbStrReplaceCaller()
+    {
+        $expected = ['String A to replace.', 'String B to replace.'];
+        $actual = $this->execNonPublicMethod(
+            'axelitus\Base\Str',
+            'mbStrReplaceCaller',
+            ['change', 'replace', ['String A to change.', 'String B to change.']]
+        );
+        $this->assertEquals($expected, $actual);
+
+        $expected = 'To replace the string some values will be replaced.';
+        $actual = $this->execNonPublicMethod(
+            'axelitus\Base\Str',
+            'mbStrReplaceCaller',
+            [['change', 'modify'], 'replace', 'To modify the string some values will be changed.']
+        );
+        $this->assertEquals($expected, $actual);
+
+        $expected = 'String not changed.';
+        $actual = $this->execNonPublicMethod(
+            'axelitus\Base\Str',
+            'mbStrReplaceCaller',
+            ['none', 'replace', 'String not changed.']
+        );
+        $this->assertEquals($expected, $actual);
+
+        $count = 0;
+        $expected = 'One replacement. Two replacements. Three replacements.';
+        $actual = $this->execNonPublicMethod(
+            'axelitus\Base\Str',
+            'mbStrReplaceCaller',
+            ['change', 'replacement', 'One change. Two changes. Three changes.', false, Str::DEFAULT_ENCODING, &$count]
+        );
+        $this->assertEquals($expected, $actual);
+        $this->assertEquals(3, $count);
+    }
+
     public function testTruncate()
     {
         $this->assertEquals('abcdefghijklmnop', Str::truncate('abcdefghijklmnop', Str::length('abcdefghijklmnop')));
         $this->assertEquals('abcde...', Str::truncate('abcdefghijklmnop', 5));
         $this->assertEquals('abcdefghi -> more', Str::truncate('abcdefghijklmnop', 9, ' -> more'));
         $this->assertEquals('...', Str::truncate('abcdefghijklmnop', 0));
-        $this->assertEquals('<span>abc<strong>de...</strong></span>', Str::truncate('<span>abc<strong>defghi</strong>jklmnop</span>', 5, '...', true));
-        $this->assertEquals('<span>abc<strong>de...</strong></span>', Str::truncate('<span>abc<strong>de</strong>fghijklmnop</span>', 5, '...', true));
-        $this->assertEquals('<span>abc<strong>d</strong>e...</span>', Str::truncate('<span>abc<strong>d</strong>efghijklmnop</span>', 5, '...', true));
-        $this->assertEquals('<span>a&nbsp;bc<strong>d...</strong></span>', Str::truncate('<span>a&nbsp;bc<strong>d</strong>efghijklmnop</span>', 5, '...', true));
-        $this->assertEquals('<span>abc<strong>d...</strong></span>', Str::truncate('<span>abc<strong>d&nbsp;</strong>efghijklmnop</span>', 4, '...', true));
-        $this->assertEquals('<span>a&nbsp;bc<strong>d</strong>ef&nbsp;ghi...</span>', Str::truncate('<span>a&nbsp;bc<strong>d</strong>ef&nbsp;ghijklmnop</span>', 11, '...', true));
+        $this->assertEquals(
+            '<span>abc<strong>de...</strong></span>',
+            Str::truncate('<span>abc<strong>defghi</strong>jklmnop</span>', 5, '...', true)
+        );
+        $this->assertEquals(
+            '<span>abc<strong>de...</strong></span>',
+            Str::truncate('<span>abc<strong>de</strong>fghijklmnop</span>', 5, '...', true)
+        );
+        $this->assertEquals(
+            '<span>abc<strong>d</strong>e...</span>',
+            Str::truncate('<span>abc<strong>d</strong>efghijklmnop</span>', 5, '...', true)
+        );
+        $this->assertEquals(
+            '<span>a&nbsp;bc<strong>d...</strong></span>',
+            Str::truncate('<span>a&nbsp;bc<strong>d</strong>efghijklmnop</span>', 5, '...', true)
+        );
+        $this->assertEquals(
+            '<span>abc<strong>d...</strong></span>',
+            Str::truncate('<span>abc<strong>d&nbsp;</strong>efghijklmnop</span>', 4, '...', true)
+        );
+        $this->assertEquals(
+            '<span>a&nbsp;bc<strong>d</strong>ef&nbsp;ghi...</span>',
+            Str::truncate('<span>a&nbsp;bc<strong>d</strong>ef&nbsp;ghijklmnop</span>', 11, '...', true)
+        );
     }
 
     //endregion
@@ -235,7 +290,10 @@ class TestsString extends TestCase
 
     public function testSeparatedEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$separator parameter must be a non-empty string.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$separator parameter must be a non-empty string."
+        );
         Str::separated('abcDefGhi', '');
     }
 

@@ -5,9 +5,9 @@
  * @author      Axel Pardemann (axelitusdev@gmail.com)
  * @copyright   2013 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
- * @license     MIT License (@see LICENSE.md)
+ * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.5
+ * @version     0.6.0
  */
 
 namespace axelitus\Base\Tests;
@@ -63,6 +63,29 @@ class TestsBool extends TestCase
         $this->assertFalse(Bool::extIs('string'));
         $this->assertFalse(Bool::extIs(10));
         $this->assertFalse(Bool::extIs(-10));
+    }
+
+    //endregion
+
+    //region Conversion
+
+    public function testFrom()
+    {
+        $this->assertTrue(Bool::From('yes'));
+        $this->assertTrue(Bool::From('1'));
+        $this->assertTrue(Bool::From('true'));
+        $this->assertTrue(Bool::From('y'));
+        $this->assertTrue(Bool::From('on'));
+
+        $this->assertFalse(Bool::From('no'));
+        $this->assertFalse(Bool::From('0'));
+        $this->assertFalse(Bool::From('false'));
+        $this->assertFalse(Bool::From('n'));
+        $this->assertFalse(Bool::From('off'));
+
+        $this->assertEquals(null, Bool::From('string'));
+        $this->assertEquals(true, Bool::From('string', true));
+        $this->assertEquals(false, Bool::From('string', false));
     }
 
     //endregion
@@ -184,7 +207,10 @@ class TestsBool extends TestCase
 
     public function testOpAndEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case array)."
+        );
         Bool::opAnd([true, true], true);
     }
 
@@ -202,7 +228,10 @@ class TestsBool extends TestCase
 
     public function testOpAndEx04()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case bool)."
+        );
         Bool::opAnd(true, [true, true]);
     }
 
@@ -238,7 +267,10 @@ class TestsBool extends TestCase
 
     public function testOpOrEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case array)."
+        );
         Bool::opOr([true, true], true);
     }
 
@@ -256,7 +288,10 @@ class TestsBool extends TestCase
 
     public function testOpOrEx04()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case bool)."
+        );
         Bool::opOr(true, [true, true]);
     }
 
@@ -282,12 +317,18 @@ class TestsBool extends TestCase
         $this->assertFalse(Bool::opEq([true, false]));
         $this->assertTrue(Bool::opEq([true, true]));
 
-        $this->assertEquals([true, false, false, true], Bool::opEq([false, false], [false, true], [true, false], [true, true]));
+        $this->assertEquals(
+            [true, false, false, true],
+            Bool::opEq([false, false], [false, true], [true, false], [true, true])
+        );
     }
 
     public function testOpEqEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case array)."
+        );
         Bool::opEq([true, true], true);
     }
 
@@ -305,7 +346,10 @@ class TestsBool extends TestCase
 
     public function testOpEqEx04()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case bool)."
+        );
         Bool::opEq(true, [true, true]);
     }
 
@@ -331,12 +375,18 @@ class TestsBool extends TestCase
         $this->assertTrue(Bool::opXor([true, false]));
         $this->assertFalse(Bool::opXor([true, true]));
 
-        $this->assertEquals([false, true, true, false], Bool::opXor([false, false], [false, true], [true, false], [true, true]));
+        $this->assertEquals(
+            [false, true, true, false],
+            Bool::opXor([false, false], [false, true], [true, false], [true, true])
+        );
     }
 
     public function testOpXorEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case array).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case array)."
+        );
         Bool::opXor([true, true], true);
     }
 
@@ -354,7 +404,10 @@ class TestsBool extends TestCase
 
     public function testOpXorEx04()
     {
-        $this->setExpectedException('\InvalidArgumentException', "Cannot mix value types. All values must be of the same type (in this case bool).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Cannot mix value types. All values must be of the same type (in this case bool)."
+        );
         Bool::opXor(true, [true, true]);
     }
 
