@@ -44,7 +44,7 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **Num** - Numeric operations.
  - **Str** - String operations.
 
- ## Features & Roadmap
+ ## Roadmap
 
  - [TODO] New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating.
  - [TODO] Try to reduce the complexity rating from the DotArr functions.
