@@ -57,6 +57,7 @@ All classes are referenced from the package namespace if not otherwise stated.
      - [TODO] isOff() function.
      - [TODO] mask() function.
  - [TODO] Add an abstract 'magic' class that allows for derived class object's to use setters and getters with property syntax through the __set() and __get() magic methods.
+ - ~~[DONE]~~ Add a Traversor (or any other name) class that applies a callback to the items of an array. This class behaves somewhat like array_map() and/or array_walk() but it's more flexible.
  
 
 ## How to install
