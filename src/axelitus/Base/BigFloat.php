@@ -346,7 +346,7 @@ class BigFloat
             return fmod($base, $modulus);
         } elseif (function_exists('bcdiv')) {
             // We cannot use bcmod because it only returns the int remainder
-            $times = static::int(bcdiv($base, $modulus, $scale)).'.0';
+            $times = static::int(bcdiv($base, $modulus, $scale)) . '.0';
             return static::sub($base, static::mul($times, $modulus, $scale), $scale);
         }
 
