@@ -97,6 +97,7 @@ class DotArr
         foreach ($keys as $key) {
             $return[$key] = static::get($arr, $key, $default);
         }
+        
         return $return;
     }
 
@@ -204,6 +205,7 @@ class DotArr
         foreach ($keys as $key) {
             $return[$key] = static::delete($arr, $key);
         }
+
         return $return;
     }
 
@@ -259,6 +261,7 @@ class DotArr
         foreach ($keys as $key) {
             $return[$key] = static::keyExists($arr, $key);
         }
+
         return $return;
     }
 
@@ -293,6 +296,7 @@ class DotArr
                 $return[] = $match;
                 $arr =& $arr[$k];
             }
+
             return $return;
         }
     }
