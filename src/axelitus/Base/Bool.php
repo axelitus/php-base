@@ -207,7 +207,7 @@ class Bool
     }
 
     /**
-     * Applies the NOT operation to each of the items in the given array(s).
+     * Applies the NOT operation to each of the items of the given array(s).
      *
      * @param array $value1 The array to apply the operation to its items.
      * @param array $_      More arrays to apply the operation to its items.
