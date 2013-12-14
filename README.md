@@ -4,7 +4,7 @@ A framework agnostic PHP package that contains _extensions_ and helpers for the 
 
 ## Package Information
 
-* **Package:** axelitus/base [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.png)](https://packagist.org/packages/axelitus/base) [![Dependencies Status](https://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base)
+* **Package:** axelitus/base [![Dependencies Status](https://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=a81596bb8923c07e0962acc3ffe7ef986bc5dd98)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.png)](https://packagist.org/packages/axelitus/base)
 * **Root Namespace:** axelitus\Base
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
 * **Repository**: [axelitus/php-base](https://github.com/axelitus/php-base "axelitus/php-base at GitHub") at GitHub
@@ -34,12 +34,31 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 All classes are referenced from the package namespace if not otherwise stated.
 
  - **Arr** - Dot-notated array object.
+ - **BigFloat** - Float operations for big numbers.
+ - **BigInt** - Int operations for big numbers.
+ - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
  - **DotArr** - Dot-notated array operations.
  - **Float** - Float operations.
  - **Int** - Int operations.
  - **Num** - Numeric operations.
  - **Str** - String operations.
+
+ ## Roadmap
+
+ - ~~[DONE]~~ New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating. (see ~~[Issue #1](https://github.com/axelitus/php-base/issues/1)~~)
+ - ~~[DONE]~~ Try to reduce the complexity rating from the DotArr functions. (see ~~[Issue #2](https://github.com/axelitus/php-base/issues/2)~~)
+ - [TODO] Add the Initiable interface for classes that can/should be initiated.
+ - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
+     - [TODO] Implement the Iterator interface to the Arr class.
+ - [TODO] Add a Flag class to handle numeric/boolean flag operations.
+     - [TODO] set() function.
+     - [TODO] isOn() function.
+     - [TODO] isOff() function.
+     - [TODO] mask() function.
+ - [TODO] Add an abstract 'magic' class that allows for derived class object's to use setters and getters with property syntax through the __set() and __get() magic methods.
+ - ~~[DONE]~~ Add a Traversor (or any other name) class that applies a callback to the items of an array. This class behaves somewhat like array_map() and/or array_walk() but it's more flexible.
+ 
 
 ## How to install
 
