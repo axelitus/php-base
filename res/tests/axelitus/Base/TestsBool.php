@@ -156,31 +156,40 @@ class TestsBool extends TestCase
 
     //region NOT operation
 
-    public function testOpNot()
+    public function testValueNot()
     {
-        $this->assertTrue(Bool::opNot(false));
-        $this->assertFalse(Bool::opNot(true));
-        $this->assertEquals([true, false], Bool::opNot(false, true));
-        $this->assertEquals([false, true, true], Bool::opNot(true, false, false));
-        $this->assertEquals([true, false, false, true, false], Bool::opNot(false, true, true, false, true));
-        $this->assertEquals([true], Bool::opNot([false]));
-        $this->assertEquals([false], Bool::opNot([true]));
-        $this->assertEquals([true, false], Bool::opNot([false, true]));
-        $this->assertEquals([false, true, true], Bool::opNot([true, false, false]));
-        $this->assertEquals([true, false, false, true, false], Bool::opNot([false, true, true, false, true]));
-        $this->assertEquals([true, [false, false, true], false], Bool::opNot(false, [true, true, false], true));
+        $this->assertTrue(Bool::valueNot(false));
+        $this->assertFalse(Bool::valueNot(true));
+        $this->assertEquals([true, false], Bool::valueNot(false, true));
+        $this->assertEquals([false, true, true], Bool::valueNot(true, false, false));
+        $this->assertEquals([true, false, false, true, false], Bool::valueNot(false, true, true, false, true));
     }
 
-    public function testOpNotEx01()
+    public function testValueNotEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
-        Bool::opNot([true, true, 'string']);
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::valueNot(true, true, 'string');
     }
 
-    public function testOpNotEx02()
+    public function testArrayNot()
     {
-        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool.");
-        Bool::opNot(true, true, 'string');
+        $this->assertEquals([true], Bool::arrayNot([false]));
+        $this->assertEquals([false], Bool::arrayNot([true]));
+        $this->assertEquals([true, false], Bool::arrayNot([false, true]));
+        $this->assertEquals([false, true, true], Bool::arrayNot([true, false, false]));
+        $this->assertEquals([true, false, false, true, false], Bool::arrayNot([false, true, true, false, true]));
+    }
+
+    public function testArrayNotEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type array.");
+        Bool::arrayNot([true, true], [false, false], 'string');
+    }
+
+    public function testArrayNotEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::arrayNot([true, true, false, false, 'string']);
     }
 
     //endregion

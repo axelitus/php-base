@@ -82,7 +82,7 @@ class Bool
      *
      * If the given value is not identified as bool by {@link Bool::extIs} the default value is returned.
      *
-     * @param mixed $value The value to convert from.
+     * @param mixed $value   The value to convert from.
      * @param mixed $default The default value.
      *
      * @return mixed Returns the converted bool value or the default value.
@@ -185,37 +185,47 @@ class Bool
     /**
      * Applies the NOT operation to the given value(s).
      *
-     * If only a boolean is given, the result will be a boolean. If multiple booleans are given, the result
-     * will be an array of booleans. If only one array of booleans is given, the result will be an array of
-     * booleans. If multiple arrays are given, the result will be an array of arrays of booleans. Any
-     * combination of booleans and array of booleans will return an array containing a combination of booleans
-     * and array of booleans in the order in which they were given.
+     * @param bool $value1 The value to apply the operation to.
+     * @param bool $_      More values to apply the operation to.
      *
-     * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_      More values to apply the operation to.
-     *
-     * @return bool|array The result of applying the operation to the given value(s).
+     * @return bool|array The result of applying the operation to the value(s).
      * @throws \InvalidArgumentException
      */
-    public static function opNot($value1, $_ = null)
+    public static function valueNot($value1, $_ = null)
     {
         $ret = [];
         $args = func_get_args();
         foreach ($args as $arg) {
-            if (is_array($arg)) {
-                $tmp = [];
-                foreach ($arg as $item) {
-                    if (!static::is($item)) {
-                        throw new \InvalidArgumentException("All array values must be of type bool.");
-                    }
-                    $tmp[] = !$item;
-                }
-                $ret[] = $tmp;
-            } elseif (static::is($arg)) {
-                $ret[] = !$arg;
-            } else {
-                throw new \InvalidArgumentException("All values must be of type bool.");
+            if (!static::is($arg)) {
+                throw new \InvalidArgumentException("All parameters must be of type bool.");
             }
+
+            $ret[] = !$arg;
+        }
+
+        return (count($ret) > 1) ? $ret : $ret[0];
+    }
+
+    /**
+     * Applies the NOT operation to each of the items in the given array(s).
+     *
+     * @param array $value1 The array to apply the operation to its items.
+     * @param array $_      More arrays to apply the operation to its items.
+     *
+     * @return array The result of applying the operation to the items of the array(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function arrayNot(array $value1, array $_ = null)
+    {
+        $ret = [];
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            if (!is_array($arg)) {
+                throw new \InvalidArgumentException("All parameters must be of type array.");
+            }
+
+            $tmp = call_user_func_array('static::valueNot', $arg);
+            $ret[] = (is_array($tmp)) ? $tmp : [$tmp];
         }
 
         return (count($ret) > 1) ? $ret : $ret[0];
