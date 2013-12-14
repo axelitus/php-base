@@ -212,7 +212,7 @@ class Bool
      * @param array $value1 The array to apply the operation to its items.
      * @param array $_      More arrays to apply the operation to its items.
      *
-     * @return array The result of applying the operation to the items of the array(s).
+     * @return array The result of applying the operation to the items of given the array(s).
      * @throws \InvalidArgumentException
      */
     public static function arrayNot(array $value1, array $_ = null)
@@ -236,57 +236,55 @@ class Bool
     //region AND operation
 
     /**
-     * Applies the AND operation to the given value(s).
+     * Applies the AND operation to the given values.
      *
-     * Consistent input values must be given, if the first value is bool, then all other values must be bool.
-     * The AND operation is applied in chain for all values, one after another in the order they were given.
-     * If the first value is array, then all other values must be array. If only one array is given, the AND
-     * operation is applied in chain for all items in the input array in the order they are. If multiple arrays
-     * are given, the AND operation is applied individually for each array, returning an array of results, one
-     * result per input array (the arrays are not mixed).
+     * @param bool $value1 The left operand to apply the operation to.
+     * @param bool $value2 The right operand to apply the operation to.
+     * @param null $_ More values to apply the operation in cascade.
      *
-     * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_      More values to apply the operation to.
-     *
-     * @return bool|array The result of applying the operation to the given value(s).
+     * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
      */
-    public static function opAnd($value1, $_ = null)
+    public static function valueAnd($value1, $value2, $_ = null)
     {
-        $reset = true;
+        if (!static::is($value1) || !static::is($value2)) {
+            throw new \InvalidArgumentException("All parameters must be of type bool.");
+        }
+
+        $ret = ($value1 && $value2);
+        $args = array_slice(func_get_args(), 2);
+        while ($ret && ($bool = array_shift($args)) !== null) {
+            if (!static::is($bool)) {
+                throw new \InvalidArgumentException("All parameters must be of type bool.");
+            }
+
+            $ret = ($ret && $bool);
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Applies the AND operation to the items of the given array(s).
+     *
+     * If only one array is given, the result will be a bool instead of an array.
+     *
+     * @param array $value1 The array to apply the operation to its items.
+     * @param array $_      More arrays to apply the operation to its items.
+     *
+     * @return bool|array The result of applying the operation to the items of the given array(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function arrayAnd(array $value1, array $_ = null)
+    {
         $ret = [];
         $args = func_get_args();
-
-        if (is_array($value1)) {
-            if (count($args) > 1) {
-                foreach ($args as $arr) {
-                    if (!is_array($arr)) {
-                        throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case array).");
-                    }
-
-                    $ret[] = static::opAnd($arr);
-                }
-            } else {
-                $tmp = $reset;
-                foreach ($value1 as $arg) {
-                    if (!static::is($arg)) {
-                        throw new \InvalidArgumentException("All array values must be of type bool.");
-                    }
-                    $tmp = ($tmp && $arg);
-                }
-                $ret[] = $tmp;
+        foreach ($args as $arg) {
+            if (!is_array($arg) || count($arg) < 2) {
+                throw new \InvalidArgumentException("All parameters must be of type array and must contain at least 2 items.");
             }
-        } elseif (static::is($value1)) {
-            $tmp = $reset;
-            foreach ($args as $arg) {
-                if (!static::is($arg)) {
-                    throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case bool).");
-                }
-                $tmp = ($tmp && $arg);
-            }
-            $ret[] = $tmp;
-        } else {
-            throw new \InvalidArgumentException("All values must be of type bool or array.");
+
+            $ret[] = call_user_func_array('static::valueAnd', $arg);
         }
 
         return (count($ret) > 1) ? $ret : $ret[0];

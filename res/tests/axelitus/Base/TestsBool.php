@@ -196,58 +196,61 @@ class TestsBool extends TestCase
 
     //region AND operation
 
-    public function testOpAnd()
+    public function testValueAnd()
     {
-        $this->assertTrue(Bool::opAnd(true, true));
-        $this->assertFalse(Bool::opAnd(true, false));
-        $this->assertTrue(Bool::opAnd(true, true, true, true, true));
-        $this->assertFalse(Bool::opAnd(true, true, true, false, true));
+        $this->assertTrue(Bool::valueAnd(true, true));
+        $this->assertFalse(Bool::valueAnd(true, false));
+        $this->assertTrue(Bool::valueAnd(true, true, true, true, true));
+        $this->assertFalse(Bool::valueAnd(true, true, true, false, true));
+    }
 
-        $this->assertTrue(Bool::opAnd([true, true]));
-        $this->assertFalse(Bool::opAnd([true, false]));
-        $this->assertTrue(Bool::opAnd([true, true, true, true, true]));
-        $this->assertFalse(Bool::opAnd([true, true, true, false, true]));
+    public function testValueAndEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::valueAnd(true, 'string');
+    }
+
+    public function testValueAndEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::valueAnd(true, true, true, 'string');
+    }
+
+    public function testArrayAnd()
+    {
+        $this->assertTrue(Bool::arrayAnd([true, true]));
+        $this->assertFalse(Bool::arrayAnd([true, false]));
+        $this->assertTrue(Bool::arrayAnd([true, true, true, true, true]));
+        $this->assertFalse(Bool::arrayAnd([true, true, true, false, true]));
 
         $this->assertEquals(
             [true, false, false, true],
-            Bool::opAnd([true, true, true], [true, false, true], [false, false, true], [true, true, true])
+            Bool::arrayAnd([true, true, true], [true, false, true], [false, false, true], [true, true, true])
         );
     }
 
-    public function testOpAndEx01()
+    public function testArrayAndEx01()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "Cannot mix value types. All values must be of the same type (in this case array)."
+            "All parameters must be of type array and must contain at least 2 items."
         );
-        Bool::opAnd([true, true], true);
+        Bool::arrayAnd([true, true], [true, false], 'string');
     }
 
-    public function testOpAndEx02()
-    {
-        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
-        Bool::opAnd([true, true, true], [true, true, 'string']);
-    }
-
-    public function testOpAndEx03()
-    {
-        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
-        Bool::opAnd([5, 'string']);
-    }
-
-    public function testOpAndEx04()
+    public function testArrayAndEx02()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "Cannot mix value types. All values must be of the same type (in this case bool)."
+            "All parameters must be of type array and must contain at least 2 items."
         );
-        Bool::opAnd(true, [true, true]);
+        Bool::arrayAnd([true, true], [true, false], [true]);
     }
 
-    public function testOpAndEx05()
+    public function testArrayAndEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
-        Bool::opAnd(5, 'string');
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::arrayAnd([true, true, true], [true, true, 'string']);
     }
 
     //endregion
