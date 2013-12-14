@@ -357,67 +357,6 @@ class Bool
 
     //endregion
 
-    //region OR operation
-
-    /**
-     * Applies the OR operation to the given value(s).
-     *
-     * Consistent input values must be given, if the first value is bool, then all other values must be bool.
-     * The OR operation is applied in chain for all values, one after another in the order they were given.
-     * If the first value is array, then all other values must be array. If only one array is given, the OR
-     * operation is applied in chain for all items in the input array in the order they are. If multiple arrays
-     * are given, the OR operation is applied individually for each array, returning an array of results, one
-     * result per input array (the arrays are not mixed).
-     *
-     * @param bool|array $value1 The value to which the operation should be applied.
-     * @param bool|array $_      More values to apply the operation to.
-     *
-     * @return bool|array The result of applying the operation to the given value(s).
-     * @throws \InvalidArgumentException
-     */
-    public static function opOr($value1, $_ = null)
-    {
-        $reset = false;
-        $ret = [];
-        $args = func_get_args();
-
-        if (is_array($value1)) {
-            if (count($args) > 1) {
-                foreach ($args as $arr) {
-                    if (!is_array($arr)) {
-                        throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case array).");
-                    }
-
-                    $ret[] = static::opOr($arr);
-                }
-            } else {
-                $tmp = $reset;
-                foreach ($value1 as $arg) {
-                    if (!static::is($arg)) {
-                        throw new \InvalidArgumentException("All array values must be of type bool.");
-                    }
-                    $tmp = ($tmp || $arg);
-                }
-                $ret[] = $tmp;
-            }
-        } elseif (static::is($value1)) {
-            $tmp = $reset;
-            foreach ($args as $arg) {
-                if (!static::is($arg)) {
-                    throw new \InvalidArgumentException("Cannot mix value types. All values must be of the same type (in this case bool).");
-                }
-                $tmp = ($tmp || $arg);
-            }
-            $ret[] = $tmp;
-        } else {
-            throw new \InvalidArgumentException("All values must be of type bool or array.");
-        }
-
-        return (count($ret) > 1) ? $ret : $ret[0];
-    }
-
-    //endregion
-
     //region EQ operation
 
     /**
