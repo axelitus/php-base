@@ -1,9 +1,13 @@
 language: php
 php:
-    - 5.4
-    - 5.5
+  - 5.4
+  - 5.5
 
 before_script:
   - composer install --dev
 
 script: phpunit --configuration phpunit.travis.xml --bootstrap phpunit.bootstrap.php
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover /tmp/coverage.xml
