@@ -330,7 +330,7 @@ class Bool
     }
 
     /**
-     * Applies the Or operation to the items of the given array(s).
+     * Applies the OR operation to the items of the given array(s).
      *
      * If only one array is given, the result will be a bool instead of an array.
      *
