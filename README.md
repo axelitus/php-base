@@ -46,10 +46,10 @@ All classes are referenced from the package namespace if not otherwise stated.
 
  ## Roadmap
 
- - [TODO] New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating.
- - [TODO] Try to reduce the complexity rating from the DotArr functions.
+ - [TODO] New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating. (see [Issue #1](https://github.com/axelitus/php-base/issues/1))
+ - [TODO] Try to reduce the complexity rating from the DotArr functions. (see [Issue #2](https://github.com/axelitus/php-base/issues/2))
  - [TODO] Add the Initiable interface for classes that can/should be initiated.
- - [TODO] Define how to iterate through a dot-notated array.
+ - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
      - [TODO] Implement the Iterator interface to the Arr class.
  - [TODO] Add a Flag class to handle numeric/boolena flag operations.
      - [TODO] set() function.
