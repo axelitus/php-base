@@ -383,58 +383,65 @@ class TestsBool extends TestCase
 
     //region XOR operation
 
-    public function testOpXor()
+    public function testValueXor()
     {
-        $this->assertFalse(Bool::opXor(false, false));
-        $this->assertTrue(Bool::opXor(false, true));
-        $this->assertTrue(Bool::opXor(true, false));
-        $this->assertFalse(Bool::opXor(true, true));
+        $this->assertFalse(Bool::valueXor(false, false));
+        $this->assertTrue(Bool::valueXor(false, true));
+        $this->assertTrue(Bool::valueXor(true, false));
+        $this->assertFalse(Bool::valueXor(true, true));
+        $this->assertTrue(Bool::valueXor(true, false, false, false));
+        $this->assertTrue(Bool::valueXor(false, true, true, true, true));
+        $this->assertFalse(Bool::valueXor(false, false, false, false));
+        $this->assertFalse(Bool::valueXor(true, true, true, true, true));
+    }
 
-        $this->assertFalse(Bool::opXor([false, false]));
-        $this->assertTrue(Bool::opXor([false, true]));
-        $this->assertTrue(Bool::opXor([true, false]));
-        $this->assertFalse(Bool::opXor([true, true]));
+    public function testValueXorEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::valueXor(true, 'string');
+    }
+
+    public function testValueXorEx02()
+    {
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::valueXor(true, false, false, 'string');
+    }
+
+    public function testArrayXor()
+    {
+        $this->assertFalse(Bool::arrayXor([false, false]));
+        $this->assertTrue(Bool::arrayXor([false, true]));
+        $this->assertTrue(Bool::arrayXor([true, false]));
+        $this->assertFalse(Bool::arrayXor([true, true]));
 
         $this->assertEquals(
             [false, true, true, false],
-            Bool::opXor([false, false], [false, true], [true, false], [true, true])
+            Bool::arrayXor([false, false], [false, true], [true, false], [true, true])
         );
     }
 
-    public function testOpXorEx01()
+    public function testArrayXorEx01()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "Cannot mix value types. All values must be of the same type (in this case array)."
+            "All parameters must be of type array and must contain at least 2 items."
         );
-        Bool::opXor([true, true], true);
+        Bool::arrayXor([true, true], [true, false], 'string');
     }
 
-    public function testOpXorEx02()
-    {
-        $this->setExpectedException('\InvalidArgumentException', "All array values must be of type bool.");
-        Bool::opXor([true, 'string']);
-    }
-
-    public function testOpXorEx03()
-    {
-        $this->setExpectedException('\InvalidArgumentException', "Only two booleans at a time are allowed.");
-        Bool::opXor(true, true, true);
-    }
-
-    public function testOpXorEx04()
+    public function testArrayXorEx02()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "Cannot mix value types. All values must be of the same type (in this case bool)."
+            "All parameters must be of type array and must contain at least 2 items."
         );
-        Bool::opXor(true, [true, true]);
+        Bool::arrayXor([true, true], [true, false], [true]);
     }
 
-    public function testOpXorEx05()
+    public function testArrayXorEx03()
     {
-        $this->setExpectedException('\InvalidArgumentException', "All values must be of type bool or array.");
-        Bool::opXor(5, 'string');
+        $this->setExpectedException('\InvalidArgumentException', "All parameters must be of type bool.");
+        Bool::arrayXor([true, false, false], [true, false, 'string']);
     }
 
     //endregion
