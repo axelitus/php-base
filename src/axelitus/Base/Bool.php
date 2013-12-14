@@ -295,6 +295,65 @@ class Bool
     //region OR operation
 
     /**
+     * Applies the OR operation to the given values.
+     *
+     * @param bool $value1 The left operand to apply the operation to.
+     * @param bool $value2 The right operand to apply the operation to.
+     * @param null $_ More values to apply the operation in cascade.
+     *
+     * @return bool The result of applying the operation to the given values.
+     * @throws \InvalidArgumentException
+     */
+    public static function valueOr($value1, $value2, $_ = null)
+    {
+        if (!static::is($value1) || !static::is($value2)) {
+            throw new \InvalidArgumentException("All parameters must be of type bool.");
+        }
+
+        $ret = ($value1 || $value2);
+        $args = array_slice(func_get_args(), 2);
+        while (!$ret && ($bool = array_shift($args)) !== null) {
+            if (!static::is($bool)) {
+                throw new \InvalidArgumentException("All parameters must be of type bool.");
+            }
+
+            $ret = ($ret || $bool);
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Applies the Or operation to the items of the given array(s).
+     *
+     * If only one array is given, the result will be a bool instead of an array.
+     *
+     * @param array $value1 The array to apply the operation to its items.
+     * @param array $_      More arrays to apply the operation to its items.
+     *
+     * @return bool|array The result of applying the operation to the items of the given array(s).
+     * @throws \InvalidArgumentException
+     */
+    public static function arrayOr(array $value1, array $_ = null)
+    {
+        $ret = [];
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            if (!is_array($arg) || count($arg) < 2) {
+                throw new \InvalidArgumentException("All parameters must be of type array and must contain at least 2 items.");
+            }
+
+            $ret[] = call_user_func_array('static::valueOr', $arg);
+        }
+
+        return (count($ret) > 1) ? $ret : $ret[0];
+    }
+
+    //endregion
+
+    //region OR operation
+
+    /**
      * Applies the OR operation to the given value(s).
      *
      * Consistent input values must be given, if the first value is bool, then all other values must be bool.
