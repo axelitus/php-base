@@ -51,7 +51,7 @@ All classes are referenced from the package namespace if not otherwise stated.
  - [TODO] Add the Initiable interface for classes that can/should be initiated.
  - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
      - [TODO] Implement the Iterator interface to the Arr class.
- - [TODO] Add a Flag class to handle numeric/boolena flag operations.
+ - [TODO] Add a Flag class to handle numeric/boolean flag operations.
      - [TODO] set() function.
      - [TODO] isOn() function.
      - [TODO] isOff() function.
