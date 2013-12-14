@@ -238,6 +238,9 @@ class Bool
     /**
      * Applies the AND operation to the given values.
      *
+     * The function is optimized to fail early (if a false is found the function returns false immediately), therefore
+     * we can't assume that all values had been tested for validity.
+     *
      * @param bool $value1 The left operand to apply the operation to.
      * @param bool $value2 The right operand to apply the operation to.
      * @param null $_ More values to apply the operation in cascade.
@@ -296,6 +299,9 @@ class Bool
 
     /**
      * Applies the OR operation to the given values.
+     *
+     * The function is optimized to fail early (if a true is found the function returns true immediately), therefore
+     * we can't assume that all values had been tested for validity.
      *
      * @param bool $value1 The left operand to apply the operation to.
      * @param bool $value2 The right operand to apply the operation to.
