@@ -255,7 +255,7 @@ class TestsBool extends TestCase
 
     //endregion
 
-    //region AND operation
+    //region OR operation
 
     public function testValueOr()
     {
