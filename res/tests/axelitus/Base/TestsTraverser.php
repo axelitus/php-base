@@ -71,6 +71,7 @@ class TestsTraverser extends TestCase
         );
 
         // Test item callback with value, key and original array (by reference)
+        // cannot unset value by reference, this must be do like this.
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0 => 'deleted', 1 => 'deleted', 2 => 'deleted', 3 => 'deleted'],
