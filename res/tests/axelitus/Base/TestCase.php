@@ -48,6 +48,24 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Gets the value of a non-public property from an instance.
+     *
+     * @param object $instance The class or instance that contains the property to get.
+     * @param string $propertyName    The property's value to get.
+     *
+     * @return mixed The property's value.
+     * @throws \InvalidArgumentException
+     */
+    protected static function getNonPublicPropertyValue($instance, $propertyName)
+    {
+        if(!is_object($instance)){
+            throw new \InvalidArgumentException("The instance must be an object.");
+        }
+
+        return static::getNonPublicProperty($instance, $propertyName)->getValue($instance);
+    }
+
+    /**
      * Gets a non-public method from a class or instance and sets it as accessible to run tests.
      *
      * @param string $classOrInstance The class or instance that contains the method to get.
