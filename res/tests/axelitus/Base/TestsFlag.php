@@ -203,7 +203,7 @@ class TestsFlag extends TestCase
             Flag::assignValues(['a', 'b', 'c', 'd', 'e'])
         );
         $this->assertEquals(
-            [0 => 1, 1 => 2, 3 => 4, 4 => 8, 5 => 16],
+            [0 => 1, 1 => 2, 2 => 4, 3 => 8, 4 => 16, 5 => 32],
             Flag::assignValues([0, 1, 2, 3, 4, 5])
         );
     }
