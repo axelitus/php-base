@@ -25,3 +25,6 @@ tools:
   php_loc:
     enabled: true
     excluded_dirs: [vendor/*, res/*, doc/*]
+  php_pdepend:
+    enabled: true
+    excluded_dirs: [vendor/*, res/*, doc/*]
