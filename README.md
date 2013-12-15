@@ -43,6 +43,7 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **Float** - Float operations.
  - **Int** - Int operations.
  - **Num** - Numeric operations.
+ - **PropertyAccessible** - Allows derived class to use object property access syntax just be defining getters and setters.
  - **Str** - String operations.
  - **Traverser** - Array callback traverser.
 
