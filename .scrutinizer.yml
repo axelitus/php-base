@@ -5,3 +5,7 @@ tools:
   external_code_coverage:
     enabled: true
     timeout: 600
+  php_code_sniffer:
+    enabled: true
+    filter:
+      excluded_paths: [vendor/*, res/*, doc/*]
