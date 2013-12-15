@@ -26,8 +26,8 @@ class Traverser
      *
      * The traverser also has a result callback to allow for 'macro' result processing.
      *
-     * @param array    $arr The array to traverse.
-     * @param callable $itemCallback The item callback to operate into every item.
+     * @param array    $arr            The array to traverse.
+     * @param callable $itemCallback   The item callback to operate into every item.
      * @param callable $resultCallback The result callback to operate into the result array.
      *
      * @return array
@@ -36,8 +36,8 @@ class Traverser
     {
         $result = [];
         foreach ($arr as $key => &$value) {
-            // Run the callback and store the result in a variable so that we allow the key to be modified by the callback.
-            // also pass the original array if one needs to unset variables from the original array.
+            // Run the callback and store the result in a variable so that we allow the key to be modified by the
+            // callback. Also pass the original array if one needs to unset variables from the original array.
             $r = $itemCallback($value, $key, $arr);
 
             // Store the item callback's result with the (new) key.
