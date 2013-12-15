@@ -106,12 +106,12 @@ class BigInt
         }
 
         $lowerLimit = min($lower, $upper);
-        if (!($lowerTest = ($lowerExclusive) ? $lowerLimit < $value : $lowerLimit <= $value)) {
+        if (!(($lowerExclusive) ? $lowerLimit < $value : $lowerLimit <= $value)) {
             return false;
         }
 
         $upperLimit = max($lower, $upper);
-        if (!($upperTest = ($upperExclusive) ? $upperLimit > $value : $upperLimit >= $value)) {
+        if (!(($upperExclusive) ? $upperLimit > $value : $upperLimit >= $value)) {
             return false;
         }
 
