@@ -39,24 +39,32 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
  - **DotArr** - Dot-notated array operations.
+ - **Flag** - Bitwise flag operations.
  - **Float** - Float operations.
+ - **Initiable** - Defines the interface for initiable objects.
+ - **InitiableStatic** - Defines the interface for static initiable classes.
  - **Int** - Int operations.
  - **Num** - Numeric operations.
+ - **PropertyAccessible** - Allows derived class to use object property access syntax just be defining getters and setters.
  - **Str** - String operations.
+ - **Traverser** - Array callback traverser.
 
  ## Roadmap
 
  - ~~[DONE]~~ New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating. (see ~~[Issue #1](https://github.com/axelitus/php-base/issues/1)~~)
  - ~~[DONE]~~ Try to reduce the complexity rating from the DotArr functions. (see ~~[Issue #2](https://github.com/axelitus/php-base/issues/2)~~)
- - [TODO] Add the Initiable interface for classes that can/should be initiated.
+ - ~~[DONE]~~ Add the Initiable interface for classes that can/should be initiated. (also added InitiableStatic interface for static initiable classes).
  - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
      - [TODO] Implement the Iterator interface to the Arr class.
- - [TODO] Add a Flag class to handle numeric/boolean flag operations.
-     - [TODO] set() function.
-     - [TODO] isOn() function.
-     - [TODO] isOff() function.
-     - [TODO] mask() function.
- - [TODO] Add an abstract 'magic' class that allows for derived class object's to use setters and getters with property syntax through the __set() and __get() magic methods.
+ - ~~[DONE]~~ Add a Flag class to handle numeric/boolean flag operations.
+     - ~~[DONE]~~ is() function to test for valid flags.
+     - ~~[DONE]~~ isOn() function to test if flag is on.
+     - ~~[DONE]~~ isOff() function to test if flag is off.
+     - ~~[DONE] set() function~~ Changed to setOn() function (and also added a setOff() function) to set and unset flags.
+     - ~~[TODO] mask() function.~~ Need to re-think the purpose of this.
+     - ~~[DONE]~~ getValues() and getPowers() functions to get an array of consecutive flags.
+     - ~~[DONE]~~ assignValues() function to assign consecutive flag values to a given array with tags.
+ - ~~[DONE]~~ Add an abstract 'magic' class that allows for derived class objects to use setters and getters with property syntax through the __set() and __get() magic methods. The class is PropertyAccessible.
  - ~~[DONE]~~ Add a Traversor (or any other name) class that applies a callback to the items of an array. This class behaves somewhat like array_map() and/or array_walk() but it's more flexible.
  
 

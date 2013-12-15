@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -68,7 +68,7 @@ class Int
      *
      * If the given value is not identified as int by {@link Int::extIs} the default value is returned.
      *
-     * @param mixed $value The value to convert from.
+     * @param mixed $value   The value to convert from.
      * @param mixed $default The default value.
      *
      * @return mixed Returns the converted int value or the default value.
@@ -78,6 +78,7 @@ class Int
         if (!static::extIs($value)) {
             return $default;
         }
+
         return (int)$value;
     }
 
@@ -211,6 +212,7 @@ class Int
 
         if ($min > $max) {
             trigger_error("The \$min value cannot be greater than the \$max value.", E_USER_WARNING);
+
             return false;
         }
 

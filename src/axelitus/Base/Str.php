@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -59,7 +59,8 @@ class Str
      * http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
      * Be careful, the ' char is escaped so it looks like \ is twice, but it is not.
      */
-    const ASCII_PRINTABLE = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+    const ASCII_PRINTABLE =
+        ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 
     //endregion
 
@@ -130,7 +131,8 @@ class Str
     /**
      * Verifies if a string begins with a substring.
      *
-     * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
+     * Uses the multibyte function if available with the given encoding $encoding.
+     * The comparison is case-sensitive by default.
      *
      * @param string $input           The input string to compare to.
      * @param string $search          The substring to compare the beginning to.
@@ -149,7 +151,8 @@ class Str
     /**
      * Verifies if a string ends with a substring.
      *
-     * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
+     * Uses the multibyte function if available with the given encoding $encoding.
+     * The comparison is case-sensitive by default.
      *
      * @param string $input           The input string to compare to.
      * @param string $search          The substring to compare the ending to.
@@ -211,7 +214,7 @@ class Str
      * @param int    $flags   The flag modifiers.
      * @param int    $offset  The offset from which to start the search (in bytes).
      *
-     * @return int
+     * @return int Returns 1 if the pattern matches the input string, 0 if it does not, or false if an error occurred.
      * @see http://php.net/manual/en/function.preg-match.php
      */
     public static function match($input, $pattern, array &$matches = null, $flags = 0, $offset = 0)
@@ -262,9 +265,11 @@ class Str
     public static function sub($input, $start, $length = null, $encoding = self::DEFAULT_ENCODING)
     {
         // sub input functions don't parse null correctly
-        $length = is_null($length) ? (function_exists('mb_substr') ? mb_strlen($input, $encoding) : strlen(
-                $input
-            )) - $start : $length;
+        $length = is_null($length)
+            ? (function_exists('mb_substr')
+                ? mb_strlen($input, $encoding)
+                : strlen($input)) - $start
+            : $length;
 
 
         return function_exists('mb_substr')
@@ -351,7 +356,7 @@ class Str
         &$count = null
     ) {
         if (is_array($subject)) {
-            $result = array();
+            $result = [];
             foreach ($subject as $item) {
                 $result[] = static::mbStrReplaceCaller($search, $replace, $item, $caseInsensitive, $encoding, $count);
             }
@@ -435,8 +440,8 @@ class Str
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input        The string to truncate
-     * @param   int    $limit        The number of characters to truncate too
+     * @param   string $input        The string to truncate.
+     * @param   int    $limit        The number of characters to truncate to.
      * @param   string $continuation The string to use to denote it was truncated
      * @param   bool   $is_html      Whether the string has HTML
      *
@@ -445,33 +450,9 @@ class Str
     public static function truncate($input, $limit, $continuation = '...', $is_html = false)
     {
         $offset = 0;
-        $tags = array();
+        $tags = [];
         if ($is_html) {
-            // Handle special characters.
-            preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-            foreach ($matches as $match) {
-                if ($match[0][1] >= $limit) {
-                    break;
-                }
-                $limit += (static::length($match[0][0]) - 1);
-            }
-
-            // Handle all the html tags.
-            preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-            foreach ($matches as $match) {
-                if ($match[0][1] - $offset >= $limit) {
-                    break;
-                }
-
-                $tag = static::sub(strtok($match[0][0], " \t\n\r\0\x0B>"), 1);
-                if ($tag[0] != '/') {
-                    $tags[] = $tag;
-                } elseif (end($tags) == static::sub($tag, 1)) {
-                    array_pop($tags);
-                }
-
-                $offset += $match[1][1] - $match[0][1];
-            }
+            $input = static::truncateHtml($input, $limit, $offset, $tags);
         }
 
         $new_string = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
@@ -479,6 +460,58 @@ class Str
         $new_string .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
 
         return $new_string;
+    }
+
+    /**
+     * Handles the strip of tags in the {@link truncate} function.
+     *
+     * @param string $input  The input string.
+     * @param int    $limit  The number of characters to truncate to.
+     * @param int    $offset The offset.
+     * @param array  $tags   The stripped tags.
+     *
+     * @return string Returns the stripped string to reassemble.
+     */
+    private static function truncateHtml($input, &$limit, &$offset, &$tags)
+    {
+        static::truncateSpecialChars($input, $limit);
+
+        // Handle all the html tags.
+        preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if ($match[0][1] - $offset >= $limit) {
+                break;
+            }
+
+            $tag = static::sub(strtok($match[0][0], " \t\n\r\0\x0B>"), 1);
+            if ($tag[0] != '/') {
+                $tags[] = $tag;
+            } elseif (end($tags) == static::sub($tag, 1)) {
+                array_pop($tags);
+            }
+
+            $offset += $match[1][1] - $match[0][1];
+        }
+
+        return $input;
+    }
+
+    /**
+     * Handles the special characters while stripping html tags in the {@link truncateHtml} function.
+     *
+     * @param string $input The input string.
+     * @param int    $limit The number of characters to truncate to.
+     */
+    private static function truncateSpecialChars($input, &$limit)
+    {
+        // Handle special characters.
+        preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if ($match[0][1] >= $limit) {
+                break;
+            }
+            $limit += (static::length($match[0][0]) - 1);
+        }
     }
 
     //endregion
@@ -573,7 +606,7 @@ class Str
      * Returns a string with the words capitalized.
      *
      * Returns a string with the words capitalized. The $encoding parameter is used to determine the input string
-     * encoding and thus use the proper method. The function uses mb_convert_case if present and falls back to ucwords.     *
+     * encoding and thus use the proper method. The function uses mb_convert_case if present and falls back to ucwords.
      * The ucwords function normally does not lowercase the input string first, this function does.
      *
      * @author FuelPHP (http://fuelphp.com)
@@ -609,7 +642,7 @@ class Str
      *
      * @return string The studly-caps-cased string
      */
-    public static function studly($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
+    public static function studly($input, array $separators = ['_'], $encoding = self::DEFAULT_ENCODING)
     {
         if (!empty($separators)) {
             $pattern = '';
@@ -652,7 +685,7 @@ class Str
      *
      * @return string  The camel-cased string
      */
-    public static function camel($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
+    public static function camel($input, array $separators = ['_'], $encoding = self::DEFAULT_ENCODING)
     {
         $camel = static::studly($input, $separators, $encoding);
         $words = explode(' ', $camel);
@@ -691,16 +724,6 @@ class Str
             function ($matches) use ($separator, $transform, $encoding) {
                 $transformed = trim($matches[0]);
                 $count_matches = count($matches);
-
-                switch ($transform) {
-                    case 'lower':
-                        $transformed = static::lower($transformed, $encoding);
-                        break;
-                    case 'upper':
-                        $transformed = static::upper($transformed, $encoding);
-                        break;
-                }
-
                 $transformed = (($count_matches == 5) ? $matches[3] : '') . $transformed;
                 $transformed = (($count_matches == 6) ? $separator : '') . $transformed;
 
@@ -709,28 +732,43 @@ class Str
             $input
         );
 
-        // Do lcfirst, ucfirst and ucwords transformations
-        if (static::isOneOf($transform, array('lcfirst', 'ucfirst', 'ucwords'))) {
-            $words = explode(' ', $separated);
-            foreach ($words as &$word) {
-                switch ($transform) {
-                    case 'lcfirst':
-                        $word = static::lcfirst($word, $encoding);
-                        break;
-                    case 'ucfirst':
-                        $word = static::ucfirst($word, $encoding);
-                        break;
-                    case 'ucwords':
-                        // Because of how mb_convert_case works with MB_CASE_TITLE (underscore delimits words) we
-                        // need to simulate it by lower + ucfirst
-                        $word = static::ucfirst(static::lower($word, $encoding), $encoding);
-                        break;
-                }
-            }
-            $separated = implode(' ', $words);
-        }
+        // Run transform to the separated string
+        $separated = static::separatedTransform($separated, $transform, $encoding);
 
         return $separated;
+    }
+
+    /**
+     * Runs the transformation for the {@link separated} function.
+     *
+     * @param string $input     The string to apply the transformation to.
+     * @param string $transform The transformation to apply (options:'lcfirst', 'ucfirst', 'ucwords').
+     * @param string $encoding  The encoding of the input string.
+     *
+     * @return string The transformed input string (or the input string as is).
+     */
+    private static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING)
+    {
+        // Do lcfirst, ucfirst and ucwords transformations
+        if (static::isOneOf($transform, ['lower', 'upper', 'lcfirst', 'ucfirst', 'ucwords'])) {
+            $words = explode(' ', $input);
+            Traverser::run(
+                $words,
+                function (&$word) use ($transform, $encoding) {
+                    // Simulate ucwords behaviour as mb_convert_case splits the word by the dash
+                    // and we want the space to be the only word separator.
+                    if ($transform == 'ucwords') {
+                        $word = static::ucfirst(static::lower($word, $encoding), $encoding);
+                    } else {
+                        $transform = 'static::' . $transform;
+                        $word = call_user_func_array($transform, [$word, $encoding]);
+                    }
+                }
+            );
+            $input = implode(' ', $words);
+        }
+
+        return $input;
     }
 
     //endregion
@@ -756,7 +794,7 @@ class Str
      * @throws \BadFunctionCallException
      * @throws \LengthException
      */
-    public static function nsprintf($format, array $args = array())
+    public static function nsprintf($format, array $args = [])
     {
         // Filter unnamed %s strings that should not be processed
         $filter_regex = '/%s/';
@@ -766,10 +804,10 @@ class Str
         $pattern = '/(?<=%)([a-zA-Z0-9_]\w*)(?=\$)/';
 
         // Add predefined values
-        $pool = array('cr' => "\r", 'lf' => "\n", 'crlf' => "\r\n", 'tab' => "\t") + $args;
+        $pool = ['cr' => "\r", 'lf' => "\n", 'crlf' => "\r\n", 'tab' => "\t"] + $args;
 
         // Build args array and substitute variables with numbers
-        $args = array();
+        $args = [];
         $pos = 0;
         while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
             list($var_key, $var_pos) = $match[0];

@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -166,7 +166,7 @@ class DotArr
                 throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
             }
 
-            // TODO: optimize
+            // TODO: optimize this chunk of code
             $tmp =& $arr;
             $keys = explode('.', $key);
             while (count($keys) > 1) {
@@ -182,6 +182,7 @@ class DotArr
             $key = array_shift($keys);
             if (array_key_exists($key, $tmp)) {
                 unset($tmp[$key]);
+
                 return true;
             }
 
@@ -315,6 +316,7 @@ class DotArr
         foreach ($keys as $key) {
             $return[$key] = static::keyMatches($arr, $key);
         }
+
         return $return;
     }
 

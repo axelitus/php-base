@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -61,7 +61,7 @@ class Float
      *
      * If the given value is not identified as float by {@link Float::extIs} the default value is returned.
      *
-     * @param mixed $value The value to convert from.
+     * @param mixed $value   The value to convert from.
      * @param mixed $default The default value.
      *
      * @return mixed Returns the converted float value or the default value.
@@ -71,6 +71,7 @@ class Float
         if (!static::extIs($value)) {
             return $default;
         }
+
         return (float)$value;
     }
 
@@ -207,6 +208,7 @@ class Float
 
         if ($min > $max) {
             trigger_error("The \$min value cannot be greater than the \$max value.", E_USER_WARNING);
+
             return false;
         }
 

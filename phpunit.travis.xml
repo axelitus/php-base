@@ -9,8 +9,24 @@
     stopOnFailure="false"
     stopOnIncomplete="false"
     stopOnSkipped="false">
+    <php>
+        <server name="tests_path">res/tests</server>
+    </php>
+    <testsuites>
+        <testsuite name="axelitus/base">
+            <directory suffix=".php">res/tests/axelitus/Base</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/axelitus</directory>
+            <exclude>
+                <directory suffix=".php">res/tests/axelitus/Base/Tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
     <logging>
-        <log type="coverage-clover" target="/tmp/coverage.xml"/>
+        <log type="coverage-clover" target="log/coverage/coverage.xml"/>
         <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
     </logging>
     <listeners>
@@ -33,23 +49,10 @@
                         <object class="League\PHPUnitCoverageListener\Hook\Travis"/>
                     </element>
                     <element key="coverage_dir">
-                        <string>/tmp</string>
+                        <string>log/coverage</string>
                     </element>
                 </array>
             </arguments>
         </listener>
     </listeners>
-    <testsuites>
-        <testsuite name="axelitus/base">
-            <directory suffix=".php">res/tests/axelitus/Base</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/axelitus</directory>
-            <exclude>
-                <directory suffix=".php">res/tests/axelitus/Base/Tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
 </phpunit>

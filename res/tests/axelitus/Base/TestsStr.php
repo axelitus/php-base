@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base\Tests;
@@ -90,7 +90,7 @@ class TestsString extends TestCase
 
     public function testIsOneOf()
     {
-        $values = array('apple', 'banana', 'grapes', 'oranges');
+        $values = ['apple', 'banana', 'grapes', 'oranges'];
         $this->assertTrue(Str::isOneOf('apple', $values));
         $this->assertFalse(Str::isOneOf('Apple', $values));
         $this->assertTrue(Str::isOneOf('Apple', $values, true));
@@ -265,16 +265,16 @@ class TestsString extends TestCase
 
     public function testStudly()
     {
-        $this->assertEquals('a_bc_def', Str::studly("a_bc_def", array()));
+        $this->assertEquals('a_bc_def', Str::studly("a_bc_def", []));
         $this->assertEquals('ABcDef', Str::studly("a_bc_def"));
-        $this->assertEquals('AbCdEfGh', Str::studly("ab.cd_ef,gh", array('_', '.', ',')));
+        $this->assertEquals('AbCdEfGh', Str::studly("ab.cd_ef,gh", ['_', '.', ',']));
     }
 
     public function testCamel()
     {
-        $this->assertEquals('a_bc_def', Str::camel("a_bc_def", array()));
+        $this->assertEquals('a_bc_def', Str::camel("a_bc_def", []));
         $this->assertEquals('aBcDef', Str::camel("a_bc_def"));
-        $this->assertEquals('abCdEfGh', Str::camel("ab.cd_ef,gh", array('_', '.', ',')));
+        $this->assertEquals('abCdEfGh', Str::camel("ab.cd_ef,gh", ['_', '.', ',']));
     }
 
     public function testSeparated()
@@ -303,14 +303,14 @@ class TestsString extends TestCase
 
     public function testNsprintf()
     {
-        $this->assertEquals('abcdef', Str::nsprintf('a%letter$scdef', array('letter' => 'b')));
-        $this->assertEquals('abcdef', Str::nsprintf('a%ltr1$scd%ltr2$sf', array('ltr1' => 'b', 'ltr2' => 'e')));
+        $this->assertEquals('abcdef', Str::nsprintf('a%letter$scdef', ['letter' => 'b']));
+        $this->assertEquals('abcdef', Str::nsprintf('a%ltr1$scd%ltr2$sf', ['ltr1' => 'b', 'ltr2' => 'e']));
     }
 
     public function testNsprintfEx01()
     {
         $this->setExpectedException('\BadFunctionCallException');
-        Str::nsprintf('a%ltr1$scd%ltr2$sf', array('ltr1' => 'b'));
+        Str::nsprintf('a%ltr1$scd%ltr2$sf', ['ltr1' => 'b']);
     }
 
     //endregion

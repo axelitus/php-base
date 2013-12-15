@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base\Tests;
@@ -43,7 +43,26 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $ref = new \ReflectionClass($classOrInstance);
         $property = $ref->getProperty($propertyName);
         $property->setAccessible(true);
+
         return $property;
+    }
+
+    /**
+     * Gets the value of a non-public property from an instance.
+     *
+     * @param object $instance The class or instance that contains the property to get.
+     * @param string $propertyName    The property's value to get.
+     *
+     * @return mixed The property's value.
+     * @throws \InvalidArgumentException
+     */
+    protected static function getNonPublicPropertyValue($instance, $propertyName)
+    {
+        if(!is_object($instance)){
+            throw new \InvalidArgumentException("The instance must be an object.");
+        }
+
+        return static::getNonPublicProperty($instance, $propertyName)->getValue($instance);
     }
 
     /**
@@ -59,6 +78,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $ref = new \ReflectionClass($classOrInstance);
         $method = $ref->getMethod($methodName);
         $method->setAccessible(true);
+
         return $method;
     }
 
@@ -74,6 +94,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     protected static function execNonPublicMethod($classOrInstance, $methodName, array $args = [])
     {
         $method = static::getNonPublicMethod($classOrInstance, $methodName);
+
         return $method->invokeArgs(null, $args);
     }
 }

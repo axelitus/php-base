@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -57,7 +57,9 @@ class BigInt
     public static function compare($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$int1 and \$int2 parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if (is_int($int1) && is_int($int2)) {
@@ -102,7 +104,9 @@ class BigInt
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
         if (!static::is($value) || !static::is($lower) || !static::is($upper)) {
-            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$value, \$lower and \$upper parameters must be of type int (or string representing a big int)."
+            );
         }
 
         $lowerLimit = min($lower, $upper);
@@ -169,7 +173,9 @@ class BigInt
     public static function add($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$int1 and \$int2 parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if (is_int($int1) && is_int($int2)) {
@@ -194,7 +200,9 @@ class BigInt
     public static function sub($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$int1 and \$int2 parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if (is_int($int1) && is_int($int2)) {
@@ -219,7 +227,9 @@ class BigInt
     public static function mul($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$int1 and \$int2 parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if (is_int($int1) && is_int($int2)) {
@@ -244,7 +254,9 @@ class BigInt
     public static function div($int1, $int2)
     {
         if (!static::is($int1) || !static::is($int2)) {
-            throw new \InvalidArgumentException("The \$int1 and \$int2 parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$int1 and \$int2 parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if ($int2 == '0') {
@@ -273,7 +285,9 @@ class BigInt
     public static function pow($base, $exponent)
     {
         if (!static::is($base) || !static::is($exponent)) {
-            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$base and \$exponent parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if (is_int($base) && is_int($exponent)) {
@@ -298,7 +312,9 @@ class BigInt
     public static function mod($base, $modulus)
     {
         if (!static::is($base) || !static::is($modulus)) {
-            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$base and \$modulus parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if ($modulus == '0') {
@@ -326,7 +342,9 @@ class BigInt
     public static function sqrt($base)
     {
         if (!static::is($base)) {
-            throw new \InvalidArgumentException("The \$base parameters must be of type int (or string representing a big int).");
+            throw new \InvalidArgumentException(
+                "The \$base parameters must be of type int (or string representing a big int)."
+            );
         }
 
         if (is_int($base)) {

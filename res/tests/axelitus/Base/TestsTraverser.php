@@ -7,19 +7,19 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base\Tests;
 
-use axelitus\Base\Traversor;
+use axelitus\Base\Traverser;
 
 /**
- * Class TestsTraversor
+ * Class TestsTraverser
  *
  * @package axelitus\Base
  */
-class TestsTraversor extends TestCase
+class TestsTraverser extends TestCase
 {
     public function testRun()
     {
@@ -27,7 +27,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [4, 9, 16, 25],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value) {
                     return pow($value, 2);
@@ -35,11 +35,21 @@ class TestsTraversor extends TestCase
             )
         );
 
+        // Test item callback only with value (by reference)
+        $arr = [2, 3, 4, 5];
+        Traverser::run(
+            $arr,
+            function (&$value) {
+                $value = pow($value, 2);
+            }
+        );
+        $this->assertEquals([4, 9, 16, 25], $arr);
+
         // Test item callback with value and key (by value)
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0, 3, 8, 15],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value, $key) {
                     return $key * $value;
@@ -51,23 +61,26 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [3 => 10, 4 => 15, 5 => 20, 6 => 25],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value, &$key) {
                     $key += 3;
+
                     return $value * 5;
                 }
             )
         );
 
         // Test item callback with value, key and original array (by reference)
+        // cannot unset value by reference, this must be do like this.
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0 => 'deleted', 1 => 'deleted', 2 => 'deleted', 3 => 'deleted'],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value, $key, &$arr) {
                     unset($arr[$key]);
+
                     return 'deleted';
                 }
             )
@@ -78,14 +91,14 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             28,
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value) {
                     return $value * 2;
                 },
                 function ($result) {
                     $count = 0;
-                    foreach($result as $value){
+                    foreach ($result as $value) {
                         $count += $value;
                     }
 
@@ -98,7 +111,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             $arr,
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value) {
                     return $value;

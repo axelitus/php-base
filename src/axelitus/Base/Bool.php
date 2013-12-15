@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -92,6 +92,7 @@ class Bool
         if (!static::extIs($value)) {
             return $default;
         }
+
         return static::extParse($value);
     }
 
@@ -131,7 +132,9 @@ class Bool
                 $ret = false;
                 break;
             default:
-                throw new \RuntimeException("The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'.");
+                throw new \RuntimeException(
+                    "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'."
+                );
                 break;
         }
 
@@ -171,7 +174,9 @@ class Bool
                 $ret = false;
                 break;
             default:
-                throw new \RuntimeException("The \$input parameter did not match any of the valid strings that can be parsed.");
+                throw new \RuntimeException(
+                    "The \$input parameter did not match any of the valid strings that can be parsed."
+                );
                 break;
         }
 
@@ -243,7 +248,7 @@ class Bool
      *
      * @param bool $value1 The left operand to apply the operation to.
      * @param bool $value2 The right operand to apply the operation to.
-     * @param null $_ More values to apply the operation in cascade.
+     * @param null $_      More values to apply the operation in cascade.
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
@@ -284,7 +289,9 @@ class Bool
         $args = func_get_args();
         foreach ($args as $arg) {
             if (!is_array($arg) || count($arg) < 2) {
-                throw new \InvalidArgumentException("All parameters must be of type array and must contain at least 2 items.");
+                throw new \InvalidArgumentException(
+                    "All parameters must be of type array and must contain at least 2 items."
+                );
             }
 
             $ret[] = call_user_func_array('static::valueAnd', $arg);
@@ -305,7 +312,7 @@ class Bool
      *
      * @param bool $value1 The left operand to apply the operation to.
      * @param bool $value2 The right operand to apply the operation to.
-     * @param null $_ More values to apply the operation in cascade.
+     * @param null $_      More values to apply the operation in cascade.
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
@@ -346,7 +353,9 @@ class Bool
         $args = func_get_args();
         foreach ($args as $arg) {
             if (!is_array($arg) || count($arg) < 2) {
-                throw new \InvalidArgumentException("All parameters must be of type array and must contain at least 2 items.");
+                throw new \InvalidArgumentException(
+                    "All parameters must be of type array and must contain at least 2 items."
+                );
             }
 
             $ret[] = call_user_func_array('static::valueOr', $arg);
@@ -367,7 +376,7 @@ class Bool
      *
      * @param bool $value1 The left operand to apply the operation to.
      * @param bool $value2 The right operand to apply the operation to.
-     * @param null $_ More values to apply the operation in cascade.
+     * @param null $_      More values to apply the operation in cascade.
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
@@ -408,7 +417,9 @@ class Bool
         $args = func_get_args();
         foreach ($args as $arg) {
             if (!is_array($arg) || count($arg) < 2) {
-                throw new \InvalidArgumentException("All parameters must be of type array and must contain at least 2 items.");
+                throw new \InvalidArgumentException(
+                    "All parameters must be of type array and must contain at least 2 items."
+                );
             }
 
             $ret[] = call_user_func_array('static::valueEq', $arg);
@@ -431,7 +442,7 @@ class Bool
      *
      * @param bool $value1 The left operand to apply the operation to.
      * @param bool $value2 The right operand to apply the operation to.
-     * @param null $_ More values to apply the operation in cascade.
+     * @param null $_      More values to apply the operation in cascade.
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
@@ -472,7 +483,9 @@ class Bool
         $args = func_get_args();
         foreach ($args as $arg) {
             if (!is_array($arg) || count($arg) < 2) {
-                throw new \InvalidArgumentException("All parameters must be of type array and must contain at least 2 items.");
+                throw new \InvalidArgumentException(
+                    "All parameters must be of type array and must contain at least 2 items."
+                );
             }
 
             $ret[] = call_user_func_array('static::valueXor', $arg);

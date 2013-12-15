@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base;
@@ -53,11 +53,13 @@ class BigFloat
     public static function int($value)
     {
         if (!static::is($value)) {
-            throw new \InvalidArgumentException("The \$value parameter must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$value parameter must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($value)) {
-            return (int) $value;
+            return (int)$value;
         } else {
             if (($decimal = Str::pos($value, '.')) !== false) {
                 $value = Str::sub($value, 0, $decimal);
@@ -78,7 +80,8 @@ class BigFloat
      *
      * @param float|string $float1 The left operand.
      * @param float|string $float2 The right operand.
-     * @param null|int     $scale  The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale  The scale to use for BCMath functions.
+     *                             If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string Returns <0 if $float1<$float2, =0 if $float1 == $float2, >0 if $float1>$float2
      * @throws \InvalidArgumentException
@@ -87,7 +90,9 @@ class BigFloat
     public static function compare($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$float1 and \$float2 parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -104,7 +109,8 @@ class BigFloat
      *
      * @param float|string $float1 The left operand.
      * @param float|string $float2 The right operand.
-     * @param null|int     $scale  The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale  The scale to use for BCMath functions.
+     *                             If null is given the value set by {@link bcscale()} is used.
      *
      * @return bool Returns true if $float1 == $float2, false otherwise.
      */
@@ -133,7 +139,10 @@ class BigFloat
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
         if (!static::is($value) || !static::is($lower) || !static::is($upper)) {
-            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$value, \$lower and \$upper parameters must be of type float"
+                . " (or string representing a big float)."
+            );
         }
 
         $lowerLimit = min($lower, $upper);
@@ -192,7 +201,8 @@ class BigFloat
      *
      * @param float|string $float1 The left operand.
      * @param float|string $float2 The right operand.
-     * @param null|int     $scale  The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale  The scale to use for BCMath functions.
+     *                             If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -201,7 +211,9 @@ class BigFloat
     public static function add($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$float1 and \$float2 parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -218,7 +230,8 @@ class BigFloat
      *
      * @param float|string $float1 The left operand.
      * @param float|string $float2 The right operand.
-     * @param null|int     $scale  The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale  The scale to use for BCMath functions.
+     *                             If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -227,7 +240,9 @@ class BigFloat
     public static function sub($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$float1 and \$float2 parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -244,7 +259,8 @@ class BigFloat
      *
      * @param float|string $float1 The left operand.
      * @param float|string $float2 The right operand.
-     * @param null|int     $scale  The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale  The scale to use for BCMath functions.
+     *                             If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -253,7 +269,9 @@ class BigFloat
     public static function mul($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$float1 and \$float2 parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($float1) && is_float($float2)) {
@@ -270,7 +288,8 @@ class BigFloat
      *
      * @param float|string $float1 The left operand.
      * @param float|string $float2 The right operand.
-     * @param null|int     $scale  The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale  The scale to use for BCMath functions.
+     *                             If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -279,7 +298,9 @@ class BigFloat
     public static function div($float1, $float2, $scale = null)
     {
         if (!static::is($float1) || !static::is($float2)) {
-            throw new \InvalidArgumentException("The \$float1 and \$float2 parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$float1 and \$float2 parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if ($float2 == '0') {
@@ -300,7 +321,8 @@ class BigFloat
      *
      * @param float|string $base     The base number.
      * @param float|string $exponent The power exponent.
-     * @param null|int     $scale    The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale    The scale to use for BCMath functions.
+     *                               If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -309,7 +331,9 @@ class BigFloat
     public static function pow($base, $exponent, $scale = null)
     {
         if (!static::is($base) || !static::is($exponent)) {
-            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$base and \$exponent parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($base) && is_float($exponent)) {
@@ -326,7 +350,8 @@ class BigFloat
      *
      * @param float|string $base    The left operand.
      * @param float|string $modulus The right operand.
-     * @param null|int     $scale   The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale   The scale to use for BCMath functions.
+     *                              If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -335,7 +360,9 @@ class BigFloat
     public static function mod($base, $modulus, $scale = null)
     {
         if (!static::is($base) || !static::is($modulus)) {
-            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$base and \$modulus parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if ($modulus == '0') {
@@ -347,6 +374,7 @@ class BigFloat
         } elseif (function_exists('bcdiv')) {
             // We cannot use bcmod because it only returns the int remainder
             $times = static::int(bcdiv($base, $modulus, $scale)) . '.0';
+
             return static::sub($base, static::mul($times, $modulus, $scale), $scale);
         }
 
@@ -357,7 +385,8 @@ class BigFloat
      * Gets the square root of a number.
      *
      * @param float|string $base  The base to use.
-     * @param null|int     $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param null|int     $scale The scale to use for BCMath functions.
+     *                            If null is given the value set by {@link bcscale()} is used.
      *
      * @return float|string The result of the operation.
      * @throws \InvalidArgumentException
@@ -366,7 +395,9 @@ class BigFloat
     public static function sqrt($base, $scale = null)
     {
         if (!static::is($base)) {
-            throw new \InvalidArgumentException("The \$base parameters must be of type float (or string representing a big float).");
+            throw new \InvalidArgumentException(
+                "The \$base parameters must be of type float (or string representing a big float)."
+            );
         }
 
         if (is_float($base)) {

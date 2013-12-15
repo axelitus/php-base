@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.2
+ * @version     0.8.0
  */
 
 namespace axelitus\Base\Tests;
@@ -41,13 +41,13 @@ class TestsArr extends TestCase
 
     public function testNew()
     {
-        $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
+        $data = static::getNonPublicPropertyValue($this->arr, 'data');
         $this->assertInternalType('array', $data);
         $this->assertEquals([], $data);
 
         $a = ['first' => 'value', 'second' => ['lvl' => 'lvl value']];
         $this->arr = new Arr($a);
-        $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
+        $data = static::getNonPublicPropertyValue($this->arr, 'data');
         $this->assertInternalType('array', $data);
         $this->assertEquals($a, $data);
     }
@@ -73,7 +73,7 @@ class TestsArr extends TestCase
         $this->arr->set('first', 'value');
         $this->arr->set('second.lvl.opt', 'other value');
 
-        $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
+        $data = static::getNonPublicPropertyValue($this->arr, 'data');
         $this->assertArrayHasKey('first', $data);
         $this->assertEquals('value', $data['first']);
         $this->assertArrayHasKey('second', $data);
@@ -90,7 +90,7 @@ class TestsArr extends TestCase
         );
 
         $this->assertTrue($this->arr->delete('first'));
-        $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
+        $data = static::getNonPublicPropertyValue($this->arr, 'data');
         $this->assertArrayNotHasKey('first', $data);
 
         $this->assertFalse($this->arr->delete('fourth'));
@@ -99,7 +99,7 @@ class TestsArr extends TestCase
             ['second' => true, 'third' => true, 'fifth' => false],
             $this->arr->delete(['second', 'third', 'fifth'])
         );
-        $data = static::getNonPublicProperty($this->arr, 'data')->getValue($this->arr);
+        $data = static::getNonPublicPropertyValue($this->arr, 'data');
         $this->assertArrayNotHasKey('second', $data);
         $this->assertArrayNotHasKey('third', $data);
         $this->assertEquals([], $data);
@@ -160,9 +160,9 @@ class TestsArr extends TestCase
         static::getNonPublicProperty($this->arr, 'data')->setValue(
             $this->arr,
             [
-                'first' => 'value',
+                'first'  => 'value',
                 'second' => ['lvl' => ['opt' => ['value 1', 'value 2', 'value 3', 'value 4', 'value 5']]],
-                'third' => ['sub' => 'sub value']
+                'third'  => ['sub' => 'sub value']
             ]
         );
         $this->assertEquals(1, $this->arr->count('first'));
