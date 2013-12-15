@@ -51,11 +51,14 @@ All classes are referenced from the package namespace if not otherwise stated.
  - [TODO] Add the Initiable interface for classes that can/should be initiated.
  - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
      - [TODO] Implement the Iterator interface to the Arr class.
- - [TODO] Add a Flag class to handle numeric/boolean flag operations.
-     - [TODO] set() function.
-     - [TODO] isOn() function.
-     - [TODO] isOff() function.
-     - [TODO] mask() function.
+ - ~~[DONE]~~ Add a Flag class to handle numeric/boolean flag operations.
+     - ~~[DONE]~~ is() function to test for valid flags.
+     - ~~[DONE]~~ isOn() function to test if flag is on.
+     - ~~[DONE]~~ isOff() function to test if flag is off.
+     - ~~[DONE] set() function~~ Changed to setOn() function (and also added a setOff() function) to set and unset flags.
+     - ~~[TODO] mask() function.~~ Need to re-think the purpose of this.
+     - ~~[DONE]~~ getValues() and getPowers() functions to get an array of consecutive flags.
+     - ~~[DONE]~~ assignValues() function to assign consecutive flag values to a given array with tags.
  - [TODO] Add an abstract 'magic' class that allows for derived class object's to use setters and getters with property syntax through the __set() and __get() magic methods.
  - ~~[DONE]~~ Add a Traversor (or any other name) class that applies a callback to the items of an array. This class behaves somewhat like array_map() and/or array_walk() but it's more flexible.
  
