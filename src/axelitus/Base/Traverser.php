@@ -15,7 +15,7 @@ namespace axelitus\Base;
 /**
  * Class Traverser
  *
- * Array traverser.
+ * Array callback traverser.
  *
  * @package axelitus\Base
  */

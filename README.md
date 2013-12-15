@@ -44,6 +44,7 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **Int** - Int operations.
  - **Num** - Numeric operations.
  - **Str** - String operations.
+ - **Traverser** - Array callback traverser.
 
  ## Roadmap
 
