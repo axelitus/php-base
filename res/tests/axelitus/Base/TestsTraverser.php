@@ -15,7 +15,7 @@ namespace axelitus\Base\Tests;
 use axelitus\Base\Traverser;
 
 /**
- * Class TestsTraversor
+ * Class TestsTraverser
  *
  * @package axelitus\Base
  */

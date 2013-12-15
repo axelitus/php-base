@@ -13,14 +13,25 @@
 namespace axelitus\Base;
 
 /**
- * Class Traversor
+ * Class Traverser
  *
- *
+ * Array traverser.
  *
  * @package axelitus\Base
  */
 class Traverser
 {
+    /**
+     * Runs the traverser across the given array and executes the item callback into every item of the array.
+     *
+     * The traverser also has a result callback to allow for 'macro' result processing.
+     *
+     * @param array    $arr The array to traverse.
+     * @param callable $itemCallback The item callback to operate into every item.
+     * @param callable $resultCallback The result callback to operate into the result array.
+     *
+     * @return array
+     */
     public static function run(array &$arr, callable $itemCallback, callable $resultCallback = null)
     {
         $result = [];
