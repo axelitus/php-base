@@ -59,7 +59,7 @@ All classes are referenced from the package namespace if not otherwise stated.
      - ~~[TODO] mask() function.~~ Need to re-think the purpose of this.
      - ~~[DONE]~~ getValues() and getPowers() functions to get an array of consecutive flags.
      - ~~[DONE]~~ assignValues() function to assign consecutive flag values to a given array with tags.
- - [TODO] Add an abstract 'magic' class that allows for derived class object's to use setters and getters with property syntax through the __set() and __get() magic methods.
+ - ~~[DONE]~~ Add an abstract 'magic' class that allows for derived class objects to use setters and getters with property syntax through the __set() and __get() magic methods. The class is PropertyAccessible.
  - ~~[DONE]~~ Add a Traversor (or any other name) class that applies a callback to the items of an array. This class behaves somewhat like array_map() and/or array_walk() but it's more flexible.
  
 
