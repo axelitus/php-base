@@ -13,3 +13,8 @@ tools:
     enabled: true
     filter:
       excluded_paths: [vendor/*, res/*, doc/*]
+  php_cpd:
+    enabled: true
+    excluded_dirs: [venodr/*, res/*, doc/*]
+    filter:
+      excluded_paths: [venodr/*, res/*, doc/*]
