@@ -35,7 +35,7 @@ class Traverser
     public static function run(array &$arr, callable $itemCallback, callable $resultCallback = null)
     {
         $result = [];
-        foreach ($arr as $key => $value) {
+        foreach ($arr as $key => &$value) {
             // Run the callback and store the result in a variable so that we allow the key to be modified by the callback.
             // also pass the original array if one needs to unset variables from the original array.
             $r = $itemCallback($value, $key, $arr);

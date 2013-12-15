@@ -35,6 +35,16 @@ class TestsTraverser extends TestCase
             )
         );
 
+        // Test item callback only with value (by reference)
+        $arr = [2, 3, 4, 5];
+        Traverser::run(
+            $arr,
+            function (&$value) {
+                $value = pow($value, 2);
+            }
+        );
+        $this->assertEquals([4, 9, 16, 25], $arr);
+
         // Test item callback with value and key (by value)
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
@@ -85,7 +95,7 @@ class TestsTraverser extends TestCase
                 },
                 function ($result) {
                     $count = 0;
-                    foreach($result as $value){
+                    foreach ($result as $value) {
                         $count += $value;
                     }
 
