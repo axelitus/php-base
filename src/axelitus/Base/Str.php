@@ -783,13 +783,6 @@ class Str
             $pos = $var_pos + $word_length; // skip to end of replacement for next iteration
         }
 
-        // TODO: evaluate if this code is really necessary
-        // Final check to see that everything is ok
-        //preg_match_all($pattern, $format, $match, PREG_OFFSET_CAPTURE);
-        //if (count($match[0]) != count($args)) {
-        //    throw new \LengthException("The number of arguments differs from the number of variables in the format.");
-        //}
-
         // Return the original %s strings
         $filter_regex = '/#\[:~s\]#/';
 
