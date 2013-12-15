@@ -779,7 +779,7 @@ class Str
             }
 
             array_push($args, $pool[$var_key]);
-            $format = substr_replace($format, $index = count($args), $var_pos, $word_length = static::length($var_key));
+            $format = substr_replace($format, count($args), $var_pos, $word_length = static::length($var_key));
             $pos = $var_pos + $word_length; // skip to end of replacement for next iteration
         }
 
