@@ -19,7 +19,7 @@ namespace axelitus\Base;
  *
  * @package axelitus\Base
  */
-class Traversor
+class Traverser
 {
     public static function run(array &$arr, callable $itemCallback, callable $resultCallback = null)
     {

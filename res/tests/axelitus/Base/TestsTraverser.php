@@ -12,14 +12,14 @@
 
 namespace axelitus\Base\Tests;
 
-use axelitus\Base\Traversor;
+use axelitus\Base\Traverser;
 
 /**
  * Class TestsTraversor
  *
  * @package axelitus\Base
  */
-class TestsTraversor extends TestCase
+class TestsTraverser extends TestCase
 {
     public function testRun()
     {
@@ -27,7 +27,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [4, 9, 16, 25],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value) {
                     return pow($value, 2);
@@ -39,7 +39,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0, 3, 8, 15],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value, $key) {
                     return $key * $value;
@@ -51,7 +51,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [3 => 10, 4 => 15, 5 => 20, 6 => 25],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value, &$key) {
                     $key += 3;
@@ -64,7 +64,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             [0 => 'deleted', 1 => 'deleted', 2 => 'deleted', 3 => 'deleted'],
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value, $key, &$arr) {
                     unset($arr[$key]);
@@ -78,7 +78,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             28,
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value) {
                     return $value * 2;
@@ -98,7 +98,7 @@ class TestsTraversor extends TestCase
         $arr = [2, 3, 4, 5];
         $this->assertEquals(
             $arr,
-            Traversor::run(
+            Traverser::run(
                 $arr,
                 function ($value) {
                     return $value;
