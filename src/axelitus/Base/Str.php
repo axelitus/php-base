@@ -435,8 +435,8 @@ class Str
      *
      * @author  FuelPHP (http://fuelphp.com)
      *
-     * @param   string $input        The string to truncate
-     * @param   int    $limit        The number of characters to truncate too
+     * @param   string $input        The string to truncate.
+     * @param   int    $limit        The number of characters to truncate to.
      * @param   string $continuation The string to use to denote it was truncated
      * @param   bool   $is_html      Whether the string has HTML
      *
@@ -445,33 +445,9 @@ class Str
     public static function truncate($input, $limit, $continuation = '...', $is_html = false)
     {
         $offset = 0;
-        $tags = array();
+        $tags = [];
         if ($is_html) {
-            // Handle special characters.
-            preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-            foreach ($matches as $match) {
-                if ($match[0][1] >= $limit) {
-                    break;
-                }
-                $limit += (static::length($match[0][0]) - 1);
-            }
-
-            // Handle all the html tags.
-            preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-            foreach ($matches as $match) {
-                if ($match[0][1] - $offset >= $limit) {
-                    break;
-                }
-
-                $tag = static::sub(strtok($match[0][0], " \t\n\r\0\x0B>"), 1);
-                if ($tag[0] != '/') {
-                    $tags[] = $tag;
-                } elseif (end($tags) == static::sub($tag, 1)) {
-                    array_pop($tags);
-                }
-
-                $offset += $match[1][1] - $match[0][1];
-            }
+            $input = static::truncateHtml($input, $limit, $offset, $tags);
         }
 
         $new_string = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
@@ -479,6 +455,47 @@ class Str
         $new_string .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
 
         return $new_string;
+    }
+
+    /**
+     * Handles the strip of tags for the truncate function.
+     *
+     * @param string $input The input string.
+     * @param int $limit The number of characters to truncate to.
+     * @param int $offset The offset.
+     * @param array $tags The stripped tags.
+     *
+     * @return string Returns the stripped string to reassemble.
+     */
+    private static function truncateHtml($input, &$limit, &$offset, &$tags)
+    {
+        // Handle special characters.
+        preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if ($match[0][1] >= $limit) {
+                break;
+            }
+            $limit += (static::length($match[0][0]) - 1);
+        }
+
+        // Handle all the html tags.
+        preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if ($match[0][1] - $offset >= $limit) {
+                break;
+            }
+
+            $tag = static::sub(strtok($match[0][0], " \t\n\r\0\x0B>"), 1);
+            if ($tag[0] != '/') {
+                $tags[] = $tag;
+            } elseif (end($tags) == static::sub($tag, 1)) {
+                array_pop($tags);
+            }
+
+            $offset += $match[1][1] - $match[0][1];
+        }
+
+        return $input;
     }
 
     //endregion
