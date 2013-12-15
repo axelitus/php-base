@@ -709,9 +709,25 @@ class Str
             $input
         );
 
+        // Run transform to the separated string
+        $separated = static::separatedTransform($separated, $transform, $encoding);
+
+        return $separated;
+    }
+
+    /**
+     * Runs the transformation for the {@link separated} function.
+     *
+     * @param string $input The string to apply the transformation to.
+     * @param string $transform The transformation to apply (options:'lcfirst', 'ucfirst', 'ucwords').
+     * @param string $encoding The encoding of the input string.
+     *
+     * @return string The transformed input string (or the input string as is).
+     */
+    private static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING) {
         // Do lcfirst, ucfirst and ucwords transformations
         if (static::isOneOf($transform, array('lcfirst', 'ucfirst', 'ucwords'))) {
-            $words = explode(' ', $separated);
+            $words = explode(' ', $input);
             foreach ($words as &$word) {
                 switch ($transform) {
                     case 'lcfirst':
@@ -727,10 +743,10 @@ class Str
                         break;
                 }
             }
-            $separated = implode(' ', $words);
+            $input = implode(' ', $words);
         }
 
-        return $separated;
+        return $input;
     }
 
     //endregion
