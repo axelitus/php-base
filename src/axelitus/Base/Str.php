@@ -770,8 +770,8 @@ class Str
 
         // Build args array and substitute variables with numbers
         $args = array();
-        //for ($pos = 0; preg_match($pattern, $format, $match, PREG_OFFSET_CAPTURE, $pos);) {
-        for ($pos = 0; static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos);) {
+        $pos = 0;
+        while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
             list($var_key, $var_pos) = $match[0];
 
             if (!array_key_exists($var_key, $pool)) {
