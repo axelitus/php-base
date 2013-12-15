@@ -9,3 +9,7 @@ tools:
     enabled: true
     filter:
       excluded_paths: [vendor/*, res/*, doc/*]
+  php_mess_detector:
+    enabled: true
+    filter:
+      excluded_paths: [vendor/*, res/*, doc/*]
