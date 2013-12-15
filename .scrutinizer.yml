@@ -1,9 +1,7 @@
 filter:
-  excluded_paths: [vendor/*, app/*, web/*, res/*, doc/*]
+  excluded_paths: [vendor/*, res/*, doc/*]
 
 tools:
-  external_code_coverage: true
-  php_cpd: true
-  php_analyzer: true
-  php_pdepend:
-    excluded_dirs: [vendor, doc]
+  external_code_coverage:
+    enabled: true
+    timeout: 600
