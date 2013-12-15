@@ -39,6 +39,7 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
  - **DotArr** - Dot-notated array operations.
+ - **Flag** - Bitwise flag operations.
  - **Float** - Float operations.
  - **Int** - Int operations.
  - **Num** - Numeric operations.

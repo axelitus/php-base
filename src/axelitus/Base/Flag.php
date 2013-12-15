@@ -15,7 +15,7 @@ namespace axelitus\Base;
 /**
  * Class Flag
  *
- * Handles flag operations.
+ * Bitwise flag operations.
  *
  * @package axelitus\Base
  */
