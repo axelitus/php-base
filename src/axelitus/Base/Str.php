@@ -463,7 +463,7 @@ class Str
     }
 
     /**
-     * Handles the strip of tags for the truncate function.
+     * Handles the strip of tags in the {@link truncate} function.
      *
      * @param string $input  The input string.
      * @param int    $limit  The number of characters to truncate to.
@@ -474,14 +474,7 @@ class Str
      */
     private static function truncateHtml($input, &$limit, &$offset, &$tags)
     {
-        // Handle special characters.
-        preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            if ($match[0][1] >= $limit) {
-                break;
-            }
-            $limit += (static::length($match[0][0]) - 1);
-        }
+        static::truncateSpecialChars($input, $limit);
 
         // Handle all the html tags.
         preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
@@ -501,6 +494,24 @@ class Str
         }
 
         return $input;
+    }
+
+    /**
+     * Handles the special characters while stripping html tags in the {@link truncateHtml} function.
+     *
+     * @param string $input The input string.
+     * @param int    $limit The number of characters to truncate to.
+     */
+    private static function truncateSpecialChars($input, &$limit)
+    {
+        // Handle special characters.
+        preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if ($match[0][1] >= $limit) {
+                break;
+            }
+            $limit += (static::length($match[0][0]) - 1);
+        }
     }
 
     //endregion
