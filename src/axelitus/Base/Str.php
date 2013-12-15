@@ -59,7 +59,8 @@ class Str
      * http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
      * Be careful, the ' char is escaped so it looks like \ is twice, but it is not.
      */
-    const ASCII_PRINTABLE = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+    const ASCII_PRINTABLE =
+        ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 
     //endregion
 
@@ -130,7 +131,8 @@ class Str
     /**
      * Verifies if a string begins with a substring.
      *
-     * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
+     * Uses the multibyte function if available with the given encoding $encoding.
+     * The comparison is case-sensitive by default.
      *
      * @param string $input           The input string to compare to.
      * @param string $search          The substring to compare the beginning to.
@@ -149,7 +151,8 @@ class Str
     /**
      * Verifies if a string ends with a substring.
      *
-     * Uses the multibyte function if available with the given encoding $encoding. The comparison is case-sensitive by default.
+     * Uses the multibyte function if available with the given encoding $encoding.
+     * The comparison is case-sensitive by default.
      *
      * @param string $input           The input string to compare to.
      * @param string $search          The substring to compare the ending to.
@@ -262,9 +265,11 @@ class Str
     public static function sub($input, $start, $length = null, $encoding = self::DEFAULT_ENCODING)
     {
         // sub input functions don't parse null correctly
-        $length = is_null($length) ? (function_exists('mb_substr') ? mb_strlen($input, $encoding) : strlen(
-                $input
-            )) - $start : $length;
+        $length = is_null($length)
+            ? (function_exists('mb_substr')
+                ? mb_strlen($input, $encoding)
+                : strlen($input)) - $start
+            : $length;
 
 
         return function_exists('mb_substr')
@@ -351,7 +356,7 @@ class Str
         &$count = null
     ) {
         if (is_array($subject)) {
-            $result = array();
+            $result = [];
             foreach ($subject as $item) {
                 $result[] = static::mbStrReplaceCaller($search, $replace, $item, $caseInsensitive, $encoding, $count);
             }
@@ -590,7 +595,7 @@ class Str
      * Returns a string with the words capitalized.
      *
      * Returns a string with the words capitalized. The $encoding parameter is used to determine the input string
-     * encoding and thus use the proper method. The function uses mb_convert_case if present and falls back to ucwords.     *
+     * encoding and thus use the proper method. The function uses mb_convert_case if present and falls back to ucwords.
      * The ucwords function normally does not lowercase the input string first, this function does.
      *
      * @author FuelPHP (http://fuelphp.com)
@@ -626,7 +631,7 @@ class Str
      *
      * @return string The studly-caps-cased string
      */
-    public static function studly($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
+    public static function studly($input, array $separators = ['_'], $encoding = self::DEFAULT_ENCODING)
     {
         if (!empty($separators)) {
             $pattern = '';
@@ -669,7 +674,7 @@ class Str
      *
      * @return string  The camel-cased string
      */
-    public static function camel($input, array $separators = array('_'), $encoding = self::DEFAULT_ENCODING)
+    public static function camel($input, array $separators = ['_'], $encoding = self::DEFAULT_ENCODING)
     {
         $camel = static::studly($input, $separators, $encoding);
         $words = explode(' ', $camel);
@@ -741,9 +746,10 @@ class Str
      *
      * @return string The transformed input string (or the input string as is).
      */
-    private static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING) {
+    private static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING)
+    {
         // Do lcfirst, ucfirst and ucwords transformations
-        if (static::isOneOf($transform, array('lcfirst', 'ucfirst', 'ucwords'))) {
+        if (static::isOneOf($transform, ['lcfirst', 'ucfirst', 'ucwords'])) {
             $words = explode(' ', $input);
             foreach ($words as &$word) {
                 switch ($transform) {
@@ -789,7 +795,7 @@ class Str
      * @throws \BadFunctionCallException
      * @throws \LengthException
      */
-    public static function nsprintf($format, array $args = array())
+    public static function nsprintf($format, array $args = [])
     {
         // Filter unnamed %s strings that should not be processed
         $filter_regex = '/%s/';
@@ -799,10 +805,10 @@ class Str
         $pattern = '/(?<=%)([a-zA-Z0-9_]\w*)(?=\$)/';
 
         // Add predefined values
-        $pool = array('cr' => "\r", 'lf' => "\n", 'crlf' => "\r\n", 'tab' => "\t") + $args;
+        $pool = ['cr' => "\r", 'lf' => "\n", 'crlf' => "\r\n", 'tab' => "\t"] + $args;
 
         // Build args array and substitute variables with numbers
-        $args = array();
+        $args = [];
         $pos = 0;
         while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
             list($var_key, $var_pos) = $match[0];

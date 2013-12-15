@@ -274,13 +274,19 @@ class TestsFloat extends TestCase
 
     public function testAddEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::add(5.0, false);
     }
 
     public function testAddEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::add(false, 5.0);
     }
 
@@ -291,13 +297,19 @@ class TestsFloat extends TestCase
 
     public function testSubEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::sub(5.0, false);
     }
 
     public function testSubEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::sub(false, 5.0);
     }
 
@@ -308,13 +320,19 @@ class TestsFloat extends TestCase
 
     public function testMulEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::mul(5.0, false);
     }
 
     public function testMulEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::mul(false, 5.0);
     }
 
@@ -325,13 +343,19 @@ class TestsFloat extends TestCase
 
     public function testDivEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::div(5.0, false);
     }
 
     public function testDivEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$float1 and \$float2 parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float1 and \$float2 parameters must be of type float."
+        );
         Float::div(false, 5.0);
     }
 
@@ -351,13 +375,19 @@ class TestsFloat extends TestCase
 
     public function testPowEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$exponent parameters must be of type float."
+        );
         Float::pow(5.0, false);
     }
 
     public function testPowEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$exponent parameters must be of type float."
+        );
         Float::pow(false, 5.0);
     }
 
@@ -368,13 +398,19 @@ class TestsFloat extends TestCase
 
     public function testModEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$modulus parameters must be of type float."
+        );
         Float::mod(5.0, false);
     }
 
     public function testModEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be of type float.");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$modulus parameters must be of type float."
+        );
         Float::mod(false, 5.0);
     }
 

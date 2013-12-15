@@ -52,7 +52,9 @@ class BigNum
     public static function int($value)
     {
         if (!static::is($value)) {
-            throw new \InvalidArgumentException("The \$value parameter must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$value parameter must be numeric (or string representing a big number)."
+            );
         }
 
         if (is_int($value)) {
@@ -79,7 +81,8 @@ class BigNum
      *
      * @param int|float|string $num1  The left operand.
      * @param int|float|string $num2  The right operand.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return int Returns <0 if $num1<$num2, =0 if $num1 == $num2, >0 if $num1>$num2
      * @throws \InvalidArgumentException
@@ -88,7 +91,9 @@ class BigNum
     public static function compare($num1, $num2, $scale = null)
     {
         if (!static::is($num1) || !static::is($num2)) {
-            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if (Num::is($num1) && Num::is($num2)) {
@@ -105,7 +110,8 @@ class BigNum
      *
      * @param int|float|string $num1  The left operand.
      * @param int|float|string $num2  The right operand.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return bool Returns true if $num1 == $num2, false otherwise.
      */
@@ -134,7 +140,9 @@ class BigNum
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
         if (!static::is($value) || !static::is($lower) || !static::is($upper)) {
-            throw new \InvalidArgumentException("The \$value, \$lower and \$upper parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$value, \$lower and \$upper parameters must be numeric (or string representing a big number)."
+            );
         }
 
         $lowerLimit = min($lower, $upper);
@@ -193,7 +201,8 @@ class BigNum
      *
      * @param int|float|string $num1  The left operand.
      * @param int|float|string $num2  The right operand.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return int|float The result of the operation.
      * @throws \InvalidArgumentException
@@ -202,7 +211,9 @@ class BigNum
     public static function add($num1, $num2, $scale = null)
     {
         if (!static::is($num1) || !static::is($num2)) {
-            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if (Num::is($num1) && Num::is($num2)) {
@@ -219,7 +230,8 @@ class BigNum
      *
      * @param int|float|string $num1  The left operand.
      * @param int|float|string $num2  The right operand.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return int|float The result of the operation.
      * @throws \InvalidArgumentException
@@ -228,7 +240,9 @@ class BigNum
     public static function sub($num1, $num2, $scale = null)
     {
         if (!static::is($num1) || !static::is($num2)) {
-            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if (Num::is($num1) && Num::is($num2)) {
@@ -245,7 +259,8 @@ class BigNum
      *
      * @param int|float|string $num1  The left operand.
      * @param int|float|string $num2  The right operand.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return int|float The result of the operation.
      * @throws \InvalidArgumentException
@@ -254,7 +269,9 @@ class BigNum
     public static function mul($num1, $num2, $scale = null)
     {
         if (!static::is($num1) || !static::is($num2)) {
-            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if (Num::is($num1) && Num::is($num2)) {
@@ -271,7 +288,8 @@ class BigNum
      *
      * @param int|float|string $num1  The left operand.
      * @param int|float|string $num2  The right operand.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return int|float The result of the operation.
      * @throws \InvalidArgumentException
@@ -280,7 +298,9 @@ class BigNum
     public static function div($num1, $num2, $scale = null)
     {
         if (!static::is($num1) || !static::is($num2)) {
-            throw new \InvalidArgumentException("The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if ($num2 == 0) {
@@ -301,7 +321,8 @@ class BigNum
      *
      * @param int|float|string $base     The base number.
      * @param int|float|string $exponent The power exponent.
-     * @param int              $scale    The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale    The scale to use for BCMath functions.
+     *                                   If null is given the value set by {@link bcscale()} is used.
      *
      * @return int|float The result of the operation.
      * @throws \InvalidArgumentException
@@ -310,7 +331,9 @@ class BigNum
     public static function pow($base, $exponent, $scale = null)
     {
         if (!static::is($base) || !static::is($exponent)) {
-            throw new \InvalidArgumentException("The \$base and \$exponent parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$base and \$exponent parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if (Num::is($base) && Num::is($exponent)) {
@@ -327,7 +350,8 @@ class BigNum
      *
      * @param int|float|string $base    The left operand.
      * @param int|float|string $modulus The right operand.
-     * @param int              $scale   The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale   The scale to use for BCMath functions.
+     *                                  If null is given the value set by {@link bcscale()} is used.
      *
      * @return float The result of the operation.
      * @throws \InvalidArgumentException
@@ -336,7 +360,9 @@ class BigNum
     public static function mod($base, $modulus, $scale = null)
     {
         if (!static::is($base) || !static::is($modulus)) {
-            throw new \InvalidArgumentException("The \$base and \$modulus parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$base and \$modulus parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if ($modulus == 0) {
@@ -348,6 +374,7 @@ class BigNum
         } elseif (function_exists('bcdiv')) {
             // We cannot use bcmod because it only returns the int remainder
             $times = static::int(bcdiv($base, $modulus, $scale)) . '.0';
+
             return static::sub($base, static::mul($times, $modulus, $scale), $scale);
         }
 
@@ -358,7 +385,8 @@ class BigNum
      * Gets the square root of a number.
      *
      * @param int|float|string $base  The base to use.
-     * @param int              $scale The scale to use for BCMath functions. If null is given the value set by {@link bcscale()} is used.
+     * @param int              $scale The scale to use for BCMath functions.
+     *                                If null is given the value set by {@link bcscale()} is used.
      *
      * @return int|float The result of the operation.
      * @throws \InvalidArgumentException
@@ -367,7 +395,9 @@ class BigNum
     public static function sqrt($base, $scale = null)
     {
         if (!static::is($base)) {
-            throw new \InvalidArgumentException("The \$base parameters must be numeric (or string representing a big number).");
+            throw new \InvalidArgumentException(
+                "The \$base parameters must be numeric (or string representing a big number)."
+            );
         }
 
         if (Num::is($base)) {

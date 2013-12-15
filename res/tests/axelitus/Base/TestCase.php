@@ -43,6 +43,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $ref = new \ReflectionClass($classOrInstance);
         $property = $ref->getProperty($propertyName);
         $property->setAccessible(true);
+
         return $property;
     }
 
@@ -59,6 +60,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $ref = new \ReflectionClass($classOrInstance);
         $method = $ref->getMethod($methodName);
         $method->setAccessible(true);
+
         return $method;
     }
 
@@ -74,6 +76,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     protected static function execNonPublicMethod($classOrInstance, $methodName, array $args = [])
     {
         $method = static::getNonPublicMethod($classOrInstance, $methodName);
+
         return $method->invokeArgs(null, $args);
     }
 }

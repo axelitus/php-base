@@ -160,9 +160,9 @@ class TestsArr extends TestCase
         static::getNonPublicProperty($this->arr, 'data')->setValue(
             $this->arr,
             [
-                'first' => 'value',
+                'first'  => 'value',
                 'second' => ['lvl' => ['opt' => ['value 1', 'value 2', 'value 3', 'value 4', 'value 5']]],
-                'third' => ['sub' => 'sub value']
+                'third'  => ['sub' => 'sub value']
             ]
         );
         $this->assertEquals(1, $this->arr->count('first'));

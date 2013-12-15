@@ -56,7 +56,10 @@ class TestsBigNum extends TestCase
 
     public function testIntEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$value parameter must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be numeric (or string representing a big number)."
+        );
         BigNum::int(false);
     }
 
@@ -71,7 +74,10 @@ class TestsBigNum extends TestCase
         $this->assertEquals(0, BigNum::compare(15, 15));
 
         $this->assertLessThan(0, BigNum::compare('123456789098765432101234567890', '987654321012345678909876543210'));
-        $this->assertGreaterThan(0, BigNum::compare('987654321012345678909876543210', '123456789098765432101234567890'));
+        $this->assertGreaterThan(
+            0,
+            BigNum::compare('987654321012345678909876543210', '123456789098765432101234567890')
+        );
         $this->assertEquals(0, BigNum::compare('123456789098765432101234567890', '123456789098765432101234567890'));
 
         $this->assertLessThan(0, BigNum::compare(10.5, 20.5));
@@ -384,13 +390,19 @@ class TestsBigNum extends TestCase
 
     public function testAddEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::add(5, false);
     }
 
     public function testAddEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::add(false, 5);
     }
 
@@ -408,13 +420,19 @@ class TestsBigNum extends TestCase
 
     public function testSubEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::sub(5, false);
     }
 
     public function testSubEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::sub(false, 5);
     }
 
@@ -432,13 +450,19 @@ class TestsBigNum extends TestCase
 
     public function testMulEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::mul(5, false);
     }
 
     public function testMulEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::mul(false, 5);
     }
 
@@ -456,13 +480,19 @@ class TestsBigNum extends TestCase
 
     public function testDivEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::div(5, false);
     }
 
     public function testDivEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$num1 and \$num2 parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$num1 and \$num2 parameters must be numeric (or string representing a big number)."
+        );
         BigNum::div(false, 5);
     }
 
@@ -489,13 +519,19 @@ class TestsBigNum extends TestCase
 
     public function testPowEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$exponent parameters must be numeric (or string representing a big number)."
+        );
         BigNum::pow(5, false);
     }
 
     public function testPowEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$exponent parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$exponent parameters must be numeric (or string representing a big number)."
+        );
         BigNum::pow(false, 5);
     }
 
@@ -514,13 +550,19 @@ class TestsBigNum extends TestCase
 
     public function testModEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$modulus parameters must be numeric (or string representing a big number)."
+        );
         BigNum::mod(5, false);
     }
 
     public function testModEx02()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base and \$modulus parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base and \$modulus parameters must be numeric (or string representing a big number)."
+        );
         BigNum::mod(false, 5);
     }
 
@@ -545,7 +587,10 @@ class TestsBigNum extends TestCase
 
     public function testSqrtEx01()
     {
-        $this->setExpectedException('\InvalidArgumentException', "The \$base parameters must be numeric (or string representing a big number).");
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$base parameters must be numeric (or string representing a big number)."
+        );
         BigNum::sqrt(false);
     }
 

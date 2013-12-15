@@ -65,6 +65,7 @@ class TestsTraverser extends TestCase
                 $arr,
                 function ($value, &$key) {
                     $key += 3;
+
                     return $value * 5;
                 }
             )
@@ -79,6 +80,7 @@ class TestsTraverser extends TestCase
                 $arr,
                 function ($value, $key, &$arr) {
                     unset($arr[$key]);
+
                     return 'deleted';
                 }
             )
