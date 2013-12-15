@@ -22,3 +22,6 @@ tools:
     enabled: true
     filter:
       excluded_paths: [venodr/*, res/*, doc/*]
+  php_loc:
+    enabled: true
+    excluded_dirs: [vendor/*, res/*, doc/*]
