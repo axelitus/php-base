@@ -214,7 +214,7 @@ class Str
      * @param int    $flags   The flag modifiers.
      * @param int    $offset  The offset from which to start the search (in bytes).
      *
-     * @return int
+     * @return int Returns 1 if the pattern matches the input string, 0 if it does not, or false if an error occurred.
      * @see http://php.net/manual/en/function.preg-match.php
      */
     public static function match($input, $pattern, array &$matches = null, $flags = 0, $offset = 0)
