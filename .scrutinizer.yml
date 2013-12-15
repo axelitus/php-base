@@ -28,3 +28,7 @@ tools:
   php_pdepend:
     enabled: true
     excluded_dirs: [vendor/*, res/*, doc/*]
+  php_analyzer:
+    enabled: true
+    filter:
+      excluded_paths: [vendor/*, res/*, doc/*]
