@@ -465,10 +465,10 @@ class Str
     /**
      * Handles the strip of tags for the truncate function.
      *
-     * @param string $input The input string.
-     * @param int $limit The number of characters to truncate to.
-     * @param int $offset The offset.
-     * @param array $tags The stripped tags.
+     * @param string $input  The input string.
+     * @param int    $limit  The number of characters to truncate to.
+     * @param int    $offset The offset.
+     * @param array  $tags   The stripped tags.
      *
      * @return string Returns the stripped string to reassemble.
      */
@@ -713,16 +713,6 @@ class Str
             function ($matches) use ($separator, $transform, $encoding) {
                 $transformed = trim($matches[0]);
                 $count_matches = count($matches);
-
-                switch ($transform) {
-                    case 'lower':
-                        $transformed = static::lower($transformed, $encoding);
-                        break;
-                    case 'upper':
-                        $transformed = static::upper($transformed, $encoding);
-                        break;
-                }
-
                 $transformed = (($count_matches == 5) ? $matches[3] : '') . $transformed;
                 $transformed = (($count_matches == 6) ? $separator : '') . $transformed;
 
@@ -740,32 +730,28 @@ class Str
     /**
      * Runs the transformation for the {@link separated} function.
      *
-     * @param string $input The string to apply the transformation to.
+     * @param string $input     The string to apply the transformation to.
      * @param string $transform The transformation to apply (options:'lcfirst', 'ucfirst', 'ucwords').
-     * @param string $encoding The encoding of the input string.
+     * @param string $encoding  The encoding of the input string.
      *
      * @return string The transformed input string (or the input string as is).
      */
     private static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING)
     {
         // Do lcfirst, ucfirst and ucwords transformations
-        if (static::isOneOf($transform, ['lcfirst', 'ucfirst', 'ucwords'])) {
+        if (static::isOneOf($transform, ['lower', 'upper', 'lcfirst', 'ucfirst', 'ucwords'])) {
             $words = explode(' ', $input);
-            foreach ($words as &$word) {
-                switch ($transform) {
-                    case 'lcfirst':
-                        $word = static::lcfirst($word, $encoding);
-                        break;
-                    case 'ucfirst':
-                        $word = static::ucfirst($word, $encoding);
-                        break;
-                    case 'ucwords':
-                        // Because of how mb_convert_case works with MB_CASE_TITLE (underscore delimits words) we
-                        // need to simulate it by lower + ucfirst
+            Traverser::run(
+                $words,
+                function (&$word) use ($transform, $encoding) {
+                    if ($transform == 'ucwords') {
                         $word = static::ucfirst(static::lower($word, $encoding), $encoding);
-                        break;
+                    } else {
+                        $transform = 'static::' . $transform;
+                        $word = call_user_func_array($transform, [$word, $encoding]);
+                    }
                 }
-            }
+            );
             $input = implode(' ', $words);
         }
 
