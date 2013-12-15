@@ -744,6 +744,8 @@ class Str
             Traverser::run(
                 $words,
                 function (&$word) use ($transform, $encoding) {
+                    // Simulate ucwords behaviour as mb_convert_case splits the word by the dash
+                    // and we want the space to be the only word separator.
                     if ($transform == 'ucwords') {
                         $word = static::ucfirst(static::lower($word, $encoding), $encoding);
                     } else {
