@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.1
+ * @version     0.7.2
  */
 
 namespace axelitus\Base;
@@ -770,8 +770,8 @@ class Str
 
         // Build args array and substitute variables with numbers
         $args = array();
-        //for ($pos = 0; preg_match($pattern, $format, $match, PREG_OFFSET_CAPTURE, $pos);) {
-        for ($pos = 0; static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos);) {
+        $pos = 0;
+        while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
             list($var_key, $var_pos) = $match[0];
 
             if (!array_key_exists($var_key, $pool)) {
@@ -779,16 +779,9 @@ class Str
             }
 
             array_push($args, $pool[$var_key]);
-            $format = substr_replace($format, $index = count($args), $var_pos, $word_length = static::length($var_key));
+            $format = substr_replace($format, count($args), $var_pos, $word_length = static::length($var_key));
             $pos = $var_pos + $word_length; // skip to end of replacement for next iteration
         }
-
-        // TODO: evaluate if this code is really necessary
-        // Final check to see that everything is ok
-        //preg_match_all($pattern, $format, $match, PREG_OFFSET_CAPTURE);
-        //if (count($match[0]) != count($args)) {
-        //    throw new \LengthException("The number of arguments differs from the number of variables in the format.");
-        //}
 
         // Return the original %s strings
         $filter_regex = '/#\[:~s\]#/';

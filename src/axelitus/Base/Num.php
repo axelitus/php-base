@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.7.1
+ * @version     0.7.2
  */
 
 namespace axelitus\Base;
@@ -112,12 +112,12 @@ class Num
         }
 
         $lowerLimit = min($lower, $upper);
-        if (!($lowerTest = ($lowerExclusive) ? $lowerLimit < $value : $lowerLimit <= $value)) {
+        if (!(($lowerExclusive) ? $lowerLimit < $value : $lowerLimit <= $value)) {
             return false;
         }
 
         $upperLimit = max($lower, $upper);
-        if (!($upperTest = ($upperExclusive) ? $upperLimit > $value : $upperLimit >= $value)) {
+        if (!(($upperExclusive) ? $upperLimit > $value : $upperLimit >= $value)) {
             return false;
         }
 
