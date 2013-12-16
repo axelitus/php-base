@@ -54,8 +54,8 @@ All classes are referenced from the package namespace if not otherwise stated.
  - ~~[DONE]~~ New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating. (see ~~[Issue #1](https://github.com/axelitus/php-base/issues/1)~~)
  - ~~[DONE]~~ Try to reduce the complexity rating from the DotArr functions. (see ~~[Issue #2](https://github.com/axelitus/php-base/issues/2)~~)
  - ~~[DONE]~~ Add the Initiable interface for classes that can/should be initiated. (also added InitiableStatic interface for static initiable classes).
- - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
-     - [TODO] Implement the Iterator interface to the Arr class.
+ - ~~[DONE]~~ Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3)). The iteration will be like any other array and won't be recursive.
+     - ~~[DONE]~~ Implement the Iterator interface to the Arr class.
  - ~~[DONE]~~ Add a Flag class to handle numeric/boolean flag operations.
      - ~~[DONE]~~ is() function to test for valid flags.
      - ~~[DONE]~~ isOn() function to test if flag is on.

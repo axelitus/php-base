@@ -185,4 +185,34 @@ class TestsArr extends TestCase
     }
 
     //endregion
+
+    //region Implements \Iterator
+
+    public function testForEachLoop()
+    {
+        $this->arr['a.aa.aaa'] = 'A.AA.AAA';
+        $this->arr['b.bb.bbb'] = 'B.BB.BBB';
+        $this->arr['c.cc1'] = 'C.CC1';
+        $this->arr['c.cc2'] = 'C.CC2';
+        $this->arr['d'] = 'D';
+
+        foreach ($this->arr as $key => $value) {
+            switch($key){
+                case 'a':
+                    $this->assertEquals(['aa' => ['aaa' => 'A.AA.AAA']], $value);
+                    break;
+                case 'b':
+                    $this->assertEquals(['bb' => ['bbb' => 'B.BB.BBB']], $value);
+                    break;
+                case 'c':
+                    $this->assertEquals(['cc1' => 'C.CC1', 'cc2' => 'C.CC2'], $value);
+                    break;
+                case 'd':
+                    $this->assertEquals('D', $value);
+                    break;
+            }
+        }
+    }
+
+    //endregion
 }
