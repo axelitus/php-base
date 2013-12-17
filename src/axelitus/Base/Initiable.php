@@ -23,5 +23,12 @@ namespace axelitus\Base;
  */
 interface Initiable
 {
-    public static function init();
+    /**
+     * Initiates a class (simulating a static constructor)
+     *
+     * @param array $options The options to initialize if available as an associative array.
+     *
+     * @return bool Returns true when the class was successfully initiated, false otherwise.
+     */
+    public static function init($options = []);
 }
