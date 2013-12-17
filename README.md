@@ -41,8 +41,7 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **DotArr** - Dot-notated array operations.
  - **Flag** - Bitwise flag operations.
  - **Float** - Float operations.
- - **Initiable** - Defines the interface for initiable objects.
- - **InitiableStatic** - Defines the interface for static initiable classes.
+ - **Initiable** - Defines the interface for initiable classes (simulates a static constructor).
  - **Int** - Int operations.
  - **Num** - Numeric operations.
  - **PropertyAccessible** - Allows derived class to use object property access syntax just be defining getters and setters.

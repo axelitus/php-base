@@ -15,7 +15,7 @@ namespace axelitus\Base;
 /**
  * Interface Initiable
  *
- * Defines the interface for initiable objects.
+ * Defines the interface for initiable classes (simulates a static constructor).
  *
  * @package axelitus\Base
  *
@@ -23,5 +23,5 @@ namespace axelitus\Base;
  */
 interface Initiable
 {
-    public function init();
+    public static function init();
 }
