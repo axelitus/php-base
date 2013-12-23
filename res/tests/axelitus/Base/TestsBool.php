@@ -67,6 +67,36 @@ class TestsBool extends TestCase
 
     //endregion
 
+    //region Comparing
+
+    public function testCompare()
+    {
+        $this->assertEquals(-1, Bool::compare(false, true));
+        $this->assertEquals(0, Bool::compare(false, false));
+        $this->assertEquals(0, Bool::compare(true, true));
+        $this->assertEquals(1, Bool::compare(true, false));
+    }
+
+    public function testCompareEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$bool1 and \$bool2 parameters must be of type bool."
+        );
+        Bool::compare('string', true);
+    }
+
+    public function testCompareEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$bool1 and \$bool2 parameters must be of type bool."
+        );
+        Bool::compare(true, 'string');
+    }
+
+    //endregion
+
     //region Conversion
 
     public function testFrom()

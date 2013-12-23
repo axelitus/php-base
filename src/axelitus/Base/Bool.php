@@ -75,6 +75,32 @@ class Bool
 
     //endregion
 
+    //region Comparing
+
+    /**
+     * Compares two bool values.
+     *
+     * The returning value contains the actual value difference.
+     *
+     * @param bool $bool1 The left operand.
+     * @param bool $bool2 The right operand.
+     *
+     * @return int Returns -1 if $bool1=false and $bool2=true, =0 if $bool1 == $bool2, 1 if $bool1=true and $bool2=false
+     * @throws \InvalidArgumentException
+     */
+    public static function compare($bool1, $bool2)
+    {
+        if (!static::is($bool1) || !static::is($bool2)) {
+            throw new \InvalidArgumentException(
+                "The \$bool1 and \$bool2 parameters must be of type bool."
+            );
+        }
+
+        return ((int)$bool1 - (int)$bool2);
+    }
+
+    //endregion
+
     //region Conversion
 
     /**
