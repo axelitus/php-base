@@ -41,7 +41,7 @@ class BigIntComparer extends Comparer
                     );
                 }
 
-                return BigInt::compare($item1, $item2, $this->options['scale']);
+                return BigInt::compare($item1, $item2);
             }
         );
         $this->options = new Arr(['scale' => $scale]);
