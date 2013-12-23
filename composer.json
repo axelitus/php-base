@@ -33,7 +33,8 @@
     },
     "autoload": {
         "psr-0": {
-            "axelitus\\Base": "src/"
+            "axelitus\\Base\\": "src/",
+            "axelitus\\Base\\Tests\\": "res/tests/"
         }
     },
     "config": {
