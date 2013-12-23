@@ -38,6 +38,7 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
  - **BigInt** - Int operations for big numbers.
  - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
+ - **Comparable** - Defines the interface for a comparable object.
  - **Comparer** - Simple and flexible base comparer from which new comparers should be derived.
  - **DotArr** - Dot-notated array operations.
  - **Flag** - Bitwise flag operations.
