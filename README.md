@@ -31,13 +31,14 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 
 ## Contents
 
-All classes are referenced from the package namespace if not otherwise stated.
+##### axelitus\Base
 
  - **Arr** - Dot-notated array object.
  - **BigFloat** - Float operations for big numbers.
  - **BigInt** - Int operations for big numbers.
  - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
+ - **Comparer** - Simple and flexible base comparer from which new comparers should be derived.
  - **DotArr** - Dot-notated array operations.
  - **Flag** - Bitwise flag operations.
  - **Float** - Float operations.
@@ -47,6 +48,15 @@ All classes are referenced from the package namespace if not otherwise stated.
  - **PropertyAccessible** - Allows derived class to use object property access syntax just be defining getters and setters.
  - **Str** - String operations.
  - **Traverser** - Array callback traverser.
+
+##### axelitus\Base\Comparison
+ - **BigFloatComparer** - BigFloat comparer implementation.
+ - **BigIntComparer** - BigInt comparer implementation.
+ - **BigNumComparer** - BigNum comparer implementation.
+ - **BoolComparer** - Bool comparer implementation.
+ - **FloatComparer** - Float comparer implementation.
+ - **IntComparer** - Int comparer implementation.
+ - **StrComparer** - Str comparer implementation.
 
  ## Roadmap
 
