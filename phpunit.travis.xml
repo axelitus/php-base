@@ -27,7 +27,7 @@
     </filter>
     <logging>
         <log type="coverage-clover" target="log/coverage/coverage.xml"/>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="coverage-html" target="log/coverage/html"/>
     </logging>
     <listeners>
         <listener class="League\PHPUnitCoverageListener\Listener">
