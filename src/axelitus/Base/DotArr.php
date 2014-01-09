@@ -69,12 +69,12 @@ class DotArr
                 throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
             }
 
-            foreach (explode('.', $key) as $key_seg) {
-                if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
+            foreach (explode('.', $key) as $keySeg) {
+                if (!is_array($arr) || !array_key_exists($keySeg, $arr)) {
                     return $default;
                 }
 
-                $arr = $arr[$key_seg];
+                $arr = $arr[$keySeg];
             }
 
             return $arr;
