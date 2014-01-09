@@ -263,6 +263,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueNot($value1, $_ = null)
     {
@@ -289,6 +290,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayNot(array $value1, array $_ = null)
     {
@@ -324,6 +326,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueAnd($value1, $value2, $_ = null)
     {
@@ -356,6 +359,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayAnd(array $value1, array $_ = null)
     {
@@ -392,6 +396,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueOr($value1, $value2, $_ = null)
     {
@@ -424,6 +429,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayOr(array $value1, array $_ = null)
     {
@@ -460,6 +466,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueEq($value1, $value2, $_ = null)
     {
@@ -492,6 +499,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayEq(array $value1, array $_ = null)
     {
@@ -530,6 +538,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueXor($value1, $value2, $_ = null)
     {
@@ -562,6 +571,7 @@ class Bool
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
      * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayXor(array $value1, array $_ = null)
     {
