@@ -58,7 +58,7 @@
         <exec command="${phing.exec} ${phing.args} script:phpdoc" passthru="true"/>
     </target>
     <target name="script:phpdoc">
-        <mkdir dir="${phpdoc.log.dir}"/>
+        <mkdir dir="${build.doc.dir}"/>
         <echo msg="${phpdoc.msg}"/>
         <exec command="${phpdoc.exec} ${phpdoc.args}" passthru="true"/>
     </target>
