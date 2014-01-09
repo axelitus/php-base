@@ -56,7 +56,7 @@ class StrComparer extends Comparer
     public function setCallback(Closure $callback = null)
     {
         if ($this->callback !== null || $callback === null) {
-            throw new \RuntimeException("Cannot redeclare this comparer callback.");
+            throw new \RuntimeException("Cannot re-declare this comparer callback.");
         }
 
         $this->callback = Closure::bind($callback, $this, get_called_class());
