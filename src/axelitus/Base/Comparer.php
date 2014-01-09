@@ -32,7 +32,7 @@ abstract class Comparer
     protected $callback = null;
 
     /** @var \axelitus\Base\Arr The comparer options to be used while comparing */
-    protected $options = [];
+    protected $options = null;
 
     //endregion
 
