@@ -52,9 +52,27 @@ class TestsStrComparer extends TestCase
         $this->assertEquals(0, $this->comparer->compare('STRING', 'string'));
     }
 
+    public function testBasicsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$item1 and \$item2 parameters must be of type string."
+        );
+        $this->comparer->compare(true, 'string');
+    }
+
+    public function testBasicsEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$item1 and \$item2 parameters must be of type string."
+        );
+        $this->comparer->compare('string', true);
+    }
+
     public function testCallbackEx()
     {
-        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");
+        $this->setExpectedException('\RuntimeException', "Cannot re-declare this comparer callback.");
         $this->comparer->setCallback(
             function ($item1, $item2) {
                 return $item1 * $item2;

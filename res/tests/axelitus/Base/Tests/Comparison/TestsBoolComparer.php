@@ -50,6 +50,24 @@ class TestsBoolComparer extends TestCase
         $this->assertEquals(-1, $this->comparer->compare(false, true));
     }
 
+    public function testBasicsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$item1 and \$item2 parameters must be of type bool."
+        );
+        $this->comparer->compare('string', true);
+    }
+
+    public function testBasicsEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$item1 and \$item2 parameters must be of type bool."
+        );
+        $this->comparer->compare(false, 'string');
+    }
+
     public function testCallbackEx()
     {
         $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");

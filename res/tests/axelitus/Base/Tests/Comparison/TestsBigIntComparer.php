@@ -52,6 +52,24 @@ class TestsBigIntComparer extends TestCase
         $this->assertEquals(0, $this->comparer->compare('5', '5'));
     }
 
+    public function testBasicsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$item1 and \$item2 parameters must be of type int (or string representing a big int)."
+        );
+        $this->comparer->compare('string', 5);
+    }
+
+    public function testBasicsEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$item1 and \$item2 parameters must be of type int (or string representing a big int)."
+        );
+        $this->comparer->compare(8, 'string');
+    }
+
     public function testCallbackEx()
     {
         $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");

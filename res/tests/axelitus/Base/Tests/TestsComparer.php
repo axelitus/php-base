@@ -42,13 +42,13 @@ class TestsComparer extends TestCase
 
     public function testBasics()
     {
+        $callback = function ($item1, $item2) {
+            return $item1 - $item2;
+        };
         $this->assertFalse($this->comparer->isReady());
-        $this->comparer->setCallback(
-            function ($item1, $item2) {
-                return $item1 - $item2;
-            }
-        );
+        $this->comparer->setCallback($callback);
         $this->assertTrue($this->comparer->isReady());
+        $this->assertEquals($callback, $this->comparer->getCallback());
         $this->assertEquals(3, $this->comparer->compare(8, 5));
         $this->assertEquals(-2, $this->comparer->compare(5, 7));
         $this->assertEquals(0, $this->comparer->compare(5, 5));
@@ -75,6 +75,25 @@ class TestsComparer extends TestCase
         $this->assertEquals(3, $this->comparer->compare(8, 5));
         $this->comparer->setOption('first.double', true);
         $this->assertEquals(11, $this->comparer->compare(8, 5));
+        $this->assertEquals(true, $this->comparer->getOption('first.double'));
+
+        $options = $this->getNonPublicPropertyValue($this->comparer, 'options')->asArray();
+        $this->assertArrayHasKey('first', $options);
+        $this->assertArrayHasKey('double', $options['first']);
+        $this->comparer->deleteOption('first.double');
+        $options = $this->getNonPublicPropertyValue($this->comparer, 'options')->asArray();
+        $this->assertArrayHasKey('first', $options);
+        $this->assertArrayNotHasKey('double', $options['first']);
+    }
+
+    //endregion
+
+    //region Compare
+
+    public function testCompareEx01()
+    {
+        $this->setExpectedException('\RuntimeException', "The comparer is not ready, no valid callback has been set.");
+        $this->comparer->compare('A', 'A');
     }
 
     //endregion
