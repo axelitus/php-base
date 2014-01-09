@@ -352,11 +352,11 @@ class Str
             return function_exists('mb_stripos')
                 ? mb_stripos($input, $search, 0, $encoding)
                 : (stripos($input, $search) !== false ? true : false);
-        } else {
-            return function_exists('mb_strpos')
-                ? mb_strpos($input, $search, 0, $encoding)
-                : (strpos($input, $search) !== false ? true : false);
         }
+
+        return function_exists('mb_strpos')
+            ? mb_strpos($input, $search, 0, $encoding)
+            : (strpos($input, $search) !== false ? true : false);
     }
 
     //endregion
@@ -704,15 +704,11 @@ class Str
      */
     public static function studly($input, array $separators = ['_'], $encoding = self::DEFAULT_ENCODING)
     {
-        if (!empty($separators)) {
-            $pattern = '';
-            foreach ($separators as $separator) {
-                $pattern .= '|' . preg_quote($separator);
-            }
-            $pattern = '/(^' . $pattern . ')(.)/';
+        $studly = $input;
 
+        if (!empty($separators)) {
             $studly = preg_replace_callback(
-                $pattern,
+                static::studlyBuildPattern($separators),
                 function ($matches) {
                     return strtoupper($matches[2]);
                 },
@@ -723,11 +719,20 @@ class Str
                 $word = static::ucfirst($word, $encoding);
             }
             $studly = implode(' ', $words);
-        } else {
-            $studly = $input;
         }
 
         return $studly;
+    }
+
+    protected static function studlyBuildPattern(array $separators)
+    {
+        $pattern = '';
+        foreach ($separators as $separator) {
+            $pattern .= '|' . preg_quote($separator);
+        }
+        $pattern = '/(^' . $pattern . ')(.)/';
+
+        return $pattern;
     }
 
     /**
@@ -817,12 +822,9 @@ class Str
                 function (&$word) use ($transform, $encoding) {
                     // Simulate ucwords behaviour as mb_convert_case splits the word by the dash
                     // and we want the space to be the only word separator.
-                    if ($transform == 'ucwords') {
-                        $word = static::ucfirst(static::lower($word, $encoding), $encoding);
-                    } else {
-                        $transform = 'static::' . $transform;
-                        $word = call_user_func_array($transform, [$word, $encoding]);
-                    }
+                    $word = ($transform == 'ucwords')
+                        ? static::ucfirst(static::lower($word, $encoding), $encoding)
+                        : call_user_func_array('static::' . $transform, [$word, $encoding]);
                 }
             );
             $input = implode(' ', $words);

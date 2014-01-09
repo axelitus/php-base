@@ -81,12 +81,12 @@ abstract class PropertyAccessible
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 return $this->{$method}();
-            } else {
-                throw new \RuntimeException("The property '{$property}' is not readable.");
             }
-        } else {
-            throw new \RuntimeException("The property '{$property}' does not exist.");
+
+            throw new \RuntimeException("The property '{$property}' is not readable.");
         }
+
+        throw new \RuntimeException("The property '{$property}' does not exist.");
     }
 
     /**
@@ -107,12 +107,13 @@ abstract class PropertyAccessible
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 $this->{$method}($value);
-            } else {
-                throw new \RuntimeException("The property '{$property}' is not writeable.");
+                return;
             }
-        } else {
-            throw new \RuntimeException("The property '{$property}' does not exist.");
+
+            throw new \RuntimeException("The property '{$property}' is not writeable.");
         }
+
+        throw new \RuntimeException("The property '{$property}' does not exist.");
     }
 
     /**
