@@ -70,7 +70,7 @@ class BigInt
             return bcsub($int1, $int2);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -187,7 +187,7 @@ class BigInt
             return bcadd($int1, $int2);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -214,7 +214,7 @@ class BigInt
             return bcsub($int1, $int2);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -241,7 +241,7 @@ class BigInt
             return bcmul($int1, $int2);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -272,7 +272,7 @@ class BigInt
             return bcdiv($int1, $int2);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -299,7 +299,7 @@ class BigInt
             return bcpow($base, $exponent);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -330,7 +330,7 @@ class BigInt
             return bcmod($base, $modulus);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -356,7 +356,7 @@ class BigInt
             return bcsqrt($base);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     //endregion

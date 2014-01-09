@@ -103,7 +103,7 @@ class BigFloat
             return bcsub($float1, $float2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -225,7 +225,7 @@ class BigFloat
             return bcadd($float1, $float2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -254,7 +254,7 @@ class BigFloat
             return bcsub($float1, $float2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -283,7 +283,7 @@ class BigFloat
             return bcmul($float1, $float2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -316,7 +316,7 @@ class BigFloat
             return bcdiv($float1, $float2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -345,7 +345,7 @@ class BigFloat
             return bcpow($base, $exponent, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -381,7 +381,7 @@ class BigFloat
             return static::sub($base, static::mul($times, $modulus, $scale), $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -409,7 +409,7 @@ class BigFloat
             return bcsqrt($base, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     //endregion
