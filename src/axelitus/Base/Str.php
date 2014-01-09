@@ -427,11 +427,11 @@ class Str
             return static::mbStrReplaceInternal($search, $replace, $subject, $caseInsensitive, $encoding, $count);
         }
 
-        $replace_is_array = is_array($replace);
+        $replaceIsArray = is_array($replace);
         foreach ($search as $key => $value) {
             $subject = static::mbStrReplaceInternal(
                 $value,
-                ($replace_is_array ? $replace[$key] : $replace),
+                ($replaceIsArray ? $replace[$key] : $replace),
                 $subject,
                 $caseInsensitive,
                 $encoding,
@@ -464,12 +464,12 @@ class Str
         $encoding = self::DEFAULT_ENCODING,
         &$count = null
     ) {
-        $search_length = mb_strlen($search, $encoding);
-        $subject_length = mb_strlen($subject, $encoding);
+        $searchLength = mb_strlen($search, $encoding);
+        $subjectLength = mb_strlen($subject, $encoding);
         $offset = 0;
         $result = '';
 
-        while ($offset < $subject_length) {
+        while ($offset < $subjectLength) {
             $match = $caseInsensitive
                 ? mb_stripos($subject, $search, $offset, $encoding)
                 : mb_strpos($subject, $search, $offset, $encoding);
@@ -479,7 +479,7 @@ class Str
                     return $subject;
                 }
                 // Append the final portion of the subject to the replaced.
-                $result .= mb_substr($subject, $offset, $subject_length - $offset, $encoding);
+                $result .= mb_substr($subject, $offset, $subjectLength - $offset, $encoding);
                 break;
             }
             if ($count !== null) {
@@ -487,7 +487,7 @@ class Str
             }
             $result .= mb_substr($subject, $offset, $match - $offset, $encoding);
             $result .= $replace;
-            $offset = $match + $search_length;
+            $offset = $match + $searchLength;
         }
 
         return $result;
@@ -503,24 +503,24 @@ class Str
      * @param   string $input        The string to truncate.
      * @param   int    $limit        The number of characters to truncate to.
      * @param   string $continuation The string to use to denote it was truncated
-     * @param   bool   $is_html      Whether the string has HTML
+     * @param   bool   $isHtml      Whether the string has HTML
      *
      * @return  string  The truncated string
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public static function truncate($input, $limit, $continuation = '...', $is_html = false)
+    public static function truncate($input, $limit, $continuation = '...', $isHtml = false)
     {
         $offset = 0;
         $tags = [];
-        if ($is_html) {
+        if ($isHtml) {
             $input = static::truncateHtml($input, $limit, $offset, $tags);
         }
 
-        $new_string = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
-        $new_string .= (static::length($input) > $limit ? $continuation : '');
-        $new_string .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
+        $newString = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
+        $newString .= (static::length($input) > $limit ? $continuation : '');
+        $newString .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
 
-        return $new_string;
+        return $newString;
     }
 
     /**
@@ -789,9 +789,9 @@ class Str
             '/(^.[^A-Z]+$)|(^.+?(?=[A-Z]))|( +)(.+?)(?=[A-Z])|([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)/',
             function ($matches) use ($separator, $transform, $encoding) {
                 $transformed = trim($matches[0]);
-                $count_matches = count($matches);
-                $transformed = (($count_matches == 5) ? $matches[3] : '') . $transformed;
-                $transformed = (($count_matches == 6) ? $separator : '') . $transformed;
+                $countMatches = count($matches);
+                $transformed = (($countMatches == 5) ? $matches[3] : '') . $transformed;
+                $transformed = (($countMatches == 6) ? $separator : '') . $transformed;
 
                 return $transformed;
             },
@@ -860,8 +860,8 @@ class Str
     public static function nsprintf($format, array $args = [])
     {
         // Filter unnamed %s strings that should not be processed
-        $filter_regex = '/%s/';
-        $format = preg_replace($filter_regex, '#[:~s]#', $format);
+        $filterRegex = '/%s/';
+        $format = preg_replace($filterRegex, '#[:~s]#', $format);
 
         // The pattern to match variables
         $pattern = '/(?<=%)([a-zA-Z0-9_]\w*)(?=\$)/';
@@ -874,21 +874,21 @@ class Str
         $pos = 0;
         $match = null;
         while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
-            list($var_key, $var_pos) = $match[0];
+            list($varKey, $varPos) = $match[0];
 
-            if (!array_key_exists($var_key, $pool)) {
-                throw new \BadFunctionCallException("Missing argument '${var_key}'.", E_USER_WARNING);
+            if (!array_key_exists($varKey, $pool)) {
+                throw new \BadFunctionCallException("Missing argument '${varKey}'.", E_USER_WARNING);
             }
 
-            array_push($args, $pool[$var_key]);
-            $format = substr_replace($format, count($args), $var_pos, $word_length = static::length($var_key));
-            $pos = $var_pos + $word_length; // skip to end of replacement for next iteration
+            array_push($args, $pool[$varKey]);
+            $format = substr_replace($format, count($args), $varPos, $wordLength = static::length($varKey));
+            $pos = $varPos + $wordLength; // skip to end of replacement for next iteration
         }
 
         // Return the original %s strings
-        $filter_regex = '/#\[:~s\]#/';
+        $filterRegex = '/#\[:~s\]#/';
 
-        return preg_replace($filter_regex, '%s', vsprintf($format, $args));
+        return preg_replace($filterRegex, '%s', vsprintf($format, $args));
     }
 
     //endregion

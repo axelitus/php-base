@@ -240,12 +240,12 @@ class DotArr
             return true;
         }
 
-        foreach (explode('.', $key) as $key_seg) {
-            if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
+        foreach (explode('.', $key) as $keySeg) {
+            if (!is_array($arr) || !array_key_exists($keySeg, $arr)) {
                 return false;
             }
 
-            $arr = $arr[$key_seg];
+            $arr = $arr[$keySeg];
         }
 
         return true;
