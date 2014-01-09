@@ -42,6 +42,7 @@ class Int
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is an int, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {

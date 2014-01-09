@@ -32,6 +32,7 @@ class DotArr
      * @param array $arr The array to test.
      *
      * @return bool Returns true if the array is dot-notated accessible, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is(array $arr)
     {

@@ -30,6 +30,7 @@ class Flag
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is considered to be a flag, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {

@@ -32,6 +32,7 @@ class Bool
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a bool or 0 or 1, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {

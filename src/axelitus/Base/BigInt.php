@@ -33,6 +33,7 @@ class BigInt
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is an int (big), false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {

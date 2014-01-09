@@ -33,6 +33,7 @@ class BigFloat
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a float (big), false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {

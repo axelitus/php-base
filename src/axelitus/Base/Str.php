@@ -75,6 +75,7 @@ class Str
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a string, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {
