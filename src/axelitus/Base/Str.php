@@ -388,7 +388,8 @@ class Str
         return function_exists('mb_strlen')
             ? static::mbStrReplaceCaller($search, $replace, $input, $caseInsensitive, $encoding, $count)
             : (($caseInsensitive)
-                ? (str_ireplace($search, $replace, $input, $count))
+                ? (str_ireplace($search, $replace, $input, $count)) // @codeCoverageIgnore
+                // excluded as reaching this line is environment dependent.
                 : (str_replace($search, $replace, $input, $count)));
     }
 
@@ -503,7 +504,7 @@ class Str
      * @param   string $input        The string to truncate.
      * @param   int    $limit        The number of characters to truncate to.
      * @param   string $continuation The string to use to denote it was truncated
-     * @param   bool   $isHtml      Whether the string has HTML
+     * @param   bool   $isHtml       Whether the string has HTML
      *
      * @return  string  The truncated string
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
