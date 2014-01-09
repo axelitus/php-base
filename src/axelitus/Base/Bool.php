@@ -57,7 +57,7 @@ class Bool
             // This function is case insensitive so let's compare to the lower-cased input string.
             $value = strtolower($value);
 
-            return (static::strIsTrueExt($value) || static::strIsFalseExt($value));
+            return (static::isTrueStrExt($value) || static::isFalseStrExt($value));
         }
 
         return false;
@@ -68,11 +68,11 @@ class Bool
      *
      * @param string $str The string to test.
      *
-     * @return bool Returns true if the given string is considered as a true boolean value.
+     * @return bool Returns true if the given string is considered as a true boolean value, false otherwise.
      */
-    protected static function strIsTrue($str)
+    protected static function isTrueStr($str)
     {
-        return ($str == 'true' || $str == '1');
+        return ($str === 'true' || $str === '1');
     }
 
     /**
@@ -80,11 +80,11 @@ class Bool
      *
      * @param string $str The string to test.
      *
-     * @return bool Returns true if the given string is considered as an extended true boolean value.
+     * @return bool Returns true if the given string is considered as an extended true boolean value, false otherwise.
      */
-    protected static function strIsTrueExt($str)
+    protected static function isTrueStrExt($str)
     {
-        return (static::strIsTrue($str) || $str == 'on' || $str == 'yes' || $str == 'y');
+        return (static::isTrueStr($str) || $str === 'on' || $str === 'yes' || $str === 'y');
     }
 
     /**
@@ -92,11 +92,11 @@ class Bool
      *
      * @param string $str The string to test.
      *
-     * @return bool Returns true if the given string is considered as a false boolean value.
+     * @return bool Returns true if the given string is considered as a false boolean value, false otherwise.
      */
-    protected static function strIsFalse($str)
+    protected static function isFalseStr($str)
     {
-        return ($str == 'false' || $str == '0');
+        return ($str === 'false' || $str === '0');
     }
 
     /**
@@ -104,11 +104,11 @@ class Bool
      *
      * @param string $str The string to test.
      *
-     * @return bool Returns true if the given string is considered as an extended false boolean value.
+     * @return bool Returns true if the given string is considered as an extended false boolean value, false otherwise.
      */
-    protected static function strIsFalseExt($str)
+    protected static function isFalseStrExt($str)
     {
-        return (static::strIsFalse($str) || $str == 'off' || $str == 'no' || $str == 'n');
+        return (static::isFalseStr($str) || $str === 'off' || $str === 'no' || $str === 'n');
     }
 
     //endregion
@@ -178,7 +178,7 @@ class Bool
      */
     public static function parse($input)
     {
-        if (!is_string($input) || $input == '') {
+        if (Str::isNotOrEmpty($input)) {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
@@ -189,10 +189,10 @@ class Bool
         // (true && (result of expression)) effectively entering the first
         // case in which the expression evaluates to true.
         switch (true) {
-            case static::strIsTrue($input):
+            case static::isTrueStr($input):
                 $ret = true;
                 break;
-            case static::strIsFalse($input):
+            case static::isFalseStr($input):
                 $ret = false;
                 break;
             default:
@@ -220,7 +220,7 @@ class Bool
      */
     public static function extParse($input)
     {
-        if (!is_string($input) || $input == '') {
+        if (Str::isNotOrEmpty($input)) {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
@@ -231,10 +231,10 @@ class Bool
         // (true && (result of expression)) effectively entering the first
         // case in which the expression evaluates to true.
         switch (true) {
-            case static::strIsTrueExt($input):
+            case static::isTrueStrExt($input):
                 $ret = true;
                 break;
-            case static::strIsFalseExt($input):
+            case static::isFalseStrExt($input):
                 $ret = false;
                 break;
             default:

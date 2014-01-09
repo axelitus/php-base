@@ -65,6 +65,50 @@ class TestsBool extends TestCase
         $this->assertFalse(Bool::extIs(-10));
     }
 
+    public function testIsTrueStr()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['true']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['1']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['on']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['yes']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['y']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', [1]));
+    }
+
+    public function testIsTrueStrExt()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['true']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['1']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['on']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['yes']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['y']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', [1]));
+    }
+
+    public function testIsFalseStr()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['false']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['0']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['off']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['no']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['n']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', [0]));
+    }
+
+    public function testIsFalseStrExt()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['false']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['0']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['off']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['no']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['n']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', [0]));
+    }
+
     //endregion
 
     //region Comparing
