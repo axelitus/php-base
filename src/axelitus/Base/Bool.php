@@ -262,6 +262,7 @@ class Bool
      * @return bool|array The result of applying the operation to the value(s).
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function valueNot($value1, $_ = null)
     {
@@ -287,6 +288,7 @@ class Bool
      * @return array The result of applying the operation to the items of given the array(s).
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function arrayNot(array $value1, array $_ = null)
     {
@@ -321,6 +323,7 @@ class Bool
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function valueAnd($value1, $value2, $_ = null)
     {
@@ -352,6 +355,7 @@ class Bool
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function arrayAnd(array $value1, array $_ = null)
     {
@@ -387,6 +391,7 @@ class Bool
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function valueOr($value1, $value2, $_ = null)
     {
@@ -418,6 +423,7 @@ class Bool
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function arrayOr(array $value1, array $_ = null)
     {
@@ -453,6 +459,7 @@ class Bool
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function valueEq($value1, $value2, $_ = null)
     {
@@ -484,6 +491,7 @@ class Bool
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function arrayEq(array $value1, array $_ = null)
     {
@@ -521,6 +529,7 @@ class Bool
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function valueXor($value1, $value2, $_ = null)
     {
@@ -552,6 +561,7 @@ class Bool
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
      * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function arrayXor(array $value1, array $_ = null)
     {
