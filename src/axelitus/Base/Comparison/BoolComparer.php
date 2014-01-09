@@ -34,9 +34,7 @@ class BoolComparer extends Comparer
         parent::__construct(
             function ($item1, $item2) {
                 if (!Bool::is($item1) || !Bool::is($item2)) {
-                    throw new \InvalidArgumentException(
-                        "The \$item1 and \$item2 parameters must be of type float or string representing a big float."
-                    );
+                    throw new \InvalidArgumentException("The \$item1 and \$item2 parameters must be of type bool.");
                 }
 
                 return Bool::compare($item1, $item2);
