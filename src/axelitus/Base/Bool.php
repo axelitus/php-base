@@ -57,20 +57,58 @@ class Bool
             // This function is case insensitive so let's compare to the lower-cased input string.
             $value = strtolower($value);
 
-            // Use true so that the expressions of the switch will evaluate to
-            // (true && (result of expression)) effectively entering the first
-            // case in which the expression evaluates to true.
-            switch (true) {
-                case ($value == 'true' || $value == '1' || $value == 'on' || $value == 'yes' || $value == 'y'):
-                case ($value == 'false' || $value == '0' || $value == 'off' || $value == 'no' || $value == 'n'):
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
+            return (static::strIsTrueExt($value) || static::strIsFalseExt($value));
         }
 
         return false;
+    }
+
+    /**
+     * Determines if the given string is considered as a true value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as a true boolean value.
+     */
+    protected static function strIsTrue($str)
+    {
+        return ($str == 'true' || $str == '1');
+    }
+
+    /**
+     * Determines if the given string is considered as an extended true value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as an extended true boolean value.
+     */
+    protected static function strIsTrueExt($str)
+    {
+        return (static::strIsTrue($str) || $str == 'on' || $str == 'yes' || $str == 'y');
+    }
+
+    /**
+     * Determines if the given string is considered as a false value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as a false boolean value.
+     */
+    protected static function strIsFalse($str)
+    {
+        return ($str == 'false' || $str == '0');
+    }
+
+    /**
+     * Determines if the given string is considered as an extended false value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as an extended false boolean value.
+     */
+    protected static function strIsFalseExt($str)
+    {
+        return (static::strIsFalse($str) || $str == 'off' || $str == 'no' || $str == 'n');
     }
 
     //endregion
@@ -151,10 +189,10 @@ class Bool
         // (true && (result of expression)) effectively entering the first
         // case in which the expression evaluates to true.
         switch (true) {
-            case ($input == 'true' || $input == '1'):
+            case static::strIsTrue($input):
                 $ret = true;
                 break;
-            case ($input == 'false' || $input == '0'):
+            case static::strIsFalse($input):
                 $ret = false;
                 break;
             default:
@@ -193,10 +231,10 @@ class Bool
         // (true && (result of expression)) effectively entering the first
         // case in which the expression evaluates to true.
         switch (true) {
-            case ($input == 'true' || $input == '1' || $input == 'on' || $input == 'yes' || $input == 'y'):
+            case static::strIsTrueExt($input):
                 $ret = true;
                 break;
-            case ($input == 'false' || $input == '0' || $input == 'off' || $input == 'no' || $input == 'n'):
+            case static::strIsFalseExt($input):
                 $ret = false;
                 break;
             default:
