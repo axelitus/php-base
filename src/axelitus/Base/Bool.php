@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Boolean operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Bool
 {

@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * String operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Str
 {

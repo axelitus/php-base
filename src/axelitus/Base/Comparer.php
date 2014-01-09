@@ -20,8 +20,7 @@ use \Closure;
  * Simple and flexible base comparer from which new comparers should be derived.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 abstract class Comparer
 {

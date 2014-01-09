@@ -21,6 +21,7 @@ namespace axelitus\Base;
  * If you want to accept both int and float use the {@link Num} class instead.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Int
 {

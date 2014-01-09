@@ -18,8 +18,6 @@ namespace axelitus\Base;
  * Defines the interface for a comparable object.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
  */
 interface Comparable
 {

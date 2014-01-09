@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Bitwise flag operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Flag
 {

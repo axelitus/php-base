@@ -18,8 +18,6 @@ namespace axelitus\Base;
  * Defines the interface for initiable classes (simulates a static constructor).
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
  */
 interface Initiable
 {

@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Dot-Notated Array operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class DotArr
 {

@@ -29,6 +29,7 @@ namespace axelitus\Base;
  * @see     http://www.phpdoc.org/docs/latest/for-users/phpdoc/tags/property-write.html
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 abstract class PropertyAccessible
 {

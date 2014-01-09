@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Array callback traverser.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Traverser
 {

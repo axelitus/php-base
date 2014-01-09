@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Dot-Notated Array object.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Arr implements \ArrayAccess, \Countable, \Iterator
 {
