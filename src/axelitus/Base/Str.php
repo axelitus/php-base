@@ -80,6 +80,54 @@ class Str
         return is_string($value);
     }
 
+    /**
+     * Tests if the given value is an empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is a string and is empty, false otherwise.
+     */
+    public static function isAndEmpty($value)
+    {
+        return (static::is($value) && $value == '');
+    }
+
+    /**
+     * Tests if the given value is a non-empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is a string and is not empty, false otherwise.
+     */
+    public static function isAndNotEmpty($value)
+    {
+        return (static::is($value) && $value != '');
+    }
+
+    /**
+     * Tests if the given value is not a string or is an empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is not a string or is an empty string, false otherwise.
+     */
+    public static function isNotOrEmpty($value)
+    {
+        return (!static::is($value) || $value == '');
+    }
+
+    /**
+     * Tests if the given value is not a string or is not an empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is not a string or is not an empty string, false otherwise.
+     */
+    public static function isNotOrNotEmpty($value)
+    {
+        return (!static::is($value) || $value != '');
+    }
+
     //endregion
 
     //region Comparing
@@ -809,6 +857,7 @@ class Str
         // Build args array and substitute variables with numbers
         $args = [];
         $pos = 0;
+        $match = null;
         while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
             list($var_key, $var_pos) = $match[0];
 

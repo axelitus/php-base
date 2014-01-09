@@ -30,6 +30,34 @@ class TestsString extends TestCase
         $this->assertFalse(Str::is(['array']));
     }
 
+    public function testIsAndEmpty()
+    {
+        $this->assertTrue(Str::isAndEmpty(''));
+        $this->assertFalse(Str::isAndEmpty(5));
+        $this->assertFalse(Str::isAndEmpty('not empty'));
+    }
+
+    public function testIsAndNotEmpty()
+    {
+        $this->assertTrue(Str::isAndNotEmpty('not empty'));
+        $this->assertFalse(Str::isAndNotEmpty(5));
+        $this->assertFalse(Str::isAndNotEmpty(''));
+    }
+
+    public function testIsNotOrEmpty()
+    {
+        $this->assertTrue(Str::isNotOrEmpty(5));
+        $this->assertTrue(Str::isNotOrEmpty(''));
+        $this->assertFalse(Str::isNotOrEmpty('not empty'));
+    }
+
+    public function testIsNotOrNotEmpty()
+    {
+        $this->assertTrue(Str::isNotOrNotEmpty(5));
+        $this->assertTrue(Str::isNotOrNotEmpty('not empty'));
+        $this->assertFalse(Str::isNotOrNotEmpty(''));
+    }
+
     //endregion
 
     //region Comparison
