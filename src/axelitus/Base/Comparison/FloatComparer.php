@@ -22,8 +22,7 @@ use axelitus\Base\Float;
  * Float comparer implementation.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class FloatComparer extends Comparer
 {

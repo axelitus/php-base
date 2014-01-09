@@ -23,8 +23,7 @@ use axelitus\Base\Arr;
  * BigFloat comparer implementation.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class BigFloatComparer extends Comparer
 {

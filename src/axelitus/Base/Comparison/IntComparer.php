@@ -22,8 +22,7 @@ use axelitus\Base\Int;
  * Int comparer implementation.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class IntComparer extends Comparer
 {

@@ -23,8 +23,7 @@ use axelitus\Base\Arr;
  * Str comparer implementation.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class StrComparer extends Comparer
 {

@@ -23,8 +23,7 @@ use axelitus\Base\Arr;
  * BigNum comparer implementation.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class BigNumComparer extends Comparer
 {

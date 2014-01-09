@@ -22,8 +22,7 @@ use axelitus\Base\Bool;
  * Bool comparer implementation.
  *
  * @package axelitus\Base
- *
- * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class BoolComparer extends Comparer
 {
