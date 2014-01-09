@@ -30,6 +30,8 @@ class StrComparer extends Comparer
 {
     /**
      * Constructor
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function __construct($caseInsensitive = false)
     {

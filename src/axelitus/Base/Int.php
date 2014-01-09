@@ -136,6 +136,7 @@ class Int
      *
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {

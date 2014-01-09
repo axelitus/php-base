@@ -141,6 +141,7 @@ class Str
      * @param bool   $caseInsensitive Whether the comparison should be case sensitive or case insensitive.
      *
      * @return int Returns < 0 if str1 is less than str2; > 0 if str1 is greater than str2, and 0 if they are equal.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function compare($str1, $str2, $caseInsensitive = false)
     {
@@ -155,6 +156,7 @@ class Str
      * @param bool   $caseInsensitive Whether the comparison should be case sensitive or case insensitive.
      *
      * @return bool Returns true if both strings are equal, false otherwise.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function equals($str1, $str2, $caseInsensitive = false)
     {
@@ -171,6 +173,7 @@ class Str
      * @param string $encoding        The encoding of the input string
      *
      * @return bool     Whether the input string contains the substring
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function contains($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -189,6 +192,7 @@ class Str
      * @param string $encoding        The encoding of the input string.
      *
      * @return bool Returns true if the input string begins with the given search string.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function beginsWith($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -209,6 +213,7 @@ class Str
      * @param string $encoding        The encoding of the input string.
      *
      * @return bool Returns true if the $input string ends with the given $search string.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function endsWith($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -235,6 +240,7 @@ class Str
      * @param  bool   $returnIndex     Whether to return the matched array's item instead
      *
      * @return bool|int    Whether the input string was found in the array or the item's index if found
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function isOneOf($input, array $values, $caseInsensitive = false, $returnIndex = false)
     {
@@ -338,6 +344,7 @@ class Str
      *
      * @return int|bool Returns the numeric position of the first occurrence of the searched string in the input string.
      *                  If it is not found, it returns false.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function pos($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -367,6 +374,7 @@ class Str
      * @param int    $count           If passed, this will be set to the number of replacements performed.
      *
      * @return string   The string with the substring replaced
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function replace(
         $input,
@@ -395,6 +403,7 @@ class Str
      *
      * @return array|string
      * @see     https://github.com/faceleg/php-mb_str_replace
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     private static function mbStrReplaceCaller(
         $search,
@@ -444,6 +453,7 @@ class Str
      *
      * @return string
      * @see      https://github.com/faceleg/php-mb_str_replace
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     private static function mbStrReplaceInternal(
         $search,
@@ -495,6 +505,7 @@ class Str
      * @param   bool   $is_html      Whether the string has HTML
      *
      * @return  string  The truncated string
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function truncate($input, $limit, $continuation = '...', $is_html = false)
     {

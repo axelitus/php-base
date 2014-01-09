@@ -61,13 +61,13 @@ class BigFloat
 
         if (is_float($value)) {
             return (int)$value;
-        } else {
-            if (($decimal = Str::pos($value, '.')) !== false) {
-                $value = Str::sub($value, 0, $decimal);
-            }
-
-            return $value;
         }
+
+        if (($decimal = Str::pos($value, '.')) !== false) {
+            $value = Str::sub($value, 0, $decimal);
+        }
+
+        return $value;
     }
 
     //endregion
@@ -136,6 +136,7 @@ class BigFloat
      *
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
