@@ -1,2 +1,2 @@
 #!/bin/bash
-./vendor/phing/phing/bin/phing
+./vendor/phing/phing/bin/phing "$@"
