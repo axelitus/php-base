@@ -62,13 +62,13 @@ class BigNum
             return $value;
         } elseif (is_float($value)) {
             return (int)$value;
-        } else {
-            if (($decimal = Str::pos($value, '.')) !== false) {
-                $value = Str::sub($value, 0, $decimal);
-            }
-
-            return $value;
         }
+
+        if (($decimal = Str::pos($value, '.')) !== false) {
+            $value = Str::sub($value, 0, $decimal);
+        }
+
+        return $value;
     }
 
     //endregion
