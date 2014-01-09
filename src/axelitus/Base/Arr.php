@@ -110,6 +110,20 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
 
     //endregion
 
+    //region Conversion
+
+    /**
+     * Get the data as a simple array.
+     *
+     * @return array The containing data as a simple array.
+     */
+    public function asArray()
+    {
+        return $this->data;
+    }
+
+    //endregion
+
     //region Implements \ArrayAccess
 
     /**

@@ -127,6 +127,17 @@ class TestsArr extends TestCase
 
     //endregion
 
+    //region Conversion
+
+    public function testAsArray()
+    {
+        $a = ['one' => 'A', 'two' => 'B', 'three' => ['one' => 'C.A', 'two' => 'C.B']];
+        $this->arr = new Arr($a);
+        $this->assertEquals($a, $this->arr->asArray());
+    }
+
+    //endregion
+
     //region Implements \ArrayAccess
 
     /**
