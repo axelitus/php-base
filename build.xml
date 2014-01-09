@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="axelitus/base" basedir="." default="build">
+    <property file="./build.properties"/>
+
+    <!-- Clean build -->
+    <target name="build:clean" description="Cleans the previous build">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Prepare the build -->
+    <target name="build:prepare" depends="build:clean" description="Removes old build directories and creates new ones">
+        <!-- Create build directories -->
+        <mkdir dir="${build.bin.dir}"/>
+        <mkdir dir="${build.log.dir}"/>
+        <mkdir dir="${build.doc.dir}"/>
+    </target>
+
+    <!-- Install composer dependencies -->
+    <target name="build:composer" description="Installs the composer dependencies">
+        <exec command="${composer.exec} ${composer.args}" passthru="true"/>
+    </target>
+
+    <!-- PHP Code Sniffer -->
+    <target name="build:phpcs" description="Runs PHP Code Sniffer">
+        <exec command="${phing.exec} ${phing.args} script:phpcs" passthru="true"/>
+    </target>
+    <target name="script:phpcs">
+        <mkdir dir="${phpcs.log.dir}"/>
+        <echo msg="${phpcs.msg}"/>
+        <exec command="${phpcs.exec} ${phpcs.args}" passthru="true"/>
+        <xslt file="${phpcs.log.xml}" tofile="${phpcs.log.html}" style="${phpcs.log.xslt}"/>
+    </target>
+
+    <!-- PHP Mess Detector -->
+    <target name="build:phpmd" description="Runs PHP Mess Detector">
+        <exec command="${phing.exec} ${phing.args} script:phpmd" passthru="true"/>
+    </target>
+    <target name="script:phpmd">
+        <mkdir dir="${phpmd.log.dir}"/>
+        <echo msg="${phpmd.msg}"/>
+        <exec command="${phpmd.exec} ${phpmd.args}" passthru="true"/>
+        <xslt file="${phpmd.log.xml}" tofile="${phpmd.log.html}" style="${phpmd.log.xslt}"/>
+    </target>
+
+    <!-- PHPUnit -->
+    <target name="build:phpunit" description="Runs PHP Mess Detector">
+        <exec command="${phing.exec} ${phing.args} script:phpunit" passthru="true"/>
+    </target>
+    <target name="script:phpunit">
+        <mkdir dir="${phpunit.log.dir}"/>
+        <echo msg="${phpunit.msg}"/>
+        <exec command="${phpunit.exec} ${phpunit.args}" passthru="true"/>
+    </target>
+
+    <!-- PHPDocumentor -->
+    <target name="build:phpdoc" description="Runs PHP Mess Detector">
+        <exec command="${phing.exec} ${phing.args} script:phpdoc" passthru="true"/>
+    </target>
+    <target name="script:phpdoc">
+        <mkdir dir="${phpdoc.log.dir}"/>
+        <echo msg="${phpdoc.msg}"/>
+        <exec command="${phpdoc.exec} ${phpdoc.args}" passthru="true"/>
+    </target>
+
+    <!-- Build -->
+    <target name="build" depends="build:prepare, build:composer, build:phpcs, build:phpmd, build:phpunit, build:phpdoc"/>
+</project>

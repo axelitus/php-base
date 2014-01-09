@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+    bootstrap="phpunit.bootstrap.php"
+    colors="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false">
+    <php>
+        <server name="tests_path">res/tests</server>
+    </php>
+    <testsuites>
+        <testsuite name="axelitus/base">
+            <directory suffix=".php">res/tests/axelitus/Base</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/axelitus</directory>
+            <exclude>
+                <directory suffix=".php">res/tests/axelitus/Base/Tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="log-junit" target="build/log/phpunit/phpunit.xml"/>
+        <log type="log-json" target="build/log/phpunit/phpunit.json"/>
+        <log type="log-tap" target="build/log/phpunit/phpunit.tap"/>
+        <log type="coverage-clover" target="build/log/phpunit/coverage.xml"/>
+        <log type="coverage-html" target="build/log/phpunit/coverage"/>
+        <log type="testdox-html" target="build/log/phpunit/testdoc.htm"/>
+    </logging>
+</phpunit>
