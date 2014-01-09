@@ -52,6 +52,7 @@ class TestsBigNum extends TestCase
     {
         $this->assertEquals(5, BigNum::int(5.53623544));
         $this->assertEquals('5', BigNum::int('5.53623544'));
+        $this->assertEquals(9, BigNum::int(9));
     }
 
     public function testIntEx01()
