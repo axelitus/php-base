@@ -207,4 +207,63 @@ class TestsFlag extends TestCase
             Flag::assignValues([0, 1, 2, 3, 4, 5])
         );
     }
+
+    public function testBuildMask()
+    {
+        $this->assertEquals(0b1, Flag::buildMask(0b1));
+        $this->assertEquals(0b11, Flag::buildMask(0b01, 0b10));
+        $this->assertEquals(0b11, Flag::buildMask(0b10, 0b01));
+        $this->assertEquals(
+            0b0011101101,
+            Flag::buildMask(
+                0b0010000000,
+                0b0000000001,
+                0b0001000000,
+                0b0000001000,
+                0b0000000100,
+                0b0000100000
+            )
+        );
+    }
+
+    public function testMask()
+    {
+        $this->assertEquals(0b0, Flag::mask(0b1, 0b0));
+        $this->assertEquals(0b0, Flag::mask(0b0, 0b1));
+
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b00));
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b01));
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b10));
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b11));
+
+        $this->assertEquals(0b00, Flag::mask(0b01, 0b00));
+        $this->assertEquals(0b01, Flag::mask(0b01, 0b01));
+        $this->assertEquals(0b00, Flag::mask(0b01, 0b10));
+        $this->assertEquals(0b01, Flag::mask(0b01, 0b11));
+
+        $this->assertEquals(0b00, Flag::mask(0b10, 0b00));
+        $this->assertEquals(0b00, Flag::mask(0b10, 0b01));
+        $this->assertEquals(0b10, Flag::mask(0b10, 0b10));
+        $this->assertEquals(0b10, Flag::mask(0b10, 0b11));
+
+        $this->assertEquals(0b00, Flag::mask(0b11, 0b00));
+        $this->assertEquals(0b01, Flag::mask(0b11, 0b01));
+        $this->assertEquals(0b10, Flag::mask(0b11, 0b10));
+        $this->assertEquals(0b11, Flag::mask(0b11, 0b11));
+    }
+
+    public function testMatchMask()
+    {
+        $this->assertTrue(Flag::matchMask(0b0, 0b0));
+        $this->assertFalse(Flag::matchMask(0b0, 0b1));
+        $this->assertTrue(Flag::matchMask(0b1, 0b0));
+        $this->assertTrue(Flag::matchMask(0b1, 0b1));
+
+        $this->assertTrue(Flag::matchMask(0b10, 0b10));
+        $this->assertTrue(Flag::matchMask(0b11, 0b10));
+        $this->assertFalse(Flag::matchMask(0b10, 0b01));
+
+        $this->assertTrue(Flag::matchMask(0b11010, 0b10010));
+        $this->assertFalse(Flag::matchMask(0b10010, 0b11010));
+    }
 }

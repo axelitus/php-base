@@ -173,4 +173,63 @@ class Flag
     {
         return array_combine($tags, static::getValues(count($tags)));
     }
+
+    /**
+     * Builds a flag mask with th given flags.
+     *
+     * @param int $flag1 The first flag.
+     * @param int $_     More flags.
+     *
+     * @return int The mask containing all the flags given.
+     * @throws \InvalidArgumentException
+     */
+    public static function buildMask($flag1, $_ = null)
+    {
+        if (!Flag::is($flag1)) {
+            throw new \InvalidArgumentException(""); // TODO
+        }
+
+        $mask = $flag1;
+        $args = array_slice(func_get_args(), 1);
+        foreach ($args as $flag) {
+            if (!Flag::is($flag)) {
+                throw new \InvalidArgumentException(""); // TODO
+            }
+
+            $mask = $mask | $flag;
+        }
+
+        return $mask;
+    }
+
+    /**
+     * Applies the mask to the given value and returns the masked result.
+     *
+     * @param int $value The value to apply the mask to.
+     * @param int $mask  The mask to apply.
+     *
+     * @return int The masked value result.
+     * @throws \InvalidArgumentException
+     */
+    public static function mask($value, $mask)
+    {
+        if (!Int::is($value) || !Int::is($mask)) {
+            throw new \InvalidArgumentException(""); // TODO
+        }
+
+        return ($value & $mask);
+    }
+
+    /**
+     * Matches a value against a mask and see if all te bits set on mask are set in value.
+     *
+     * @param int $value The value to check.
+     * @param int $mask  The mask to check the value against.
+     *
+     * @return bool Returns true if the mask equals zero or all flags in the mask are set in the value, false otherwise.
+     */
+    public static function matchMask($value, $mask)
+    {
+        return (($mask === 0) || (static::mask($value, $mask) === $mask));
+    }
 }
