@@ -92,6 +92,8 @@ class TestsFlag extends TestCase
 
         $this->assertEquals(0b11101, Flag::setOn(0b01101, 0b10000));
         $this->assertEquals(0b11111, Flag::setOn(0b11101, 0b00010));
+
+        $this->assertEquals(0b11101, Flag::setOn(0b01001, [0b10000, 0b00100]));
     }
 
     public function testSetOnEx01()
@@ -122,6 +124,8 @@ class TestsFlag extends TestCase
 
         $this->assertEquals(0b01000, Flag::setOff(0b01010, 0b00010));
         $this->assertEquals(0b00000, Flag::setOff(0b01000, 0b01000));
+
+        $this->assertEquals(0b01001, Flag::setOff(0b11101, [0b10000, 0b00100]));
     }
 
     public function testSetOffEx01()

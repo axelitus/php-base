@@ -80,8 +80,8 @@ class Flag
     /**
      * Sets a flag into a value.
      *
-     * @param int $value The value to set the flag on.
-     * @param int $flag  The flag to be set.
+     * @param int       $value The value to set the flag on.
+     * @param int|array $flag  The flag(s) to be set.
      *
      * @return int Returns the value with the flag on.
      * @throws \InvalidArgumentException
@@ -92,7 +92,13 @@ class Flag
             throw new \InvalidArgumentException("The \$value parameter must be of type int.");
         }
 
-        if (!static::is($flag)) {
+        if (is_array($flag)) {
+            $ret = $value;
+            foreach ($flag as $item) {
+                $ret = static::setOn($ret, $item);
+            }
+            return $ret;
+        } elseif (!static::is($flag)) {
             throw new \InvalidArgumentException("The \$flag parameter must be of type int and a power of 2.");
         }
 
@@ -102,8 +108,8 @@ class Flag
     /**
      * Unsets a flag into a value.
      *
-     * @param int $value The value to unset the flag on.
-     * @param int $flag  The flag to be unset.
+     * @param int       $value The value to unset the flag on.
+     * @param int|array $flag  The flag(s) to be unset.
      *
      * @return int Returns the value with the flag off.
      * @throws \InvalidArgumentException
@@ -114,7 +120,13 @@ class Flag
             throw new \InvalidArgumentException("The \$value parameter must be of type int.");
         }
 
-        if (!static::is($flag)) {
+        if (is_array($flag)) {
+            $ret = $value;
+            foreach ($flag as $item) {
+                $ret = static::setOff($ret, $item);
+            }
+            return $ret;
+        } elseif (!static::is($flag)) {
             throw new \InvalidArgumentException("The \$flag parameter must be of type int and a power of 2.");
         }
 
@@ -175,7 +187,7 @@ class Flag
     }
 
     /**
-     * Builds a flag mask with th given flags.
+     * Builds a flag mask with the given flags.
      *
      * @param int $flag1 The first flag.
      * @param int $_     More flags.
