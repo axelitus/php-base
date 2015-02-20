@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base\Tests;
@@ -63,6 +63,80 @@ class TestsBool extends TestCase
         $this->assertFalse(Bool::extIs('string'));
         $this->assertFalse(Bool::extIs(10));
         $this->assertFalse(Bool::extIs(-10));
+    }
+
+    public function testIsTrueStr()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['true']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['1']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['on']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['yes']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['y']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStr', [1]));
+    }
+
+    public function testIsTrueStrExt()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['true']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['1']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['on']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['yes']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['y']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isTrueStrExt', [1]));
+    }
+
+    public function testIsFalseStr()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['false']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['0']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['off']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['no']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['n']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStr', [0]));
+    }
+
+    public function testIsFalseStrExt()
+    {
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['false']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['0']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['off']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['no']));
+        $this->assertTrue($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['n']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', ['string']));
+        $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', [0]));
+    }
+
+    //endregion
+
+    //region Comparing
+
+    public function testCompare()
+    {
+        $this->assertEquals(-1, Bool::compare(false, true));
+        $this->assertEquals(0, Bool::compare(false, false));
+        $this->assertEquals(0, Bool::compare(true, true));
+        $this->assertEquals(1, Bool::compare(true, false));
+    }
+
+    public function testCompareEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$bool1 and \$bool2 parameters must be of type bool."
+        );
+        Bool::compare('string', true);
+    }
+
+    public function testCompareEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$bool1 and \$bool2 parameters must be of type bool."
+        );
+        Bool::compare(true, 'string');
     }
 
     //endregion

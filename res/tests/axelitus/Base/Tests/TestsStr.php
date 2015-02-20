@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base\Tests;
@@ -28,6 +28,34 @@ class TestsString extends TestCase
         $this->assertTrue(Str::is('string'));
         $this->assertFalse(Str::is(9));
         $this->assertFalse(Str::is(['array']));
+    }
+
+    public function testIsAndEmpty()
+    {
+        $this->assertTrue(Str::isAndEmpty(''));
+        $this->assertFalse(Str::isAndEmpty(5));
+        $this->assertFalse(Str::isAndEmpty('not empty'));
+    }
+
+    public function testIsAndNotEmpty()
+    {
+        $this->assertTrue(Str::isAndNotEmpty('not empty'));
+        $this->assertFalse(Str::isAndNotEmpty(5));
+        $this->assertFalse(Str::isAndNotEmpty(''));
+    }
+
+    public function testIsNotOrEmpty()
+    {
+        $this->assertTrue(Str::isNotOrEmpty(5));
+        $this->assertTrue(Str::isNotOrEmpty(''));
+        $this->assertFalse(Str::isNotOrEmpty('not empty'));
+    }
+
+    public function testIsNotOrNotEmpty()
+    {
+        $this->assertTrue(Str::isNotOrNotEmpty(5));
+        $this->assertTrue(Str::isNotOrNotEmpty('not empty'));
+        $this->assertFalse(Str::isNotOrNotEmpty(''));
     }
 
     //endregion

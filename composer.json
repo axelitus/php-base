@@ -23,17 +23,20 @@
         "php": ">=5.4.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.8.*",
-        "squizlabs/php_codesniffer": "1.4.*",
+        "phing/phing": "2.6.*",
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "1.5.*",
         "phpmd/phpmd" : "1.5.*",
-        "league/phpunit-coverage-listener": "~1.0"
+        "league/phpunit-coverage-listener": "~1.0",
+        "phpdocumentor/phpdocumentor": "2.*"
     },
     "replace": {
         "axelitus/acre-common": "*"
     },
     "autoload": {
         "psr-0": {
-            "axelitus\\Base": "src/"
+            "axelitus\\Base\\": "src/",
+            "axelitus\\Base\\Tests\\": "res/tests/"
         }
     },
     "config": {
@@ -44,7 +47,7 @@
     "extra": {
         "branch-alias": {
             "dev-develop": "0.9-dev",
-            "dev-master": "0.9-dev"
+            "dev-master": "0.8-dev"
         }
     }
 }

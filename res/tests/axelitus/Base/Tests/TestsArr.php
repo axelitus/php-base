@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base\Tests;
@@ -127,6 +127,17 @@ class TestsArr extends TestCase
 
     //endregion
 
+    //region Conversion
+
+    public function testAsArray()
+    {
+        $a = ['one' => 'A', 'two' => 'B', 'three' => ['one' => 'C.A', 'two' => 'C.B']];
+        $this->arr = new Arr($a);
+        $this->assertEquals($a, $this->arr->asArray());
+    }
+
+    //endregion
+
     //region Implements \ArrayAccess
 
     /**
@@ -182,6 +193,36 @@ class TestsArr extends TestCase
             "The \$key parameter must be int or string (or array of them)."
         );
         $this->arr->count(false);
+    }
+
+    //endregion
+
+    //region Implements \Iterator
+
+    public function testForEachLoop()
+    {
+        $this->arr['a.aa.aaa'] = 'A.AA.AAA';
+        $this->arr['b.bb.bbb'] = 'B.BB.BBB';
+        $this->arr['c.cc1'] = 'C.CC1';
+        $this->arr['c.cc2'] = 'C.CC2';
+        $this->arr['d'] = 'D';
+
+        foreach ($this->arr as $key => $value) {
+            switch($key){
+                case 'a':
+                    $this->assertEquals(['aa' => ['aaa' => 'A.AA.AAA']], $value);
+                    break;
+                case 'b':
+                    $this->assertEquals(['bb' => ['bbb' => 'B.BB.BBB']], $value);
+                    break;
+                case 'c':
+                    $this->assertEquals(['cc1' => 'C.CC1', 'cc2' => 'C.CC2'], $value);
+                    break;
+                case 'd':
+                    $this->assertEquals('D', $value);
+                    break;
+            }
+        }
     }
 
     //endregion

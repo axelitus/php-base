@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base;
@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Numeric operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class BigNum
 {
@@ -31,6 +32,7 @@ class BigNum
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a number, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {
@@ -61,13 +63,13 @@ class BigNum
             return $value;
         } elseif (is_float($value)) {
             return (int)$value;
-        } else {
-            if (($decimal = Str::pos($value, '.')) !== false) {
-                $value = Str::sub($value, 0, $decimal);
-            }
-
-            return $value;
         }
+
+        if (($decimal = Str::pos($value, '.')) !== false) {
+            $value = Str::sub($value, 0, $decimal);
+        }
+
+        return $value;
     }
 
     //endregion
@@ -102,7 +104,7 @@ class BigNum
             return bcsub($num1, $num2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -136,6 +138,7 @@ class BigNum
      *
      * @return bool Whether the value is in the given range given the bounds configurations.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function inRange($value, $lower, $upper, $lowerExclusive = false, $upperExclusive = false)
     {
@@ -222,7 +225,7 @@ class BigNum
             return bcadd($num1, $num2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -251,7 +254,7 @@ class BigNum
             return bcsub($num1, $num2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -280,7 +283,7 @@ class BigNum
             return bcmul($num1, $num2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -313,7 +316,7 @@ class BigNum
             return bcdiv($num1, $num2, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -342,7 +345,7 @@ class BigNum
             return bcpow($base, $exponent, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -378,7 +381,7 @@ class BigNum
             return static::sub($base, static::mul($times, $modulus, $scale), $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     /**
@@ -406,7 +409,7 @@ class BigNum
             return bcsqrt($base, $scale);
         }
 
-        throw new \RuntimeException("The BCMath library is not available.");
+        throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
     //endregion

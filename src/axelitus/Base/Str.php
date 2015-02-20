@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base;
@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * String operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Str
 {
@@ -74,10 +75,59 @@ class Str
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a string, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {
         return is_string($value);
+    }
+
+    /**
+     * Tests if the given value is an empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is a string and is empty, false otherwise.
+     */
+    public static function isAndEmpty($value)
+    {
+        return (static::is($value) && $value == '');
+    }
+
+    /**
+     * Tests if the given value is a non-empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is a string and is not empty, false otherwise.
+     */
+    public static function isAndNotEmpty($value)
+    {
+        return (static::is($value) && $value != '');
+    }
+
+    /**
+     * Tests if the given value is not a string or is an empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is not a string or is an empty string, false otherwise.
+     */
+    public static function isNotOrEmpty($value)
+    {
+        return (!static::is($value) || $value == '');
+    }
+
+    /**
+     * Tests if the given value is not a string or is not an empty string.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the given value is not a string or is not an empty string, false otherwise.
+     */
+    public static function isNotOrNotEmpty($value)
+    {
+        return (!static::is($value) || $value != '');
     }
 
     //endregion
@@ -92,6 +142,7 @@ class Str
      * @param bool   $caseInsensitive Whether the comparison should be case sensitive or case insensitive.
      *
      * @return int Returns < 0 if str1 is less than str2; > 0 if str1 is greater than str2, and 0 if they are equal.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function compare($str1, $str2, $caseInsensitive = false)
     {
@@ -106,6 +157,7 @@ class Str
      * @param bool   $caseInsensitive Whether the comparison should be case sensitive or case insensitive.
      *
      * @return bool Returns true if both strings are equal, false otherwise.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function equals($str1, $str2, $caseInsensitive = false)
     {
@@ -122,6 +174,7 @@ class Str
      * @param string $encoding        The encoding of the input string
      *
      * @return bool     Whether the input string contains the substring
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function contains($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -140,6 +193,7 @@ class Str
      * @param string $encoding        The encoding of the input string.
      *
      * @return bool Returns true if the input string begins with the given search string.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function beginsWith($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -160,6 +214,7 @@ class Str
      * @param string $encoding        The encoding of the input string.
      *
      * @return bool Returns true if the $input string ends with the given $search string.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function endsWith($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -186,6 +241,7 @@ class Str
      * @param  bool   $returnIndex     Whether to return the matched array's item instead
      *
      * @return bool|int    Whether the input string was found in the array or the item's index if found
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function isOneOf($input, array $values, $caseInsensitive = false, $returnIndex = false)
     {
@@ -289,6 +345,7 @@ class Str
      *
      * @return int|bool Returns the numeric position of the first occurrence of the searched string in the input string.
      *                  If it is not found, it returns false.
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function pos($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
     {
@@ -296,11 +353,11 @@ class Str
             return function_exists('mb_stripos')
                 ? mb_stripos($input, $search, 0, $encoding)
                 : (stripos($input, $search) !== false ? true : false);
-        } else {
-            return function_exists('mb_strpos')
-                ? mb_strpos($input, $search, 0, $encoding)
-                : (strpos($input, $search) !== false ? true : false);
         }
+
+        return function_exists('mb_strpos')
+            ? mb_strpos($input, $search, 0, $encoding)
+            : (strpos($input, $search) !== false ? true : false);
     }
 
     //endregion
@@ -318,6 +375,7 @@ class Str
      * @param int    $count           If passed, this will be set to the number of replacements performed.
      *
      * @return string   The string with the substring replaced
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function replace(
         $input,
@@ -330,7 +388,8 @@ class Str
         return function_exists('mb_strlen')
             ? static::mbStrReplaceCaller($search, $replace, $input, $caseInsensitive, $encoding, $count)
             : (($caseInsensitive)
-                ? (str_ireplace($search, $replace, $input, $count))
+                ? (str_ireplace($search, $replace, $input, $count)) // @codeCoverageIgnore
+                // excluded as reaching this line is environment dependent.
                 : (str_replace($search, $replace, $input, $count)));
     }
 
@@ -346,6 +405,7 @@ class Str
      *
      * @return array|string
      * @see     https://github.com/faceleg/php-mb_str_replace
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     private static function mbStrReplaceCaller(
         $search,
@@ -368,11 +428,11 @@ class Str
             return static::mbStrReplaceInternal($search, $replace, $subject, $caseInsensitive, $encoding, $count);
         }
 
-        $replace_is_array = is_array($replace);
+        $replaceIsArray = is_array($replace);
         foreach ($search as $key => $value) {
             $subject = static::mbStrReplaceInternal(
                 $value,
-                ($replace_is_array ? $replace[$key] : $replace),
+                ($replaceIsArray ? $replace[$key] : $replace),
                 $subject,
                 $caseInsensitive,
                 $encoding,
@@ -395,6 +455,7 @@ class Str
      *
      * @return string
      * @see      https://github.com/faceleg/php-mb_str_replace
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     private static function mbStrReplaceInternal(
         $search,
@@ -404,12 +465,12 @@ class Str
         $encoding = self::DEFAULT_ENCODING,
         &$count = null
     ) {
-        $search_length = mb_strlen($search, $encoding);
-        $subject_length = mb_strlen($subject, $encoding);
+        $searchLength = mb_strlen($search, $encoding);
+        $subjectLength = mb_strlen($subject, $encoding);
         $offset = 0;
         $result = '';
 
-        while ($offset < $subject_length) {
+        while ($offset < $subjectLength) {
             $match = $caseInsensitive
                 ? mb_stripos($subject, $search, $offset, $encoding)
                 : mb_strpos($subject, $search, $offset, $encoding);
@@ -419,7 +480,7 @@ class Str
                     return $subject;
                 }
                 // Append the final portion of the subject to the replaced.
-                $result .= mb_substr($subject, $offset, $subject_length - $offset, $encoding);
+                $result .= mb_substr($subject, $offset, $subjectLength - $offset, $encoding);
                 break;
             }
             if ($count !== null) {
@@ -427,7 +488,7 @@ class Str
             }
             $result .= mb_substr($subject, $offset, $match - $offset, $encoding);
             $result .= $replace;
-            $offset = $match + $search_length;
+            $offset = $match + $searchLength;
         }
 
         return $result;
@@ -443,23 +504,24 @@ class Str
      * @param   string $input        The string to truncate.
      * @param   int    $limit        The number of characters to truncate to.
      * @param   string $continuation The string to use to denote it was truncated
-     * @param   bool   $is_html      Whether the string has HTML
+     * @param   bool   $isHtml       Whether the string has HTML
      *
      * @return  string  The truncated string
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public static function truncate($input, $limit, $continuation = '...', $is_html = false)
+    public static function truncate($input, $limit, $continuation = '...', $isHtml = false)
     {
         $offset = 0;
         $tags = [];
-        if ($is_html) {
+        if ($isHtml) {
             $input = static::truncateHtml($input, $limit, $offset, $tags);
         }
 
-        $new_string = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
-        $new_string .= (static::length($input) > $limit ? $continuation : '');
-        $new_string .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
+        $newString = static::sub($input, 0, $limit = min(static::length($input), $limit + $offset));
+        $newString .= (static::length($input) > $limit ? $continuation : '');
+        $newString .= count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '';
 
-        return $new_string;
+        return $newString;
     }
 
     /**
@@ -644,15 +706,11 @@ class Str
      */
     public static function studly($input, array $separators = ['_'], $encoding = self::DEFAULT_ENCODING)
     {
-        if (!empty($separators)) {
-            $pattern = '';
-            foreach ($separators as $separator) {
-                $pattern .= '|' . preg_quote($separator);
-            }
-            $pattern = '/(^' . $pattern . ')(.)/';
+        $studly = $input;
 
+        if (!empty($separators)) {
             $studly = preg_replace_callback(
-                $pattern,
+                static::studlyBuildPattern($separators),
                 function ($matches) {
                     return strtoupper($matches[2]);
                 },
@@ -663,11 +721,20 @@ class Str
                 $word = static::ucfirst($word, $encoding);
             }
             $studly = implode(' ', $words);
-        } else {
-            $studly = $input;
         }
 
         return $studly;
+    }
+
+    protected static function studlyBuildPattern(array $separators)
+    {
+        $pattern = '';
+        foreach ($separators as $separator) {
+            $pattern .= '|' . preg_quote($separator);
+        }
+        $pattern = '/(^' . $pattern . ')(.)/';
+
+        return $pattern;
     }
 
     /**
@@ -723,9 +790,9 @@ class Str
             '/(^.[^A-Z]+$)|(^.+?(?=[A-Z]))|( +)(.+?)(?=[A-Z])|([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)/',
             function ($matches) use ($separator, $transform, $encoding) {
                 $transformed = trim($matches[0]);
-                $count_matches = count($matches);
-                $transformed = (($count_matches == 5) ? $matches[3] : '') . $transformed;
-                $transformed = (($count_matches == 6) ? $separator : '') . $transformed;
+                $countMatches = count($matches);
+                $transformed = (($countMatches == 5) ? $matches[3] : '') . $transformed;
+                $transformed = (($countMatches == 6) ? $separator : '') . $transformed;
 
                 return $transformed;
             },
@@ -757,12 +824,9 @@ class Str
                 function (&$word) use ($transform, $encoding) {
                     // Simulate ucwords behaviour as mb_convert_case splits the word by the dash
                     // and we want the space to be the only word separator.
-                    if ($transform == 'ucwords') {
-                        $word = static::ucfirst(static::lower($word, $encoding), $encoding);
-                    } else {
-                        $transform = 'static::' . $transform;
-                        $word = call_user_func_array($transform, [$word, $encoding]);
-                    }
+                    $word = ($transform == 'ucwords')
+                        ? static::ucfirst(static::lower($word, $encoding), $encoding)
+                        : call_user_func_array('static::' . $transform, [$word, $encoding]);
                 }
             );
             $input = implode(' ', $words);
@@ -797,8 +861,8 @@ class Str
     public static function nsprintf($format, array $args = [])
     {
         // Filter unnamed %s strings that should not be processed
-        $filter_regex = '/%s/';
-        $format = preg_replace($filter_regex, '#[:~s]#', $format);
+        $filterRegex = '/%s/';
+        $format = preg_replace($filterRegex, '#[:~s]#', $format);
 
         // The pattern to match variables
         $pattern = '/(?<=%)([a-zA-Z0-9_]\w*)(?=\$)/';
@@ -809,22 +873,23 @@ class Str
         // Build args array and substitute variables with numbers
         $args = [];
         $pos = 0;
+        $match = null;
         while (static::match($format, $pattern, $match, PREG_OFFSET_CAPTURE, $pos)) {
-            list($var_key, $var_pos) = $match[0];
+            list($varKey, $varPos) = $match[0];
 
-            if (!array_key_exists($var_key, $pool)) {
-                throw new \BadFunctionCallException("Missing argument '${var_key}'.", E_USER_WARNING);
+            if (!array_key_exists($varKey, $pool)) {
+                throw new \BadFunctionCallException("Missing argument '${varKey}'.", E_USER_WARNING);
             }
 
-            array_push($args, $pool[$var_key]);
-            $format = substr_replace($format, count($args), $var_pos, $word_length = static::length($var_key));
-            $pos = $var_pos + $word_length; // skip to end of replacement for next iteration
+            array_push($args, $pool[$varKey]);
+            $format = substr_replace($format, count($args), $varPos, $wordLength = static::length($varKey));
+            $pos = $varPos + $wordLength; // skip to end of replacement for next iteration
         }
 
         // Return the original %s strings
-        $filter_regex = '/#\[:~s\]#/';
+        $filterRegex = '/#\[:~s\]#/';
 
-        return preg_replace($filter_regex, '%s', vsprintf($format, $args));
+        return preg_replace($filterRegex, '%s', vsprintf($format, $args));
     }
 
     //endregion

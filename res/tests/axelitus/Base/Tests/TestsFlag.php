@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base\Tests;
@@ -92,6 +92,8 @@ class TestsFlag extends TestCase
 
         $this->assertEquals(0b11101, Flag::setOn(0b01101, 0b10000));
         $this->assertEquals(0b11111, Flag::setOn(0b11101, 0b00010));
+
+        $this->assertEquals(0b11101, Flag::setOn(0b01001, [0b10000, 0b00100]));
     }
 
     public function testSetOnEx01()
@@ -122,6 +124,8 @@ class TestsFlag extends TestCase
 
         $this->assertEquals(0b01000, Flag::setOff(0b01010, 0b00010));
         $this->assertEquals(0b00000, Flag::setOff(0b01000, 0b01000));
+
+        $this->assertEquals(0b01001, Flag::setOff(0b11101, [0b10000, 0b00100]));
     }
 
     public function testSetOffEx01()
@@ -206,5 +210,64 @@ class TestsFlag extends TestCase
             [0 => 1, 1 => 2, 2 => 4, 3 => 8, 4 => 16, 5 => 32],
             Flag::assignValues([0, 1, 2, 3, 4, 5])
         );
+    }
+
+    public function testBuildMask()
+    {
+        $this->assertEquals(0b1, Flag::buildMask(0b1));
+        $this->assertEquals(0b11, Flag::buildMask(0b01, 0b10));
+        $this->assertEquals(0b11, Flag::buildMask(0b10, 0b01));
+        $this->assertEquals(
+            0b0011101101,
+            Flag::buildMask(
+                0b0010000000,
+                0b0000000001,
+                0b0001000000,
+                0b0000001000,
+                0b0000000100,
+                0b0000100000
+            )
+        );
+    }
+
+    public function testMask()
+    {
+        $this->assertEquals(0b0, Flag::mask(0b1, 0b0));
+        $this->assertEquals(0b0, Flag::mask(0b0, 0b1));
+
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b00));
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b01));
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b10));
+        $this->assertEquals(0b00, Flag::mask(0b00, 0b11));
+
+        $this->assertEquals(0b00, Flag::mask(0b01, 0b00));
+        $this->assertEquals(0b01, Flag::mask(0b01, 0b01));
+        $this->assertEquals(0b00, Flag::mask(0b01, 0b10));
+        $this->assertEquals(0b01, Flag::mask(0b01, 0b11));
+
+        $this->assertEquals(0b00, Flag::mask(0b10, 0b00));
+        $this->assertEquals(0b00, Flag::mask(0b10, 0b01));
+        $this->assertEquals(0b10, Flag::mask(0b10, 0b10));
+        $this->assertEquals(0b10, Flag::mask(0b10, 0b11));
+
+        $this->assertEquals(0b00, Flag::mask(0b11, 0b00));
+        $this->assertEquals(0b01, Flag::mask(0b11, 0b01));
+        $this->assertEquals(0b10, Flag::mask(0b11, 0b10));
+        $this->assertEquals(0b11, Flag::mask(0b11, 0b11));
+    }
+
+    public function testMatchMask()
+    {
+        $this->assertTrue(Flag::matchMask(0b0, 0b0));
+        $this->assertFalse(Flag::matchMask(0b0, 0b1));
+        $this->assertTrue(Flag::matchMask(0b1, 0b0));
+        $this->assertTrue(Flag::matchMask(0b1, 0b1));
+
+        $this->assertTrue(Flag::matchMask(0b10, 0b10));
+        $this->assertTrue(Flag::matchMask(0b11, 0b10));
+        $this->assertFalse(Flag::matchMask(0b10, 0b01));
+
+        $this->assertTrue(Flag::matchMask(0b11010, 0b10010));
+        $this->assertFalse(Flag::matchMask(0b10010, 0b11010));
     }
 }

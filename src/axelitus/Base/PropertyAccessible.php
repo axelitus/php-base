@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base;
@@ -29,6 +29,7 @@ namespace axelitus\Base;
  * @see     http://www.phpdoc.org/docs/latest/for-users/phpdoc/tags/property-write.html
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 abstract class PropertyAccessible
 {
@@ -80,12 +81,12 @@ abstract class PropertyAccessible
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 return $this->{$method}();
-            } else {
-                throw new \RuntimeException("The property '{$property}' is not readable.");
             }
-        } else {
-            throw new \RuntimeException("The property '{$property}' does not exist.");
+
+            throw new \RuntimeException("The property '{$property}' is not readable.");
         }
+
+        throw new \RuntimeException("The property '{$property}' does not exist.");
     }
 
     /**
@@ -106,12 +107,13 @@ abstract class PropertyAccessible
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 $this->{$method}($value);
-            } else {
-                throw new \RuntimeException("The property '{$property}' is not writeable.");
+                return;
             }
-        } else {
-            throw new \RuntimeException("The property '{$property}' does not exist.");
+
+            throw new \RuntimeException("The property '{$property}' is not writeable.");
         }
+
+        throw new \RuntimeException("The property '{$property}' does not exist.");
     }
 
     /**

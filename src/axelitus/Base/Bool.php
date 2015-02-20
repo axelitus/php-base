@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base;
@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Boolean operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Bool
 {
@@ -31,6 +32,7 @@ class Bool
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a bool or 0 or 1, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is($value)
     {
@@ -57,20 +59,84 @@ class Bool
             // This function is case insensitive so let's compare to the lower-cased input string.
             $value = strtolower($value);
 
-            // Use true so that the expressions of the switch will evaluate to
-            // (true && (result of expression)) effectively entering the first
-            // case in which the expression evaluates to true.
-            switch (true) {
-                case ($value == 'true' || $value == '1' || $value == 'on' || $value == 'yes' || $value == 'y'):
-                case ($value == 'false' || $value == '0' || $value == 'off' || $value == 'no' || $value == 'n'):
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
+            return (static::isTrueStrExt($value) || static::isFalseStrExt($value));
         }
 
         return false;
+    }
+
+    /**
+     * Determines if the given string is considered as a true value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as a true boolean value, false otherwise.
+     */
+    protected static function isTrueStr($str)
+    {
+        return ($str === 'true' || $str === '1');
+    }
+
+    /**
+     * Determines if the given string is considered as an extended true value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as an extended true boolean value, false otherwise.
+     */
+    protected static function isTrueStrExt($str)
+    {
+        return (static::isTrueStr($str) || $str === 'on' || $str === 'yes' || $str === 'y');
+    }
+
+    /**
+     * Determines if the given string is considered as a false value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as a false boolean value, false otherwise.
+     */
+    protected static function isFalseStr($str)
+    {
+        return ($str === 'false' || $str === '0');
+    }
+
+    /**
+     * Determines if the given string is considered as an extended false value.
+     *
+     * @param string $str The string to test.
+     *
+     * @return bool Returns true if the given string is considered as an extended false boolean value, false otherwise.
+     */
+    protected static function isFalseStrExt($str)
+    {
+        return (static::isFalseStr($str) || $str === 'off' || $str === 'no' || $str === 'n');
+    }
+
+    //endregion
+
+    //region Comparing
+
+    /**
+     * Compares two bool values.
+     *
+     * The returning value contains the actual value difference.
+     *
+     * @param bool $bool1 The left operand.
+     * @param bool $bool2 The right operand.
+     *
+     * @return int Returns -1 if $bool1=false and $bool2=true, =0 if $bool1 == $bool2, 1 if $bool1=true and $bool2=false
+     * @throws \InvalidArgumentException
+     */
+    public static function compare($bool1, $bool2)
+    {
+        if (!static::is($bool1) || !static::is($bool2)) {
+            throw new \InvalidArgumentException(
+                "The \$bool1 and \$bool2 parameters must be of type bool."
+            );
+        }
+
+        return ((int)$bool1 - (int)$bool2);
     }
 
     //endregion
@@ -114,7 +180,7 @@ class Bool
      */
     public static function parse($input)
     {
-        if (!is_string($input) || $input == '') {
+        if (Str::isNotOrEmpty($input)) {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
@@ -125,10 +191,10 @@ class Bool
         // (true && (result of expression)) effectively entering the first
         // case in which the expression evaluates to true.
         switch (true) {
-            case ($input == 'true' || $input == '1'):
+            case static::isTrueStr($input):
                 $ret = true;
                 break;
-            case ($input == 'false' || $input == '0'):
+            case static::isFalseStr($input):
                 $ret = false;
                 break;
             default:
@@ -156,7 +222,7 @@ class Bool
      */
     public static function extParse($input)
     {
-        if (!is_string($input) || $input == '') {
+        if (Str::isNotOrEmpty($input)) {
             throw new \InvalidArgumentException("The \$input parameter must be a non-empty string.");
         }
 
@@ -167,10 +233,10 @@ class Bool
         // (true && (result of expression)) effectively entering the first
         // case in which the expression evaluates to true.
         switch (true) {
-            case ($input == 'true' || $input == '1' || $input == 'on' || $input == 'yes' || $input == 'y'):
+            case static::isTrueStrExt($input):
                 $ret = true;
                 break;
-            case ($input == 'false' || $input == '0' || $input == 'off' || $input == 'no' || $input == 'n'):
+            case static::isFalseStrExt($input):
                 $ret = false;
                 break;
             default:
@@ -195,6 +261,9 @@ class Bool
      *
      * @return bool|array The result of applying the operation to the value(s).
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueNot($value1, $_ = null)
     {
@@ -219,6 +288,9 @@ class Bool
      *
      * @return array The result of applying the operation to the items of given the array(s).
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayNot(array $value1, array $_ = null)
     {
@@ -252,6 +324,9 @@ class Bool
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueAnd($value1, $value2, $_ = null)
     {
@@ -282,6 +357,9 @@ class Bool
      *
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayAnd(array $value1, array $_ = null)
     {
@@ -316,6 +394,9 @@ class Bool
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueOr($value1, $value2, $_ = null)
     {
@@ -346,6 +427,9 @@ class Bool
      *
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayOr(array $value1, array $_ = null)
     {
@@ -380,6 +464,9 @@ class Bool
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueEq($value1, $value2, $_ = null)
     {
@@ -410,6 +497,9 @@ class Bool
      *
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayEq(array $value1, array $_ = null)
     {
@@ -446,6 +536,9 @@ class Bool
      *
      * @return bool The result of applying the operation to the given values.
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function valueXor($value1, $value2, $_ = null)
     {
@@ -476,6 +569,9 @@ class Bool
      *
      * @return bool|array The result of applying the operation to the items of the given array(s).
      * @throws \InvalidArgumentException
+     * @SuppressWarnings(PHPMD.CamelCaseParameterName)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function arrayXor(array $value1, array $_ = null)
     {

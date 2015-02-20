@@ -4,7 +4,7 @@ A framework agnostic PHP package that contains _extensions_ and helpers for the 
 
 ## Package Information
 
-* **Package:** axelitus/base [![Dependencies Status](https://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=a81596bb8923c07e0962acc3ffe7ef986bc5dd98)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.png)](https://packagist.org/packages/axelitus/base)
+* **Package:** axelitus/base [![Dependencies Status](https://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=9dd3b992bc2e6984a108deb40dcb85c9af9451ec)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.png)](https://packagist.org/packages/axelitus/base)
 * **Root Namespace:** axelitus\Base
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
 * **Repository**: [axelitus/php-base](https://github.com/axelitus/php-base "axelitus/php-base at GitHub") at GitHub
@@ -31,42 +31,33 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
 
 ## Contents
 
-All classes are referenced from the package namespace if not otherwise stated.
+##### axelitus\Base
 
  - **Arr** - Dot-notated array object.
  - **BigFloat** - Float operations for big numbers.
  - **BigInt** - Int operations for big numbers.
  - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
+ - **Comparable** - Defines the interface for a comparable object.
+ - **Comparer** - Simple and flexible base comparer from which new comparers should be derived.
  - **DotArr** - Dot-notated array operations.
  - **Flag** - Bitwise flag operations.
  - **Float** - Float operations.
- - **Initiable** - Defines the interface for initiable objects.
- - **InitiableStatic** - Defines the interface for static initiable classes.
+ - **Initiable** - Defines the interface for initiable classes (simulates a static constructor).
  - **Int** - Int operations.
  - **Num** - Numeric operations.
  - **PropertyAccessible** - Allows derived class to use object property access syntax just be defining getters and setters.
  - **Str** - String operations.
  - **Traverser** - Array callback traverser.
 
- ## Roadmap
-
- - ~~[DONE]~~ New private functions for the Bool class to handle each input data case independently and therefore reduce the complexity rating. (see ~~[Issue #1](https://github.com/axelitus/php-base/issues/1)~~)
- - ~~[DONE]~~ Try to reduce the complexity rating from the DotArr functions. (see ~~[Issue #2](https://github.com/axelitus/php-base/issues/2)~~)
- - ~~[DONE]~~ Add the Initiable interface for classes that can/should be initiated. (also added InitiableStatic interface for static initiable classes).
- - [TODO] Define how to iterate through a dot-notated array. (see [Issue #3](https://github.com/axelitus/php-base/issues/3))
-     - [TODO] Implement the Iterator interface to the Arr class.
- - ~~[DONE]~~ Add a Flag class to handle numeric/boolean flag operations.
-     - ~~[DONE]~~ is() function to test for valid flags.
-     - ~~[DONE]~~ isOn() function to test if flag is on.
-     - ~~[DONE]~~ isOff() function to test if flag is off.
-     - ~~[DONE] set() function~~ Changed to setOn() function (and also added a setOff() function) to set and unset flags.
-     - ~~[TODO] mask() function.~~ Need to re-think the purpose of this.
-     - ~~[DONE]~~ getValues() and getPowers() functions to get an array of consecutive flags.
-     - ~~[DONE]~~ assignValues() function to assign consecutive flag values to a given array with tags.
- - ~~[DONE]~~ Add an abstract 'magic' class that allows for derived class objects to use setters and getters with property syntax through the __set() and __get() magic methods. The class is PropertyAccessible.
- - ~~[DONE]~~ Add a Traversor (or any other name) class that applies a callback to the items of an array. This class behaves somewhat like array_map() and/or array_walk() but it's more flexible.
- 
+##### axelitus\Base\Comparison
+ - **BigFloatComparer** - BigFloat comparer implementation.
+ - **BigIntComparer** - BigInt comparer implementation.
+ - **BigNumComparer** - BigNum comparer implementation.
+ - **BoolComparer** - Bool comparer implementation.
+ - **FloatComparer** - Float comparer implementation.
+ - **IntComparer** - Int comparer implementation.
+ - **StrComparer** - Str comparer implementation.
 
 ## How to install
 

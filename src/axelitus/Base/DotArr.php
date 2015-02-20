@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base;
@@ -18,6 +18,7 @@ namespace axelitus\Base;
  * Dot-Notated Array operations.
  *
  * @package axelitus\Base
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class DotArr
 {
@@ -31,6 +32,7 @@ class DotArr
      * @param array $arr The array to test.
      *
      * @return bool Returns true if the array is dot-notated accessible, false otherwise.
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public static function is(array $arr)
     {
@@ -63,21 +65,21 @@ class DotArr
     {
         if (is_array($key)) {
             return static::getMultiple($arr, $key, $default);
-        } else {
-            if (!Int::is($key) && !Str::is($key)) {
-                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-            }
-
-            foreach (explode('.', $key) as $key_seg) {
-                if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
-                    return $default;
-                }
-
-                $arr = $arr[$key_seg];
-            }
-
-            return $arr;
         }
+
+        if (!Int::is($key) && !Str::is($key)) {
+            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+        }
+
+        foreach (explode('.', $key) as $keySeg) {
+            if (!is_array($arr) || !array_key_exists($keySeg, $arr)) {
+                return $default;
+            }
+
+            $arr = $arr[$keySeg];
+        }
+
+        return $arr;
     }
 
     /**
@@ -114,23 +116,24 @@ class DotArr
     {
         if (is_array($key)) {
             static::setMultiple($arr, $key);
-        } else {
-            if (!Int::is($key) && !Str::is($key)) {
-                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-            }
-
-            $keys = explode('.', $key);
-            while (count($keys) > 1) {
-                $key = array_shift($keys);
-
-                if (!isset($arr[$key]) || !is_array($arr[$key])) {
-                    $arr[$key] = [];
-                }
-                $arr =& $arr[$key];
-            }
-
-            $arr[array_shift($keys)] = $value;
+            return;
         }
+
+        if (!Int::is($key) && !Str::is($key)) {
+            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+        }
+
+        $keys = explode('.', $key);
+        while (count($keys) > 1) {
+            $key = array_shift($keys);
+
+            if (!isset($arr[$key]) || !is_array($arr[$key])) {
+                $arr[$key] = [];
+            }
+            $arr =& $arr[$key];
+        }
+
+        $arr[array_shift($keys)] = $value;
     }
 
     /**
@@ -161,33 +164,33 @@ class DotArr
     {
         if (is_array($key)) {
             return static::deleteMultiple($arr, $key);
-        } else {
-            if (!Int::is($key) && !Str::is($key)) {
-                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-            }
-
-            // TODO: optimize this chunk of code
-            $tmp =& $arr;
-            $keys = explode('.', $key);
-            while (count($keys) > 1) {
-                $key = array_shift($keys);
-
-                if (!is_array($tmp[$key])) {
-                    return false;
-                }
-
-                $tmp =& $tmp[$key];
-            }
-
-            $key = array_shift($keys);
-            if (array_key_exists($key, $tmp)) {
-                unset($tmp[$key]);
-
-                return true;
-            }
-
-            return false;
         }
+
+        if (!Int::is($key) && !Str::is($key)) {
+            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+        }
+
+        // TODO: optimize this chunk of code
+        $tmp =& $arr;
+        $keys = explode('.', $key);
+        while (count($keys) > 1) {
+            $key = array_shift($keys);
+
+            if (!is_array($tmp[$key])) {
+                return false;
+            }
+
+            $tmp =& $tmp[$key];
+        }
+
+        $key = array_shift($keys);
+        if (array_key_exists($key, $tmp)) {
+            unset($tmp[$key]);
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -237,12 +240,12 @@ class DotArr
             return true;
         }
 
-        foreach (explode('.', $key) as $key_seg) {
-            if (!is_array($arr) || !array_key_exists($key_seg, $arr)) {
+        foreach (explode('.', $key) as $keySeg) {
+            if (!is_array($arr) || !array_key_exists($keySeg, $arr)) {
                 return false;
             }
 
-            $arr = $arr[$key_seg];
+            $arr = $arr[$keySeg];
         }
 
         return true;
@@ -281,25 +284,25 @@ class DotArr
     {
         if (is_array($key)) {
             return static::keyMatchesMultiple($arr, $key);
-        } else {
-            if (!Int::is($key) && !Str::is($key)) {
-                throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
-            }
-
-            $match = '';
-            $return = [];
-            foreach (explode('.', $key) as $k) {
-                if (!is_array($arr) || !array_key_exists($k, $arr)) {
-                    return $return;
-                }
-
-                $match .= (($match != '') ? '.' : '') . $k;
-                $return[] = $match;
-                $arr =& $arr[$k];
-            }
-
-            return $return;
         }
+
+        if (!Int::is($key) && !Str::is($key)) {
+            throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
+        }
+
+        $match = '';
+        $return = [];
+        foreach (explode('.', $key) as $k) {
+            if (!is_array($arr) || !array_key_exists($k, $arr)) {
+                return $return;
+            }
+
+            $match .= (($match != '') ? '.' : '') . $k;
+            $return[] = $match;
+            $arr =& $arr[$k];
+        }
+
+        return $return;
     }
 
     /**
@@ -348,11 +351,7 @@ class DotArr
                 $tmp =& $tmp[$k];
             }
 
-            if (is_array($value)) {
-                $tmp = static::convert($value);
-            } else {
-                $tmp = $value;
-            }
+            $tmp = is_array($value) ? static::convert($value) : $value;
         }
 
         return $converted;

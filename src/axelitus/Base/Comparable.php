@@ -13,20 +13,20 @@
 namespace axelitus\Base;
 
 /**
- * Interface Initiable
+ * Interface Comparable
  *
- * Defines the interface for initiable classes (simulates a static constructor).
+ * Defines the interface for a comparable object.
  *
  * @package axelitus\Base
  */
-interface Initiable
+interface Comparable
 {
     /**
-     * Initiates a class (simulating a static constructor)
+     * Compares the instance with another object/value.
      *
-     * @param array $options The options to initialize if available as an associative array.
+     * @param mixed    $item     The item to compare to.
      *
-     * @return bool Returns true when the class was successfully initiated, false otherwise.
+     * @return mixed
      */
-    public static function init($options = []);
+    public function compareTo($item);
 }

@@ -3,11 +3,11 @@
  * PHP Package: axelitus/base - Primitive operations and helpers.
  *
  * @author      Axel Pardemann (axelitusdev@gmail.com)
- * @copyright   2013 - Axel Pardemann
+ * @copyright   2015 - Axel Pardemann
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.0
+ * @version     0.8.1
  */
 
 namespace axelitus\Base\Tests;
@@ -52,6 +52,7 @@ class TestsBigNum extends TestCase
     {
         $this->assertEquals(5, BigNum::int(5.53623544));
         $this->assertEquals('5', BigNum::int('5.53623544'));
+        $this->assertEquals(9, BigNum::int(9));
     }
 
     public function testIntEx01()
