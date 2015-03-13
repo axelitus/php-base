@@ -209,7 +209,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
      * @param null|int|string|array $key The key to get the count from.
      *
      * @throws \InvalidArgumentException
-     * @return int|array The custom count as an integer.
+     * @return int The custom count as an integer.
      * </p>
      * <p>
      * The return value is cast to an integer.
@@ -221,6 +221,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         }
 
         if (is_array($key)) {
+            // FIXME: having $return as an array is incompatible with the declaration of the Countable::count interface function which expects an integer to be returned
             $return = [];
             foreach ($key as $k) {
                 $return[$k] = $this->count($k);
@@ -234,7 +235,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         }
 
         if (!$this->has($key)) {
-            return false;
+            return -1;
         }
 
         return count($this->get($key));

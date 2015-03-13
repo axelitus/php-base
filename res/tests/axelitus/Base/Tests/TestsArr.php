@@ -166,7 +166,7 @@ class TestsArr extends TestCase
     public function testCountable()
     {
         $this->assertEquals(0, count($this->arr));
-        $this->assertEquals(false, $this->arr->count('first'));
+        $this->assertEquals(-1, $this->arr->count('first'));
 
         static::getNonPublicProperty($this->arr, 'data')->setValue(
             $this->arr,
@@ -181,7 +181,7 @@ class TestsArr extends TestCase
         $this->assertEquals(5, $this->arr->count('second.lvl.opt'));
 
         $this->assertEquals(
-            ['first' => 1, 'second.lvl.opt' => 5, 'third' => 1, 'fourth' => false],
+            ['first' => 1, 'second.lvl.opt' => 5, 'third' => 1, 'fourth' => -1],
             $this->arr->count(['first', 'second.lvl.opt', 'third', 'fourth'])
         );
     }
