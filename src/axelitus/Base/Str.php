@@ -446,12 +446,12 @@ class Str
     /**
      * Implementation of mb_str_replace. Do not call directly.
      *
-     * @param string $search
-     * @param string $replace
-     * @param string $subject
-     * @param bool   $caseInsensitive
-     * @param string $encoding
-     * @param int    $count
+     * @param string|array $search
+     * @param string|array $replace
+     * @param string|array $subject
+     * @param bool         $caseInsensitive
+     * @param string       $encoding
+     * @param int          $count
      *
      * @return string
      * @see      https://github.com/faceleg/php-mb_str_replace
