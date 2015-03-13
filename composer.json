@@ -28,7 +28,7 @@
         "squizlabs/php_codesniffer": "2.2.*",
         "phpmd/phpmd" : "2.2.*",
         "league/phpunit-coverage-listener": "1.1.*",
-        "phpdocumentor/phpdocumentor": "2.*"
+        "phpdocumentor/phpdocumentor": "2.8.*"
     },
     "replace": {
         "axelitus/acre-common": "*"
