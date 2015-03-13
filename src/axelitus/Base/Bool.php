@@ -201,7 +201,6 @@ class Bool
                 throw new \RuntimeException(
                     "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'."
                 );
-                break;
         }
 
         return $ret;
@@ -243,7 +242,6 @@ class Bool
                 throw new \RuntimeException(
                     "The \$input parameter did not match any of the valid strings that can be parsed."
                 );
-                break;
         }
 
         return $ret;
