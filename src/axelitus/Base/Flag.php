@@ -197,14 +197,14 @@ class Flag
      */
     public static function buildMask($flag1, $_ = null)
     {
-        if (!Flag::is($flag1)) {
+        if (!static::is($flag1)) {
             throw new \InvalidArgumentException("The first parameter must be a flag.");
         }
 
         $mask = $flag1;
         $args = array_slice(func_get_args(), 1);
         foreach ($args as $flag) {
-            if (!Flag::is($flag)) {
+            if (!static::is($flag)) {
                 throw new \InvalidArgumentException("All parameters must be flags.");
             }
 
