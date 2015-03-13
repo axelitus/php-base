@@ -343,7 +343,7 @@ class Str
      * @param bool   $caseInsensitive Whether the comparison is case-sensitive
      * @param string $encoding        The encoding of the input string
      *
-     * @return int|bool Returns the numeric position of the first occurrence of the searched string in the input string.
+     * @return int|false Returns the numeric position of the first occurrence of the searched string in the input string.
      *                  If it is not found, it returns false.
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
@@ -407,7 +407,7 @@ class Str
      * @see     https://github.com/faceleg/php-mb_str_replace
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    private static function mbStrReplaceCaller(
+    protected static function mbStrReplaceCaller(
         $search,
         $replace,
         $subject,
@@ -457,7 +457,7 @@ class Str
      * @see      https://github.com/faceleg/php-mb_str_replace
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    private static function mbStrReplaceInternal(
+    protected static function mbStrReplaceInternal(
         $search,
         $replace,
         $subject,
@@ -534,25 +534,27 @@ class Str
      *
      * @return string Returns the stripped string to reassemble.
      */
-    private static function truncateHtml($input, &$limit, &$offset, &$tags)
+    protected static function truncateHtml($input, &$limit, &$offset, &$tags)
     {
         static::truncateSpecialChars($input, $limit);
 
         // Handle all the html tags.
         preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            if ($match[0][1] - $offset >= $limit) {
-                break;
-            }
+        if(is_array($matches) || $matches instanceof \Traversable) {
+            foreach ($matches as $match) {
+                if ($match[0][1] - $offset >= $limit) {
+                    break;
+                }
 
-            $tag = static::sub(strtok($match[0][0], " \t\n\r\0\x0B>"), 1);
-            if ($tag[0] != '/') {
-                $tags[] = $tag;
-            } elseif (end($tags) == static::sub($tag, 1)) {
-                array_pop($tags);
-            }
+                $tag = static::sub(strtok($match[0][0], " \t\n\r\0\x0B>"), 1);
+                if ($tag[0] != '/') {
+                    $tags[] = $tag;
+                } elseif (end($tags) == static::sub($tag, 1)) {
+                    array_pop($tags);
+                }
 
-            $offset += $match[1][1] - $match[0][1];
+                $offset += $match[1][1] - $match[0][1];
+            }
         }
 
         return $input;
@@ -564,7 +566,7 @@ class Str
      * @param string $input The input string.
      * @param int    $limit The number of characters to truncate to.
      */
-    private static function truncateSpecialChars($input, &$limit)
+    protected static function truncateSpecialChars($input, &$limit)
     {
         // Handle special characters.
         preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
@@ -814,7 +816,7 @@ class Str
      *
      * @return string The transformed input string (or the input string as is).
      */
-    private static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING)
+    protected static function separatedTransform($input, $transform, $encoding = self::DEFAULT_ENCODING)
     {
         // Do lcfirst, ucfirst and ucwords transformations
         if (static::isOneOf($transform, ['lower', 'upper', 'lcfirst', 'ucfirst', 'ucwords'])) {
