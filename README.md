@@ -4,7 +4,7 @@ A framework agnostic PHP package that contains _extensions_ and helpers for the 
 
 ## Package Information
 
-* **Package:** axelitus/base [![Dependencies Status](http://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=9dd3b992bc2e6984a108deb40dcb85c9af9451ec)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.svg)](https://packagist.org/packages/axelitus/base) [![License](https://poser.pugx.org/axelitus/base/license.svg)](https://packagist.org/packages/axelitus/base)
+* **Package:** axelitus/base [![Dependencies Status](http://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=9dd3b992bc2e6984a108deb40dcb85c9af9451ec)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.svg)](https://packagist.org/packages/axelitus/base) [![License](https://poser.pugx.org/axelitus/base/license.svg)](https://packagist.org/packages/axelitus/base) [![Project Status](https://stillmaintained.com/axelitus/php-base.png)](https://stillmaintained.com/axelitus/php-base)
 * **Root Namespace:** axelitus\Base
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
 * **Repository**: [axelitus/php-base](https://github.com/axelitus/php-base "axelitus/php-base at GitHub") at GitHub
