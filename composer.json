@@ -20,7 +20,7 @@
         "wiki": "https://github.com/axelitus/php-base/wiki"
     },
     "require": {
-        "php": ">=5.4.*"
+        "php": ">=5.4.9"
     },
     "require-dev": {
         "phing/phing": "2.10.*",
