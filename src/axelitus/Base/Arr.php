@@ -142,8 +142,8 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
      */
     public function offsetExists($offset)
     {
-        $ret = $this->has($offset);
-        return (is_array($ret)? (bool)Bool::arrayAnd($ret) : $ret);
+        $return = $this->has($offset);
+        return (is_array($return)? (bool)Bool::arrayAnd($return) : $return);
     }
 
     /**
