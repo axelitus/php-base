@@ -12,8 +12,6 @@
 
 namespace axelitus\Base\Tests;
 
-use axelitus\Base\Comparer;
-
 /**
  * Class TestsComparer
  *
