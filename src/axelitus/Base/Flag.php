@@ -198,14 +198,14 @@ class Flag
     public static function buildMask($flag1, $_ = null)
     {
         if (!Flag::is($flag1)) {
-            throw new \InvalidArgumentException(""); // TODO
+            throw new \InvalidArgumentException("The first parameter must be a flag.");
         }
 
         $mask = $flag1;
         $args = array_slice(func_get_args(), 1);
         foreach ($args as $flag) {
             if (!Flag::is($flag)) {
-                throw new \InvalidArgumentException(""); // TODO
+                throw new \InvalidArgumentException("All parameters must be flags.");
             }
 
             $mask = $mask | $flag;
@@ -226,7 +226,7 @@ class Flag
     public static function mask($value, $mask)
     {
         if (!Int::is($value) || !Int::is($mask)) {
-            throw new \InvalidArgumentException(""); // TODO
+            throw new \InvalidArgumentException("Both parameters must be integers.");
         }
 
         return ($value & $mask);
