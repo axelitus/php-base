@@ -30,6 +30,9 @@ class StrComparer extends Comparer
     /**
      * Constructor
      *
+     * @param bool $caseInsensitive If true sets the comparer to do a case insensitive comparison.
+     * @throws \InvalidArgumentException
+     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function __construct($caseInsensitive = false)

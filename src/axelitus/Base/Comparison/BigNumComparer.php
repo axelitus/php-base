@@ -29,6 +29,10 @@ class BigNumComparer extends Comparer
 {
     /**
      * Constructor
+     *
+     * @param null|int $scale This optional parameter is used to set the number of digits after the decimal place in the result.
+     *                        If no scale is given the global default scale will be used.
+     * @throws \InvalidArgumentException
      */
     public function __construct($scale = null)
     {
