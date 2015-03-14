@@ -12,10 +12,10 @@
 
 namespace axelitus\Base\Comparison;
 
-use axelitus\Base\Comparer;
-use \Closure;
-use axelitus\Base\BigNum;
 use axelitus\Base\Arr;
+use axelitus\Base\BigNum;
+use axelitus\Base\Comparer;
+use Closure;
 
 /**
  * Class BigNumComparer

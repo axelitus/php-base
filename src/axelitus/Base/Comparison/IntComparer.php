@@ -13,8 +13,8 @@
 namespace axelitus\Base\Comparison;
 
 use axelitus\Base\Comparer;
-use \Closure;
 use axelitus\Base\Int;
+use Closure;
 
 /**
  * Class IntComparer

@@ -143,7 +143,8 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     public function offsetExists($offset)
     {
         $return = $this->has($offset);
-        return (is_array($return)? (bool)Bool::arrayAnd($return) : $return);
+
+        return (is_array($return) ? (bool)Bool::arrayAnd($return) : $return);
     }
 
     /**
@@ -225,7 +226,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         if (is_array($key)) {
             $return = -1;
             foreach ($key as $k) {
-                if($this->has($k)) {
+                if ($this->has($k)) {
                     $return = max(0, $return);
                     $return += $this->count($k);
                 }

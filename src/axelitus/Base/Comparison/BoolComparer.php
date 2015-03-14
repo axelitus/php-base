@@ -12,9 +12,9 @@
 
 namespace axelitus\Base\Comparison;
 
-use axelitus\Base\Comparer;
-use \Closure;
 use axelitus\Base\Bool;
+use axelitus\Base\Comparer;
+use Closure;
 
 /**
  * Class BoolComparer

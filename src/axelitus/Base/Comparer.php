@@ -12,7 +12,7 @@
 
 namespace axelitus\Base;
 
-use \Closure;
+use Closure;
 
 /**
  * Class Comparer

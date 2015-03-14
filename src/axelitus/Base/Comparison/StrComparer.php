@@ -12,10 +12,10 @@
 
 namespace axelitus\Base\Comparison;
 
-use axelitus\Base\Comparer;
-use \Closure;
-use axelitus\Base\Str;
 use axelitus\Base\Arr;
+use axelitus\Base\Comparer;
+use axelitus\Base\Str;
+use Closure;
 
 /**
  * Class IntComparer

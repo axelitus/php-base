@@ -107,6 +107,7 @@ abstract class PropertyAccessible
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 $this->{$method}($value);
+
                 return;
             }
 

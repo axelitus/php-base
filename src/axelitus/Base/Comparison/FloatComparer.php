@@ -13,8 +13,8 @@
 namespace axelitus\Base\Comparison;
 
 use axelitus\Base\Comparer;
-use \Closure;
 use axelitus\Base\Float;
+use Closure;
 
 /**
  * Class FloatComparer

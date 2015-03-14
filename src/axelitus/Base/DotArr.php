@@ -116,6 +116,7 @@ class DotArr
     {
         if (is_array($key)) {
             static::setMultiple($arr, $key);
+
             return;
         }
 

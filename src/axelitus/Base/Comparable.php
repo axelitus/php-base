@@ -24,7 +24,7 @@ interface Comparable
     /**
      * Compares the instance with another object/value.
      *
-     * @param mixed    $item     The item to compare to.
+     * @param mixed $item The item to compare to.
      *
      * @return mixed
      */

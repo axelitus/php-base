@@ -343,8 +343,8 @@ class Str
      * @param bool   $caseInsensitive Whether the comparison is case-sensitive
      * @param string $encoding        The encoding of the input string
      *
-     * @return int|false Returns the numeric position of the first occurrence of the searched string in the input string.
-     *                  If it is not found, it returns false.
+     * @return int|false Returns the numeric position of the first occurrence of the searched string in the input
+     *                   string. If it is not found, it returns false.
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function pos($input, $search, $caseInsensitive = false, $encoding = self::DEFAULT_ENCODING)
@@ -540,7 +540,7 @@ class Str
 
         // Handle all the html tags.
         preg_match_all('/<[^>]+>([^<]*)/', $input, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-        if(is_array($matches) || $matches instanceof \Traversable) {
+        if (is_array($matches) || $matches instanceof \Traversable) {
             foreach ($matches as $match) {
                 if ($match[0][1] - $offset >= $limit) {
                     break;
@@ -570,7 +570,7 @@ class Str
     {
         // Handle special characters.
         preg_match_all('/&[a-z]+;/i', strip_tags($input), $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-        if(is_array($matches) || $matches instanceof \Traversable) {
+        if (is_array($matches) || $matches instanceof \Traversable) {
             foreach ($matches as $match) {
                 if ($match[0][1] >= $limit) {
                     break;

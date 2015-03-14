@@ -97,6 +97,7 @@ class Flag
             foreach ($flag as $item) {
                 $ret = static::setOn($ret, $item);
             }
+
             return $ret;
         } elseif (!static::is($flag)) {
             throw new \InvalidArgumentException("The \$flag parameter must be of type int and a power of 2.");
@@ -125,6 +126,7 @@ class Flag
             foreach ($flag as $item) {
                 $ret = static::setOff($ret, $item);
             }
+
             return $ret;
         } elseif (!static::is($flag)) {
             throw new \InvalidArgumentException("The \$flag parameter must be of type int and a power of 2.");

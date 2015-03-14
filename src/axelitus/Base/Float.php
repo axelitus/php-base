@@ -211,6 +211,7 @@ class Float
 
         if ($min > $max) {
             trigger_error("The \$min value cannot be greater than the \$max value.", E_USER_WARNING);
+
             return false;
         }
 
@@ -221,7 +222,7 @@ class Float
         $rand = $min + (((mt_rand() - 1) / mt_getrandmax()) * abs($max - $min));
 
         // Round if needed
-        $rand = (!is_null($round) && Int::is($round) && $round > 0)? round($rand, $round) : $rand;
+        $rand = (!is_null($round) && Int::is($round) && $round > 0) ? round($rand, $round) : $rand;
 
         // unseed (random reseed) random generator
         mt_srand();
