@@ -730,6 +730,13 @@ class Str
         return $studly;
     }
 
+    /**
+     * Builds the studly patter with the given separators.
+     *
+     * @param array $separators The array of separators to use.
+     *
+     * @return string Returns the built studly pattern.
+     */
     protected static function studlyBuildPattern(array $separators)
     {
         $pattern = '';

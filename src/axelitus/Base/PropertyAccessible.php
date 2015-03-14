@@ -33,6 +33,9 @@ namespace axelitus\Base;
  */
 abstract class PropertyAccessible
 {
+    /**
+     * @var \ReflectionClass The internal reflection class object to use to extract the properties.
+     */
     private $refClass = null;
 
     /**
