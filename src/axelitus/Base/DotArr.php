@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -93,7 +93,7 @@ class DotArr
      *
      * @return array The values of the found items or the default values if not found.
      */
-    private static function getMultiple(array $arr, array $keys, $default = null)
+    protected static function getMultiple(array $arr, array $keys, $default = null)
     {
         $return = [];
         foreach ($keys as $key) {
@@ -116,6 +116,7 @@ class DotArr
     {
         if (is_array($key)) {
             static::setMultiple($arr, $key);
+
             return;
         }
 
@@ -144,7 +145,7 @@ class DotArr
      * @param array $arr     The array to set the values to.
      * @param array $keyvals The key=>value associative array to set the item values.
      */
-    private static function setMultiple(array &$arr, array $keyvals)
+    protected static function setMultiple(array &$arr, array $keyvals)
     {
         foreach ($keyvals as $key => $value) {
             static::set($arr, $key, $value);
@@ -203,7 +204,7 @@ class DotArr
      *
      * @return array Returns an array of results.
      */
-    private static function deleteMultiple(array &$arr, array $keys)
+    protected static function deleteMultiple(array &$arr, array $keys)
     {
         $return = [];
         foreach ($keys as $key) {
@@ -259,7 +260,7 @@ class DotArr
      *
      * @return array The array of results.
      */
-    private static function keyExistsMultiple(array $arr, array $keys)
+    protected static function keyExistsMultiple(array $arr, array $keys)
     {
         $return = [];
         foreach ($keys as $key) {
@@ -313,7 +314,7 @@ class DotArr
      *
      * @return array The array of ful and partial matches of the given keys.
      */
-    private static function keyMatchesMultiple(array $arr, array $keys)
+    protected static function keyMatchesMultiple(array $arr, array $keys)
     {
         $return = [];
         foreach ($keys as $key) {

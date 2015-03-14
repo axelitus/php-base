@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -65,7 +65,7 @@ class BigFloat
         }
 
         if (($decimal = Str::pos($value, '.')) !== false) {
-            $value = Str::sub($value, 0, $decimal);
+            $value = Str::sub($value, 0, (int)$decimal);
         }
 
         return $value;

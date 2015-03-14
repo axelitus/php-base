@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base\Tests;
@@ -166,7 +166,7 @@ class TestsArr extends TestCase
     public function testCountable()
     {
         $this->assertEquals(0, count($this->arr));
-        $this->assertEquals(false, $this->arr->count('first'));
+        $this->assertEquals(-1, $this->arr->count('first'));
 
         static::getNonPublicProperty($this->arr, 'data')->setValue(
             $this->arr,
@@ -180,9 +180,8 @@ class TestsArr extends TestCase
         $this->assertEquals(1, $this->arr->count('second.lvl'));
         $this->assertEquals(5, $this->arr->count('second.lvl.opt'));
 
-        $this->assertEquals(
-            ['first' => 1, 'second.lvl.opt' => 5, 'third' => 1, 'fourth' => false],
-            $this->arr->count(['first', 'second.lvl.opt', 'third', 'fourth'])
+        $this->assertEquals(7,
+            $this->arr->count(['first', 'second.lvl.opt', 'third', 'non-existent'])
         );
     }
 

@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -201,7 +201,6 @@ class Bool
                 throw new \RuntimeException(
                     "The \$input string cannot be parsed because it does not match 'true', 'false', '1' or '0'."
                 );
-                break;
         }
 
         return $ret;
@@ -243,7 +242,6 @@ class Bool
                 throw new \RuntimeException(
                     "The \$input parameter did not match any of the valid strings that can be parsed."
                 );
-                break;
         }
 
         return $ret;

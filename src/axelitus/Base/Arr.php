@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -142,7 +142,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
      */
     public function offsetExists($offset)
     {
-        return $this->has($offset);
+        $return = $this->has($offset);
+
+        return (is_array($return) ? (bool)Bool::arrayAnd($return) : $return);
     }
 
     /**
@@ -208,10 +210,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
      * @param null|int|string|array $key The key to get the count from.
      *
      * @throws \InvalidArgumentException
-     * @return int|array The custom count as an integer.
+     * @return int The custom count as an integer.
      * </p>
      * <p>
      * The return value is cast to an integer.
+     * If an array is given the count will be the total count of the found key elements.
+     * If no key is found -1 will be returned.
      */
     public function count($key = null)
     {
@@ -220,9 +224,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         }
 
         if (is_array($key)) {
-            $return = [];
+            $return = -1;
             foreach ($key as $k) {
-                $return[$k] = $this->count($k);
+                if ($this->has($k)) {
+                    $return = max(0, $return);
+                    $return += $this->count($k);
+                }
             }
 
             return $return;
@@ -233,7 +240,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         }
 
         if (!$this->has($key)) {
-            return false;
+            return -1;
         }
 
         return count($this->get($key));

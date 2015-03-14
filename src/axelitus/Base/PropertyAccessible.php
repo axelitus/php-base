@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -33,6 +33,9 @@ namespace axelitus\Base;
  */
 abstract class PropertyAccessible
 {
+    /**
+     * @var \ReflectionClass The internal reflection class object to use to extract the properties.
+     */
     private $refClass = null;
 
     /**
@@ -107,6 +110,7 @@ abstract class PropertyAccessible
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 $this->{$method}($value);
+
                 return;
             }
 

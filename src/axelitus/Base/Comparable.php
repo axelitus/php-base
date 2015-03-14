@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -24,7 +24,7 @@ interface Comparable
     /**
      * Compares the instance with another object/value.
      *
-     * @param mixed    $item     The item to compare to.
+     * @param mixed $item The item to compare to.
      *
      * @return mixed
      */

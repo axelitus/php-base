@@ -7,15 +7,15 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base\Comparison;
 
-use axelitus\Base\Comparer;
-use \Closure;
-use axelitus\Base\BigInt;
 use axelitus\Base\Arr;
+use axelitus\Base\BigInt;
+use axelitus\Base\Comparer;
+use Closure;
 
 /**
  * Class BigIntComparer
@@ -29,6 +29,10 @@ class BigIntComparer extends Comparer
 {
     /**
      * Constructor
+     *
+     * @param null|int $scale This optional parameter is used to set the number of digits after the decimal place in the result.
+     *                        If no scale is given the global default scale will be used.
+     * @throws \InvalidArgumentException
      */
     public function __construct($scale = null)
     {

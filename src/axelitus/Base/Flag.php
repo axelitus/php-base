@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -97,6 +97,7 @@ class Flag
             foreach ($flag as $item) {
                 $ret = static::setOn($ret, $item);
             }
+
             return $ret;
         } elseif (!static::is($flag)) {
             throw new \InvalidArgumentException("The \$flag parameter must be of type int and a power of 2.");
@@ -125,6 +126,7 @@ class Flag
             foreach ($flag as $item) {
                 $ret = static::setOff($ret, $item);
             }
+
             return $ret;
         } elseif (!static::is($flag)) {
             throw new \InvalidArgumentException("The \$flag parameter must be of type int and a power of 2.");
@@ -197,15 +199,15 @@ class Flag
      */
     public static function buildMask($flag1, $_ = null)
     {
-        if (!Flag::is($flag1)) {
-            throw new \InvalidArgumentException(""); // TODO
+        if (!static::is($flag1)) {
+            throw new \InvalidArgumentException("The first parameter must be a flag.");
         }
 
         $mask = $flag1;
         $args = array_slice(func_get_args(), 1);
         foreach ($args as $flag) {
-            if (!Flag::is($flag)) {
-                throw new \InvalidArgumentException(""); // TODO
+            if (!static::is($flag)) {
+                throw new \InvalidArgumentException("All parameters must be flags.");
             }
 
             $mask = $mask | $flag;
@@ -226,7 +228,7 @@ class Flag
     public static function mask($value, $mask)
     {
         if (!Int::is($value) || !Int::is($mask)) {
-            throw new \InvalidArgumentException(""); // TODO
+            throw new \InvalidArgumentException("Both parameters must be integers.");
         }
 
         return ($value & $mask);

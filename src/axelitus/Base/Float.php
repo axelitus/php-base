@@ -7,7 +7,7 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base;
@@ -215,16 +215,14 @@ class Float
             return false;
         }
 
-        if (!is_null($seed) && Int::is($seed)) {
-            mt_srand($seed);
-        }
+        // If a seed was given use that seed
+        !is_null($seed) && Int::is($seed) && mt_srand($seed);
 
         // Ensure that max is not inclusive
         $rand = $min + (((mt_rand() - 1) / mt_getrandmax()) * abs($max - $min));
 
-        if (!is_null($round) && Int::is($round) && $round > 0) {
-            $rand = round($rand, $round);
-        }
+        // Round if needed
+        $rand = (!is_null($round) && Int::is($round) && $round > 0) ? round($rand, $round) : $rand;
 
         // unseed (random reseed) random generator
         mt_srand();

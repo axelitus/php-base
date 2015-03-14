@@ -7,14 +7,14 @@
  * @link        http://axelitus.mx/projects/axelitus/base
  * @license     MIT License ({@link LICENSE.md})
  * @package     axelitus\Base
- * @version     0.8.1
+ * @version     0.8.2
  */
 
 namespace axelitus\Base\Comparison;
 
-use axelitus\Base\Comparer;
-use \Closure;
 use axelitus\Base\Bool;
+use axelitus\Base\Comparer;
+use Closure;
 
 /**
  * Class BoolComparer
