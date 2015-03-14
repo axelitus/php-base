@@ -230,6 +230,24 @@ class TestsFlag extends TestCase
         );
     }
 
+    public function testBuildMaskEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The first parameter must be a flag."
+        );
+        Flag::buildMask('string');
+    }
+
+    public function testBuildMaskEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "All parameters must be flags."
+        );
+        Flag::buildMask(2, 'string');
+    }
+
     public function testMask()
     {
         $this->assertEquals(0b0, Flag::mask(0b1, 0b0));
@@ -254,6 +272,24 @@ class TestsFlag extends TestCase
         $this->assertEquals(0b01, Flag::mask(0b11, 0b01));
         $this->assertEquals(0b10, Flag::mask(0b11, 0b10));
         $this->assertEquals(0b11, Flag::mask(0b11, 0b11));
+    }
+
+    public function testMaskEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Both parameters must be integers."
+        );
+        Flag::mask('string', 4);
+    }
+
+    public function testMaskEx02()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "Both parameters must be integers."
+        );
+        Flag::mask(4, 'string');
     }
 
     public function testMatchMask()
