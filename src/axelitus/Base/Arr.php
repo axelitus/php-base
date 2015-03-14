@@ -213,6 +213,8 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
      * </p>
      * <p>
      * The return value is cast to an integer.
+     * If an array is given the count will be the total count of the found key elements.
+     * If no key is found -1 will be returned.
      */
     public function count($key = null)
     {
@@ -221,10 +223,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         }
 
         if (is_array($key)) {
-            // FIXME: having $return as an array is incompatible with the declaration of the Countable::count interface function which expects an integer to be returned
-            $return = [];
+            $return = -1;
             foreach ($key as $k) {
-                $return[$k] = $this->count($k);
+                if($this->has($k)) {
+                    $return = max(0, $return);
+                    $return += $this->count($k);
+                }
             }
 
             return $return;

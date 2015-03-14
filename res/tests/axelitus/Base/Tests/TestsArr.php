@@ -180,9 +180,8 @@ class TestsArr extends TestCase
         $this->assertEquals(1, $this->arr->count('second.lvl'));
         $this->assertEquals(5, $this->arr->count('second.lvl.opt'));
 
-        $this->assertEquals(
-            ['first' => 1, 'second.lvl.opt' => 5, 'third' => 1, 'fourth' => -1],
-            $this->arr->count(['first', 'second.lvl.opt', 'third', 'fourth'])
+        $this->assertEquals(7,
+            $this->arr->count(['first', 'second.lvl.opt', 'third', 'non-existent'])
         );
     }
 
