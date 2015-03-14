@@ -211,20 +211,17 @@ class Float
 
         if ($min > $max) {
             trigger_error("The \$min value cannot be greater than the \$max value.", E_USER_WARNING);
-
             return false;
         }
 
-        if (!is_null($seed) && Int::is($seed)) {
-            mt_srand($seed);
-        }
+        // If a seed was given use that seed
+        !is_null($seed) && Int::is($seed) && mt_srand($seed);
 
         // Ensure that max is not inclusive
         $rand = $min + (((mt_rand() - 1) / mt_getrandmax()) * abs($max - $min));
 
-        if (!is_null($round) && Int::is($round) && $round > 0) {
-            $rand = round($rand, $round);
-        }
+        // Round if needed
+        $rand = (!is_null($round) && Int::is($round) && $round > 0)? round($rand, $round) : $rand;
 
         // unseed (random reseed) random generator
         mt_srand();
