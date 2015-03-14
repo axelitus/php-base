@@ -65,7 +65,7 @@ class BigFloat
         }
 
         if (($decimal = Str::pos($value, '.')) !== false) {
-            $value = Str::sub($value, 0, $decimal);
+            $value = Str::sub($value, 0, (int)$decimal);
         }
 
         return $value;
