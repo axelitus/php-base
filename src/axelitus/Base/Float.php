@@ -54,6 +54,40 @@ class Float
         return (static::is($value) || (is_numeric($value) && !Int::extIs($value)));
     }
 
+    /**
+     * Tests if the given value is even.
+     *
+     * @param float $value The value to test.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if the given value is even, false otherwise.
+     */
+    public static function isEven($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type float.");
+        }
+
+        return (static::mod($value, 2.0) == 0.0);
+    }
+
+    /**
+     * Tests if the given value is odd.
+     *
+     * @param float $value The value to test.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if the given value is odd, false otherwise.
+     */
+    public static function isOdd($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type float.");
+        }
+
+        return (abs(static::mod($value, 2.0)) == 1.0);
+    }
+
     // endregion
 
     // region: Conversion
@@ -233,6 +267,22 @@ class Float
     // endregion
 
     // region: Basic numeric operations
+
+    /**
+     * Gets the absolute value of the given float.
+     *
+     * @param float $float The number to get the absolute value of.
+     *
+     * @return float Returns the absolute value of the given float.
+     */
+    public static function abs($float)
+    {
+        if (!static::is($float)) {
+            throw new \InvalidArgumentException("The \$float parameter must be of type float.");
+        }
+
+        return (float)abs($float);
+    }
 
     /**
      * Adds a number to another number.

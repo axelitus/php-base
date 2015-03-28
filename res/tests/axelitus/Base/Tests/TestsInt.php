@@ -67,6 +67,42 @@ class TestsInt extends TestCase
         $this->assertFalse(Int::extIs([]));
     }
 
+    public function testIsEven()
+    {
+        $this->assertTrue(Int::isEven(-8));
+        $this->assertTrue(Int::isEven(0));
+        $this->assertTrue(Int::isEven(6));
+        $this->assertFalse(Int::isEven(-7));
+        $this->assertFalse(Int::isEven(5));
+    }
+
+    public function testIsEvenEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type int."
+        );
+        Int::isEven(2.3);
+    }
+
+    public function testIsOdd()
+    {
+        $this->assertTrue(Int::isOdd(-7));
+        $this->assertTrue(Int::isOdd(5));
+        $this->assertFalse(Int::isOdd(-8));
+        $this->assertFalse(Int::isOdd(0));
+        $this->assertFalse(Int::isOdd(6));
+    }
+
+    public function testIsOddEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type int."
+        );
+        Int::isOdd(2.3);
+    }
+
     // endregion
 
     // region: Conversion
@@ -261,6 +297,21 @@ class TestsInt extends TestCase
     // endregion
 
     // region: Basic numeric operations
+
+    public function testAbs()
+    {
+        $this->assertEquals(5, Int::abs(5));
+        $this->assertEquals(5, Int::abs(-5));
+    }
+
+    public function testAbsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type int."
+        );
+        Int::abs(2.3);
+    }
 
     public function testAdd()
     {

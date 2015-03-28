@@ -58,6 +58,48 @@ class TestsFloat extends TestCase
         $this->assertFalse(Float::extIs([]));
     }
 
+    public function testIsEven()
+    {
+        $this->assertTrue(Float::isEven(-8.0));
+        $this->assertTrue(Float::isEven(0.0));
+        $this->assertTrue(Float::isEven(6.0));
+        $this->assertFalse(Float::isEven(-7.0));
+        $this->assertFalse(Float::isEven(5.0));
+
+        $this->assertFalse(Float::isEven(2.3));
+        $this->assertFalse(Float::isEven(-2.3));
+    }
+
+    public function testIsEvenEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type float."
+        );
+        Float::isEven(false);
+    }
+
+    public function testIsOdd()
+    {
+        $this->assertTrue(Float::isOdd(-7.0));
+        $this->assertTrue(Float::isOdd(5.0));
+        $this->assertFalse(Float::isOdd(-8.0));
+        $this->assertFalse(Float::isOdd(0.0));
+        $this->assertFalse(Float::isOdd(6.0));
+
+        $this->assertFalse(Float::isEven(3.2));
+        $this->assertFalse(Float::isEven(-3.2));
+    }
+
+    public function testIsOddEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type float."
+        );
+        Float::isOdd(false);
+    }
+
     // endregion
 
     // region: Conversion
@@ -266,6 +308,21 @@ class TestsFloat extends TestCase
     // endregion
 
     // region: Basic numeric operations
+
+    public function testAbs()
+    {
+        $this->assertEquals(5.5, Float::abs(5.5));
+        $this->assertEquals(5.5, Float::abs(-5.5));
+    }
+
+    public function testAbsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float parameter must be of type float."
+        );
+        Float::abs(false);
+    }
 
     public function testAdd()
     {

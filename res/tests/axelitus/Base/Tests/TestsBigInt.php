@@ -41,6 +41,54 @@ class TestsBigInt extends TestCase
         $this->assertFalse(BigInt::is([]));
     }
 
+    public function testIsEven()
+    {
+        $this->assertTrue(BigInt::isEven(-8));
+        $this->assertTrue(BigInt::isEven(0));
+        $this->assertTrue(BigInt::isEven(6));
+        $this->assertFalse(BigInt::isEven(-7));
+        $this->assertFalse(BigInt::isEven(5));
+
+        $this->assertTrue(BigInt::isEven('-8'));
+        $this->assertTrue(BigInt::isEven('0'));
+        $this->assertTrue(BigInt::isEven('6'));
+        $this->assertFalse(BigInt::isEven('-7'));
+        $this->assertFalse(BigInt::isEven('5'));
+    }
+
+    public function testIsEvenEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type int (or string representing a big int)."
+        );
+        BigInt::isEven(2.3);
+    }
+
+    public function testIsOdd()
+    {
+        $this->assertTrue(BigInt::isOdd(-7));
+        $this->assertTrue(BigInt::isOdd(5));
+        $this->assertFalse(BigInt::isOdd(-8));
+        $this->assertFalse(BigInt::isOdd(0));
+        $this->assertFalse(BigInt::isOdd(6));
+
+        $this->assertTrue(BigInt::isOdd('-7'));
+        $this->assertTrue(BigInt::isOdd('5'));
+        $this->assertFalse(BigInt::isOdd('-8'));
+        $this->assertFalse(BigInt::isOdd('0'));
+        $this->assertFalse(BigInt::isOdd('6'));
+    }
+
+    public function testIsOddEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type int (or string representing a big int)."
+        );
+        BigInt::isOdd(2.3);
+    }
+
     // endregion
 
     // region: Comparing
@@ -235,6 +283,23 @@ class TestsBigInt extends TestCase
     // endregion
 
     // region: Basic numeric operations
+
+    public function testAbs()
+    {
+        $this->assertEquals(5, BigInt::abs(5));
+        $this->assertEquals(5, BigInt::abs(-5));
+        $this->assertEquals('5', BigInt::abs('5'));
+        $this->assertEquals('5', BigInt::abs('-5'));
+    }
+
+    public function testAbsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$int parameter must be of type int (or string representing a big int)."
+        );
+        BigInt::abs(2.3);
+    }
 
     public function testAdd()
     {

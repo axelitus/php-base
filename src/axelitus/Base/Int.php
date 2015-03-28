@@ -61,6 +61,40 @@ class Int
         return static::is($value) || (is_string($value) && (strval(intval($value)) === strval($value)));
     }
 
+    /**
+     * Tests if the given value is even.
+     *
+     * @param int $value The value to test.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if the given value is even, false otherwise.
+     */
+    public static function isEven($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type int.");
+        }
+
+        return (static::mod($value, 2) == 0);
+    }
+
+    /**
+     * Tests if the given value is odd.
+     *
+     * @param int $value The value to test.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if the given value is odd, false otherwise.
+     */
+    public static function isOdd($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type int.");
+        }
+
+        return (abs(static::mod($value, 2)) == 1);
+    }
+
     // endregion
 
     // region: Conversion
@@ -234,6 +268,22 @@ class Int
     // endregion
 
     // region: Basic numeric operations
+
+    /**
+     * Gets the absolute value of the given integer.
+     *
+     * @param int $int The number to get the absolute value of.
+     *
+     * @return int Returns the absolute value of the given integer.
+     */
+    public static function abs($int)
+    {
+        if (!static::is($int)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type int.");
+        }
+
+        return (int)abs($int);
+    }
 
     /**
      * Adds a number to another number.

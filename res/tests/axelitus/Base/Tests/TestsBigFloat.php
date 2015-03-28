@@ -47,6 +47,27 @@ class TestsBigFloat extends TestCase
 
     // region: Conversion
 
+    public function testMake()
+    {
+        $float = BigFloat::make(5);
+        $this->assertTrue(is_float($float));
+        $this->assertEquals(5.0, $float);
+
+        $strFloat = BigFloat::make('5');
+        $this->assertTrue(is_string($strFloat));
+        $this->assertTrue(is_numeric($strFloat));
+        $this->assertEquals('5.0', $strFloat);
+    }
+
+    public function testMakeEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be a number (or a string representing a number)."
+        );
+        BigFloat::make(false);
+    }
+
     public function testInt()
     {
         $this->assertEquals(5, BigFloat::int(5.53623544));
@@ -60,6 +81,70 @@ class TestsBigFloat extends TestCase
             "The \$value parameter must be of type float (or string representing a big float)."
         );
         BigFloat::int(false);
+    }
+
+    public function testIsEven()
+    {
+        $this->assertTrue(BigFloat::isEven(-8.0));
+        $this->assertTrue(BigFloat::isEven(0.0));
+        $this->assertTrue(BigFloat::isEven(6.0));
+        $this->assertFalse(BigFloat::isEven(-7.0));
+        $this->assertFalse(BigFloat::isEven(5.0));
+
+        $this->assertFalse(BigFloat::isEven(2.3));
+        $this->assertFalse(BigFloat::isEven(-2.3));
+
+        $this->assertTrue(BigFloat::isEven('-8.0'));
+        $this->assertTrue(BigFloat::isEven('0.0'));
+        $this->assertTrue(BigFloat::isEven('6.0'));
+        $this->assertFalse(BigFloat::isEven('-7.0'));
+        $this->assertFalse(BigFloat::isEven('5.0'));
+
+        $this->assertTrue(BigFloat::isEven('2.3'));
+        $this->assertFalse(BigFloat::isEven('2.3', 1));
+        $this->assertTrue(BigFloat::isEven('-2.3'));
+        $this->assertFalse(BigFloat::isEven('-2.3', 1));
+    }
+
+    public function testIsEvenEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type float (or string representing a big float)."
+        );
+        BigFloat::isEven(false);
+    }
+
+    public function testIsOdd()
+    {
+        $this->assertTrue(BigFloat::isOdd(-7.0));
+        $this->assertTrue(BigFloat::isOdd(5.0));
+        $this->assertFalse(BigFloat::isOdd(-8.0));
+        $this->assertFalse(BigFloat::isOdd(0.0));
+        $this->assertFalse(BigFloat::isOdd(6.0));
+
+        $this->assertFalse(BigFloat::isOdd(3.2));
+        $this->assertFalse(BigFloat::isOdd(-3.2));
+
+        $this->assertTrue(BigFloat::isOdd('-7.0'));
+        $this->assertTrue(BigFloat::isOdd('5.0'));
+        $this->assertFalse(BigFloat::isOdd('-8.0'));
+        $this->assertFalse(BigFloat::isOdd('0.0'));
+        $this->assertFalse(BigFloat::isOdd('6.0'));
+
+        $this->assertTrue(BigFloat::isOdd('3.2'));
+        $this->assertFalse(BigFloat::isOdd('3.2', 1));
+        $this->assertTrue(BigFloat::isOdd('-3.2'));
+        $this->assertFalse(BigFloat::isOdd('-3.2', 1));
+    }
+
+    public function testIsOddEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type float (or string representing a big float)."
+        );
+        BigFloat::isOdd(false);
     }
 
     // endregion
@@ -253,6 +338,23 @@ class TestsBigFloat extends TestCase
     // endregion
 
     // region: Basic numeric operations
+
+    public function testAbs()
+    {
+        $this->assertEquals(5.5, BigFloat::abs(5.5));
+        $this->assertEquals(5.5, BigFloat::abs(-5.5));
+        $this->assertEquals('5.5', BigFloat::abs('5.5'));
+        $this->assertEquals('5.5', BigFloat::abs('-5.5'));
+    }
+
+    public function testAbsEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$float parameter must be of type float (or string representing a big float)."
+        );
+        BigFloat::abs(false);
+    }
 
     public function testAdd()
     {

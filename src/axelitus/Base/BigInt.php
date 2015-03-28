@@ -40,6 +40,44 @@ class BigInt
         return (is_int($value) || (is_numeric($value) && !is_float($value) && !Str::contains($value, '.')));
     }
 
+    /**
+     * Tests if the given value is even.
+     *
+     * @param int|string $value The value to test.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if the given value is even, false otherwise.
+     */
+    public static function isEven($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException(
+                "The \$value parameter must be of type int (or string representing a big int)."
+            );
+        }
+
+        return static::equals(static::mod($value, 2), 0);
+    }
+
+    /**
+     * Tests if the given value is odd.
+     *
+     * @param int|string $value The value to test.
+     *
+     * @throws \InvalidArgumentException
+     * @return bool Returns true if the given value is odd, false otherwise.
+     */
+    public static function isOdd($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException(
+                "The \$value parameter must be of type int (or string representing a big int)."
+            );
+        }
+
+        return static::equals(static::abs(static::mod($value, 2)), 1);
+    }
+
     // endregion
 
     // region: Comparing
@@ -162,6 +200,28 @@ class BigInt
     // endregion
 
     // region: Basic numeric operations
+
+    /**
+     * Gets the absolute value of the given integer.
+     *
+     * @param int|string $int The number to get the absolute value of.
+     *
+     * @return int|string Returns the absolute value of the given integer.
+     */
+    public static function abs($int)
+    {
+        if (!static::is($int)) {
+            throw new \InvalidArgumentException(
+                "The \$int parameter must be of type int (or string representing a big int)."
+            );
+        }
+
+        if (Int::is($int)) {
+            return Int::abs($int);
+        } else {
+            return Str::replace($int, '-', '');
+        }
+    }
 
     /**
      * Adds a number to another number.
