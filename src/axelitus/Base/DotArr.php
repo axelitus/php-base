@@ -38,7 +38,9 @@ class DotArr
     {
         $isdot = true;
         foreach ($arr as $key => $value) {
-            $isdot = ($isdot && !Str::contains($key, '.'));
+            if (!($isdot = ($isdot && !Str::contains($key, '.')))) {
+                break;
+            }
             if (is_array($value)) {
                 $isdot = ($isdot && static::is($value));
             }
@@ -71,6 +73,22 @@ class DotArr
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
+        return static::_get($arr, $key, $default);
+    }
+
+    /**
+     * Gets a value from a dot-notated array.
+     *
+     * @internal
+     *
+     * @param array            $arr     The array to get the value from.
+     * @param int|string|array $key     The key of the item's value to get or an array of keys.
+     * @param mixed            $default A default value to return if the item is not found.
+     *
+     * @return mixed The value of the item if found, the default value otherwise.
+     */
+    protected static function _get(array $arr, $key, $default)
+    {
         foreach (explode('.', $key) as $keySeg) {
             if (!is_array($arr) || !array_key_exists($keySeg, $arr)) {
                 return $default;
@@ -104,7 +122,7 @@ class DotArr
     }
 
     /**
-     * Sets a value to a dot-notated array.
+     * Sets a value into a dot-notated array.
      *
      * @param array            $arr   The array to set the value to.
      * @param int|string|array $key   The key of the item to be set or an array of key=>value pairs.
@@ -124,6 +142,20 @@ class DotArr
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
+        static::_set($arr, $key, $value);
+    }
+
+    /**
+     * Sets a value into a dot-notated array.
+     *
+     * @internal
+     *
+     * @param array            $arr   The array to set the value to.
+     * @param int|string|array $key   The key of the item to be set or an array of key=>value pairs.
+     * @param mixed            $value The value to be set to the item.
+     */
+    protected static function _set(array &$arr, $key, $value = null)
+    {
         $keys = explode('.', $key);
         while (count($keys) > 1) {
             $key = array_shift($keys);
@@ -171,7 +203,22 @@ class DotArr
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
-        // TODO: optimize this chunk of code
+        return static::_delete($arr, $key);
+    }
+
+    /**
+     * Deletes an item from a dot-notated array.
+     *
+     * @internal
+     *
+     * @param array            $arr The dot-notated array.
+     * @param int|string|array $key The key of the item to delete or array of keys.
+     *
+     * @return bool|array Returns true if the item was found and deleted, false otherwise (or an array of results).
+     */
+    protected static function _delete(array &$arr, $key)
+    {
+        // TODO: optimize this chunk of code if possible
         $tmp =& $arr;
         $keys = explode('.', $key);
         while (count($keys) > 1) {
@@ -237,6 +284,21 @@ class DotArr
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
+        return static::_keyExists($arr, $key);
+    }
+
+    /**
+     * Verifies if an item with the given key exists in a dot-notated array or not.
+     *
+     * @internal
+     *
+     * @param array            $arr The dot-notated array.
+     * @param int|string|array $key The key of the item to check for or an array of keys.
+     *
+     * @return bool|array Returns true if the item exists, false otherwise (or an array of results).
+     */
+    protected static function _keyExists(array $arr, $key)
+    {
         if (array_key_exists($key, $arr)) {
             return true;
         }
@@ -291,6 +353,23 @@ class DotArr
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
+        return static::_keyMatches($arr, $key);
+    }
+
+    /**
+     * Gets full and partial matches to the given key.
+     *
+     * The function matches each key sub level to a partial match.
+     *
+     * @internal
+     *
+     * @param array            $arr The array to match the key to.
+     * @param int|string|array $key The key to be matched or an array of keys.
+     *
+     * @return array The array of full and partial matches.
+     */
+    public static function _keyMatches(array $arr, $key)
+    {
         $match = '';
         $return = [];
         foreach (explode('.', $key) as $k) {
