@@ -22,7 +22,121 @@ namespace axelitus\Base;
  */
 class Traverser
 {
+    // region: Properties
+
+    /**
+     * @var callable $itemCallback The Traverser instance item callback to run on arrays.
+     */
+    protected $itemCallback = null;
+
+    /**
+     * @var callable $resultCallback The Traverser instance result callback to run on traversed arrays.
+     */
+    protected $resultCallback = null;
+
+    // endregion
+
+    // region: Constructors
+
+    /**
+     * Default constructor
+     *
+     * @param callable $itemCallback   The item callback to operate into every item.
+     * @param callable $resultCallback The result callback to operate into the result array.
+     */
+    public function __construct(callable $itemCallback = null, callable $resultCallback = null)
+    {
+        $this->itemCallback = $itemCallback;
+        $this->resultCallback = $resultCallback;
+    }
+
+    // endregion
+
+    // region: Get & Set
+
+    /**
+     * Sets the item callback.
+     *
+     * @param callable $itemCallback The new item callback to use.
+     */
+    public function setItemCallback(callable $itemCallback = null)
+    {
+        $this->itemCallback = $itemCallback;
+    }
+
+    /**
+     * Gets the instance's item callback.
+     *
+     * @return callable Returns the instance's item callback.
+     */
+    public function getItemCallback()
+    {
+        return $this->itemCallback;
+    }
+
+    /**
+     * Sets the result callback.
+     *
+     * @param callable $resultCallback The new result callback to use.
+     */
+    public function setResultCallback(callable $resultCallback = null)
+    {
+        $this->resultCallback = $resultCallback;
+    }
+
+    /**
+     * Gets the instance's result callback.
+     *
+     * @return callable Returns the instance's result callback.
+     */
+    public function getResultCallback()
+    {
+        return $this->resultCallback;
+    }
+
+    // endregion
+
+    // region: Status Testing
+
+    /**
+     * Checks if the item callback has been set.
+     *
+     * @return bool Returns true if the item callback has been set, false otherwise.
+     */
+    public function isReady()
+    {
+        return ($this->itemCallback !== null);
+    }
+
+    /**
+     * Checks if a result callback has been set.
+     *
+     * @return bool Returns true if a result callback has been set, false otherwise.
+     */
+    public function hasResultCallback()
+    {
+        return ($this->resultCallback !== null);
+    }
+
+    // endregion
+
     // region: Execution
+
+    /**
+     * Runs the given array through the Traverser's callbacks.
+     *
+     * @param array $arr The array to traverse.
+     *
+     * @return array Returns the resulting array.
+     */
+    final public function traverse(array &$arr)
+    {
+        if (!$this->isReady()) {
+            throw new \RuntimeException("The traverser is not ready, no valid item callback has been set.");
+        }
+
+        return static::run($arr, $this->itemCallback, $this->resultCallback);
+    }
 
     /**
      * Runs the traverser across the given array and executes the item callback into every item of the array.
@@ -31,9 +145,13 @@ class Traverser
      *
      * @param array    $arr            The array to traverse.
      * @param callable $itemCallback   The item callback to operate into every item.
+     *                                 Callback signature used:
+     *                                 - array function($value, $key, $arr) { }
      * @param callable $resultCallback The result callback to operate into the result array.
+     *                                 Callback signature used:
+     *                                 - mixed function($resultArray, $originalArray) { }
      *
-     * @return array
+     * @return array Returns the resulting array.
      */
     public static function run(array &$arr, callable $itemCallback, callable $resultCallback = null)
     {
