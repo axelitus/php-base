@@ -27,7 +27,7 @@ class Flag
     /**
      * Determines if the given value is a flag.
      *
-     * A flag is considered to be one if it is an int that is a power of 2.
+     * A flag is considered to be one if it is an int greater than zero that is a power of 2.
      *
      * @param mixed $value The value to test.
      *
@@ -249,7 +249,7 @@ class Flag
     }
 
     /**
-     * Matches a value against a mask and see if all te bits set on mask are set in value.
+     * Matches a value against a mask and see if all the bits set on mask are set in value.
      *
      * @param int $value The value to check.
      * @param int $mask  The mask to check the value against.
