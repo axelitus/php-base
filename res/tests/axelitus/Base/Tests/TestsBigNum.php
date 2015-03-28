@@ -48,20 +48,40 @@ class TestsBigNum extends TestCase
 
     // region: Conversion
 
-    public function testInt()
+    public function testToInt()
     {
-        $this->assertEquals(5, BigNum::int(5.53623544));
-        $this->assertEquals('5', BigNum::int('5.53623544'));
-        $this->assertEquals(9, BigNum::int(9));
+        $this->assertEquals(9, BigNum::toInt(9));
+        $this->assertEquals('9', BigNum::toInt('9'));
+        $this->assertEquals(5, BigNum::toInt(5.53623544));
+        $this->assertEquals('5', BigNum::toInt('5.53623544'));
     }
 
-    public function testIntEx01()
+    public function testToIntEx01()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
             "The \$value parameter must be numeric (or string representing a big number)."
         );
-        BigNum::int(false);
+        BigNum::toInt(false);
+    }
+
+    public function testToFloat()
+    {
+        $float = BigNum::toFloat(5);
+        $this->assertTrue(is_float($float));
+        $this->assertEquals(5.0, $float);
+
+        $strFloat = BigNum::toFloat('5');
+        $this->assertEquals('5.0', $strFloat);
+    }
+
+    public function testToFloatEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be numeric (or string representing a big number)."
+        );
+        BigNum::toFloat(false);
     }
 
     // endregion

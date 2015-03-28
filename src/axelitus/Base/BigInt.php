@@ -80,6 +80,28 @@ class BigInt
 
     // endregion
 
+    // region: Conversion
+
+    /**
+     * Converts the given integer value to float.
+     *
+     * @param int|string $value The value to convert.
+     *
+     * @return float|string Returns the value converted to float.
+     */
+    public static function toFloat($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException(
+                "The \$value parameter must be of type int (or string representing a big int)."
+            );
+        }
+
+        return BigNum::toFloat($value);
+    }
+
+    // endregion
+
     // region: Comparing
 
     /**

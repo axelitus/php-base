@@ -91,6 +91,29 @@ class TestsBigInt extends TestCase
 
     // endregion
 
+    // region: Conversion
+
+    public function testToFloat()
+    {
+        $float = BigInt::toFloat(5);
+        $this->assertTrue(is_float($float));
+        $this->assertEquals(5.0, $float);
+
+        $strFloat = BigInt::toFloat('5');
+        $this->assertEquals('5.0', $strFloat);
+    }
+
+    public function testToIntEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type int (or string representing a big int)."
+        );
+        BigInt::toFloat(false);
+    }
+
+    // endregion
+
     // region: Comparing
 
     public function testCompare()

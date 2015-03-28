@@ -87,24 +87,6 @@ class BigFloat
     // region: Conversion
 
     /**
-     * Makes the given value a float.
-     *
-     * @param int|float|string $value The given numeric value to make a float.
-     *
-     * @return float|int|string Returns the numeric value made as a float.
-     */
-    public static function make($value)
-    {
-        if (is_int($value) || is_float($value)) {
-            return (float)$value;
-        } elseif (is_numeric($value)) {
-            return ((Str::contains($value, '.')) ? $value : $value . '.0');
-        }
-
-        throw new \InvalidArgumentException("The \$value parameter must be a number (or a string representing a number).");
-    }
-
-    /**
      * Gets the integer value of the given value.
      *
      * @param float|string $value The value to get the integer value from.
@@ -112,7 +94,7 @@ class BigFloat
      * @return int|string The integer value of the given value.
      * @throws \InvalidArgumentException
      */
-    public static function int($value)
+    public static function toInt($value)
     {
         if (!static::is($value)) {
             throw new \InvalidArgumentException(
@@ -120,15 +102,7 @@ class BigFloat
             );
         }
 
-        if (is_float($value)) {
-            return (int)$value;
-        }
-
-        if (($decimal = Str::pos($value, '.')) !== false) {
-            $value = Str::sub($value, 0, (int)$decimal);
-        }
-
-        return $value;
+        return BigNum::toInt($value);
     }
 
     // endregion
@@ -160,7 +134,7 @@ class BigFloat
         if (is_float($float1) && is_float($float2)) {
             return ($float1 - $float2);
         } elseif (function_exists('bcsub')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcsub($float1, $float2)
                 : bcsub($float1, $float2, $scale)));
         }
@@ -306,7 +280,7 @@ class BigFloat
         if (is_float($float1) && is_float($float2)) {
             return ($float1 + $float2);
         } elseif (function_exists('bcadd')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcadd($float1, $float2)
                 : bcadd($float1, $float2, $scale)));
         }
@@ -337,7 +311,7 @@ class BigFloat
         if (is_float($float1) && is_float($float2)) {
             return ($float1 - $float2);
         } elseif (function_exists('bcsub')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcsub($float1, $float2)
                 : bcsub($float1, $float2, $scale)));
         }
@@ -368,7 +342,7 @@ class BigFloat
         if (is_float($float1) && is_float($float2)) {
             return ($float1 * $float2);
         } elseif (function_exists('bcmul')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcmul($float1, $float2)
                 : bcmul($float1, $float2, $scale)));
         }
@@ -403,7 +377,7 @@ class BigFloat
         if (is_float($float1) && is_float($float2)) {
             return ($float1 / $float2);
         } elseif (function_exists('bcdiv')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcdiv($float1, $float2)
                 : bcdiv($float1, $float2, $scale)));
         }
@@ -434,7 +408,7 @@ class BigFloat
         if (is_float($base) && is_float($exponent)) {
             return pow($base, $exponent);
         } elseif (function_exists('bcpow')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcpow($base, $exponent)
                 : bcpow($base, $exponent, $scale)));
         }
@@ -470,12 +444,12 @@ class BigFloat
             return fmod($base, $modulus);
         } elseif (function_exists('bcdiv')) {
             // We cannot use bcmod because it only returns the int remainder
-            $times = static::make(((is_null($scale))
-                ? static::int(static::make(bcdiv($base, $modulus)))
-                : static::int(static::make(bcdiv($base, $modulus, $scale)))
+            $times = BigNum::toFloat(((is_null($scale))
+                ? static::toInt(BigNum::toFloat(bcdiv($base, $modulus)))
+                : static::toInt(BigNum::toFloat(bcdiv($base, $modulus, $scale)))
             ));
 
-            return static::make(static::sub($base, static::mul($times, $modulus, $scale), $scale));
+            return BigNum::toFloat(static::sub($base, static::mul($times, $modulus, $scale), $scale));
         }
 
         throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
@@ -503,7 +477,7 @@ class BigFloat
         if (is_float($base)) {
             return sqrt($base);
         } elseif (function_exists('bcsqrt')) {
-            return static::make(((is_null($scale))
+            return BigNum::toFloat(((is_null($scale))
                 ? bcsqrt($base)
                 : bcsqrt($base, $scale)));
         }

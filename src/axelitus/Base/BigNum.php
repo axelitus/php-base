@@ -39,6 +39,8 @@ class BigNum
         return (BigInt::is($value) || BigFloat::is($value));
     }
 
+    // TODO: add isInt and isFloat methods
+
     // endregion
 
     // region: Conversion
@@ -48,10 +50,10 @@ class BigNum
      *
      * @param float|string $value The value to get the integer value from.
      *
-     * @return int|string The integer value of the given value.
+     * @return int|string Returns the integer value of the given value.
      * @throws \InvalidArgumentException
      */
-    public static function int($value)
+    public static function toInt($value)
     {
         if (!static::is($value)) {
             throw new \InvalidArgumentException(
@@ -70,6 +72,29 @@ class BigNum
         }
 
         return $value;
+    }
+
+    /**
+     * Converts the given number to float.
+     *
+     * @param int|float|string $value The value to convert.
+     *
+     * @return float|string Returns the value converted to float.
+     * @throws \InvalidArgumentException
+     */
+    public static function toFloat($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException(
+                "The \$value parameter must be numeric (or string representing a big number)."
+            );
+        }
+
+        if (is_int($value) || is_float($value)) {
+            return (float)$value;
+        } else {
+            return ((Str::contains($value, '.')) ? $value : $value . '.0');
+        }
     }
 
     // endregion
@@ -376,7 +401,7 @@ class BigNum
             return fmod($base, $modulus);
         } elseif (function_exists('bcdiv')) {
             // We cannot use bcmod because it only returns the int remainder
-            $times = static::int(bcdiv($base, $modulus, $scale)) . '.0';
+            $times = static::toInt(bcdiv($base, $modulus, $scale)) . '.0';
 
             return static::sub($base, static::mul($times, $modulus, $scale), $scale);
         }

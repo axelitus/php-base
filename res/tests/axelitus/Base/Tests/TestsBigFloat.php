@@ -43,46 +43,6 @@ class TestsBigFloat extends TestCase
         $this->assertFalse(BigFloat::is([]));
     }
 
-    // endregion
-
-    // region: Conversion
-
-    public function testMake()
-    {
-        $float = BigFloat::make(5);
-        $this->assertTrue(is_float($float));
-        $this->assertEquals(5.0, $float);
-
-        $strFloat = BigFloat::make('5');
-        $this->assertTrue(is_string($strFloat));
-        $this->assertTrue(is_numeric($strFloat));
-        $this->assertEquals('5.0', $strFloat);
-    }
-
-    public function testMakeEx01()
-    {
-        $this->setExpectedException(
-            '\InvalidArgumentException',
-            "The \$value parameter must be a number (or a string representing a number)."
-        );
-        BigFloat::make(false);
-    }
-
-    public function testInt()
-    {
-        $this->assertEquals(5, BigFloat::int(5.53623544));
-        $this->assertEquals('5', BigFloat::int('5.53623544'));
-    }
-
-    public function testIntEx01()
-    {
-        $this->setExpectedException(
-            '\InvalidArgumentException',
-            "The \$value parameter must be of type float (or string representing a big float)."
-        );
-        BigFloat::int(false);
-    }
-
     public function testIsEven()
     {
         $this->assertTrue(BigFloat::isEven(-8.0));
@@ -145,6 +105,25 @@ class TestsBigFloat extends TestCase
             "The \$value parameter must be of type float (or string representing a big float)."
         );
         BigFloat::isOdd(false);
+    }
+
+    // endregion
+
+    // region: Conversion
+
+    public function testToInt()
+    {
+        $this->assertEquals(5, BigFloat::toInt(5.53623544));
+        $this->assertEquals('5', BigFloat::toInt('5.53623544'));
+    }
+
+    public function testToIntEx01()
+    {
+        $this->setExpectedException(
+            '\InvalidArgumentException',
+            "The \$value parameter must be of type float (or string representing a big float)."
+        );
+        BigFloat::toInt(false);
     }
 
     // endregion
