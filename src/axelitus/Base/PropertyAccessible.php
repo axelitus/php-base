@@ -33,10 +33,16 @@ namespace axelitus\Base;
  */
 abstract class PropertyAccessible
 {
+    // region: Properties
+
     /**
      * @var \ReflectionClass The internal reflection class object to use to extract the properties.
      */
     private $refClass = null;
+
+    // endregion
+
+    // region: Get & Set
 
     /**
      * Gets the ReflectionClass object for the current object.
@@ -120,6 +126,10 @@ abstract class PropertyAccessible
         throw new \RuntimeException("The property '{$property}' does not exist.");
     }
 
+    // endregion
+
+    // region: Has Properties
+
     /**
      * Checks if the object has the given property.
      *
@@ -166,4 +176,6 @@ abstract class PropertyAccessible
 
         return method_exists($this, $method);
     }
+
+    // endregion
 }

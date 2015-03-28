@@ -25,7 +25,7 @@ namespace axelitus\Base;
  */
 class BigInt
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is an int (even if it's big).
@@ -40,9 +40,9 @@ class BigInt
         return (is_int($value) || (is_numeric($value) && !is_float($value) && !Str::contains($value, '.')));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two int values.
@@ -159,9 +159,9 @@ class BigInt
         return static::inRange($value, $lower, $upper, true, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     /**
      * Adds a number to another number.
@@ -359,5 +359,5 @@ class BigInt
         throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
-    //endregion
+    // endregion
 }

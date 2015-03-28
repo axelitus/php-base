@@ -22,6 +22,8 @@ namespace axelitus\Base;
  */
 class Traverser
 {
+    // region: Execution
+
     /**
      * Runs the traverser across the given array and executes the item callback into every item of the array.
      *
@@ -52,4 +54,6 @@ class Traverser
 
         return $result;
     }
+
+    // endregion
 }

@@ -25,7 +25,7 @@ namespace axelitus\Base;
  */
 class BigFloat
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a float (even if it's big).
@@ -40,9 +40,9 @@ class BigFloat
         return (is_float($value) || (is_numeric($value) && !is_int($value) && Str::contains($value, '.')));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     /**
      * Gets the integer value of the given value.
@@ -71,9 +71,9 @@ class BigFloat
         return $value;
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two int values.
@@ -195,9 +195,9 @@ class BigFloat
         return static::inRange($value, $lower, $upper, true, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     /**
      * Adds a number to another number.
@@ -412,5 +412,5 @@ class BigFloat
         throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
-    //endregion
+    // endregion
 }

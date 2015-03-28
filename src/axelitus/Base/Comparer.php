@@ -24,25 +24,28 @@ use Closure;
  */
 abstract class Comparer
 {
-    //region Properties
+    // region: Properties
 
     /**
      * @var \Closure The callback to use for comparison.
      */
     protected $callback = null;
 
-    /** @var \axelitus\Base\Arr The comparer options to be used while comparing */
+    /**
+     * @var \axelitus\Base\Arr The comparer options to be used while comparing
+     */
     protected $options = null;
 
-    //endregion
+    // endregion
 
-    //region Constructor
+    // region: Constructor
 
     /**
      * Default constructor
      *
-     * @param Closure $callback The callback to use for comparison. The following closure signature must be used:
-     *                          int function($item1, $item2, \axelitus\Base\Arr $options) { }
+     * @param Closure $callback The callback to use for comparison.
+     *                          Callback signature used:
+     *                          - int function($item1, $item2, array $options) { }
      * @param array   $options  The options of the callback.
      */
     public function __construct(Closure $callback = null, array $options = [])
@@ -53,9 +56,9 @@ abstract class Comparer
         $this->options = new Arr($options);
     }
 
-    //endregion
+    // endregion
 
-    //region Properties
+    // region: Get & Set
 
     /**
      * Sets the callback and binds it to the Comparer instance.
@@ -68,9 +71,9 @@ abstract class Comparer
     }
 
     /**
-     * Get the configured callback.
+     * Gets the instance's callback.
      *
-     * @return Closure
+     * @return Closure Returns the instance's callback.
      */
     public function getCallback()
     {
@@ -111,9 +114,9 @@ abstract class Comparer
         $this->options->delete($key);
     }
 
-    //endregion
+    // endregion
 
-    //region Is Ready?
+    // region: Status Testing
 
     /**
      * Checks if the callback has been set.
@@ -125,9 +128,9 @@ abstract class Comparer
         return ($this->callback !== null);
     }
 
-    //endregion
+    // endregion
 
-    //region Compare
+    // region: Comparison
 
     /**
      * Compares two items.
@@ -147,5 +150,5 @@ abstract class Comparer
         return call_user_func_array($this->callback, [$item1, $item2, $this->options]);
     }
 
-    //endregion
+    // endregion
 }

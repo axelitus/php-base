@@ -25,14 +25,14 @@ namespace axelitus\Base;
  */
 class Int
 {
-    //region Constants
+    // region: Constants
 
     /** @var int Maximum environment integer value, alias to PHP_INT_MAX */
     const MAX = PHP_INT_MAX;
 
-    //endregion
+    // endregion
 
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is an int (type test).
@@ -61,9 +61,9 @@ class Int
         return static::is($value) || (is_string($value) && (strval(intval($value)) === strval($value)));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     /**
      * Converts a given value to int.
@@ -84,9 +84,9 @@ class Int
         return (int)$value;
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two int values.
@@ -192,9 +192,9 @@ class Int
         return static::inRange($value, $lower, $upper, true, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Random
+    // region: Random
 
     /**
      * Generates a random integer number between min and max.
@@ -231,9 +231,9 @@ class Int
         return $rand;
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     /**
      * Adds a number to another number.
@@ -368,5 +368,5 @@ class Int
         return sqrt($base);
     }
 
-    //endregion
+    // endregion
 }

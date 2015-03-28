@@ -25,7 +25,7 @@ namespace axelitus\Base;
  */
 class Float
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a float (type test).
@@ -54,9 +54,9 @@ class Float
         return (static::is($value) || (is_numeric($value) && !Int::extIs($value)));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     /**
      * Converts a given value to float.
@@ -77,9 +77,9 @@ class Float
         return (float)$value;
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two float values.
@@ -185,9 +185,9 @@ class Float
         return static::inRange($value, $lower, $upper, true, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Random
+    // region: Random
 
     /**
      * Generates a random float number between min and max.
@@ -230,9 +230,9 @@ class Float
         return $rand;
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     /**
      * Adds a number to another number.
@@ -367,5 +367,5 @@ class Float
         return sqrt($base);
     }
 
-    //endregion
+    // endregion
 }

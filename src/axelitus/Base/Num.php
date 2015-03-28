@@ -22,7 +22,7 @@ namespace axelitus\Base;
  */
 class Num
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a number (type test).
@@ -53,9 +53,9 @@ class Num
         return (Int::extIs($value) || Float::extIs($value));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two numeric values.
@@ -161,9 +161,9 @@ class Num
         return static::inRange($value, $lower, $upper, true, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     /**
      * Adds a number to another number.
@@ -298,5 +298,5 @@ class Num
         return sqrt($base);
     }
 
-    //endregion
+    // endregion
 }

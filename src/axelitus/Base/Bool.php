@@ -22,7 +22,7 @@ namespace axelitus\Base;
  */
 class Bool
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a bool or not.
@@ -113,9 +113,9 @@ class Bool
         return (static::isFalseStr($str) || $str === 'off' || $str === 'no' || $str === 'n');
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two bool values.
@@ -139,9 +139,9 @@ class Bool
         return ((int)$bool1 - (int)$bool2);
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     /**
      * Converts a given value to bool.
@@ -162,9 +162,9 @@ class Bool
         return static::extParse($value);
     }
 
-    //endregion
+    // endregion
 
-    //region Parsing
+    // region: Parsing
 
     /**
      * Parses the input string into a bool.
@@ -247,9 +247,9 @@ class Bool
         return $ret;
     }
 
-    //endregion
+    // endregion
 
-    //region NOT operation
+    // region: NOT operation
 
     /**
      * Applies the NOT operation to the given value(s).
@@ -306,9 +306,9 @@ class Bool
         return (count($ret) > 1) ? $ret : $ret[0];
     }
 
-    //endregion
+    // endregion
 
-    //region AND operation
+    // region: AND operation
 
     /**
      * Applies the AND operation to the given values.
@@ -376,9 +376,9 @@ class Bool
         return (count($ret) > 1) ? $ret : $ret[0];
     }
 
-    //endregion
+    // endregion
 
-    //region OR operation
+    // region: OR operation
 
     /**
      * Applies the OR operation to the given values.
@@ -446,9 +446,9 @@ class Bool
         return (count($ret) > 1) ? $ret : $ret[0];
     }
 
-    //endregion
+    // endregion
 
-    //region EQ operation
+    // region: EQ operation
 
     /**
      * Applies the EQ operation to the given values.
@@ -516,9 +516,9 @@ class Bool
         return (count($ret) > 1) ? $ret : $ret[0];
     }
 
-    //endregion
+    // endregion
 
-    //region XOR operation
+    // region: XOR operation
 
     /**
      * Applies the XOR operation to the given values.
@@ -588,5 +588,5 @@ class Bool
         return (count($ret) > 1) ? $ret : $ret[0];
     }
 
-    //endregion
+    // endregion
 }

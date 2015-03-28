@@ -21,6 +21,8 @@ namespace axelitus\Base;
  */
 interface Initiable
 {
+    // region: Initialization
+
     /**
      * Initiates a class (simulating a static constructor)
      *
@@ -29,4 +31,6 @@ interface Initiable
      * @return bool Returns true when the class was successfully initiated, false otherwise.
      */
     public static function init($options = []);
+
+    // endregion
 }

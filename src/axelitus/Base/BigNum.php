@@ -22,7 +22,7 @@ namespace axelitus\Base;
  */
 class BigNum
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a number (or big number represented by a string).
@@ -39,9 +39,9 @@ class BigNum
         return (BigInt::is($value) || BigFloat::is($value));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     /**
      * Gets the integer value of the given value.
@@ -72,9 +72,9 @@ class BigNum
         return $value;
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two numeric values.
@@ -195,9 +195,9 @@ class BigNum
         return static::inRange($value, $lower, $upper, true, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     /**
      * Adds a number to another number.
@@ -412,5 +412,5 @@ class BigNum
         throw new \RuntimeException("The BCMath library is not available."); // @codeCoverageIgnore
     }
 
-    //endregion
+    // endregion
 }

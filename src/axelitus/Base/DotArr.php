@@ -22,7 +22,7 @@ namespace axelitus\Base;
  */
 class DotArr
 {
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a dot-notated accessible array.
@@ -47,9 +47,9 @@ class DotArr
         return $isdot;
     }
 
-    //endregion
+    // endregion
 
-    //region Get & Set
+    // region: Get & Set
 
     /**
      * Gets a value from a dot-notated array.
@@ -214,9 +214,9 @@ class DotArr
         return $return;
     }
 
-    //endregion
+    // endregion
 
-    //region Matches
+    // region: Matches
 
     /**
      * Verifies if an item with the given key exists in a dot-notated array or not.
@@ -324,9 +324,9 @@ class DotArr
         return $return;
     }
 
-    //endregion
+    // endregion
 
-    //region Convert
+    // region: Convert
 
     /**
      * Converts an array to a dot-notated array.
@@ -358,5 +358,5 @@ class DotArr
         return $converted;
     }
 
-    //endregion
+    // endregion
 }

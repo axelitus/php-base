@@ -21,6 +21,8 @@ namespace axelitus\Base;
  */
 interface Comparable
 {
+    // region: Comparison
+
     /**
      * Compares the instance with another object/value.
      *
@@ -29,4 +31,6 @@ interface Comparable
      * @return mixed
      */
     public function compareTo($item);
+
+    // endregion
 }

@@ -22,16 +22,16 @@ namespace axelitus\Base;
  */
 class Arr implements \ArrayAccess, \Countable, \Iterator
 {
-    //region Properties
+    // region: Properties
 
     /**
      * @var array The internal dot-notated array.
      */
     private $data = [];
 
-    //endregion
+    // endregion
 
-    //region Constructors
+    // region: Constructors
 
     /**
      * Constructor
@@ -46,9 +46,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         $this->data = DotArr::convert($data);
     }
 
-    //endregion
+    // endregion
 
-    //region Get & Set
+    // region: Get & Set
 
     /**
      * Gets a value from the dot-notated internal array.
@@ -91,9 +91,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         return DotArr::delete($this->data, $key);
     }
 
-    //endregion
+    // endregion
 
-    //region Matches
+    // region: Matches
 
     /**
      * Checks if the dot-notated internal array has the given key.
@@ -108,9 +108,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         return DotArr::keyExists($this->data, $key);
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     /**
      * Get the data as a simple array.
@@ -122,9 +122,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         return $this->data;
     }
 
-    //endregion
+    // endregion
 
-    //region Implements \ArrayAccess
+    // region: Implements \ArrayAccess
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
@@ -198,9 +198,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         $this->delete($offset);
     }
 
-    //endregion
+    // endregion
 
-    //region Implements \Countable
+    // region: Implements \Countable
 
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
@@ -246,9 +246,9 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         return count($this->get($key));
     }
 
-    //endregion
+    // endregion
 
-    //region Implements \Iterator
+    // region: Implements \Iterator
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
@@ -306,5 +306,5 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
         reset($this->data);
     }
 
-    //endregion
+    // endregion
 }

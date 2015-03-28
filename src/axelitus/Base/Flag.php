@@ -22,6 +22,8 @@ namespace axelitus\Base;
  */
 class Flag
 {
+    // region: Value Testing
+
     /**
      * Determines if the given value is a flag.
      *
@@ -76,6 +78,10 @@ class Flag
     {
         return !static::isOn($value, $flag);
     }
+
+    // endregion
+
+    // region: Get & Set
 
     /**
      * Sets a flag into a value.
@@ -176,6 +182,10 @@ class Flag
         return static::getValues($power + 1);
     }
 
+    // endregion
+
+    // region: Assignations
+
     /**
      * Assigns consecutive flag values to the given tags in an array.
      *
@@ -187,6 +197,10 @@ class Flag
     {
         return array_combine($tags, static::getValues(count($tags)));
     }
+
+    // endregion
+
+    // region: Mask Operations
 
     /**
      * Builds a flag mask with the given flags.
@@ -246,4 +260,6 @@ class Flag
     {
         return (($mask === 0) || (static::mask($value, $mask) === $mask));
     }
+
+    // endregion
 }

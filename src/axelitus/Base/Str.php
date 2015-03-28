@@ -22,7 +22,7 @@ namespace axelitus\Base;
  */
 class Str
 {
-    //region Constants
+    // region: Constants
 
     /**
      * @type string DEFAULT_ENCODING The default encoding to use with the functions that require it.
@@ -63,9 +63,9 @@ class Str
     const ASCII_PRINTABLE =
         ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 
-    //endregion
+    // endregion
 
-    //region Value Testing
+    // region: Value Testing
 
     /**
      * Tests if the given value is a string or not.
@@ -130,9 +130,9 @@ class Str
         return (!static::is($value) || $value != '');
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     /**
      * Compares two strings.
@@ -278,9 +278,9 @@ class Str
         return preg_match($pattern, $input, $matches, $flags, $offset);
     }
 
-    //endregion
+    // endregion
 
-    //region Length
+    // region: Length
 
     /**
      * Gets the length of the given string.
@@ -299,9 +299,9 @@ class Str
         return function_exists('mb_strlen') ? mb_strlen($input, $encoding) : strlen($input);
     }
 
-    //endregionregion
+    // endregionregion
 
-    //region Extraction
+    // region: Extraction
 
     /**
      * Returns the portion of string specified by the $start and $length parameters.
@@ -360,9 +360,9 @@ class Str
             : (strpos($input, $search) !== false ? true : false);
     }
 
-    //endregion
+    // endregion
 
-    //region Replace
+    // region: Replace
 
     /**
      * Replaces a substring inside a string.
@@ -580,9 +580,9 @@ class Str
         }
     }
 
-    //endregion
+    // endregion
 
-    //region Transforms
+    // region: Transforms
 
     /**
      * Returns a lowercased string.
@@ -689,9 +689,9 @@ class Str
             : ucwords(strtolower($input));
     }
 
-    //endregion
+    // endregion
 
-    //region Style Transforms
+    // region: Style Transforms
 
     /**
      * Converts a char(s)-separated string into studly caps.
@@ -846,9 +846,9 @@ class Str
         return $input;
     }
 
-    //endregion
+    // endregion
 
-    //region Formatting
+    // region: Formatting
 
     /**
      * Function sprintf for named variables inside format.
@@ -903,5 +903,5 @@ class Str
         return preg_replace($filterRegex, '%s', vsprintf($format, $args));
     }
 
-    //endregion
+    // endregion
 }
