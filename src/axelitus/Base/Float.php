@@ -93,22 +93,36 @@ class Float
     // region: Conversion
 
     /**
-     * Converts a given value to float.
+     * Parses a string numeric value into a float.
      *
-     * If the given value is not identified as float by {@link Float::extIs} the default value is returned.
+     * @param string $value The value to parse.
+     * @param null $default The default return value if the given value is not a string or is not numeric.
      *
-     * @param mixed $value   The value to convert from.
-     * @param mixed $default The default value.
-     *
-     * @return mixed Returns the converted float value or the default value.
+     * @return mixed Returns the parsed float or the default value.
      */
-    public static function from($value, $default = null)
+    public static function parse($value, $default = null)
     {
-        if (!static::extIs($value)) {
+        if (!is_string($value) || !is_numeric($value)) {
             return $default;
         }
 
         return (float)$value;
+    }
+
+    /**
+     * Converts the given value to integer.
+     *
+     * @param float $value The value to convert.
+     *
+     * @return int Returns the value converted to integer.
+     */
+    public static function toInt($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type float.");
+        }
+
+        return BigNum::toInt($value);
     }
 
     // endregion

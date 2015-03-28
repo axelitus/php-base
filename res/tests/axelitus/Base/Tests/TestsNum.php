@@ -60,6 +60,63 @@ class TestsNum extends TestCase
 
     // endregion
 
+    // region: Conversion
+
+    public function testParse()
+    {
+        $int = Num::parse('5');
+        $this->assertEquals(5, $int);
+        $this->assertTrue(is_int($int));
+
+        $float = Num::parse('5.0');
+        $this->assertEquals(5.0, $float);
+        $this->assertTrue(is_float($float));
+
+        $this->assertEquals(null, Num::parse('string'));
+        $this->assertEquals('default', Num::parse('string', 'default'));
+        $this->assertEquals('default', Num::parse('string', 'default'));
+    }
+
+    public function testToInt()
+    {
+        $int = Num::toInt(5);
+        $this->assertEquals(5, $int);
+        $this->assertTrue(is_int($int));
+
+        $int = Num::toInt(5.0);
+        $this->assertEquals(5, $int);
+        $this->assertTrue(is_int($int));
+    }
+
+    public function testToIntEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException',
+            "The \$value parameter must be numeric."
+        );
+        Num::toInt(false);
+    }
+
+    public function testToFloat()
+    {
+        $float = Num::toFloat(5);
+        $this->assertEquals(5.0, $float);
+        $this->assertTrue(is_float($float));
+
+        $float = Num::toFloat(5.0);
+        $this->assertEquals(5.0, $float);
+        $this->assertTrue(is_float($float));
+    }
+
+    public function testToFloatEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException',
+            "The \$value parameter must be numeric."
+        );
+        Num::toFloat(false);
+    }
+
+    // endregion
+
     // region: Comparing
 
     public function testCompare()

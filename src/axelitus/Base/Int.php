@@ -100,22 +100,36 @@ class Int
     // region: Conversion
 
     /**
-     * Converts a given value to int.
+     * Parses a string numeric value into an integer.
      *
-     * If the given value is not identified as int by {@link Int::extIs} the default value is returned.
+     * @param string $value The value to parse.
+     * @param null $default The default return value if the given value is not a string or is not numeric.
      *
-     * @param mixed $value   The value to convert from.
-     * @param mixed $default The default value.
-     *
-     * @return mixed Returns the converted int value or the default value.
+     * @return mixed Returns the parsed integer or the default value.
      */
-    public static function from($value, $default = null)
+    public static function parse($value, $default = null)
     {
-        if (!static::extIs($value)) {
+        if (!is_string($value) || !is_numeric($value)) {
             return $default;
         }
 
         return (int)$value;
+    }
+
+    /**
+     * Converts the given value to float.
+     *
+     * @param int $value The value to convert.
+     *
+     * @return float Returns the value converted to float.
+     */
+    public static function toFloat($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be of type int.");
+        }
+
+        return (float)$value;
     }
 
     // endregion

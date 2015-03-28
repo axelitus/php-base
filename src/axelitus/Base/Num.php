@@ -55,6 +55,63 @@ class Num
 
     // endregion
 
+    // region: Conversion
+
+    /**
+     * Parses a string numeric value into an integer or a float.
+     *
+     * @param string $value The value to parse.
+     * @param null $default The default return value if the given value is not a string or is not numeric.
+     *
+     * @return mixed Returns the parsed value or the default value.
+     */
+    public static function parse($value, $default = null)
+    {
+        if (!is_string($value) || !is_numeric($value)) {
+            return $default;
+        }
+
+        if(Int::extIs($value)){
+            return Int::parse($value);
+        } else {
+            return Float::parse($value);
+        }
+    }
+
+    /**
+     * Converts the given value to integer.
+     *
+     * @param int|float $value The value to convert.
+     *
+     * @return int Returns the value converted to integer.
+     */
+    public static function toInt($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be numeric.");
+        }
+
+        return (int)$value;
+    }
+
+    /**
+     * Converts the given value to float.
+     *
+     * @param int|float $value The value to convert.
+     *
+     * @return float Returns the value converted to float.
+     */
+    public static function toFloat($value)
+    {
+        if (!static::is($value)) {
+            throw new \InvalidArgumentException("The \$value parameter must be numeric.");
+        }
+
+        return (float)$value;
+    }
+
+    // endregion
+
     // region: Comparing
 
     /**

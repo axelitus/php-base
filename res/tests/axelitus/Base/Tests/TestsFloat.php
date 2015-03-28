@@ -104,15 +104,30 @@ class TestsFloat extends TestCase
 
     // region: Conversion
 
-    public function testFrom()
+    public function testParse()
     {
-        $this->assertEquals(5.0, Float::From('5.0'));
-        $this->assertEquals(9.23, Float::From('9.23'));
-        $this->assertEquals(null, Float::From('5')); // this is evaluated as integer so the default value is returned
+        $this->assertEquals(5.0, Float::parse('5.0'));
+        $this->assertEquals(9.23, Float::parse('9.23'));
+        $this->assertEquals(5.0, Float::parse('5'));
 
-        $this->assertEquals(null, Float::From('string'));
-        $this->assertEquals(5.0, Float::From('string', 5.0));
-        $this->assertEquals(9.23, Float::From('string', 9.23));
+        $this->assertEquals(null, Float::parse('string'));
+        $this->assertEquals(5.0, Float::parse('string', 5.0));
+        $this->assertEquals(9.23, Float::parse('string', 9.23));
+    }
+
+    public function testToInt()
+    {
+        $int = Float::toInt(5.0);
+        $this->assertEquals(5, $int);
+        $this->assertTrue(is_int($int));
+    }
+
+    public function testToIntEx01()
+    {
+        $this->setExpectedException('\InvalidArgumentException',
+            "The \$value parameter must be of type float."
+        );
+        Float::toInt(5);
     }
 
     // endregion
