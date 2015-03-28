@@ -270,7 +270,7 @@ class Float
         $rand = $min + (((mt_rand() - 1) / mt_getrandmax()) * abs($max - $min));
 
         // Round if needed
-        $rand = (!is_null($round) && Int::is($round) && $round > 0) ? round($rand, $round) : $rand;
+        (!is_null($round) && Int::is($round) && $round > 0) && ($rand = round($rand, $round));
 
         // unseed (random reseed) random generator
         mt_srand();
