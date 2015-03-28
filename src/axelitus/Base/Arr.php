@@ -144,7 +144,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     {
         $return = $this->has($offset);
 
-        return (is_array($return) ? (bool)Bool::arrayAnd($return) : $return);
+        return (is_array($return) ? (bool)BoolAnd::arr($return) : $return);
     }
 
     /**
