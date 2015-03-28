@@ -21,7 +21,7 @@ use axelitus\Base\Str;
  */
 class TestsString extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -58,9 +58,9 @@ class TestsString extends TestCase
         $this->assertFalse(Str::isNotOrNotEmpty(''));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparison
+    // region: Comparison
 
     public function testCompare()
     {
@@ -131,9 +131,9 @@ class TestsString extends TestCase
         $this->assertEquals(0, Str::match('abcdefghijklmnop', '/ponmlkjihgfedcba/'));
     }
 
-    //endregion
+    // endregion
 
-    //region Length
+    // region: Length
 
     public function testLength()
     {
@@ -141,9 +141,9 @@ class TestsString extends TestCase
         $this->assertEquals(5, Str::length('abcde'));
     }
 
-    //endregion
+    // endregion
 
-    //region Extraction
+    // region: Extraction
 
     public function testSub()
     {
@@ -159,9 +159,9 @@ class TestsString extends TestCase
         $this->assertEquals(4, Str::pos('abcdef', 'E', true));
     }
 
-    //endregion
+    // endregion
 
-    //region Replace
+    // region: Replace
 
     public function testReplace()
     {
@@ -242,9 +242,9 @@ class TestsString extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 
-    //region Transforms
+    // region: Transforms
 
     public function testLower()
     {
@@ -287,9 +287,9 @@ class TestsString extends TestCase
         $this->assertEquals('A Bcdefghi Jklmno', Str::ucwords('a bcdefghi jklmno'));
     }
 
-    //endregion
+    // endregion
 
-    //region Style Transforms
+    // region: Style Transforms
 
     public function testStudly()
     {
@@ -325,9 +325,9 @@ class TestsString extends TestCase
         Str::separated('abcDefGhi', '');
     }
 
-    //endregion
+    // endregion
 
-    //region Formatting
+    // region: Formatting
 
     public function testNsprintf()
     {
@@ -341,5 +341,5 @@ class TestsString extends TestCase
         Str::nsprintf('a%ltr1$scd%ltr2$sf', ['ltr1' => 'b']);
     }
 
-    //endregion
+    // endregion
 }

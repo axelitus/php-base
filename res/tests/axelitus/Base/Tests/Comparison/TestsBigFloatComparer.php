@@ -22,24 +22,24 @@ use axelitus\Base\Comparison\BigFloatComparer;
  */
 class TestsBigFloatComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparison\BigFloatComparer The big float comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = new BigFloatComparer(2);
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -80,5 +80,5 @@ class TestsBigFloatComparer extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

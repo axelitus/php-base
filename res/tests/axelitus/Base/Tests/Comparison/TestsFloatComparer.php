@@ -22,24 +22,24 @@ use axelitus\Base\Comparison\FloatComparer;
  */
 class TestsFloatComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparison\FloatComparer The float comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = new FloatComparer();
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -77,5 +77,5 @@ class TestsFloatComparer extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

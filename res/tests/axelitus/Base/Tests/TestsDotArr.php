@@ -21,7 +21,7 @@ use axelitus\Base\DotArr;
  */
 class TestsDotArr extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -77,9 +77,9 @@ class TestsDotArr extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 
-    //region Get & Set
+    // region: Get & Set
 
     public function testGet()
     {
@@ -189,9 +189,9 @@ class TestsDotArr extends TestCase
         DotArr::delete($array, true);
     }
 
-    //endregion
+    // endregion
 
-    //region Matches
+    // region: Matches
 
     public function testKeyExists()
     {
@@ -281,9 +281,9 @@ class TestsDotArr extends TestCase
         DotArr::keyMatches(['first'], true);
     }
 
-    //endregion
+    // endregion
 
-    //region Convert
+    // region: Convert
 
     public function testConvert()
     {
@@ -315,5 +315,5 @@ class TestsDotArr extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

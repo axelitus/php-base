@@ -31,7 +31,7 @@ namespace axelitus\Base\Tests\PropertyAccessible;
  */
 class PropertyAccessibleDerivedChild extends PropertyAccessibleDerived
 {
-    //region Get Parent Properties
+    // region: Get Parent Properties
 
     public function getParentPrivateRawProperty()
     {
@@ -63,9 +63,9 @@ class PropertyAccessibleDerivedChild extends PropertyAccessibleDerived
         return $this->publicGSProperty;
     }
 
-    //endregion
+    // endregion
 
-    //region Set Parent Properties
+    // region: Set Parent Properties
 
     public function setParentPrivateRawProperty($value)
     {
@@ -97,5 +97,5 @@ class PropertyAccessibleDerivedChild extends PropertyAccessibleDerived
         $this->publicGSProperty = $value;
     }
 
-    //endregion
+    // endregion
 }

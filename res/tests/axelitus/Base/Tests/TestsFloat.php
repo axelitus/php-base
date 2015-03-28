@@ -21,7 +21,7 @@ use axelitus\Base\Float;
  */
 class TestsFloat extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -58,9 +58,9 @@ class TestsFloat extends TestCase
         $this->assertFalse(Float::extIs([]));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     public function testFrom()
     {
@@ -73,9 +73,9 @@ class TestsFloat extends TestCase
         $this->assertEquals(9.23, Float::From('string', 9.23));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     public function testCompare()
     {
@@ -202,9 +202,9 @@ class TestsFloat extends TestCase
         $this->assertFalse(Float::between($value, $rangeD[0], $rangeD[1]));
     }
 
-    //endregion
+    // endregion
 
-    //region Random
+    // region: Random
 
     public function testRandom()
     {
@@ -263,9 +263,9 @@ class TestsFloat extends TestCase
         Float::random(5.5, -5.5);
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     public function testAdd()
     {
@@ -434,5 +434,5 @@ class TestsFloat extends TestCase
         Float::sqrt(false);
     }
 
-    //endregion
+    // endregion
 }

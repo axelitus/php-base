@@ -22,24 +22,24 @@ use axelitus\Base\Comparison\IntComparer;
  */
 class TestsIntComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparison\IntComparer The int comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = new IntComparer();
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -77,5 +77,5 @@ class TestsIntComparer extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

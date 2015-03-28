@@ -33,7 +33,7 @@ use axelitus\Base\PropertyAccessible;
  */
 class PropertyAccessibleDerived extends PropertyAccessible
 {
-    //region Properties
+    // region: Properties
 
     private $privateRawProperty;
     protected $protectedRawProperty;
@@ -43,7 +43,7 @@ class PropertyAccessibleDerived extends PropertyAccessible
     private $protectedGSProperty;
     private $publicGSProperty;
 
-    //endregion
+    // endregion
 
     // region Constructor
 
@@ -58,9 +58,9 @@ class PropertyAccessibleDerived extends PropertyAccessible
         $this->publicGSProperty = 'public getter/setter property';
     }
 
-    //endregion
+    // endregion
 
-    //region Getters
+    // region: Getters
 
     private function getPrivateGSProperty()
     {
@@ -77,9 +77,9 @@ class PropertyAccessibleDerived extends PropertyAccessible
         return $this->publicGSProperty;
     }
 
-    //endregion
+    // endregion
 
-    //region Setters
+    // region: Setters
 
     private function setPrivateGSProperty($value)
     {
@@ -96,5 +96,5 @@ class PropertyAccessibleDerived extends PropertyAccessible
         $this->publicGSProperty = $value;
     }
 
-    //endregion
+    // endregion
 }

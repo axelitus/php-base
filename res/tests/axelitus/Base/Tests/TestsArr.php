@@ -21,23 +21,23 @@ use axelitus\Base\Arr;
  */
 class TestsArr extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Arr */
     private $arr;
 
-    //endregion
+    // endregion
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->arr = new Arr();
     }
 
-    //endregion
+    // endregion
 
-    //region Constructors
+    // region: Constructors
 
     public function testNew()
     {
@@ -52,9 +52,9 @@ class TestsArr extends TestCase
         $this->assertEquals($a, $data);
     }
 
-    //endregion
+    // endregion
 
-    //region Get & Set
+    // region: Get & Set
 
     public function testGet()
     {
@@ -105,9 +105,9 @@ class TestsArr extends TestCase
         $this->assertEquals([], $data);
     }
 
-    //endregion
+    // endregion
 
-    //region Matches
+    // region: Matches
 
     public function testHas()
     {
@@ -125,9 +125,9 @@ class TestsArr extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     public function testAsArray()
     {
@@ -136,9 +136,9 @@ class TestsArr extends TestCase
         $this->assertEquals($a, $this->arr->asArray());
     }
 
-    //endregion
+    // endregion
 
-    //region Implements \ArrayAccess
+    // region: Implements \ArrayAccess
 
     /**
      * @depends testGet
@@ -159,9 +159,9 @@ class TestsArr extends TestCase
         $this->assertFalse(isset($this->arr['first.sub.val']));
     }
 
-    //endregion
+    // endregion
 
-    //region Implements \Countable
+    // region: Implements \Countable
 
     public function testCountable()
     {
@@ -194,9 +194,9 @@ class TestsArr extends TestCase
         $this->arr->count(false);
     }
 
-    //endregion
+    // endregion
 
-    //region Implements \Iterator
+    // region: Implements \Iterator
 
     public function testForEachLoop()
     {
@@ -224,5 +224,5 @@ class TestsArr extends TestCase
         }
     }
 
-    //endregion
+    // endregion
 }

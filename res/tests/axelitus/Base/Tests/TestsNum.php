@@ -21,7 +21,7 @@ use axelitus\Base\Num;
  */
 class TestsNum extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -58,9 +58,9 @@ class TestsNum extends TestCase
         $this->assertFalse(Num::extIs([]));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     public function testCompare()
     {
@@ -238,9 +238,9 @@ class TestsNum extends TestCase
         $this->assertFalse(Num::between($value, $rangeD[0], $rangeD[1]));
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     public function testAdd()
     {
@@ -403,5 +403,5 @@ class TestsNum extends TestCase
         Num::sqrt(false);
     }
 
-    //endregion
+    // endregion
 }

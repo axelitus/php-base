@@ -21,7 +21,7 @@ use axelitus\Base\BigFloat;
  */
 class TestsBigFloat extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -43,9 +43,9 @@ class TestsBigFloat extends TestCase
         $this->assertFalse(BigFloat::is([]));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     public function testInt()
     {
@@ -62,9 +62,9 @@ class TestsBigFloat extends TestCase
         BigFloat::int(false);
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     public function testCompare()
     {
@@ -250,9 +250,9 @@ class TestsBigFloat extends TestCase
         $this->assertFalse(BigFloat::between($value, $rangeD[0], $rangeD[1]));
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     public function testAdd()
     {
@@ -431,5 +431,5 @@ class TestsBigFloat extends TestCase
         BigFloat::sqrt(false);
     }
 
-    //endregion
+    // endregion
 }

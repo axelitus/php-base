@@ -22,24 +22,24 @@ use axelitus\Base\Comparison\BoolComparer;
  */
 class TestsBoolComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparison\BoolComparer The bool comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = new BoolComparer();
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -78,5 +78,5 @@ class TestsBoolComparer extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

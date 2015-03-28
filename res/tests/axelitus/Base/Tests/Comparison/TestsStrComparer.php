@@ -22,24 +22,24 @@ use axelitus\Base\Comparison\StrComparer;
  */
 class TestsStrComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparison\StrComparer The str comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = new StrComparer();
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -80,5 +80,5 @@ class TestsStrComparer extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

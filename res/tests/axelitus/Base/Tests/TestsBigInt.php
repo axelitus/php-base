@@ -21,7 +21,7 @@ use axelitus\Base\BigInt;
  */
 class TestsBigInt extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -41,9 +41,9 @@ class TestsBigInt extends TestCase
         $this->assertFalse(BigInt::is([]));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     public function testCompare()
     {
@@ -232,9 +232,9 @@ class TestsBigInt extends TestCase
         $this->assertFalse(BigInt::between($value, $rangeD[0], $rangeD[1]));
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     public function testAdd()
     {
@@ -433,5 +433,5 @@ class TestsBigInt extends TestCase
         BigInt::sqrt(2.3);
     }
 
-    //endregion
+    // endregion
 }

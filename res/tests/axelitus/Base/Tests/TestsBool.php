@@ -21,7 +21,7 @@ use axelitus\Base\Bool;
  */
 class TestsBool extends TestCase
 {
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -109,9 +109,9 @@ class TestsBool extends TestCase
         $this->assertFalse($this->execNonPublicMethod('axelitus\Base\Bool', 'isFalseStrExt', [0]));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     public function testCompare()
     {
@@ -139,9 +139,9 @@ class TestsBool extends TestCase
         Bool::compare(true, 'string');
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     public function testFrom()
     {
@@ -162,9 +162,9 @@ class TestsBool extends TestCase
         $this->assertEquals(false, Bool::From('string', false));
     }
 
-    //endregion
+    // endregion
 
-    //region Parsing
+    // region: Parsing
 
     public function testParse()
     {
@@ -226,7 +226,7 @@ class TestsBool extends TestCase
         Bool::extParse('valid');
     }
 
-    //endregion
+    // endregion
 
     //region NOT operation
 

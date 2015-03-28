@@ -22,24 +22,24 @@ use axelitus\Base\Comparison\BigNumComparer;
  */
 class TestsBigNumComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparison\BigNumComparer The big int comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = new BigNumComparer(2);
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -86,5 +86,5 @@ class TestsBigNumComparer extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

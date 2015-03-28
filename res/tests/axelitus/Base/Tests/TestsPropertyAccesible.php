@@ -22,7 +22,7 @@ use axelitus\Base\Tests\PropertyAccessible\PropertyAccessibleDerivedChild;
  */
 class TestsPropertyAccesible extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\PropertyAccessible */
     private $mock;
@@ -33,9 +33,9 @@ class TestsPropertyAccesible extends TestCase
     /** @var \axelitus\Base\Tests\PropertyAccessible\PropertyAccessibleDerivedChild */
     private $child;
 
-    //endregion
+    // endregion
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
@@ -44,9 +44,9 @@ class TestsPropertyAccesible extends TestCase
         $this->child = new PropertyAccessibleDerivedChild();
     }
 
-    //endregion
+    // endregion
 
-    //region Test has* functions
+    // region: Test has* functions
 
     public function testHasPropertyEx01()
     {
@@ -66,9 +66,9 @@ class TestsPropertyAccesible extends TestCase
         $this->mock->hasMethod(false);
     }
 
-    //endregion
+    // endregion
 
-    //region Get Raw Properties
+    // region: Get Raw Properties
 
     public function testGetPrivateRawProperty()
     {
@@ -87,9 +87,9 @@ class TestsPropertyAccesible extends TestCase
         $this->assertEquals('public raw property', $this->obj->publicRawProperty);
     }
 
-    //endregion
+    // endregion
 
-    //region Set Raw Properties
+    // region: Set Raw Properties
 
     public function testSetPrivateRawProperty()
     {
@@ -111,9 +111,9 @@ class TestsPropertyAccesible extends TestCase
         $this->assertEquals('changed', static::getNonPublicPropertyValue($this->obj, 'publicRawProperty'));
     }
 
-    //endregion
+    // endregion
 
-    //region Get Properties with Getter
+    // region: Get Properties with Getter
 
     public function testGetPrivateGSProperty()
     {
@@ -132,9 +132,9 @@ class TestsPropertyAccesible extends TestCase
         $this->assertEquals('public getter/setter property', $this->obj->publicGSProperty);
     }
 
-    //endregion
+    // endregion
 
-    //region Set Properties with Getter
+    // region: Set Properties with Getter
 
     public function testSetPrivateGSProperty()
     {
@@ -156,9 +156,9 @@ class TestsPropertyAccesible extends TestCase
         $this->assertEquals('changed', static::getNonPublicPropertyValue($this->obj, 'publicGSProperty'));
     }
 
-    //endregion
+    // endregion
 
-    //region Get Non-existent
+    // region: Get Non-existent
 
     public function testGetNonExistent()
     {
@@ -169,9 +169,9 @@ class TestsPropertyAccesible extends TestCase
         $this->assertEquals(null, $this->obj->nonExistent);
     }
 
-    //endregion
+    // endregion
 
-    //region Set Non-existent
+    // region: Set Non-existent
 
     public function testSetNonExistent()
     {
@@ -182,9 +182,9 @@ class TestsPropertyAccesible extends TestCase
         $this->obj->nonExistent = null;
     }
 
-    //endregion
+    // endregion
 
-    //region Get Properties from Child
+    // region: Get Properties from Child
 
     public function getPrivateRawPropertyFromChild()
     {
@@ -218,9 +218,9 @@ class TestsPropertyAccesible extends TestCase
         $this->assertEquals('public getter/setter property', $this->child->publicGSProperty);
     }
 
-    //endregion
+    // endregion
 
-    //region Set Properties from Child
+    // region: Set Properties from Child
 
     public function setPrivateRawPropertyFromChild()
     {
@@ -278,5 +278,5 @@ class TestsPropertyAccesible extends TestCase
         );
     }
 
-    //endregion
+    // endregion
 }

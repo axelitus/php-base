@@ -19,24 +19,24 @@ namespace axelitus\Base\Tests;
  */
 class TestsComparer extends TestCase
 {
-    //region Properties
+    // region: Properties
 
     /** @var \axelitus\Base\Comparer The comparer to use */
     private $comparer;
 
-    //endregion
+    // endregion
 
 
-    //region SetUp
+    // region: SetUp
 
     public function setUp()
     {
         $this->comparer = $this->getMockForAbstractClass('\axelitus\Base\Comparer');
     }
 
-    //endregion
+    // endregion
 
-    //region Basics
+    // region: Basics
 
     public function testBasics()
     {
@@ -52,9 +52,9 @@ class TestsComparer extends TestCase
         $this->assertEquals(0, $this->comparer->compare(5, 5));
     }
 
-    //endregion
+    // endregion
 
-    //region Options
+    // region: Options
 
     public function testOptions()
     {
@@ -84,9 +84,9 @@ class TestsComparer extends TestCase
         $this->assertArrayNotHasKey('double', $options['first']);
     }
 
-    //endregion
+    // endregion
 
-    //region Compare
+    // region: Compare
 
     public function testCompareEx01()
     {
@@ -94,5 +94,5 @@ class TestsComparer extends TestCase
         $this->comparer->compare('A', 'A');
     }
 
-    //endregion
+    // endregion
 }

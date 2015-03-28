@@ -21,16 +21,16 @@ use axelitus\Base\Int;
  */
 class TestsInt extends TestCase
 {
-    //region Constants
+    // region: Constants
 
     public function testConstants()
     {
         $this->assertEquals(PHP_INT_MAX, Int::MAX);
     }
 
-    //endregion
+    // endregion
 
-    //region Value Testing
+    // region: Value Testing
 
     public function testIs()
     {
@@ -67,9 +67,9 @@ class TestsInt extends TestCase
         $this->assertFalse(Int::extIs([]));
     }
 
-    //endregion
+    // endregion
 
-    //region Conversion
+    // region: Conversion
 
     public function testFrom()
     {
@@ -82,9 +82,9 @@ class TestsInt extends TestCase
         $this->assertEquals(9, Int::From('string', 9));
     }
 
-    //endregion
+    // endregion
 
-    //region Comparing
+    // region: Comparing
 
     public function testCompare()
     {
@@ -211,9 +211,9 @@ class TestsInt extends TestCase
         $this->assertFalse(Int::between($value, $rangeD[0], $rangeD[1]));
     }
 
-    //endregion
+    // endregion
 
-    //region Random
+    // region: Random
 
     public function testRandom()
     {
@@ -258,9 +258,9 @@ class TestsInt extends TestCase
         Int::random(5, -5);
     }
 
-    //endregion
+    // endregion
 
-    //region Basic numeric operations
+    // region: Basic numeric operations
 
     public function testAdd()
     {
@@ -441,5 +441,5 @@ class TestsInt extends TestCase
         Int::sqrt(2.3);
     }
 
-    //endregion
+    // endregion
 }
