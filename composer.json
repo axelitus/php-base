@@ -1,53 +1,60 @@
 {
-    "name": "axelitus/base",
-    "description": "A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.",
-    "type": "library",
-    "keywords": ["basic", "primitive", "string", "number", "array", "collection"],
-    "homepage": "http://axelitus.github.io/php-base",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Axel Pardemann",
-            "email": "axelitusdev@gmail.com",
-            "homepage": "http://axelitus.mx",
-            "role": "Lead Developer"
-        }
-    ],
-    "support": {
-        "email": "axelitusdev@gmail.com",
-        "source": "https://github.com/axelitus/php-base",
-        "issues": "https://github.com/axelitus/php-base/issues",
-        "wiki": "https://github.com/axelitus/php-base/wiki"
-    },
-    "require": {
-        "php": ">=5.4.9"
-    },
-    "require-dev": {
-        "phing/phing": "2.10.*",
-        "phpunit/phpunit": "4.5.*",
-        "squizlabs/php_codesniffer": "2.2.*",
-        "phpmd/phpmd" : "2.2.*",
-        "league/phpunit-coverage-listener": "1.1.*",
-        "phpdocumentor/phpdocumentor": "2.8.*"
-    },
-    "replace": {
-        "axelitus/acre-common": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "axelitus\\Base\\": "src/",
-            "axelitus\\Base\\Tests\\": "res/tests/"
-        }
-    },
-    "config": {
-        "vendor-dir": "vendor"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "0.9-dev",
-            "dev-master": "0.8-dev"
-        }
+  "name": "axelitus/base",
+  "description": "A framework agnostic PHP package that contains _extensions_ and helpers for the PHP primitive types (strings, numbers, array, etc.). It also contains common interfaces for _new_ types like collections, etc.",
+  "type": "library",
+  "keywords": [
+    "basic",
+    "primitive",
+    "string",
+    "number",
+    "array",
+    "collection"
+  ],
+  "homepage": "http://axelitus.github.io/php-base",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Axel Pardemann",
+      "email": "axelitusdev@gmail.com",
+      "homepage": "http://axelitus.mx",
+      "role": "Lead Developer"
     }
+  ],
+  "support": {
+    "email": "axelitusdev@gmail.com",
+    "source": "https://github.com/axelitus/php-base",
+    "issues": "https://github.com/axelitus/php-base/issues",
+    "wiki": "https://github.com/axelitus/php-base/wiki"
+  },
+  "require": {
+    "php": ">=5.4.9"
+  },
+  "require-dev": {
+    "phing/phing": "2.10.*",
+    "phpunit/phpunit": "4.5.*",
+    "squizlabs/php_codesniffer": "2.2.*",
+    "phpmd/phpmd": "2.2.*",
+    "league/phpunit-coverage-listener": "1.1.*",
+    "phpdocumentor/phpdocumentor": "2.8.*"
+  },
+  "replace": {
+    "axelitus/acre-common": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "axelitus\\Base\\": "src/",
+      "axelitus\\Base\\Tests\\": "res/tests/"
+    }
+  },
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.9-dev",
+      "dev-master": "0.8-dev"
+    }
+  }
 }
