@@ -14,14 +14,14 @@
     </php>
     <testsuites>
         <testsuite name="axelitus/base">
-            <directory suffix=".php">res/tests/axelitus/Base</directory>
+            <directory suffix=".php">res/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/axelitus</directory>
+            <directory suffix=".php">src</directory>
             <exclude>
-                <directory suffix=".php">res/tests/axelitus/Base/Tests</directory>
+                <directory suffix=".php">res/tests</directory>
             </exclude>
         </whitelist>
     </filter>

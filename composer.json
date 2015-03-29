@@ -34,7 +34,7 @@
         "axelitus/acre-common": "*"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "axelitus\\Base\\": "src/",
             "axelitus\\Base\\Tests\\": "res/tests/"
         }

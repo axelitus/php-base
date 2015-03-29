@@ -4,7 +4,7 @@ A framework agnostic PHP package that contains _extensions_ and helpers for the 
 
 ## Package Information
 
-* **Package:** axelitus/base [![Dependencies Status](http://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=9dd3b992bc2e6984a108deb40dcb85c9af9451ec)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.svg)](https://packagist.org/packages/axelitus/base) [![License](https://poser.pugx.org/axelitus/base/license.svg)](https://packagist.org/packages/axelitus/base) [![Project Status](https://stillmaintained.com/axelitus/php-base.png)](https://stillmaintained.com/axelitus/php-base)
+* **Package:** axelitus/base [![Dependencies Status](http://depending.in/axelitus/php-base.png)](http://depending.in/axelitus/php-base) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/axelitus/php-base/badges/quality-score.png?s=9dd3b992bc2e6984a108deb40dcb85c9af9451ec)](https://scrutinizer-ci.com/g/axelitus/php-base/) [![Total Downloads](https://poser.pugx.org/axelitus/base/downloads.svg)](https://packagist.org/packages/axelitus/base) [![License](https://poser.pugx.org/axelitus/base/license.svg)](https://packagist.org/packages/axelitus/base) [![Project Status](https://stillmaintained.com/axelitus/php-base.svg)](https://stillmaintained.com/axelitus/php-base)
 * **Root Namespace:** axelitus\Base
 * **Author:** Axel Pardemann (axelitusdev@gmail.com)
 * **Repository**: [axelitus/php-base](https://github.com/axelitus/php-base "axelitus/php-base at GitHub") at GitHub
@@ -23,11 +23,11 @@ The requirements for this package to work are the following:
 
 This package is intended to follow some standards for easy contributions and usage. Recently there has been an initiative to standardize the interoperation of frameworks, though I think this easily extends to most pieces of code everyone is building. The group behind all this is the [PHP-FIG (Framework Interoperability Group)](http://www.php-fig.org), you should pay them a visit at their site.
 
-There are already some standards marked as accepted (_final_): [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md), [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md).
+There are already some standards marked as accepted (_final_): [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md), [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md), [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md), [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md), [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md).
 
-**This package is intended to be PSR-2 compliant.**
+**This package is intended to be PSR-2/PSR-4 compliant.**
 
-Being PSR-2 compliant means this package can be easily installed by using [Composer](getcomposer.org) from the [Packagist](http://packagist.org) package archive. Just follow the instructions in section [How to install](#how-to-install). It also means that there's a [guide for coding styles](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and the developers and contributors should enforce this for everyone's benefit.
+Being PSR-2/PSR-4 compliant means this package follows a [guide for coding styles](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) and the developers and contributors should enforce this for everyone's benefit. It also means that it can be easily installed by using [Composer](getcomposer.org) from the [Packagist](http://packagist.org) package archive. Just follow the instructions in section [How to install](#how-to-install).
 
 ## Contents
 
@@ -38,6 +38,11 @@ Being PSR-2 compliant means this package can be easily installed by using [Compo
  - **BigInt** - Int operations for big numbers.
  - **BigNum** - Numeric operations for big numbers.
  - **Bool** - Boolean operations.
+ - **BoolAnd** - Boolean AND operations on values and arrays.
+ - **BoolEq** - Boolean EQ operations on values and arrays.
+ - **BoolNot** - Boolean NOT operations on values and arrays.
+ - **BoolOr** - Boolean OR operations on values and arrays.
+ - **BoolXor** - Boolean XOR operations on values and arrays.
  - **Comparable** - Defines the interface for a comparable object.
  - **Comparer** - Simple and flexible base comparer from which new comparers should be derived.
  - **DotArr** - Dot-notated array operations.
