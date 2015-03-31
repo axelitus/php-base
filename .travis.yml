@@ -5,7 +5,7 @@ php:
   - 5.6
 
 before_script:
-  - php composer.phar install --dev
+  - php composer.phar install
 
 script:
   - phpunit --configuration phpunit.travis.xml --bootstrap phpunit.bootstrap.php

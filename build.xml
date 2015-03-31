@@ -2,6 +2,7 @@
 
 <project name="axelitus/base" basedir="." default="dist">
     <property file="./build.properties"/>
+    <property name="build" value=""/>
 
     <!-- Clean build -->
     <target name="build:clean" description="Cleans the previous build">
@@ -18,7 +19,17 @@
 
     <!-- Install composer dependencies -->
     <target name="build:composer" description="Installs the composer dependencies">
-        <exec command="${composer.exec} ${composer.args}" passthru="true"/>
+        <if>
+            <available file="${composer.lock}" type="file" />
+            <then>
+                <echo msg="Command: ${composer.exec} ${composer.update.args}"/>
+                <exec command="${composer.exec} ${composer.update.args}" passthru="true"/>
+            </then>
+            <else>
+                <echo msg="$Command: ${composer.exec} ${composer.install.args}"/>
+                <exec command="${composer.exec} ${composer.install.args}" passthru="true"/>
+            </else>
+        </if>
     </target>
 
     <!-- PHP Code Sniffer -->
@@ -28,6 +39,7 @@
     <target name="script:phpcs">
         <mkdir dir="${phpcs.log.dir}"/>
         <echo msg="${phpcs.msg}"/>
+        <echo msg="Command: ${phpcs.exec} ${phpcs.args}"/>
         <exec command="${phpcs.exec} ${phpcs.args}" passthru="true"/>
         <xslt file="${phpcs.log.xml}" tofile="${phpcs.log.html}" style="${phpcs.log.xslt}"/>
     </target>
@@ -39,27 +51,54 @@
     <target name="script:phpmd">
         <mkdir dir="${phpmd.log.dir}"/>
         <echo msg="${phpmd.msg}"/>
+        <echo msg="Command: ${phpmd.exec} ${phpmd.args}"/>
         <exec command="${phpmd.exec} ${phpmd.args}" passthru="true"/>
         <xslt file="${phpmd.log.xml}" tofile="${phpmd.log.html}" style="${phpmd.log.xslt}"/>
     </target>
 
+    <!-- PHPLOC -->
+    <target name="build:phploc" description="Runs PHPLOC">
+        <exec command="${phing.exec} ${phing.args} script:phploc" passthru="true"/>
+    </target>
+    <target name="script:phploc">
+        <mkdir dir="${phploc.log.dir}"/>
+        <echo msg="${phploc.msg}"/>
+        <echo msg="Command: ${phploc.exec} ${phploc.args}"/>
+        <exec command="${phploc.exec} ${phploc.args}" passthru="true"/>
+        <!--<xslt file="${phploc.log.xml}" tofile="${phploc.log.html}" style="${phploc.log.xslt}"/>-->
+    </target>
+
+    <!-- PHPCPD -->
+    <target name="build:phpcpd" description="Runs PHPCPD">
+        <exec command="${phing.exec} ${phing.args} script:phpcpd" passthru="true"/>
+    </target>
+    <target name="script:phpcpd">
+        <mkdir dir="${phpcpd.log.dir}"/>
+        <echo msg="${phpcpd.msg}"/>
+        <echo msg="Command: ${phpcpd.exec} ${phpcpd.args}"/>
+        <exec command="${phpcpd.exec} ${phpcpd.args}" passthru="true"/>
+        <!--<xslt file="${phpcpd.log.xml}" tofile="${phpcpd.log.html}" style="${phpcpd.log.xslt}"/>-->
+    </target>
+
     <!-- PHPUnit -->
-    <target name="build:phpunit" description="Runs PHP Mess Detector">
+    <target name="build:phpunit" description="Runs PHPUnit Tests">
         <exec command="${phing.exec} ${phing.args} script:phpunit" passthru="true"/>
     </target>
     <target name="script:phpunit">
         <mkdir dir="${phpunit.log.dir}"/>
         <echo msg="${phpunit.msg}"/>
+        <echo msg="Command: ${phpunit.exec} ${phpunit.args}"/>
         <exec command="${phpunit.exec} ${phpunit.args}" passthru="true"/>
     </target>
 
     <!-- PHPDocumentor -->
-    <target name="build:phpdoc" description="Runs PHP Mess Detector">
+    <target name="build:phpdoc" description="Runs PHPDocumentor">
         <exec command="${phing.exec} ${phing.args} script:phpdoc" passthru="true"/>
     </target>
     <target name="script:phpdoc">
         <mkdir dir="${build.output.doc.dir}"/>
         <echo msg="${phpdoc.msg}"/>
+        <echo msg="Command: ${phpdoc.exec} ${phpdoc.args}"/>
         <exec command="${phpdoc.exec} ${phpdoc.args}" passthru="true"/>
     </target>
 

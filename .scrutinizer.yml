@@ -1,5 +1,5 @@
 filter:
-  excluded_paths: [doc/*, log/*, res/*, vendor/*]
+  excluded_paths: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
 
 tools:
   external_code_coverage:
@@ -8,27 +8,27 @@ tools:
   php_code_sniffer:
     enabled: true
     filter:
-      excluded_paths: [doc/*, log/*, res/*, vendor/*]
+      excluded_paths: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
   php_mess_detector:
     enabled: true
     filter:
-      excluded_paths: [doc/*, log/*, res/*, vendor/*]
+      excluded_paths: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
   php_cpd:
     enabled: true
-    excluded_dirs: [doc/*, log/*, res/*, vendor/*]
+    excluded_dirs: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
     filter:
-      excluded_paths: [doc/*, log/*, res/*, vendor/*]
+      excluded_paths: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
   php_hhvm:
     enabled: true
     filter:
-      excluded_paths: [doc/*, log/*, res/*, vendor/*]
+      excluded_paths: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
   php_loc:
     enabled: true
-    excluded_dirs: [doc/*, log/*, res/*, vendor/*]
+    excluded_dirs: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
   php_pdepend:
     enabled: true
-    excluded_dirs: [doc/*, log/*, res/*, vendor/*]
+    excluded_dirs: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
   php_analyzer:
     enabled: true
     filter:
-      excluded_paths: [doc/*, log/*, res/*, vendor/*]
+      excluded_paths: [build/*, doc/*, log/*, res/*, test/*, vendor/*]
