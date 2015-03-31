@@ -127,17 +127,16 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     // region: Implements \ArrayAccess
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Whether a offset exists
+     * (PHP 5 >= 5.0.0)
+     *
+     * Whether a offset exists.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetexists.php
      *
-     * @param mixed $offset <p>
-     *                      An offset to check for.
-     *                      </p>
+     * @param mixed $offset An offset to check for.
      *
      * @return boolean true on success or false on failure.
-     * </p>
-     * <p>
+     *
      * The return value will be casted to boolean if non-boolean was returned.
      */
     public function offsetExists($offset)
@@ -148,13 +147,13 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Offset to retrieve
+     * (PHP 5 >= 5.0.0)
+     *
+     * Offset to retrieve.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetget.php
      *
-     * @param mixed $offset <p>
-     *                      The offset to retrieve.
-     *                      </p>
+     * @param mixed $offset The offset to retrieve.
      *
      * @return mixed Can return all value types.
      */
@@ -164,16 +163,14 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Offset to set
+     * (PHP 5 >= 5.0.0)
+     *
+     * Offset to set.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetset.php
      *
-     * @param mixed $offset <p>
-     *                      The offset to assign the value to.
-     *                      </p>
-     * @param mixed $value  <p>
-     *                      The value to set.
-     *                      </p>
+     * @param mixed $offset The offset to assign the value to.
+     * @param mixed $value  The value to set.
      *
      * @return void
      */
@@ -183,13 +180,13 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Offset to unset
+     * (PHP 5 >= 5.0.0)
+     *
+     * Offset to unset.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetunset.php
      *
-     * @param mixed $offset <p>
-     *                      The offset to unset.
-     *                      </p>
+     * @param mixed $offset The offset to unset.
      *
      * @return void
      */
@@ -203,16 +200,17 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     // region: Implements \Countable
 
     /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Count elements of an object
+     * (PHP 5 >= 5.1.0)
+     *
+     * Count elements of an object.
+     *
      * @link http://php.net/manual/en/countable.count.php
      *
      * @param null|int|string|array $key The key to get the count from.
      *
      * @throws \InvalidArgumentException
      * @return int The custom count as an integer.
-     * </p>
-     * <p>
+     *
      * The return value is cast to an integer.
      * If an array is given the count will be the total count of the found key elements.
      * If no key is found -1 will be returned.
@@ -251,9 +249,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     // region: Implements \Iterator
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the current element
+     * (PHP 5 >= 5.0.0)
+     *
+     * Return the current element.
+     *
      * @link http://php.net/manual/en/iterator.current.php
+     *
      * @return mixed Can return any type.
      */
     public function current()
@@ -262,9 +263,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Move forward to next element
+     * (PHP 5 >= 5.0.0)
+     *
+     * Move forward to next element.
+     *
      * @link http://php.net/manual/en/iterator.next.php
+     *
      * @return void Any returned value is ignored.
      */
     public function next()
@@ -273,9 +277,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the key of the current element
+     * (PHP 5 >= 5.0.0)
+     *
+     * Return the key of the current element.
+     *
      * @link http://php.net/manual/en/iterator.key.php
+     *
      * @return mixed scalar on success, or null on failure.
      */
     public function key()
@@ -284,11 +291,16 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Checks if current position is valid
+     * (PHP 5 >= 5.0.0)
+     *
+     * Checks if current position is valid.
+     *
      * @link http://php.net/manual/en/iterator.valid.php
-     * @return boolean The return value will be casted to boolean and then evaluated.
-     * Returns true on success or false on failure.
+     *
+     * @return boolean Returns true on success or false on failure.
+     *
+     * The return value will be casted to boolean and then evaluated.
+     *
      */
     public function valid()
     {
@@ -296,9 +308,12 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Rewind the Iterator to the first element     *
+     * (PHP 5 >= 5.0.0)
+     *
+     * Rewind the Iterator to the first element.
+     *
      * @link http://php.net/manual/en/iterator.rewind.php
+     *
      * @return void Any returned value is ignored.
      */
     public function rewind()
