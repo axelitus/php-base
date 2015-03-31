@@ -13,19 +13,20 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\BigFloatComparer;
+use axelitus\Base\Comparison\BigFloatComparator;
 
 /**
- * Class TestsBigFloatComparer
+ * Tests class BigFloatComparator
  *
  * @package axelitus\Base
+ * @see BigFloatComparator
  */
-class TestsBigFloatComparer extends TestCase
+class TestsBigFloatComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\BigFloatComparer The big float comparer to use */
-    private $comparer;
+    /** @var \axelitus\Base\Comparison\BigFloatComparator The big float comparator to use */
+    private $comparator;
 
     // endregion
 
@@ -34,7 +35,7 @@ class TestsBigFloatComparer extends TestCase
 
     public function setUp()
     {
-        $this->comparer = new BigFloatComparer(2);
+        $this->comparator = new BigFloatComparator(2);
     }
 
     // endregion
@@ -43,13 +44,13 @@ class TestsBigFloatComparer extends TestCase
 
     public function testBasics()
     {
-        $this->assertTrue($this->comparer->isReady());
-        $this->assertEquals(3.25, $this->comparer->compare(8.75, 5.5));
-        $this->assertEquals(-2.25, $this->comparer->compare(5.5, 7.75));
-        $this->assertEquals(0.0, $this->comparer->compare(5.3, 5.3));
-        $this->assertEquals(3.25, $this->comparer->compare('8.75', '5.5'));
-        $this->assertEquals(-2.25, $this->comparer->compare('5.5', '7.75'));
-        $this->assertEquals(0.0, $this->comparer->compare('5.3', '5.3'));
+        $this->assertTrue($this->comparator->isReady());
+        $this->assertEquals(3.25, $this->comparator->compare(8.75, 5.5));
+        $this->assertEquals(-2.25, $this->comparator->compare(5.5, 7.75));
+        $this->assertEquals(0.0, $this->comparator->compare(5.3, 5.3));
+        $this->assertEquals(3.25, $this->comparator->compare('8.75', '5.5'));
+        $this->assertEquals(-2.25, $this->comparator->compare('5.5', '7.75'));
+        $this->assertEquals(0.0, $this->comparator->compare('5.3', '5.3'));
     }
 
     public function testBasicsEx01()
@@ -58,7 +59,7 @@ class TestsBigFloatComparer extends TestCase
             '\InvalidArgumentException',
             "The \$item1 and \$item2 parameters must be of type float (or string representing a big float)."
         );
-        $this->comparer->compare('string', 5.5);
+        $this->comparator->compare('string', 5.5);
     }
 
     public function testBasicsEx02()
@@ -67,13 +68,13 @@ class TestsBigFloatComparer extends TestCase
             '\InvalidArgumentException',
             "The \$item1 and \$item2 parameters must be of type float (or string representing a big float)."
         );
-        $this->comparer->compare(8.75, 'string');
+        $this->comparator->compare(8.75, 'string');
     }
 
     public function testCallbackEx()
     {
-        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");
-        $this->comparer->setCallback(
+        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparator callback.");
+        $this->comparator->setCallback(
             function ($item1, $item2) {
                 return $item1 * $item2;
             }

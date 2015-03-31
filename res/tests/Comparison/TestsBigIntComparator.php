@@ -13,19 +13,20 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\BigIntComparer;
+use axelitus\Base\Comparison\BigIntComparator;
 
 /**
- * Class TestsBigIntComparer
+ * Tests class BigIntComparator
  *
  * @package axelitus\Base
+ * @see BigIntComparator
  */
-class TestsBigIntComparer extends TestCase
+class TestsBigIntComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\BigIntComparer The big int comparer to use */
-    private $comparer;
+    /** @var \axelitus\Base\Comparison\BigIntComparator The big int comparator to use */
+    private $comparator;
 
     // endregion
 
@@ -34,7 +35,7 @@ class TestsBigIntComparer extends TestCase
 
     public function setUp()
     {
-        $this->comparer = new BigIntComparer();
+        $this->comparator = new BigIntComparator();
     }
 
     // endregion
@@ -43,13 +44,13 @@ class TestsBigIntComparer extends TestCase
 
     public function testBasics()
     {
-        $this->assertTrue($this->comparer->isReady());
-        $this->assertEquals(3, $this->comparer->compare(8, 5));
-        $this->assertEquals(-2, $this->comparer->compare(5, 7));
-        $this->assertEquals(0, $this->comparer->compare(5, 5));
-        $this->assertEquals(3, $this->comparer->compare('8', '5'));
-        $this->assertEquals(-2, $this->comparer->compare('5', '7'));
-        $this->assertEquals(0, $this->comparer->compare('5', '5'));
+        $this->assertTrue($this->comparator->isReady());
+        $this->assertEquals(3, $this->comparator->compare(8, 5));
+        $this->assertEquals(-2, $this->comparator->compare(5, 7));
+        $this->assertEquals(0, $this->comparator->compare(5, 5));
+        $this->assertEquals(3, $this->comparator->compare('8', '5'));
+        $this->assertEquals(-2, $this->comparator->compare('5', '7'));
+        $this->assertEquals(0, $this->comparator->compare('5', '5'));
     }
 
     public function testBasicsEx01()
@@ -58,7 +59,7 @@ class TestsBigIntComparer extends TestCase
             '\InvalidArgumentException',
             "The \$item1 and \$item2 parameters must be of type int (or string representing a big int)."
         );
-        $this->comparer->compare('string', 5);
+        $this->comparator->compare('string', 5);
     }
 
     public function testBasicsEx02()
@@ -67,13 +68,13 @@ class TestsBigIntComparer extends TestCase
             '\InvalidArgumentException',
             "The \$item1 and \$item2 parameters must be of type int (or string representing a big int)."
         );
-        $this->comparer->compare(8, 'string');
+        $this->comparator->compare(8, 'string');
     }
 
     public function testCallbackEx()
     {
-        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");
-        $this->comparer->setCallback(
+        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparator callback.");
+        $this->comparator->setCallback(
             function ($item1, $item2) {
                 return $item1 * $item2;
             }

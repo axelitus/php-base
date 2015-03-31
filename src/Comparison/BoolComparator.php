@@ -12,19 +12,19 @@
 
 namespace axelitus\Base\Comparison;
 
-use axelitus\Base\Comparer;
-use axelitus\Base\Float;
+use axelitus\Base\Bool;
+use axelitus\Base\Comparator;
 use Closure;
 
 /**
- * Class FloatComparer
+ * Class BoolComparator
  *
- * Float comparer implementation.
+ * Bool comparator implementation.
  *
  * @package axelitus\Base
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class FloatComparer extends Comparer
+class BoolComparator extends Comparator
 {
     /**
      * Constructor
@@ -33,17 +33,17 @@ class FloatComparer extends Comparer
     {
         parent::__construct(
             function ($item1, $item2) {
-                if (!Float::is($item1) || !Float::is($item2)) {
-                    throw new \InvalidArgumentException("The \$item1 and \$item2 parameters must be of type float.");
+                if (!Bool::is($item1) || !Bool::is($item2)) {
+                    throw new \InvalidArgumentException("The \$item1 and \$item2 parameters must be of type bool.");
                 }
 
-                return Float::compare($item1, $item2);
+                return Bool::compare($item1, $item2);
             }
         );
     }
 
     /**
-     * This comparer does not allow to set the callback outside this class.
+     * This comparator does not allow to set the callback outside this class.
      *
      * @param Closure $callback The new callback.
      *
@@ -52,7 +52,7 @@ class FloatComparer extends Comparer
     public function setCallback(Closure $callback = null)
     {
         if ($this->callback !== null || $callback === null) {
-            throw new \RuntimeException("Cannot redeclare this comparer callback.");
+            throw new \RuntimeException("Cannot redeclare this comparator callback.");
         }
 
         $this->callback = Closure::bind($callback, $this, get_called_class());

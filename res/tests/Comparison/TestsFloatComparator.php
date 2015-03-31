@@ -13,19 +13,20 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\IntComparer;
+use axelitus\Base\Comparison\FloatComparator;
 
 /**
- * Class TestsIntComparer
+ * Tests class FloatComparator
  *
  * @package axelitus\Base
+ * @see FloatComparator
  */
-class TestsIntComparer extends TestCase
+class TestsFloatComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\IntComparer The int comparer to use */
-    private $comparer;
+    /** @var \axelitus\Base\Comparison\FloatComparator The float comparator to use */
+    private $comparator;
 
     // endregion
 
@@ -34,7 +35,7 @@ class TestsIntComparer extends TestCase
 
     public function setUp()
     {
-        $this->comparer = new IntComparer();
+        $this->comparator = new FloatComparator();
     }
 
     // endregion
@@ -43,34 +44,34 @@ class TestsIntComparer extends TestCase
 
     public function testBasics()
     {
-        $this->assertTrue($this->comparer->isReady());
-        $this->assertEquals(3, $this->comparer->compare(8, 5));
-        $this->assertEquals(-2, $this->comparer->compare(5, 7));
-        $this->assertEquals(0, $this->comparer->compare(5, 5));
+        $this->assertTrue($this->comparator->isReady());
+        $this->assertEquals(3.25, $this->comparator->compare(8.75, 5.5));
+        $this->assertEquals(-2.25, $this->comparator->compare(5.5, 7.75));
+        $this->assertEquals(0.0, $this->comparator->compare(5.3, 5.3));
     }
 
     public function testBasicsEx01()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "The \$item1 and \$item2 parameters must be of type int."
+            "The \$item1 and \$item2 parameters must be of type float."
         );
-        $this->comparer->compare('string', 5);
+        $this->comparator->compare('string', 5.5);
     }
 
     public function testBasicsEx02()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "The \$item1 and \$item2 parameters must be of type int."
+            "The \$item1 and \$item2 parameters must be of type float."
         );
-        $this->comparer->compare(8, 'string');
+        $this->comparator->compare(8.75, 'string');
     }
 
     public function testCallbackEx()
     {
-        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");
-        $this->comparer->setCallback(
+        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparator callback.");
+        $this->comparator->setCallback(
             function ($item1, $item2) {
                 return $item1 * $item2;
             }

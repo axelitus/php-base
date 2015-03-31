@@ -15,14 +15,14 @@ namespace axelitus\Base;
 use Closure;
 
 /**
- * Class Comparer
+ * Class Comparator
  *
- * Simple and flexible base comparer from which new comparers should be derived.
+ * Simple and flexible base comparator from which new comparators should be derived.
  *
  * @package axelitus\Base
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-abstract class Comparer
+abstract class Comparator
 {
     // region: Properties
 
@@ -32,7 +32,7 @@ abstract class Comparer
     protected $callback = null;
 
     /**
-     * @var \axelitus\Base\Arr The comparer options to be used while comparing
+     * @var \axelitus\Base\Arr The comparator options to be used while comparing
      */
     protected $options = null;
 
@@ -61,7 +61,7 @@ abstract class Comparer
     // region: Get & Set
 
     /**
-     * Sets the callback and binds it to the Comparer instance.
+     * Sets the callback and binds it to the Comparator instance.
      *
      * @param Closure $callback The new callback to use.
      */
@@ -81,7 +81,7 @@ abstract class Comparer
     }
 
     /**
-     * Gets a comparer option.
+     * Gets a comparator option.
      *
      * @param int|string|array $key     The option(s) to get.
      * @param mixed            $default The default value to get if the given key does not exist
@@ -94,7 +94,7 @@ abstract class Comparer
     }
 
     /**
-     * Sets a comparer option (or multiple options).
+     * Sets a comparator option (or multiple options).
      *
      * @param int|string|array $key   The key of the item to set (or associative array with key => value pairs).
      * @param null|mixed       $value The value to set.
@@ -144,7 +144,7 @@ abstract class Comparer
     final public function compare($item1, $item2)
     {
         if (!$this->isReady()) {
-            throw new \RuntimeException("The comparer is not ready, no valid callback has been set.");
+            throw new \RuntimeException("The comparator is not ready, no valid callback has been set.");
         }
 
         return call_user_func_array($this->callback, [$item1, $item2, $this->options]);

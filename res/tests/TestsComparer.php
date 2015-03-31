@@ -13,16 +13,16 @@
 namespace axelitus\Base\Tests;
 
 /**
- * Class TestsComparer
+ * Class TestsComparator
  *
  * @package axelitus\Base
  */
-class TestsComparer extends TestCase
+class TestsComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparer The comparer to use */
-    private $comparer;
+    /** @var \axelitus\Base\Comparator The comparator to use */
+    private $comparator;
 
     // endregion
 
@@ -31,7 +31,7 @@ class TestsComparer extends TestCase
 
     public function setUp()
     {
-        $this->comparer = $this->getMockForAbstractClass('\axelitus\Base\Comparer');
+        $this->comparator = $this->getMockForAbstractClass('\axelitus\Base\Comparator');
     }
 
     // endregion
@@ -43,13 +43,13 @@ class TestsComparer extends TestCase
         $callback = function ($item1, $item2) {
             return $item1 - $item2;
         };
-        $this->assertFalse($this->comparer->isReady());
-        $this->comparer->setCallback($callback);
-        $this->assertTrue($this->comparer->isReady());
-        $this->assertEquals($callback, $this->comparer->getCallback());
-        $this->assertEquals(3, $this->comparer->compare(8, 5));
-        $this->assertEquals(-2, $this->comparer->compare(5, 7));
-        $this->assertEquals(0, $this->comparer->compare(5, 5));
+        $this->assertFalse($this->comparator->isReady());
+        $this->comparator->setCallback($callback);
+        $this->assertTrue($this->comparator->isReady());
+        $this->assertEquals($callback, $this->comparator->getCallback());
+        $this->assertEquals(3, $this->comparator->compare(8, 5));
+        $this->assertEquals(-2, $this->comparator->compare(5, 7));
+        $this->assertEquals(0, $this->comparator->compare(5, 5));
     }
 
     // endregion
@@ -58,10 +58,10 @@ class TestsComparer extends TestCase
 
     public function testOptions()
     {
-        $this->assertFalse($this->comparer->isReady());
-        $this->comparer->setCallback(
+        $this->assertFalse($this->comparator->isReady());
+        $this->comparator->setCallback(
             function ($item1, $item2) {
-                /** @var object $this \axelitus\Base\Comparer */
+                /** @var object $this \axelitus\Base\Comparator */
                 if ($this->options['first.double'] !== null) {
                     return ($item1 * 2) - $item2;
                 } else {
@@ -69,17 +69,17 @@ class TestsComparer extends TestCase
                 }
             }
         );
-        $this->assertTrue($this->comparer->isReady());
-        $this->assertEquals(3, $this->comparer->compare(8, 5));
-        $this->comparer->setOption('first.double', true);
-        $this->assertEquals(11, $this->comparer->compare(8, 5));
-        $this->assertEquals(true, $this->comparer->getOption('first.double'));
+        $this->assertTrue($this->comparator->isReady());
+        $this->assertEquals(3, $this->comparator->compare(8, 5));
+        $this->comparator->setOption('first.double', true);
+        $this->assertEquals(11, $this->comparator->compare(8, 5));
+        $this->assertEquals(true, $this->comparator->getOption('first.double'));
 
-        $options = $this->getNonPublicPropertyValue($this->comparer, 'options')->asArray();
+        $options = $this->getNonPublicPropertyValue($this->comparator, 'options')->asArray();
         $this->assertArrayHasKey('first', $options);
         $this->assertArrayHasKey('double', $options['first']);
-        $this->comparer->deleteOption('first.double');
-        $options = $this->getNonPublicPropertyValue($this->comparer, 'options')->asArray();
+        $this->comparator->deleteOption('first.double');
+        $options = $this->getNonPublicPropertyValue($this->comparator, 'options')->asArray();
         $this->assertArrayHasKey('first', $options);
         $this->assertArrayNotHasKey('double', $options['first']);
     }
@@ -90,8 +90,8 @@ class TestsComparer extends TestCase
 
     public function testCompareEx01()
     {
-        $this->setExpectedException('\RuntimeException', "The comparer is not ready, no valid callback has been set.");
-        $this->comparer->compare('A', 'A');
+        $this->setExpectedException('\RuntimeException', "The comparator is not ready, no valid callback has been set.");
+        $this->comparator->compare('A', 'A');
     }
 
     // endregion

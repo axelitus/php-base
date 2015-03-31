@@ -13,19 +13,20 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\BoolComparer;
+use axelitus\Base\Comparison\IntComparator;
 
 /**
- * Class TestsBoolComparer
+ * Tests class IntComparator
  *
  * @package axelitus\Base
+ * @see IntComparator
  */
-class TestsBoolComparer extends TestCase
+class TestsIntComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\BoolComparer The bool comparer to use */
-    private $comparer;
+    /** @var \axelitus\Base\Comparison\IntComparator The int comparator to use */
+    private $comparator;
 
     // endregion
 
@@ -34,7 +35,7 @@ class TestsBoolComparer extends TestCase
 
     public function setUp()
     {
-        $this->comparer = new BoolComparer();
+        $this->comparator = new IntComparator();
     }
 
     // endregion
@@ -43,35 +44,34 @@ class TestsBoolComparer extends TestCase
 
     public function testBasics()
     {
-        $this->assertTrue($this->comparer->isReady());
-        $this->assertEquals(1, $this->comparer->compare(true, false));
-        $this->assertEquals(0, $this->comparer->compare(true, true));
-        $this->assertEquals(0, $this->comparer->compare(false, false));
-        $this->assertEquals(-1, $this->comparer->compare(false, true));
+        $this->assertTrue($this->comparator->isReady());
+        $this->assertEquals(3, $this->comparator->compare(8, 5));
+        $this->assertEquals(-2, $this->comparator->compare(5, 7));
+        $this->assertEquals(0, $this->comparator->compare(5, 5));
     }
 
     public function testBasicsEx01()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "The \$item1 and \$item2 parameters must be of type bool."
+            "The \$item1 and \$item2 parameters must be of type int."
         );
-        $this->comparer->compare('string', true);
+        $this->comparator->compare('string', 5);
     }
 
     public function testBasicsEx02()
     {
         $this->setExpectedException(
             '\InvalidArgumentException',
-            "The \$item1 and \$item2 parameters must be of type bool."
+            "The \$item1 and \$item2 parameters must be of type int."
         );
-        $this->comparer->compare(false, 'string');
+        $this->comparator->compare(8, 'string');
     }
 
     public function testCallbackEx()
     {
-        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparer callback.");
-        $this->comparer->setCallback(
+        $this->setExpectedException('\RuntimeException', "Cannot redeclare this comparator callback.");
+        $this->comparator->setCallback(
             function ($item1, $item2) {
                 return $item1 * $item2;
             }

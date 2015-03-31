@@ -44,7 +44,7 @@ Being PSR-2/PSR-4 compliant means this package follows a [guide for coding style
  - **BoolOr** - Boolean OR operations on values and arrays.
  - **BoolXor** - Boolean XOR operations on values and arrays.
  - **Comparable** - Defines the interface for a comparable object.
- - **Comparer** - Simple and flexible base comparer from which new comparers should be derived.
+ - **Comparator** - Simple and flexible base comparator from which new comparators should be derived.
  - **DotArr** - Dot-notated array operations.
  - **Flag** - Bitwise flag operations.
  - **Float** - Float operations.
@@ -56,13 +56,13 @@ Being PSR-2/PSR-4 compliant means this package follows a [guide for coding style
  - **Traverser** - Array callback traverser.
 
 ##### axelitus\Base\Comparison
- - **BigFloatComparer** - BigFloat comparer implementation.
- - **BigIntComparer** - BigInt comparer implementation.
- - **BigNumComparer** - BigNum comparer implementation.
- - **BoolComparer** - Bool comparer implementation.
- - **FloatComparer** - Float comparer implementation.
- - **IntComparer** - Int comparer implementation.
- - **StrComparer** - Str comparer implementation.
+ - **BigFloatComparator** - BigFloat comparator implementation.
+ - **BigIntComparator** - BigInt comparator implementation.
+ - **BigNumComparator** - BigNum comparator implementation.
+ - **BoolComparator** - Bool comparator implementation.
+ - **FloatComparator** - Float comparator implementation.
+ - **IntComparator** - Int comparator implementation.
+ - **StrComparator** - Str comparator implementation.
 
 ## How to install
 

@@ -13,19 +13,19 @@
 namespace axelitus\Base\Comparison;
 
 use axelitus\Base\Arr;
-use axelitus\Base\BigInt;
-use axelitus\Base\Comparer;
+use axelitus\Base\BigNum;
+use axelitus\Base\Comparator;
 use Closure;
 
 /**
- * Class BigIntComparer
+ * Class BigNumComparator
  *
- * BigInt comparer implementation.
+ * BigNum comparator implementation.
  *
  * @package axelitus\Base
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class BigIntComparer extends Comparer
+class BigNumComparator extends Comparator
 {
     /**
      * Constructor
@@ -38,20 +38,20 @@ class BigIntComparer extends Comparer
     {
         parent::__construct(
             function ($item1, $item2) {
-                if (!BigInt::is($item1) || !BigInt::is($item2)) {
+                if (!BigNum::is($item1) || !BigNum::is($item2)) {
                     throw new \InvalidArgumentException(
-                        "The \$item1 and \$item2 parameters must be of type int (or string representing a big int)."
+                        "The \$item1 and \$item2 parameters must be numeric (or string representing a big number)."
                     );
                 }
 
-                return BigInt::compare($item1, $item2);
+                return BigNum::compare($item1, $item2, $this->options['scale']);
             }
         );
         $this->options = new Arr(['scale' => $scale]);
     }
 
     /**
-     * This comparer does not allow to set the callback outside this class.
+     * This comparator does not allow to set the callback outside this class.
      *
      * @param Closure $callback The new callback.
      *
@@ -60,7 +60,7 @@ class BigIntComparer extends Comparer
     public function setCallback(Closure $callback = null)
     {
         if ($this->callback !== null || $callback === null) {
-            throw new \RuntimeException("Cannot redeclare this comparer callback.");
+            throw new \RuntimeException("Cannot redeclare this comparator callback.");
         }
 
         $this->callback = Closure::bind($callback, $this, get_called_class());
