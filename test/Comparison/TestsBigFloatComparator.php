@@ -13,7 +13,7 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\BigFloatComparator;
+use axelitus\Base\Comparison\ABigFloatComparator;
 
 /**
  * Tests class BigFloatComparator
@@ -25,7 +25,7 @@ class TestsBigFloatComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\BigFloatComparator The big float comparator to use */
+    /** @var \axelitus\Base\Comparison\ABigFloatComparator The big float comparator to use */
     private $comparator;
 
     // endregion
@@ -35,7 +35,7 @@ class TestsBigFloatComparator extends TestCase
 
     public function setUp()
     {
-        $this->comparator = new BigFloatComparator(2);
+        $this->comparator = new ABigFloatComparator(2);
     }
 
     // endregion

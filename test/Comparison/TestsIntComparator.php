@@ -13,7 +13,7 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\IntComparator;
+use axelitus\Base\Comparison\AIntComparator;
 
 /**
  * Tests class IntComparator
@@ -25,7 +25,7 @@ class TestsIntComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\IntComparator The int comparator to use */
+    /** @var \axelitus\Base\Comparison\AIntComparator The int comparator to use */
     private $comparator;
 
     // endregion
@@ -35,7 +35,7 @@ class TestsIntComparator extends TestCase
 
     public function setUp()
     {
-        $this->comparator = new IntComparator();
+        $this->comparator = new AIntComparator();
     }
 
     // endregion

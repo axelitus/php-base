@@ -38,7 +38,7 @@ class DotArr
     {
         $isdot = true;
         foreach ($arr as $key => $value) {
-            if (!($isdot = ($isdot && !Str::contains($key, '.')))) {
+            if (!($isdot = ($isdot && !AStr::contains($key, '.')))) {
                 break;
             }
             if (is_array($value)) {
@@ -69,7 +69,7 @@ class DotArr
             return static::getMultiple($arr, $key, $default);
         }
 
-        if (!Int::is($key) && !Str::is($key)) {
+        if (!AInt::is($key) && !AStr::is($key)) {
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
@@ -138,7 +138,7 @@ class DotArr
             return;
         }
 
-        if (!Int::is($key) && !Str::is($key)) {
+        if (!AInt::is($key) && !AStr::is($key)) {
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
@@ -199,7 +199,7 @@ class DotArr
             return static::deleteMultiple($arr, $key);
         }
 
-        if (!Int::is($key) && !Str::is($key)) {
+        if (!AInt::is($key) && !AStr::is($key)) {
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
@@ -280,7 +280,7 @@ class DotArr
             return static::keyExistsMultiple($arr, $key);
         }
 
-        if (!Int::is($key) && !Str::is($key)) {
+        if (!AInt::is($key) && !AStr::is($key)) {
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 
@@ -349,7 +349,7 @@ class DotArr
             return static::keyMatchesMultiple($arr, $key);
         }
 
-        if (!Int::is($key) && !Str::is($key)) {
+        if (!AInt::is($key) && !AStr::is($key)) {
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or an array of them).");
         }
 

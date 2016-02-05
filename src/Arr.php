@@ -143,7 +143,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
     {
         $return = $this->has($offset);
 
-        return (is_array($return) ? (bool)BoolAnd::arr($return) : $return);
+        return (is_array($return) ? (bool)ABoolAnd::arr($return) : $return);
     }
 
     /**
@@ -233,7 +233,7 @@ class Arr implements \ArrayAccess, \Countable, \Iterator
             return $return;
         }
 
-        if (!Int::is($key) && !Str::is($key)) {
+        if (!AInt::is($key) && !AStr::is($key)) {
             throw new \InvalidArgumentException("The \$key parameter must be int or string (or array of them).");
         }
 

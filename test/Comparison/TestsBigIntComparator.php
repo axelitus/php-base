@@ -13,7 +13,7 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\BigIntComparator;
+use axelitus\Base\Comparison\ABigIntComparator;
 
 /**
  * Tests class BigIntComparator
@@ -25,7 +25,7 @@ class TestsBigIntComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\BigIntComparator The big int comparator to use */
+    /** @var \axelitus\Base\Comparison\ABigIntComparator The big int comparator to use */
     private $comparator;
 
     // endregion
@@ -35,7 +35,7 @@ class TestsBigIntComparator extends TestCase
 
     public function setUp()
     {
-        $this->comparator = new BigIntComparator();
+        $this->comparator = new ABigIntComparator();
     }
 
     // endregion

@@ -36,7 +36,7 @@ class Flag
      */
     public static function is($value)
     {
-        if (Int::is($value) && $value > 0) {
+        if (AInt::is($value) && $value > 0) {
             return (($value & ($value - 1)) == 0);
         }
 
@@ -54,7 +54,7 @@ class Flag
      */
     public static function isOn($value, $flag)
     {
-        if (!Int::is($value)) {
+        if (!AInt::is($value)) {
             throw new \InvalidArgumentException("The \$value parameter must be of type int.");
         }
 
@@ -94,7 +94,7 @@ class Flag
      */
     public static function setOn($value, $flag)
     {
-        if (!Int::is($value)) {
+        if (!AInt::is($value)) {
             throw new \InvalidArgumentException("The \$value parameter must be of type int.");
         }
 
@@ -123,7 +123,7 @@ class Flag
      */
     public static function setOff($value, $flag)
     {
-        if (!Int::is($value)) {
+        if (!AInt::is($value)) {
             throw new \InvalidArgumentException("The \$value parameter must be of type int.");
         }
 
@@ -151,7 +151,7 @@ class Flag
      */
     public static function getValues($count)
     {
-        if (!Int::is($count) || $count < 1) {
+        if (!AInt::is($count) || $count < 1) {
             throw new \InvalidArgumentException("The \$count parameter must be of type int and greater than zero.");
         }
 
@@ -175,7 +175,7 @@ class Flag
      */
     public static function getPowers($power)
     {
-        if (!Int::is($power) || $power < 0) {
+        if (!AInt::is($power) || $power < 0) {
             throw new \InvalidArgumentException("The \$power parameter must be of type int and positive.");
         }
 
@@ -241,7 +241,7 @@ class Flag
      */
     public static function mask($value, $mask)
     {
-        if (!Int::is($value) || !Int::is($mask)) {
+        if (!AInt::is($value) || !AInt::is($mask)) {
             throw new \InvalidArgumentException("Both parameters must be integers.");
         }
 

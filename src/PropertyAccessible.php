@@ -86,7 +86,7 @@ abstract class PropertyAccessible
     {
         if ($this->hasProperty($property)) {
             // if the property is public it is automatically accessible, therefore we don't need to test that
-            if ($this->hasMethod(($method = 'get' . Str::ucfirst($property)))
+            if ($this->hasMethod(($method = 'get' . AStr::ucfirst($property)))
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 return $this->{$method}();
@@ -112,7 +112,7 @@ abstract class PropertyAccessible
     {
         if ($this->hasProperty($property)) {
             // if the property is public it is automatically accessible, therefore we don't need to test that
-            if ($this->hasMethod(($method = 'set' . Str::ucfirst($property)))
+            if ($this->hasMethod(($method = 'set' . AStr::ucfirst($property)))
                 && $this->getRefMethod($method)->isPublic()
             ) {
                 $this->{$method}($value);
@@ -142,8 +142,8 @@ abstract class PropertyAccessible
      */
     final public function hasProperty($property)
     {
-        if (!Str::is($property)
-            || !Str::match($property, "/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/")
+        if (!AStr::is($property)
+            || !AStr::match($property, "/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/")
             || $property == 'this'
         ) {
             throw new \InvalidArgumentException(
@@ -166,8 +166,8 @@ abstract class PropertyAccessible
      */
     final public function hasMethod($method)
     {
-        if (!Str::is($method)
-            || !Str::match($method, "/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/")
+        if (!AStr::is($method)
+            || !AStr::match($method, "/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/")
         ) {
             throw new \InvalidArgumentException(
                 "The \$method parameter must be a string and follow the PHP rules of method naming."

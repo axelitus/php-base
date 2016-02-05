@@ -13,7 +13,7 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\BoolComparator;
+use axelitus\Base\Comparison\ABoolComparator;
 
 /**
  * Tests class BoolComparator
@@ -25,7 +25,7 @@ class TestsBoolComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\BoolComparator The bool comparator to use */
+    /** @var \axelitus\Base\Comparison\ABoolComparator The bool comparator to use */
     private $comparator;
 
     // endregion
@@ -35,7 +35,7 @@ class TestsBoolComparator extends TestCase
 
     public function setUp()
     {
-        $this->comparator = new BoolComparator();
+        $this->comparator = new ABoolComparator();
     }
 
     // endregion

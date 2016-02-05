@@ -13,7 +13,7 @@
 namespace axelitus\Base\Tests\Comparison;
 
 use axelitus\Base\Tests\TestCase;
-use axelitus\Base\Comparison\StrComparator;
+use axelitus\Base\Comparison\AStrComparator;
 
 /**
  * Tests class StrComparator
@@ -25,7 +25,7 @@ class TestsStrComparator extends TestCase
 {
     // region: Properties
 
-    /** @var \axelitus\Base\Comparison\StrComparator The str comparator to use */
+    /** @var \axelitus\Base\Comparison\AStrComparator The str comparator to use */
     private $comparator;
 
     // endregion
@@ -35,7 +35,7 @@ class TestsStrComparator extends TestCase
 
     public function setUp()
     {
-        $this->comparator = new StrComparator();
+        $this->comparator = new AStrComparator();
     }
 
     // endregion
