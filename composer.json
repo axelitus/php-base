@@ -30,11 +30,11 @@
     "php": ">=5.4.9"
   },
   "require-dev": {
-    "phing/phing": "2.10.*",
-    "phpunit/phpunit": "4.5.*",
-    "squizlabs/php_codesniffer": "2.2.*",
-    "phpmd/phpmd": "2.2.*",
-    "phploc/phploc": "2.1.*",
+    "phing/phing": "2.13.*",
+    "phpunit/phpunit": "5.1.*",
+    "squizlabs/php_codesniffer": "2.5.*",
+    "phpmd/phpmd": "2.3.*",
+    "phploc/phploc": "3.0.*",
     "sebastian/phpcpd": "2.0.*",
     "league/phpunit-coverage-listener": "1.1.*",
     "phpdocumentor/phpdocumentor": "2.8.*"
@@ -55,8 +55,8 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-develop": "0.9-dev",
-      "dev-master": "0.8-dev"
+      "dev-master": "0.8.x-dev",
+      "dev-develop": "0.9.x-dev"
     }
   }
 }
