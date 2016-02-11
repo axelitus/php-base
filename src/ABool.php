@@ -145,7 +145,7 @@ class ABool
     /**
      * Converts a given value to bool.
      *
-     * If the given value is not identified as bool by {@link Bool::extIs} the default value is returned.
+     * If the given value is not identified as bool by {@link ABool::extIs} the default value is returned.
      *
      * @param mixed $value   The value to convert from.
      * @param mixed $default The default value.

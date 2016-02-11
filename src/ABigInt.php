@@ -188,14 +188,14 @@ class ABigInt
     /**
      * Tests if an integer is inside a range.
      *
-     * It's an alias for BigInt::inRange($value, $lower, $upper, false, false)
+     * It's an alias for ABigInt::inRange($value, $lower, $upper, false, false)
      *
      * @param int|string $value The value to test in range.
      * @param int|string $lower The range's lower limit.
      * @param int|string $upper The range's upper limit.
      *
      * @return bool Whether the value is inside the given range.
-     * @see BigInt::inRange
+     * @see ABigInt::inRange
      */
     public static function inside($value, $lower, $upper)
     {
@@ -205,14 +205,14 @@ class ABigInt
     /**
      * Tests if an integer is between a range.
      *
-     * It's an alias for BigInt::inRange($value, $lower, $upper, true, true)
+     * It's an alias for ABigInt::inRange($value, $lower, $upper, true, true)
      *
      * @param int|string $value The value to test in range.
      * @param int|string $lower The range's lower limit.
      * @param int|string $upper The range's upper limit.
      *
      * @return bool Whether the value is between the given range.
-     * @see BigInt::inRange
+     * @see ABigInt::inRange
      */
     public static function between($value, $lower, $upper)
     {

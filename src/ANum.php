@@ -27,7 +27,7 @@ class ANum
     /**
      * Tests if the given value is a number (type test).
      *
-     * This function uses {@link Int::is} and {@link Float::is} functions to test.
+     * This function uses {@link AInt::is} and {@link AFloat::is} functions to test.
      *
      * @param mixed $value The value to test.
      *
@@ -42,7 +42,7 @@ class ANum
     /**
      * Tests if the given value is a number or a string representation of a number.
      *
-     * This function uses {@link Int::extIs} and {@link Float::extIs} function to test.
+     * This function uses {@link AInt::extIs} and {@link AFloat::extIs} function to test.
      *
      * @param mixed $value The value to test.
      *
@@ -187,14 +187,14 @@ class ANum
     /**
      * Tests if a number is inside a range.
      *
-     * It's an alias for Num::inRange($value, $lower, $upper, false, false)
+     * It's an alias for ANum::inRange($value, $lower, $upper, false, false)
      *
      * @param int|float $value The value to test in range.
      * @param int|float $lower The range's lower limit.
      * @param int|float $upper The range's upper limit.
      *
      * @return bool Whether the value is inside the given range.
-     * @see Num::inRange
+     * @see ANum::inRange
      */
     public static function inside($value, $lower, $upper)
     {
@@ -204,14 +204,14 @@ class ANum
     /**
      * Tests if a number is between a range.
      *
-     * It's an alias for Num::inRange($value, $lower, $upper, true, true)
+     * It's an alias for ANum::inRange($value, $lower, $upper, true, true)
      *
      * @param int|float $value The value to test in range.
      * @param int|float $lower The range's lower limit.
      * @param int|float $upper The range's upper limit.
      *
      * @return bool Whether the value is between the given range.
-     * @see Num::inRange
+     * @see ANum::inRange
      */
     public static function between($value, $lower, $upper)
     {
