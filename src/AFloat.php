@@ -122,7 +122,7 @@ class AFloat
             throw new \InvalidArgumentException("The \$value parameter must be of type float.");
         }
 
-        return ABigNum::toInt($value);
+        return ANum::toInt($value);
     }
 
     // endregion
