@@ -7,7 +7,7 @@ before_script:
   - php composer.phar install
 
 script:
-  - phpunit --configuration phpunit.travis.xml --bootstrap phpunit.bootstrap.php
+  - php ./vendor/phpunit/phpunit/phpunit --configuration phpunit.travis.xml --bootstrap phpunit.bootstrap.php
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
