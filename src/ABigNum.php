@@ -27,8 +27,6 @@ class ABigNum
     /**
      * Tests if the given value is a number (or big number represented by a string).
      *
-     * This function uses {@link BigInt::is} and {@link BigFloat::is} functions to test.
-     *
      * @param mixed $value The value to test.
      *
      * @return bool Returns true if the value is a number, false otherwise.
@@ -36,10 +34,36 @@ class ABigNum
      */
     public static function is($value)
     {
-        return (ABigInt::is($value) || ABigFloat::is($value));
+        return (static::isInt($value) || static::isFloat($value));
     }
 
-    // TODO: add isInt and isFloat methods
+    /**
+     * Tests if the given value is an int (or big integer represented by a string).
+     *
+     * This function uses {@link ABigInt::is} function to test.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is an int (big), false otherwise.
+     */
+    public static function isInt($value)
+    {
+        return ABigInt::is($value);
+    }
+
+    /**
+     * Tests if the given value is a float (or big float represented by a string).
+     *
+     * This function uses {@link ABigFloat::is} function to test.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return bool Returns true if the value is a float (big), false otherwise.
+     */
+    public static function isFloat($value)
+    {
+        return ABigFloat::is($value);
+    }
 
     // endregion
 
@@ -189,7 +213,7 @@ class ABigNum
     /**
      * Tests if a number is inside a range.
      *
-     * It's an alias for BigNum::inRange($value, $lower, $upper, false, false)
+     * It's an alias for ABigNum::inRange($value, $lower, $upper, false, false)
      *
      * @param int|float|string $value The value to test in range.
      * @param int|float|string $lower The range's lower limit.
@@ -206,7 +230,7 @@ class ABigNum
     /**
      * Tests if a number is between a range.
      *
-     * It's an alias for BigNum::inRange($value, $lower, $upper, true, true)
+     * It's an alias for ABigNum::inRange($value, $lower, $upper, true, true)
      *
      * @param int|float|string $value The value to test in range.
      * @param int|float|string $lower The range's lower limit.
